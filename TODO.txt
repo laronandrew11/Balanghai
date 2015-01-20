@@ -1,1 +1,5 @@
 Fix bug in line 54 of static_screen.js:cannot convert this.buttons to object
+(also, same bug with hovering)
+-Event handlers
+-Get font to work correctly
+-Button background

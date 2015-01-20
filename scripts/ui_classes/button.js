@@ -18,5 +18,6 @@ function Button(x,y,width,height,text,style,size,color){
 		context.font = size + "px " + this.style;
 		context.fillText(this.text, this.x, this.y);
 	}
+	this.onClick;
 	
 }

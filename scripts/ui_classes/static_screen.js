@@ -8,17 +8,12 @@
 function staticScreen(){
 	this.buttons = new Array();
 	this.drawBG=function(context, img){
-		context.fillStyle="white";
-		context.fillRect(0,0,1000,600);
+		//context.fillStyle="white";
+		//context.fillRect(0,0,1000,600);
 		context.drawImage(img,0,0,1000,600); 
 	}	
-	this.addButton=function(x,y,w,h,text,style,size,color){
-		var op = new Button(x,y,w,h,text,style,size,color);
-		this.buttons.push(op);
-	}
-	this.makeButtonList=function(){
-		this.addButton(600,388,116,11,"BATTLE","Epistolar",15,"black");
-		this.addButton(650,350,120,11,"Add player","Epistolar",15,"black");
+	this.addButton=function(button){
+		this.buttons.push(button);
 	}
 	this.drawButtons=function(){
 		var i;
@@ -30,17 +25,13 @@ function staticScreen(){
 	{
 		var mousePos = getMousePos(canvas, evt);
 		var i;
-		/*for(i=0; i<this.buttons.length; i++){
+		for(i=0; i<this.buttons.length; i++){
 			if(inCoordinates(this.buttons[i],mousePos)){
 				this.drawBG();
 				this.buttons[i].defaultHover(context, "#ffff66", 20);
 				this.drawMenu();
 			}
-			/*else{
-				this.drawBG();
-				this.drawMenu();
-			}*/
-		//}
+		}
 	}
 	this.keyEvent=function(event){
 		var key = event.keyCode;
@@ -52,14 +43,10 @@ function staticScreen(){
 	this.clickEvent=function(evt)
 	{
 		var mousePos = getMousePos(canvas, evt);
-		if(inCoordinates(this.buttons[0],mousePos)){
-			/*init();
-			removeListeners();
-			canvas.removeEventListener(selectClickEvent);*/
-		}
-		else if(inCoordinates(this.buttons[1],mousePos)){
-			//removeListeners();
-			
+		for(i=0; i<this.buttons.length; i++){
+			if(inCoordinates(this.buttons[i],mousePos)){
+				this.buttons[i].onClick();
+			}
 		}
 	}
 	this.removeListeners=function(){
@@ -67,9 +54,6 @@ function staticScreen(){
 		canvas.removeEventListener('mousedown', this.clickEvent);
 	}
 	
-	//this.drawBG(context);
-	//this.makeButtonList();
-	//this.drawButtons();
 	canvas.addEventListener('mousemove', this.hoverEvent, false);
 	canvas.addEventListener('mousedown', this.clickEvent, false);
 	document.onkeydown = this.keyEvent;
