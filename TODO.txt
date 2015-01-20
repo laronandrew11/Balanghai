@@ -1,0 +1,1 @@
+Fix bug in line 54 of static_screen.js:cannot convert this.buttons to object
