@@ -7,9 +7,10 @@
 
 function staticScreen(){
 	this.buttons = new Array();
-	this.drawBG=function(context){
+	this.drawBG=function(context, img){
 		context.fillStyle="white";
 		context.fillRect(0,0,1000,600);
+		context.drawImage(img,0,0,1000,600); 
 	}	
 	this.addButton=function(x,y,w,h,text,style,size,color){
 		var op = new Button(x,y,w,h,text,style,size,color);
@@ -29,7 +30,7 @@ function staticScreen(){
 	{
 		var mousePos = getMousePos(canvas, evt);
 		var i;
-		for(i=0; i<this.buttons.length; i++){
+		/*for(i=0; i<this.buttons.length; i++){
 			if(inCoordinates(this.buttons[i],mousePos)){
 				this.drawBG();
 				this.buttons[i].defaultHover(context, "#ffff66", 20);
@@ -39,7 +40,7 @@ function staticScreen(){
 				this.drawBG();
 				this.drawMenu();
 			}*/
-		}
+		//}
 	}
 	this.keyEvent=function(event){
 		var key = event.keyCode;
