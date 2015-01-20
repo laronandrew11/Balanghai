@@ -1,5 +1,23 @@
+var startbg = document.createElement('img');
+	startbg.src = 'img/startscreen.jpg';
+	
 function main()
 {
+	addStartScreen();
+}	
+function addStartScreen()
+{
+	var startScreen=new staticScreen();
+	var btnContinue=new Button(700,200,116,11,"CLICK TO CONTINUE","Epistolar",15,"black");
+	btnContinue.onClick=function(){
+		//this.removeListeners();
+		addMainMenu();
+	}
+	startScreen.addButton(btnContinue);
+	drawStaticScreen(startScreen, startbg);
+}
+
+function addMainMenu(){
 	var mainMenu=new staticScreen();
 	var btnNewGame=new Button(700,200,116,11,"NEW GAME","Epistolar",15,"black");
 	btnNewGame.onClick=function(){
@@ -16,9 +34,13 @@ function main()
 	mainMenu.addButton(btnNewGame);
 	mainMenu.addButton(btnLoadGame);
 	mainMenu.addButton(btnCredits);
-	var startbg = document.createElement('img');
-	startbg.src = 'img/startscreen.jpg';
-	mainMenu.setBG(startbg);
-	mainMenu.drawBG(context);
-	mainMenu.drawButtons();
-}	
+	
+	drawStaticScreen(mainMenu, startbg);
+}
+
+function drawStaticScreen(screen, bg)
+{
+	screen.setBG(startbg);
+	screen.drawBG(context);
+	screen.drawButtons();
+}

@@ -1,4 +1,5 @@
 Get drawBG and drawMenu methods to work
--Hover and key press event handlers
+Fix hover and key press event handlers
+Properly clear button list in static screen
 -Get font to work correctly
 -Button background

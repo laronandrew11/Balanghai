@@ -5,8 +5,8 @@ function Game_state(playerName){
 	this.latitude;
 	this.longitude;
 	this.settlement; //if applicable
-	this.ships=array[];
-	this.cargo=array[];
+	this.ships=[];
+	this.cargo=[];
 	this.gameTime;
 	this.dx;
 	this.dy;

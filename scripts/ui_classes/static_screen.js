@@ -6,7 +6,7 @@
 
 
 function staticScreen(){
-	var buttons = new Array();
+	var buttons = [];
 	var bgImage;
 	this.setBG=function(img)
 	{
@@ -20,9 +20,9 @@ function staticScreen(){
 	this.drawMenu=function(undraw)
 	{
 		var i;
-		for(i=0; i<options.length; i++){
+		for(i=0; i<buttons.length; i++){
 		if(i != undraw)
-			options[i].drawText(context);
+			buttons[i].drawText(context);
 		}
 	}
 	this.addButton=function(button){
@@ -34,9 +34,15 @@ function staticScreen(){
 				buttons[i].drawText(context);
 		}
 	}
+	this.clearButtons=function(){
+		alert(buttons.length);
+		alert("Clearing buttons");
+		buttons=[];//optimization: ???
+		alert(buttons.length);
+	}
 	this.hoverEvent=function(evt)
 	{
-		var mousePos = getMousePos(canvas, evt);
+		/*var mousePos = getMousePos(canvas, evt);
 		var i;
 		
 		for(i=0; i<buttons.length; i++){
@@ -50,7 +56,7 @@ function staticScreen(){
 				//this.drawBG(context);
 				this.drawMenu();
 			}
-		}
+		}*/
 	}
 	this.keyEvent=function(event){
 		var key = event.keyCode;
@@ -63,8 +69,10 @@ function staticScreen(){
 	{
 		var mousePos = getMousePos(canvas, evt);
 		for(i=0; i<buttons.length; i++){
+			alert(buttons[i].text);
 			if(inCoordinates(buttons[i],mousePos)){
 				buttons[i].onClick();
+				return;
 			}
 		}
 	}
@@ -72,7 +80,9 @@ function staticScreen(){
 		canvas.removeEventListener('mousemove', this.hoverEvent);
 		canvas.removeEventListener('mousedown', this.clickEvent);
 	}
-	
+
+	this.clearButtons();
+	this.removeListeners();//optimization: only call before a screen closes
 	canvas.addEventListener('mousemove', this.hoverEvent, false);
 	canvas.addEventListener('mousedown', this.clickEvent, false);
 	document.onkeydown = this.keyEvent;
