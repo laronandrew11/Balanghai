@@ -18,6 +18,7 @@ function main()
 	mainMenu.addButton(btnCredits);
 	var startbg = document.createElement('img');
 	startbg.src = 'img/startscreen.jpg';
-	mainMenu.drawBG(context, startbg);
+	mainMenu.setBG(startbg);
+	mainMenu.drawBG(context);
 	mainMenu.drawButtons();
 }	

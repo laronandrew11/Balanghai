@@ -6,29 +6,48 @@
 
 
 function staticScreen(){
-	this.buttons = new Array();
-	this.drawBG=function(context, img){
+	var buttons = new Array();
+	var bgImage;
+	this.setBG=function(img)
+	{
+		bgImage=img;
+	}
+	this.drawBG=function(context){
 		//context.fillStyle="white";
 		//context.fillRect(0,0,1000,600);
-		context.drawImage(img,0,0,1000,600); 
+		context.drawImage(bgImage,0,0,1000,600); 
 	}	
+	this.drawMenu=function(undraw)
+	{
+		var i;
+		for(i=0; i<options.length; i++){
+		if(i != undraw)
+			options[i].drawText(context);
+		}
+	}
 	this.addButton=function(button){
-		this.buttons.push(button);
+		buttons.push(button);
 	}
 	this.drawButtons=function(){
 		var i;
-		for(i=0; i<this.buttons.length; i++){	
-				this.buttons[i].drawText(context);
+		for(i=0; i<buttons.length; i++){	
+				buttons[i].drawText(context);
 		}
 	}
 	this.hoverEvent=function(evt)
 	{
 		var mousePos = getMousePos(canvas, evt);
 		var i;
-		for(i=0; i<this.buttons.length; i++){
-			if(inCoordinates(this.buttons[i],mousePos)){
-				this.drawBG();
-				this.buttons[i].defaultHover(context, "#ffff66", 20);
+		
+		for(i=0; i<buttons.length; i++){
+			if(inCoordinates(buttons[i],mousePos)){
+				//this.drawBG(context);
+				buttons[i].defaultHover(context, "#ffff66", 20);
+				this.drawMenu(i);
+			}
+			else
+			{
+				//this.drawBG(context);
 				this.drawMenu();
 			}
 		}
@@ -43,9 +62,9 @@ function staticScreen(){
 	this.clickEvent=function(evt)
 	{
 		var mousePos = getMousePos(canvas, evt);
-		for(i=0; i<this.buttons.length; i++){
-			if(inCoordinates(this.buttons[i],mousePos)){
-				this.buttons[i].onClick();
+		for(i=0; i<buttons.length; i++){
+			if(inCoordinates(buttons[i],mousePos)){
+				buttons[i].onClick();
 			}
 		}
 	}
@@ -57,6 +76,7 @@ function staticScreen(){
 	canvas.addEventListener('mousemove', this.hoverEvent, false);
 	canvas.addEventListener('mousedown', this.clickEvent, false);
 	document.onkeydown = this.keyEvent;
+	
 
 }
 
