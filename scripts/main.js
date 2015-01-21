@@ -33,6 +33,8 @@ function addMainMenu(){
 
 	var btnNewGame=new Button(700,200,116,11,"NEW GAME","Epistolar",15,"black");
 	btnNewGame.onClick=function(){
+		mainMenu.removeListeners();
+		mainMenu.clearButtons();
 		addFleetMenu();
 	}
 	var btnLoadGame=new Button(700,250,116,11,"LOAD GAME","Epistolar",15,"black");
