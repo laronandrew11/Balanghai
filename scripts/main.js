@@ -1,6 +1,14 @@
 //TODO remove from global scope
 var startbg = document.createElement('img');
 	startbg.src = 'img/startscreen.jpg';
+var mainMenuBG = document.createElement('img');
+	mainMenuBG.src = 'img/mainmenulo.jpg';
+var shipMenuBG = document.createElement('img');
+	shipMenuBG.src = 'img/shipmenu.jpg';
+var cargoMenuBG = document.createElement('img');
+	cargoMenuBG.src = 'img/cargo.png';
+var mapBG = document.createElement('img');
+	mapBG.src = 'img/map.png';
 //var activeScreen;
 	
 //TODO optimize screen switching by not re-initializing screens every time we switch screens
@@ -51,36 +59,84 @@ function addMainMenu(){
 	mainMenu.addButton(btnLoadGame);
 	mainMenu.addButton(btnCredits);
 	
-	drawStaticScreen(mainMenu, startbg);
+	drawStaticScreen(mainMenu, mainMenuBG);
 }
 
-function addFleetMenu(){
+function addFleetMenu(){ //TODO use panels?
 	var fleetMenu=new staticScreen();
 
 	var btnShip=new Button(700,200,116,11,"SHIPS","Epistolar",15,"black");
 	btnShip.onClick=function(){
-		alert("Ships");
+		//addFleetMenu();
 	}
 	var btnCargo=new Button(700,250,116,11,"CARGO","Epistolar",15,"black");
 	btnCargo.onClick=function(){
-		alert("Cargo");
+		addCargoMenu();
 	}
 
 	var btnMap=new Button(700,300,120,11,"MAP","Epistolar",15,"black");
 	btnMap.onClick=function(){
-		alert("Map");
+		addMapMenu();
 	}
 
 	fleetMenu.addButton(btnShip);
 	fleetMenu.addButton(btnCargo);
 	fleetMenu.addButton(btnMap);
 	
-	drawStaticScreen(fleetMenu, startbg);
+	drawStaticScreen(fleetMenu, shipMenuBG);
+}
+
+function addCargoMenu(){
+	var cargoMenu=new staticScreen();
+
+	var btnShip=new Button(700,200,116,11,"SHIPS","Epistolar",15,"black");
+	btnShip.onClick=function(){
+		addFleetMenu();
+	}
+	var btnCargo=new Button(700,250,116,11,"CARGO","Epistolar",15,"black");
+	btnCargo.onClick=function(){
+		//addCargoMenu();
+	}
+
+	var btnMap=new Button(700,300,120,11,"MAP","Epistolar",15,"black");
+	btnMap.onClick=function(){
+		addMapMenu();
+	}
+
+	cargoMenu.addButton(btnShip);
+	cargoMenu.addButton(btnCargo);
+	cargoMenu.addButton(btnMap);
+	
+	drawStaticScreen(cargoMenu, cargoMenuBG);
+}
+
+function addMapMenu(){
+	var mapMenu=new staticScreen();
+
+	var btnShip=new Button(700,200,116,11,"SHIPS","Epistolar",15,"black");
+	btnShip.onClick=function(){
+		addFleetMenu();
+	}
+	var btnCargo=new Button(700,250,116,11,"CARGO","Epistolar",15,"black");
+	btnCargo.onClick=function(){
+		addCargoMenu();
+	}
+
+	var btnMap=new Button(700,300,120,11,"MAP","Epistolar",15,"black");
+	btnMap.onClick=function(){
+		//addMapMenu();
+	}
+
+	mapMenu.addButton(btnShip);
+	mapMenu.addButton(btnCargo);
+	mapMenu.addButton(btnMap);
+	
+	drawStaticScreen(mapMenu, mapBG);
 }
 
 function drawStaticScreen(screen, bg)
 {
-	screen.setBG(startbg);
+	screen.setBG(bg);
 	screen.drawBG(context);
-	screen.drawButtons();
+	screen.drawMenu(-1);
 }

@@ -26,37 +26,39 @@ function staticScreen(){
 	this.addButton=function(button){
 		buttons.push(button);
 	}
-	this.drawButtons=function(){
-		var i;
-		for(i=0; i<buttons.length; i++){	
-				buttons[i].drawText(context);
-		}
-	}
 	this.clearButtons=function(){
 		while(buttons.length>0)
 			buttons.pop();
 	}
-	this.hoverEvent=function(evt) //TODO: optimize
-	{
-		var mousePos = getMousePos(canvas, evt);
-		var i;
-		//var newButtonIndex=-1;
-		for(i=0; i<buttons.length; i++){
-			if(inCoordinates(buttons[i],mousePos)){
-				this.drawBG();
-				buttons[i].onHover(context);
-				this.drawMenu(i);
-			}
-			else
-			{
-				this.drawBG();
-				this.drawMenu(-1);
-				//buttons[i].onMouseOff(context);
-			}
+	
+
+	this.createHoverEvent = function() {
+		var obj = this;
+		return function(evt) //TODO: optimize
+		{
+			/*var mousePos = getMousePos(canvas, evt);
+			var i;
+			for(i=0; i<buttons.length; i++){
+				if(inCoordinates(buttons[i],mousePos)){
+					obj.drawBG(context);
+					buttons[i].onHover(context);
+					obj.drawMenu(i);
+					return;
+				}
+				else
+				{
+					obj.drawBG(context);
+					obj.drawMenu(-1);
+					//buttons[i].onMouseOff(context);
+				}
+			}*/
+
+
 		}
-
-
 	}
+
+	this.hoverEvent=this.createHoverEvent();
+
 	this.keyEvent=function(event){
 		var key = event.keyCode;
 		switch(key)
