@@ -1,9 +1,10 @@
-function Settlement(region, longitude, latitude)
+function Settlement(name, region, mapX, mapY)
 {
 	//to do: link price list to settlement
+	this.name=name;
 	this.region=region;
-	this.longitude=longitude;
-	this.latitude=latitude;
+	this.mapX=mapX;
+	this.mapY=mapY;
 	this.pointsOfInterest=new Array();
 	
 	function addPointOfInterest(newPOI)

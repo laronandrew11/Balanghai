@@ -7,6 +7,7 @@ function GameState(playerName){
 	this.settlement="Sikdagat"; //if applicable
 	this.ships=[];
 	this.cargo=[];
+	this.visibleSettlements=["Sikdagat","Kagisanan","Mapawikan","Atabay","Balasin","Lungon"];
 	this.gameTime;
 	this.dx;
 	this.dy;

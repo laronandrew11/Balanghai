@@ -1,7 +1,12 @@
 {
 		"region":[
 		{"name":"Lunhayan","settlement":[
-			{"name":"","latitude":60,"longitude":60,"pois":["shipbuilder","market"]} //pois=points of interest
+			{"name":"Sikdagat","mapX":494,"mapY":199,"pois":["shipbuilder","market"]}, //pois=points of interest
+			{"name":"Kagisanan","mapX":507,"mapY":126,"pois":["shipbuilder","market"]},
+			{"name":"Mapawikan","mapX":511,"mapY":234,"pois":["shipbuilder","market"]},
+			{"name":"Atabay","mapX":558,"mapY":267,"pois":["shipbuilder","market"]},
+			{"name":"Balasin","mapX":524,"mapY":299,"pois":["shipbuilder","market"]},
+			{"name":"Lungos","mapX":478,"mapY":337,"pois":["shipbuilder","market"]}
 			]
 		},
 		{"name":"Besaria","settlement":[

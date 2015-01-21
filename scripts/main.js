@@ -154,9 +154,13 @@ function addMapMenu(){
 	var pnlMap=new Panel(50,50,900,500,mapImg);
 	var btnYouAreHere=new Button(50+gameState.mapX,50+gameState.mapY,16,16,"YOU ARE HERE","Epistolar",15,"black", pointerImg);
 	btnYouAreHere.onClick=function(){
-		alert("YOU ARE HERE")
+		alert("YOU ARE HERE");
 	}
 	pnlMap.addButton(btnYouAreHere);
+	for(var settlement in gameState.visibleSettlements)
+	{
+		addSettlementButton(settlement);
+	}
 	pnlMap.visible=true;
 
 
@@ -203,4 +207,11 @@ function addSettlementMenu(settlementName){
 
 	settlementScreen.addButton(btnContinue);
 	settlementScreen.drawScreen(startbg);
+}
+
+function addSettlementButton(settlementName)
+{
+	var settlementFetcher= new SettlementInfoFetcher();
+	var settlement=settlementFetcher.get(settlementName);
+	return new Button(50+settlement.mapX,50+settlement.mapY,16,16,settlement.name,"Epistolar",15,"black", settlementImg);
 }
