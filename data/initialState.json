@@ -1,0 +1,17 @@
+{
+	"gameState":{
+		"saveName":"DEFAULT",
+		"playerName":"noname",
+		"money":1000,
+		"latitude":1,
+		"longitude":1,
+		"settlement":"none",//change to starting settlement
+		"ships":[
+
+		],
+		"cargo":[
+		],
+		"gameTime":"1200-01-01",
+		"regionsFound":["Lunhayan"]
+	}
+}

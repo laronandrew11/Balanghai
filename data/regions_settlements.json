@@ -1,9 +1,7 @@
 {
-	"savestate:"{
-		"saveName":"Default",
 		"region":[
 		{"name":"Lunhayan","settlement":[
-			{"name":"","latitude":"","longitude":""} //todo: points of interest
+			{"name":"","latitude":60,"longitude":60,"pois":["shipbuilder","market"]} //pois=points of interest
 			]
 		},
 		{"name":"Besaria","settlement":[
@@ -19,7 +17,4 @@
 			]
 		}
 		]
-
-		
-	}
 }

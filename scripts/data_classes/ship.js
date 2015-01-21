@@ -1,6 +1,6 @@
-function Ship(type, speed, armor, cargoCapacity){
+function Ship(type, speed, health, cargoCapacity){
 	this.type=type;
 	this.speed=speed;
-	this.armor=armor;
+	this.health=health;
 	this.cargoCapacity=cargoCapacity;
 }

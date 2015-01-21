@@ -1,0 +1,5 @@
+{
+	"cargo":[
+	{"name":"","type":"","unitWeight":1,"priceMin":[1,2,3,4],"priceMax":[5,6,7,8]}//prices will map to regions in the order they were loaded
+	]
+}

@@ -1,0 +1,5 @@
+{
+	"ship":[
+	{"type":"bangka","speed":0,"health":50,"cargoCapacity":100}
+	]
+}
