@@ -19,7 +19,7 @@ var buttonBG = document.createElement('img');
 	newGameButtonBG.src = 'img/newgamebut.png';
 //var activeScreen;
 	
-//TODO optimize screen switching by not re-initializing screens every time we switch screens
+//TODO optimize screen switching by not re-initializing screens every time we switch screens, or removing invisible screens from memory
 function main()
 {
 	addStartScreen();
@@ -30,12 +30,12 @@ function addStartScreen()
 
 	var btnContinue=new Button(415,525,240,60,"CLICK TO CONTINUE","Epistolar",15,"black", buttonBG);
 	btnContinue.onClick=function(){
-		clearStaticScreen(startScreen);
+		startScreen.clearScreen();
 		addMainMenu();
 	}
 
 	startScreen.addButton(btnContinue);
-	drawStaticScreen(startScreen, startbg);
+	startScreen.drawScreen(startbg);
 }
 /*function activateScreen(){
 
@@ -46,14 +46,22 @@ function deactivateScreen(){
 function addMainMenu(){
 	var mainMenu=new staticScreen();
 
+	var btnCloseLoadGamePanel=new Button(100,56,80,80,"Close Panel","Epistolar",15,"black", buttonBG);
+	btnCloseLoadGamePanel.onClick=function(){
+		mainMenu.hidePanel(0);
+	}
+
+	var pnlLoadGame=new Panel(100,56,357,496,startbg);
+	pnlLoadGame.addButton(btnCloseLoadGamePanel);
+
 	var btnNewGame=new Button(600,160,322,80,"NEW GAME","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
-		clearStaticScreen(mainMenu);
+		mainMenu.clearScreen();
 		addFleetMenu();
 	}
 	var btnLoadGame=new Button(600,260,322,80,"LOAD GAME","Epistolar",15,"black", loadGameButtonBG);
 	btnLoadGame.onClick=function(){
-		alert("LOAD GAME!");
+		mainMenu.showPanel(0);//display load game panel
 	}
 
 	var btnCredits=new Button(600,360,322,80,"CREDITS","Epistolar",15,"black", creditsButtonBG);
@@ -61,14 +69,17 @@ function addMainMenu(){
 		alert("Copyright DLSU Game Development Laboratory, 2015.");
 	}
 
+	
+
 	mainMenu.addButton(btnNewGame);
 	mainMenu.addButton(btnLoadGame);
 	mainMenu.addButton(btnCredits);
+	mainMenu.addPanel(pnlLoadGame);
 	
-	drawStaticScreen(mainMenu, mainMenuBG);
+	mainMenu.drawScreen(mainMenuBG);
 }
 
-function addFleetMenu(){ //TODO use panels?
+function addFleetMenu(){ //TODO use panels?dra
 	var fleetMenu=new staticScreen();
 
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
@@ -77,19 +88,24 @@ function addFleetMenu(){ //TODO use panels?
 	}
 	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
 	btnCargo.onClick=function(){
+		fleetMenu.clearScreen();
 		addCargoMenu();
+
 	}
 
 	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
 	btnMap.onClick=function(){
+		fleetMenu.clearScreen();
 		addMapMenu();
+
 	}
 
 	fleetMenu.addButton(btnShip);
 	fleetMenu.addButton(btnCargo);
 	fleetMenu.addButton(btnMap);
+
 	
-	drawStaticScreen(fleetMenu, shipMenuBG);
+	fleetMenu.drawScreen(shipMenuBG);
 }
 
 function addCargoMenu(){
@@ -97,6 +113,7 @@ function addCargoMenu(){
 
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){
+		cargoMenu.clearScreen();
 		addFleetMenu();
 	}
 	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
@@ -106,17 +123,19 @@ function addCargoMenu(){
 
 	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
 	btnMap.onClick=function(){
+		cargoMenu.clearScreen();
 		addMapMenu();
 	}
 
 	var pnlInfo=new Panel(577,56,357,496,startbg);
+	pnlInfo.visible=true;
 
 	cargoMenu.addButton(btnShip);
 	cargoMenu.addButton(btnCargo);
 	cargoMenu.addButton(btnMap);
 	cargoMenu.addPanel(pnlInfo);
 	
-	drawStaticScreen(cargoMenu, cargoMenuBG);
+	cargoMenu.drawScreen(cargoMenuBG);
 }
 
 function addMapMenu(){
@@ -124,10 +143,12 @@ function addMapMenu(){
 
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){
+		mapMenu.clearScreen();
 		addFleetMenu();
 	}
 	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
 	btnCargo.onClick=function(){
+		mapMenu.clearScreen();
 		addCargoMenu();
 	}
 
@@ -140,19 +161,5 @@ function addMapMenu(){
 	mapMenu.addButton(btnCargo);
 	mapMenu.addButton(btnMap);
 	
-	drawStaticScreen(mapMenu, mapBG);
-}
-
-function drawStaticScreen(screen, bg)
-{
-	screen.setBG(bg);
-	screen.drawBG(context);
-	screen.drawMenu(-1);
-	screen.drawPanels();
-}
-function clearStaticScreen(screen)
-{
-	screen.removeListeners();
-	screen.clearButtons();
-	screen.clearPanels();
+	mapMenu.drawScreen(mapBG);
 }

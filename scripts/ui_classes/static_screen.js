@@ -28,9 +28,29 @@ function staticScreen(){
 	{
 		var i;
 		for(i=0; i<panels.length; i++){
-			panels[i].draw(context);
+			if(panels[i].visible==true)
+				panels[i].draw(context);
 		}
 	}
+
+	this.createHidePanel=function(i){
+		var obj=this;
+		return function(i)
+		{
+			panels[i].clearPanel();
+			obj.drawPanels();
+		}
+	}
+	this.hidePanel=this.createHidePanel();
+	this.createShowPanel=function(i){
+		var obj=this;
+		return function(i)
+		{
+			panels[i].visible=true;
+			obj.drawPanels();
+		}
+	}
+	this.showPanel=this.createShowPanel();
 	this.addPanel=function(panel)
 	{
 		panels.push(panel);
@@ -96,7 +116,27 @@ function staticScreen(){
 		canvas.removeEventListener('mousemove', this.hoverEvent);
 		canvas.removeEventListener('mousedown', this.clickEvent);
 	}
+	this.createClearScreen=function(){
+		var obj=this;
+		return function(){
+			obj.removeListeners();
+			obj.clearButtons();
+			obj.clearPanels();
+		}
+	}
+	this.clearScreen=this.createClearScreen();
 
+	this.createDrawScreen=function(bg)
+	{
+		var obj=this;
+		return function(bg){
+			obj.setBG(bg);
+			obj.drawBG(context);
+			obj.drawMenu(-1);
+			obj.drawPanels();
+		}
+	}
+	this.drawScreen=this.createDrawScreen();
 	//canvas.addEventListener('mousemove', this.hoverEvent, false);
 	canvas.addEventListener('mousedown', this.clickEvent, false);
 	document.onkeydown = this.keyEvent;
