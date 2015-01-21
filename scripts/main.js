@@ -17,6 +17,8 @@ var buttonBG = document.createElement('img');
 	loadGameButtonBG.src = 'img/loadgamebut.png';
 	var newGameButtonBG = document.createElement('img');
 	newGameButtonBG.src = 'img/newgamebut.png';
+	var closeButtonBG=document.createElement('img');
+	closeButtonBG.src='img/closePanel.png';
 //var activeScreen;
 	
 //TODO optimize screen switching by not re-initializing screens every time we switch screens, or removing invisible screens from memory
@@ -46,7 +48,7 @@ function deactivateScreen(){
 function addMainMenu(){
 	var mainMenu=new staticScreen();
 
-	var btnCloseLoadGamePanel=new Button(100,56,80,80,"Close Panel","Epistolar",15,"black", buttonBG);
+	var btnCloseLoadGamePanel=new Button(100,56,50,50,"Close Panel","Epistolar",15,"black", closeButtonBG);
 	btnCloseLoadGamePanel.onClick=function(){
 		mainMenu.hidePanel(0);
 	}

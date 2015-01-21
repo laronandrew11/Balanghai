@@ -29,7 +29,9 @@ function staticScreen(){
 		var i;
 		for(i=0; i<panels.length; i++){
 			if(panels[i].visible==true)
+			{
 				panels[i].draw(context);
+			}
 		}
 	}
 
@@ -37,8 +39,9 @@ function staticScreen(){
 		var obj=this;
 		return function(i)
 		{
-			panels[i].clearPanel();
-			obj.drawPanels();
+			panels[i].visible=false;
+			obj.drawScreen(bgImage);
+			//obj.drawPanels();
 		}
 	}
 	this.hidePanel=this.createHidePanel();
@@ -108,6 +111,13 @@ function staticScreen(){
 		for(i=0; i<buttons.length; i++){
 			if(inCoordinates(buttons[i],mousePos)){
 				buttons[i].onClick();
+				return;
+			}
+		}
+		for(i=0;i<panels.length;i++)
+		{
+			if(panels[i].visible==true&&inCoordinates(panels[i],mousePos)){
+				panels[i].onClick(mousePos);
 				return;
 			}
 		}
