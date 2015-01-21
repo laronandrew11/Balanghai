@@ -9,6 +9,10 @@ var cargoMenuBG = document.createElement('img');
 	cargoMenuBG.src = 'img/cargo.png';
 var mapBG = document.createElement('img');
 	mapBG.src = 'img/map.png';
+	
+var mapImg = document.createElement('img');
+	mapImg.src = 'img/minimap.png';
+	
 var buttonBG = document.createElement('img');
 	buttonBG.src = 'img/button.png';
 	var creditsButtonBG = document.createElement('img');
@@ -142,7 +146,10 @@ function addCargoMenu(){
 
 function addMapMenu(){
 	var mapMenu=new staticScreen();
-
+	
+	var pnlMap=new Panel(50,50,900,500,mapImg);
+	pnlMap.visible=true;
+	
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){
 		mapMenu.clearScreen();
@@ -168,7 +175,7 @@ function addMapMenu(){
 	mapMenu.addButton(btnShip);
 	mapMenu.addButton(btnCargo);
 	mapMenu.addButton(btnMap);
-	
+	mapMenu.addPanel(pnlMap);
 	mapMenu.drawScreen(mapBG);
 }
 //TODO generalize settlement generation
