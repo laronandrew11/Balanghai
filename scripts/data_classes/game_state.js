@@ -10,6 +10,7 @@ function Game_state(playerName){
 	this.gameTime;
 	this.dx;
 	this.dy;
+	this.settlementsDiscovered=[];
 	
 	this.addShip=function(newShip){
 		ships.put(newShip);

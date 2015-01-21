@@ -1,0 +1,25 @@
+{
+	"savestate:"{
+		"saveName":"Default",
+		"region":[
+		{"name":"Lunhayan","settlement":[
+			{"name":"","latitude":"","longitude":""} //todo: points of interest
+			]
+		},
+		{"name":"Besaria","settlement":[
+			
+			]
+		},
+		{"name":"Phra Van","settlement":[
+			
+			]
+		},
+		{"name":"Manjiang","settlement":[
+			
+			]
+		}
+		]
+
+		
+	}
+}

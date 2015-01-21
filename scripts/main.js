@@ -159,9 +159,30 @@ function addMapMenu(){
 		//addMapMenu();
 	}
 
+	var btnSettlement=new Button(749,50,200,50,"Balasin","Epistolar",15,"black", buttonBG);
+	btnSettlement.onClick=function(){
+		mapMenu.clearScreen();
+		addSettlementMenu("Balasin");
+	}
+
 	mapMenu.addButton(btnShip);
 	mapMenu.addButton(btnCargo);
 	mapMenu.addButton(btnMap);
 	
 	mapMenu.drawScreen(mapBG);
+}
+//TODO generalize settlement generation
+function addSettlementMenu(settlementName){
+	var settlementScreen=new staticScreen();
+
+	//TODO load settlement data for given settlement name, and create relevant buttons/panels
+
+	var btnShipbuilder=new Button(415,525,240,60,"CLICK TO CONTINUE","Epistolar",15,"black", buttonBG);
+	btnShipbuilder.onClick=function(){
+		settlementScreen.clearScreen();
+		addMainMenu();
+	}
+
+	settlementScreen.addButton(btnContinue);
+	settlementScreen.drawScreen(startbg);
 }

@@ -1,3 +1,7 @@
+HIGH PRIORITY
+Settlement screen
+Shipbuilder screen
+Market screen
 
 MEDIUM PRIORITY
 Icon lists
