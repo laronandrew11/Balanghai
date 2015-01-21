@@ -12,6 +12,8 @@ var mapBG = document.createElement('img');
 	
 var mapImg = document.createElement('img');
 	mapImg.src = 'img/minimap.png';
+var pointerImg = document.createElement('img');
+	pointerImg.src = 'img/pointer.png';
 	
 var buttonBG = document.createElement('img');
 	buttonBG.src = 'img/button.png';
@@ -24,7 +26,8 @@ var buttonBG = document.createElement('img');
 	var closeButtonBG=document.createElement('img');
 	closeButtonBG.src='img/closePanel.png';
 //var activeScreen;
-	
+
+var gameState;
 //TODO optimize screen switching by not re-initializing screens every time we switch screens, or removing invisible screens from memory
 function main()
 {
@@ -62,6 +65,7 @@ function addMainMenu(){
 
 	var btnNewGame=new Button(600,160,322,80,"NEW GAME","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
+		gameState=new GameState("Player");
 		mainMenu.clearScreen();
 		addFleetMenu();
 	}
@@ -148,7 +152,14 @@ function addMapMenu(){
 	var mapMenu=new staticScreen();
 	
 	var pnlMap=new Panel(50,50,900,500,mapImg);
+	var btnYouAreHere=new Button(50+gameState.mapX,50+gameState.mapY,16,16,"YOU ARE HERE","Epistolar",15,"black", pointerImg);
+	btnYouAreHere.onClick=function(){
+		alert("YOU ARE HERE")
+	}
+	pnlMap.addButton(btnYouAreHere);
 	pnlMap.visible=true;
+
+
 	
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){

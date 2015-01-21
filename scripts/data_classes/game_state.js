@@ -1,10 +1,10 @@
-function Game_state(playerName){
-	
-	this.playerName = playerName || "noname";
+function GameState(playerName){
+	//information needed to save the game; mostly player-related info
+	this.playerName = playerName ;
 	this.money=1000;
-	this.latitude;
-	this.longitude;
-	this.settlement; //if applicable
+	this.mapX=494;
+	this.mapY=199;
+	this.settlement="Sikdagat"; //if applicable
 	this.ships=[];
 	this.cargo=[];
 	this.gameTime;
