@@ -18,6 +18,14 @@ function Button(x,y,width,height,text,style,size,color){
 		context.font = size + "px " + this.style;
 		context.fillText(this.text, this.x, this.y);
 	}
+	this.onMouseOff=function(context){
+		context.fillStyle = this.color;
+		context.font = this.font;
+		context.fillText(this.text, x, y);
+	}
 	this.onClick;
+	this.onHover=function(context){
+		this.defaultHover(context, "yellow", 18);
+	};
 	
 }
