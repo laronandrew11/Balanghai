@@ -1,8 +1,10 @@
-Get drawBG and drawMenu methods to work
-Remove previous button text on hover/mouse off
--Get font to work correctly
--Button background
 
-
-
+MEDIUM PRIORITY
 Icon lists
+Scrollbar?
+Zoom?
+
+
+LOW PRIORITY
+Remove previous button text on hover/mouse off
+Get custom font to work correctly

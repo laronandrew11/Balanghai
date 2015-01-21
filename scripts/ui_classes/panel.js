@@ -34,15 +34,14 @@ function Panel(x,y,width,height, bgImage){
 		return function(){
 			//hiding the panel is done from parent screen
 			obj.clearButtons();
-			this.visible=false;
+			obj.visible=false;
 			//TODO remove listeners
 		}
 	}
 	this.clearPanel=this.createClearPanel();
 
-	this.clickEvent=function(evt)
+	this.onClick=function(mousePos)
 	{
-		var mousePos = getMousePos(canvas, evt);
 		for(i=0; i<panelButtons.length; i++){
 			if(inCoordinates(panelButtons[i],mousePos)){
 				panelButtons[i].onClick();
@@ -52,11 +51,7 @@ function Panel(x,y,width,height, bgImage){
 	}
 	this.removeListeners=function(){
 		//canvas.removeEventListener('mousemove', this.hoverEvent);
-		canvas.removeEventListener('mousedown', this.clickEvent);
+		//canvas.removeEventListener('mousedown', this.clickEvent);
 	}
-
-	//canvas.addEventListener('mousemove', this.hoverEvent, false);
-	canvas.addEventListener('mousedown', this.clickEvent, false);
-	document.onkeydown = this.keyEvent;
 	
 }
