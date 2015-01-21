@@ -1,11 +1,11 @@
-function Settlement(name, region, mapX, mapY)
+function Settlement(name, region, mapX, mapY, pointsOfInterest)
 {
 	//to do: link price list to settlement
 	this.name=name;
 	this.region=region;
 	this.mapX=mapX;
 	this.mapY=mapY;
-	this.pointsOfInterest=new Array();
+	this.pointsOfInterest=pointsOfInterest;
 	
 	function addPointOfInterest(newPOI)
 	{

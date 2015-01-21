@@ -1,6 +1,5 @@
-{
-		"region":[
-		{"name":"Lunhayan","settlement":[
+var regions_settlements='[
+		{"name":"Lunhayan","settlements":[
 			{"name":"Sikdagat","mapX":494,"mapY":199,"pois":["shipbuilder","market"]}, //pois=points of interest
 			{"name":"Kagisanan","mapX":507,"mapY":126,"pois":["shipbuilder","market"]},
 			{"name":"Mapawikan","mapX":511,"mapY":234,"pois":["shipbuilder","market"]},
@@ -21,5 +20,4 @@
 			
 			]
 		}
-		]
-}
+		]';

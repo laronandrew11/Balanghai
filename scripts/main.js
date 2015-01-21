@@ -14,6 +14,8 @@ var mapImg = document.createElement('img');
 	mapImg.src = 'img/minimap.png';
 var pointerImg = document.createElement('img');
 	pointerImg.src = 'img/pointer.png';
+var settlementImg = document.createElement('img');
+	settlementImg.src = 'img/settlement.png';
 	
 var buttonBG = document.createElement('img');
 	buttonBG.src = 'img/button.png';
@@ -152,15 +154,22 @@ function addMapMenu(){
 	var mapMenu=new staticScreen();
 	
 	var pnlMap=new Panel(50,50,900,500,mapImg);
+	
+
+	//add settlements
+	var settlementFetcher= new SettlementInfoFetcher();
+	var i;
+	for(i=0;i<gameState.visibleSettlements.length;i++)
+	{
+		var newButton=getSettlementButton(settlementFetcher, mapMenu, gameState.visibleSettlements[i]);
+		pnlMap.addButton(newButton);
+	}
+
 	var btnYouAreHere=new Button(50+gameState.mapX,50+gameState.mapY,16,16,"YOU ARE HERE","Epistolar",15,"black", pointerImg);
 	btnYouAreHere.onClick=function(){
 		alert("YOU ARE HERE");
 	}
 	pnlMap.addButton(btnYouAreHere);
-	for(var settlement in gameState.visibleSettlements)
-	{
-		addSettlementButton(settlement);
-	}
 	pnlMap.visible=true;
 
 
@@ -181,12 +190,6 @@ function addMapMenu(){
 		//addMapMenu();
 	}
 
-	var btnSettlement=new Button(749,50,200,50,"Balasin","Epistolar",15,"black", buttonBG);
-	btnSettlement.onClick=function(){
-		mapMenu.clearScreen();
-		addSettlementMenu("Balasin");
-	}
-
 	mapMenu.addButton(btnShip);
 	mapMenu.addButton(btnCargo);
 	mapMenu.addButton(btnMap);
@@ -194,24 +197,43 @@ function addMapMenu(){
 	mapMenu.drawScreen(mapBG);
 }
 //TODO generalize settlement generation
-function addSettlementMenu(settlementName){
+function addSettlementMenu(settlement){
 	var settlementScreen=new staticScreen();
 
 	//TODO load settlement data for given settlement name, and create relevant buttons/panels
-
-	var btnShipbuilder=new Button(415,525,240,60,"CLICK TO CONTINUE","Epistolar",15,"black", buttonBG);
-	btnShipbuilder.onClick=function(){
-		settlementScreen.clearScreen();
-		addMainMenu();
+	if(contains(settlement.pointsOfInterest,"shipbuilder"))
+	{
+		var btnShipbuilder=new Button(415,400,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+		btnShipbuilder.onClick=function(){
+			alert(settlement.name+" shipbuilder coming soon!");
+		}
+		settlementScreen.addButton(btnShipbuilder);
+	}
+	if(contains(settlement.pointsOfInterest,"market"))
+	{
+		var btnMarket=new Button(415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
+		btnMarket.onClick=function(){
+			alert(settlement.name+" market coming soon!");
+		}
+		settlementScreen.addButton(btnMarket);
 	}
 
-	settlementScreen.addButton(btnContinue);
+	
+
+	
 	settlementScreen.drawScreen(startbg);
 }
 
-function addSettlementButton(settlementName)
+function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize so that we don't parse the JSON string every time we add a new settlement
 {
-	var settlementFetcher= new SettlementInfoFetcher();
-	var settlement=settlementFetcher.get(settlementName);
-	return new Button(50+settlement.mapX,50+settlement.mapY,16,16,settlement.name,"Epistolar",15,"black", settlementImg);
+
+	var settlement=fetcher.get(settlementName);
+	var newButton=new Button(50+settlement.mapX,50+settlement.mapY,12,12,settlement.name,"Epistolar",15,"black", settlementImg);
+	newButton.onClick=function(){
+			//alert(settlement.name);
+			parentMenu.clearScreen();
+			addSettlementMenu(settlement);
+		}
+	return newButton;
 }
+
