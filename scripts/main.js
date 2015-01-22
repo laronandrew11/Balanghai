@@ -215,6 +215,14 @@ function addMarketMenu(settlement){
 
 function addDefaultButtons(parentMenu)
 {
+
+	var btnMainMenu=new Button(49,0,200,50,"MAIN MENU","Epistolar",15,"black", buttonBG);
+	btnMainMenu.onClick=function(){
+		parentMenu.clearScreen();
+		addMainMenu();
+	}
+
+
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){
 		parentMenu.clearScreen();
@@ -232,6 +240,8 @@ function addDefaultButtons(parentMenu)
 		addMapMenu();
 	}
 
+
+	parentMenu.addButton(btnMainMenu);
 	parentMenu.addButton(btnShip);
 	parentMenu.addButton(btnCargo);
 	parentMenu.addButton(btnMap);
