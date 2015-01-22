@@ -12,3 +12,7 @@ Zoom?
 LOW PRIORITY
 Remove previous button text on hover/mouse off
 Get custom font to work correctly
+
+REFACTORING (optional)
+Pre-sort lists by name if possible, so that we can use binary search
+Convert ship, cargo and map screens to panels within a single fleet menu?

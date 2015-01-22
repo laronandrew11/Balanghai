@@ -67,7 +67,8 @@ function addMainMenu(){
 
 	var btnNewGame=new Button(600,160,322,80,"NEW GAME","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
-		gameState=new GameState("Player");
+		var newPlayerName = prompt("Please enter your name", "");
+		gameState=new GameState(newPlayerName);
 		mainMenu.clearScreen();
 		addFleetMenu();
 	}
@@ -196,32 +197,55 @@ function addMapMenu(){
 	mapMenu.addPanel(pnlMap);
 	mapMenu.drawScreen(mapBG);
 }
-//TODO generalize settlement generation
+
 function addSettlementMenu(settlement){
 	var settlementScreen=new staticScreen();
 
-	//TODO load settlement data for given settlement name, and create relevant buttons/panels
+	//load settlement data for given settlement name, and create relevant buttons/panels
 	if(contains(settlement.pointsOfInterest,"shipbuilder"))
 	{
-		var btnShipbuilder=new Button(415,400,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
-		btnShipbuilder.onClick=function(){
-			alert(settlement.name+" shipbuilder coming soon!");
-		}
-		settlementScreen.addButton(btnShipbuilder);
+		addShipbuilderButton(settlementScreen,settlement.name);
 	}
 	if(contains(settlement.pointsOfInterest,"market"))
 	{
+		addMarketButton(settlementScreen,settlement.name);
+	}
+	settlementScreen.drawScreen(startbg);
+}
+function addShipbuilderButton(parentMenu,settlementName){
+	var btnShipbuilder=new Button(415,400,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+		btnShipbuilder.onClick=function(){
+			parentMenu.clearScreen();
+			addShipbuilderMenu(settlementName);
+		}
+		parentMenu.addButton(btnShipbuilder);
+}
+function addMarketButton(parentMenu,settlementName){
 		var btnMarket=new Button(415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
 		btnMarket.onClick=function(){
-			alert(settlement.name+" market coming soon!");
+			parentMenu.clearScreen();
+			addMarketMenu(settlementName);
 		}
-		settlementScreen.addButton(btnMarket);
-	}
+		parentMenu.addButton(btnMarket);
+}
 
-	
-
-	
-	settlementScreen.drawScreen(startbg);
+function addShipbuilderMenu(settlement){
+	var shipbuilderScreen=new staticScreen();
+	var btnTest=new Button(415,300,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+		btnTest.onClick=function(){
+			alert(settlement+" shipbuilder coming soon!");
+		}
+	shipbuilderScreen.addButton(btnTest);
+	shipbuilderScreen.drawScreen(startbg);
+}
+function addMarketMenu(settlement){
+	var marketScreen=new staticScreen();
+	var btnTest=new Button(415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
+		btnTest.onClick=function(){
+			alert(settlement+" market coming soon!");
+		}
+	marketScreen.addButton(btnTest);
+	marketScreen.drawScreen(startbg);
 }
 
 function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize so that we don't parse the JSON string every time we add a new settlement
