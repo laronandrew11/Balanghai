@@ -3,6 +3,9 @@ Settlement screen
 Shipbuilder screen
 Market screen
 
+Cargo Screen: Update details panel based on selected cargo
+Ship screen: load ship data, add/update relevant buttons/panels
+
 MEDIUM PRIORITY
 Icon lists
 Scrollbar?

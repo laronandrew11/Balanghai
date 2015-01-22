@@ -7,15 +7,27 @@
 
 function staticScreen(){
 	var buttons = [];
-	var panels=[];
-	var bgImage;
-	this.setBG=function(img)
+	this.panels=[];
+	this.bgImage;
+	this.createSetBG=function(img)
 	{
-		bgImage=img;
+		var obj=this;
+		return function(img){
+			obj.bgImage=img;
+		}
+
 	}
-	this.drawBG=function(context){
-		context.drawImage(bgImage,0,0,1000,600); 
+	this.setBG=this.createSetBG();
+	this.createDrawBG=function(context){
+		var obj=this;
+		return function(context)
+		{
+			context.drawImage(obj.bgImage,0,0,1000,600); 			
+		}
+
 	}	
+	this.drawBG=this.createDrawBG();
+
 	this.drawMenu=function(undraw)
 	{
 		var i;
@@ -24,23 +36,27 @@ function staticScreen(){
 			buttons[i].draw(context);
 		}
 	}
-	this.drawPanels=function()
+	this.createDrawPanels=function()
 	{
-		var i;
-		for(i=0; i<panels.length; i++){
-			if(panels[i].visible==true)
-			{
-				panels[i].draw(context);
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.panels.length; i++){
+				if(obj.panels[i].visible==true)
+				{
+					obj.panels[i].draw(context);
+				}
 			}
 		}
 	}
+	this.drawPanels=this.createDrawPanels();
 
 	this.createHidePanel=function(i){
 		var obj=this;
 		return function(i)
 		{
-			panels[i].visible=false;
-			obj.drawScreen(bgImage);
+			obj.panels[i].visible=false;
+			obj.drawScreen(obj.bgImage);
 			//obj.drawPanels();
 		}
 	}
@@ -49,15 +65,21 @@ function staticScreen(){
 		var obj=this;
 		return function(i)
 		{
-			panels[i].visible=true;
+			obj.panels[i].visible=true;
 			obj.drawPanels();
 		}
 	}
 	this.showPanel=this.createShowPanel();
-	this.addPanel=function(panel)
+	this.createAddPanel=function(panel)
 	{
-		panels.push(panel);
+		var obj=this;
+		return function(panel){
+			obj.panels.push(panel);
+		}
+
 	}
+	this.addPanel=this.createAddPanel();
+
 	this.addButton=function(button){
 		buttons.push(button);
 	}
@@ -65,11 +87,14 @@ function staticScreen(){
 		while(buttons.length>0)
 			buttons.pop();
 	}
-	this.clearPanels=function(){
-		while(panels.length>0)
-			panels.pop();
+	this.createClearPanels=function(){
+		var obj=this;
+		return function(){
+			while(obj.panels.length>0)
+			obj.panels.pop();
+		}
 	}
-
+	this.clearPanels=this.createClearPanels();
 
 	this.createHoverEvent = function() {
 		var obj = this;
@@ -105,23 +130,28 @@ function staticScreen(){
 			default: break;
 		}
 	}
-	this.clickEvent=function(evt)
+	this.createClickEvent=function(evt)
 	{
-		var mousePos = getMousePos(canvas, evt);
-		for(i=0; i<buttons.length; i++){
-			if(inCoordinates(buttons[i],mousePos)){
-				buttons[i].onClick();
-				return;
+		var obj=this;
+		return function(evt){
+			var mousePos = getMousePos(canvas, evt);
+			for(i=0; i<buttons.length; i++){
+				if(inCoordinates(buttons[i],mousePos)){
+					buttons[i].onClick();
+					return;
+				}
 			}
-		}
-		for(i=0;i<panels.length;i++)
-		{
-			if(panels[i].visible==true&&inCoordinates(panels[i],mousePos)){
-				panels[i].onClick(mousePos);
-				return;
+			for(i=0;i<obj.panels.length;i++)
+			{
+				if(obj.panels[i].visible==true&&inCoordinates(obj.panels[i],mousePos)){
+					obj.panels[i].onClick(mousePos);
+					return;
+				}
 			}
 		}
 	}
+	this.clickEvent=this.createClickEvent();
+
 	this.removeListeners=function(){
 		canvas.removeEventListener('mousemove', this.hoverEvent);
 		canvas.removeEventListener('mousedown', this.clickEvent);

@@ -65,19 +65,19 @@ function addMainMenu(){
 	var pnlLoadGame=new Panel(100,56,357,496,startbg);
 	pnlLoadGame.addButton(btnCloseLoadGamePanel);
 
-	var btnNewGame=new Button(600,160,322,80,"NEW GAME","Epistolar",15,"black", newGameButtonBG);
+	var btnNewGame=new Button(600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
 		var newPlayerName = prompt("Please enter your name", "");
 		gameState=new GameState(newPlayerName);
 		mainMenu.clearScreen();
 		addFleetMenu();
 	}
-	var btnLoadGame=new Button(600,260,322,80,"LOAD GAME","Epistolar",15,"black", loadGameButtonBG);
+	var btnLoadGame=new Button(600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
 	btnLoadGame.onClick=function(){
 		mainMenu.showPanel(0);//display load game panel
 	}
 
-	var btnCredits=new Button(600,360,322,80,"CREDITS","Epistolar",15,"black", creditsButtonBG);
+	var btnCredits=new Button(600,360,322,80,"","Epistolar",15,"black", creditsButtonBG);
 	btnCredits.onClick=function(){
 		alert("Copyright DLSU Game Development Laboratory, 2015.");
 	}
@@ -101,19 +101,73 @@ function addFleetMenu(){ //TODO use panels?dra
 	fleetMenu.drawScreen(shipMenuBG);
 }
 
+function CreateCargoCategoryButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			populateCargoPanel(parentMenu, lbutton.text);
+		}
+}
+
 function addCargoMenu(){
 	var cargoMenu=new staticScreen();
 
-	
+	var i;
+	var x=70;
+	for(i=0;i<cargoCategories.length;i++)
+	{
 
-	var pnlInfo=new Panel(577,56,357,496,startbg);
-	pnlInfo.visible=true;
+		var newButton=new Button(x,70,50,50,cargoCategories[i],"Epistolar",15,"black", buttonBG);
+
+		newButton.onClick=CreateCargoCategoryButtonHandler(cargoMenu, newButton);
+		cargoMenu.addButton(newButton);
+		x+=55;
+	}
+
+	var pnlInventory=new Panel(70,130,457,456,startbg);
+	pnlInventory.visible=true;
+
+	
+	//pnlDetails.visible=true;
 
 
 	addDefaultButtons(cargoMenu);
-	cargoMenu.addPanel(pnlInfo);
+
+	cargoMenu.addPanel(pnlInventory);
 	
 	cargoMenu.drawScreen(cargoMenuBG);
+}
+
+function CreateCargoItemButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			alert("You have "+button.text);
+			var pnlDetails=new Panel(577,56,357,496,startbg);
+			pnlDetails.visible=true;
+			parentMenu.addPanel(pnlDetails);
+			parentMenu.drawScreen(parentMenu.bgImage);
+		}
+}
+function populateCargoPanel(parentMenu, type)
+{
+	parentMenu.panels[0].clearButtons();
+	var x=70;
+	var i;
+	for(i=0;i<gameState.cargo.length;i++){
+		var item=gameState.cargo[i];
+		if(item.type==type)
+		{
+			var newButton=new Button(x,150,140,140,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+
+			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton);
+			parentMenu.panels[0].addButton(newButton);//add to inventory panel
+			x+=130;
+
+			//parentMenu.drawScreen(parentMenu.bgImage);
+		}
+	}
+	parentMenu.panels[0].draw(context);
 }
 
 function addMapMenu(){
@@ -131,7 +185,7 @@ function addMapMenu(){
 		pnlMap.addButton(newButton);
 	}
 
-	var btnYouAreHere=new Button(50+gameState.mapX,50+gameState.mapY,16,16,"YOU ARE HERE","Epistolar",15,"black", pointerImg);
+	var btnYouAreHere=new Button(50+gameState.mapX,50+gameState.mapY,16,16,"","Epistolar",15,"black", pointerImg);
 	btnYouAreHere.onClick=function(){
 		alert("YOU ARE HERE");
 	}
@@ -188,7 +242,7 @@ function addShipbuilderMenu(settlement){
 	}
 
 
-	var btnTest=new Button(115,300,60,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+	var btnTest=new Button(115,300,60,60,"You're at Shipbuilder","Epistolar",15,"black", buttonBG);
 		btnTest.onClick=function(){
 			alert(settlement.name+" shipbuilder coming soon!");
 		}
@@ -205,7 +259,7 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTest=new Button(115,300,60,60,"Market","Epistolar",15,"black", buttonBG);
+	var btnTest=new Button(115,300,60,60,"You're at Market","Epistolar",15,"black", buttonBG);
 		btnTest.onClick=function(){
 			alert(settlement.name+" market coming soon!");
 		}

@@ -16,9 +16,9 @@ function Button(x,y,width,height,text,style,size,color,bgImage){
 		{
 			context.drawImage(bgImage,x,y,width,height); 
 			//console.log("Color "+this.color);
-			//context.fillStyle = obj.color;
-			//context.font = obj.font;
-			//context.fillText(text, x, y);
+			context.fillStyle = obj.color;
+			context.font = obj.font;
+			context.fillText(text, x, y);
 		}
 	}
 
