@@ -95,27 +95,7 @@ function addMainMenu(){
 function addFleetMenu(){ //TODO use panels?dra
 	var fleetMenu=new staticScreen();
 
-	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
-	btnShip.onClick=function(){
-		//addFleetMenu();
-	}
-	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
-	btnCargo.onClick=function(){
-		fleetMenu.clearScreen();
-		addCargoMenu();
-
-	}
-
-	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
-	btnMap.onClick=function(){
-		fleetMenu.clearScreen();
-		addMapMenu();
-
-	}
-
-	fleetMenu.addButton(btnShip);
-	fleetMenu.addButton(btnCargo);
-	fleetMenu.addButton(btnMap);
+	addDefaultButtons(fleetMenu);
 
 	
 	fleetMenu.drawScreen(shipMenuBG);
@@ -124,28 +104,13 @@ function addFleetMenu(){ //TODO use panels?dra
 function addCargoMenu(){
 	var cargoMenu=new staticScreen();
 
-	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
-	btnShip.onClick=function(){
-		cargoMenu.clearScreen();
-		addFleetMenu();
-	}
-	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
-	btnCargo.onClick=function(){
-		//addCargoMenu();
-	}
-
-	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
-	btnMap.onClick=function(){
-		cargoMenu.clearScreen();
-		addMapMenu();
-	}
+	
 
 	var pnlInfo=new Panel(577,56,357,496,startbg);
 	pnlInfo.visible=true;
 
-	cargoMenu.addButton(btnShip);
-	cargoMenu.addButton(btnCargo);
-	cargoMenu.addButton(btnMap);
+
+	addDefaultButtons(cargoMenu);
 	cargoMenu.addPanel(pnlInfo);
 	
 	cargoMenu.drawScreen(cargoMenuBG);
@@ -175,25 +140,7 @@ function addMapMenu(){
 
 
 	
-	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
-	btnShip.onClick=function(){
-		mapMenu.clearScreen();
-		addFleetMenu();
-	}
-	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
-	btnCargo.onClick=function(){
-		mapMenu.clearScreen();
-		addCargoMenu();
-	}
-
-	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
-	btnMap.onClick=function(){
-		//addMapMenu();
-	}
-
-	mapMenu.addButton(btnShip);
-	mapMenu.addButton(btnCargo);
-	mapMenu.addButton(btnMap);
+	addDefaultButtons(mapMenu);
 	mapMenu.addPanel(pnlMap);
 	mapMenu.drawScreen(mapBG);
 }
@@ -201,51 +148,93 @@ function addMapMenu(){
 function addSettlementMenu(settlement){
 	var settlementScreen=new staticScreen();
 
+	addDefaultButtons(settlementScreen);
+
 	//load settlement data for given settlement name, and create relevant buttons/panels
 	if(contains(settlement.pointsOfInterest,"shipbuilder"))
 	{
-		addShipbuilderButton(settlementScreen,settlement.name);
+		addShipbuilderButton(settlementScreen,settlement);
 	}
 	if(contains(settlement.pointsOfInterest,"market"))
 	{
-		addMarketButton(settlementScreen,settlement.name);
+		addMarketButton(settlementScreen,settlement);
 	}
 	settlementScreen.drawScreen(startbg);
 }
-function addShipbuilderButton(parentMenu,settlementName){
+function addShipbuilderButton(parentMenu,settlement){
 	var btnShipbuilder=new Button(415,400,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
 		btnShipbuilder.onClick=function(){
 			parentMenu.clearScreen();
-			addShipbuilderMenu(settlementName);
+			addShipbuilderMenu(settlement);
 		}
 		parentMenu.addButton(btnShipbuilder);
 }
-function addMarketButton(parentMenu,settlementName){
+function addMarketButton(parentMenu,settlement){
 		var btnMarket=new Button(415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
 		btnMarket.onClick=function(){
 			parentMenu.clearScreen();
-			addMarketMenu(settlementName);
+			addMarketMenu(settlement);
 		}
 		parentMenu.addButton(btnMarket);
 }
 
 function addShipbuilderMenu(settlement){
 	var shipbuilderScreen=new staticScreen();
-	var btnTest=new Button(415,300,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+	addDefaultButtons(shipbuilderScreen);
+
+	if(contains(settlement.pointsOfInterest,"market"))
+	{
+		addMarketButton(shipbuilderScreen,settlement);
+	}
+
+
+	var btnTest=new Button(115,300,60,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
 		btnTest.onClick=function(){
-			alert(settlement+" shipbuilder coming soon!");
+			alert(settlement.name+" shipbuilder coming soon!");
 		}
 	shipbuilderScreen.addButton(btnTest);
 	shipbuilderScreen.drawScreen(startbg);
 }
 function addMarketMenu(settlement){
 	var marketScreen=new staticScreen();
-	var btnTest=new Button(415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
+	addDefaultButtons(marketScreen);
+
+
+	if(contains(settlement.pointsOfInterest,"shipbuilder"))
+	{
+		addShipbuilderButton(marketScreen,settlement);
+	}
+
+	var btnTest=new Button(115,300,60,60,"Market","Epistolar",15,"black", buttonBG);
 		btnTest.onClick=function(){
-			alert(settlement+" market coming soon!");
+			alert(settlement.name+" market coming soon!");
 		}
 	marketScreen.addButton(btnTest);
 	marketScreen.drawScreen(startbg);
+}
+
+function addDefaultButtons(parentMenu)
+{
+	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
+	btnShip.onClick=function(){
+		parentMenu.clearScreen();
+		addFleetMenu();
+	}
+	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
+	btnCargo.onClick=function(){
+		parentMenu.clearScreen();
+		addCargoMenu();
+	}
+
+	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
+	btnMap.onClick=function(){
+		parentMenu.clearScreen();
+		addMapMenu();
+	}
+
+	parentMenu.addButton(btnShip);
+	parentMenu.addButton(btnCargo);
+	parentMenu.addButton(btnMap);
 }
 
 function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize so that we don't parse the JSON string every time we add a new settlement
@@ -256,7 +245,7 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 	newButton.onClick=function(){
 			//alert(settlement.name);
 			parentMenu.clearScreen();
-			addSettlementMenu(settlement);
+			addSettlementMenu(settlement);//TODO only pass name?
 		}
 	return newButton;
 }
