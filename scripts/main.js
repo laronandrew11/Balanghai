@@ -54,16 +54,29 @@ function addStartScreen()
 function deactivateScreen(){
 
 }*/
+
 function addMainMenu(){
 	var mainMenu=new staticScreen();
 
-	var btnCloseLoadGamePanel=new Button(100,56,50,50,"Close Panel","Epistolar",15,"black", closeButtonBG);
+	var btnCloseLoadGamePanel=new Button(100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
 	btnCloseLoadGamePanel.onClick=function(){
 		mainMenu.hidePanel(0);
+	}
+	var btnCloseCreditsPanel=new Button(100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
+	btnCloseCreditsPanel.onClick=function(){
+		mainMenu.hidePanel(1);
 	}
 
 	var pnlLoadGame=new Panel(100,56,357,496,startbg);
 	pnlLoadGame.addButton(btnCloseLoadGamePanel);
+
+	var pnlCredits=new Panel(100,56,357,496,startbg);
+	pnlCredits.addLabel(new Label(100,100,200,50,"Code: ANDREW LARON","Epistolar",15,"black"));
+	pnlCredits.addLabel(new Label(100,150,200,50,"Additional Code: MIGUEL DUNGAN, JANA AUSTRIA","Epistolar",15,"black"));
+	pnlCredits.addLabel(new Label(100,200,200,50,"Background Art: NIGEL BINAS","Epistolar",15,"black"));
+	pnlCredits.addLabel(new Label(100,250,200,50,"Character Art: <name>","Epistolar",15,"black"));
+	pnlCredits.addLabel(new Label(100,300,200,50,"Copyright DLSU Game Development Laboratory, 2015.","Epistolar",15,"black"));
+	pnlCredits.addButton(btnCloseCreditsPanel);
 
 	var btnNewGame=new Button(600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
@@ -74,12 +87,14 @@ function addMainMenu(){
 	}
 	var btnLoadGame=new Button(600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
 	btnLoadGame.onClick=function(){
+		mainMenu.hidePanel(1);
 		mainMenu.showPanel(0);//display load game panel
 	}
 
 	var btnCredits=new Button(600,360,322,80,"","Epistolar",15,"black", creditsButtonBG);
 	btnCredits.onClick=function(){
-		alert("Copyright DLSU Game Development Laboratory, 2015.");
+		mainMenu.hidePanel(0);
+		mainMenu.showPanel(1);
 	}
 
 	
@@ -88,7 +103,7 @@ function addMainMenu(){
 	mainMenu.addButton(btnLoadGame);
 	mainMenu.addButton(btnCredits);
 	mainMenu.addPanel(pnlLoadGame);
-	
+	mainMenu.addPanel(pnlCredits);
 	mainMenu.drawScreen(mainMenuBG);
 }
 
@@ -186,6 +201,7 @@ function createCargoDetailsPanel(cargo){
 	pnlDetails.addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Epistolar",15,"black"));
 	pnlDetails.addLabel(new Label(590,250,100,25,"Weight/unit: "+cargo.unitWeight,"Epistolar",15,"black"));
 	pnlDetails.addLabel(new Label(590,300,100,25,"Total weight: "+cargo.unitWeight*cargo.amount,"Epistolar",15,"black"));
+	//add labels: "You paid:" and maybe common market prices per region
 	pnlDetails.visible=true;
 	return pnlDetails;
 }
