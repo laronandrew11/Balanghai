@@ -9,11 +9,10 @@ function GameState(playerName){
 	this.ships=[new Ship("Bangka",10,100,50)];
 	this.cargo=[new Cargo("Rice","Food",1, 10),new Cargo("Water","Food",1, 10),new Cargo("Abaca Wood","Wood",1, 10)];
 	this.visibleSettlements=["Sikdagat","Kagisanan","Mapawikan","Atabay","Balasin","Lungon"];
-	this.gameYear=1200;
-	this.gameMonth=1;
-	this.gameDay=1;
-	this.dx;
-	this.dy;
+	this.gameDate=new GameDate(1200,1,1);
+
+	this.quests=[];
+
 	
 	this.addShip=function(newShip){
 		ships.put(newShip);
