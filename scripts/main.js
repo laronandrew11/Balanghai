@@ -96,9 +96,39 @@ function addFleetMenu(){ //TODO use panels?dra
 	var fleetMenu=new staticScreen();
 
 	addDefaultButtons(fleetMenu);
-
+	populateShipPanel(fleetMenu);
 	
 	fleetMenu.drawScreen(shipMenuBG);
+}
+function CreateShipItemButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			alert("You have "+button.text);
+			var pnlDetails=new Panel(50,50,900,400,startbg);
+			pnlDetails.visible=true;
+			parentMenu.addPanel(pnlDetails);
+			parentMenu.drawScreen(parentMenu.bgImage);
+		}
+}
+function populateShipPanel(parentMenu)
+{
+	//parentMenu.clearButtons();
+	var x=50;
+	var i;
+	for(i=0;i<gameState.ships.length;i++){
+		var item=gameState.ships[i];
+
+		var newButton=new Button(x,470,140,140,item.type,"Epistolar",15,"black", buttonBG);
+
+			newButton.onClick=CreateShipItemButtonHandler(parentMenu, newButton);
+			parentMenu.addButton(newButton);
+			x+=130;
+
+			//parentMenu.drawScreen(parentMenu.bgImage);
+		
+	}
+	//parentMenu.drawScreen(parentMenu.bgImage);
 }
 
 function CreateCargoCategoryButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
@@ -126,11 +156,6 @@ function addCargoMenu(){
 
 	var pnlInventory=new Panel(70,130,457,456,startbg);
 	pnlInventory.visible=true;
-
-	
-	//pnlDetails.visible=true;
-
-
 	addDefaultButtons(cargoMenu);
 
 	cargoMenu.addPanel(pnlInventory);

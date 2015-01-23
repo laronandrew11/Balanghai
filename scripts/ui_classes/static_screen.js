@@ -18,15 +18,15 @@ function staticScreen(){
 
 	}
 	this.setBG=this.createSetBG();
-	this.createDrawBG=function(context){
-		var obj=this;
-		return function(context)
-		{
-			context.drawImage(obj.bgImage,0,0,1000,600); 			
+	this.drawBG=function(context){
+		//var obj=this;
+		//return function(context)
+		//{
+			context.drawImage(this.bgImage,0,0,1000,600); 			
 		}
 
-	}	
-	this.drawBG=this.createDrawBG();
+		
+	//this.drawBG=this.createDrawBG();
 
 	this.drawMenu=function(undraw)
 	{
@@ -169,6 +169,7 @@ function staticScreen(){
 	this.createDrawScreen=function(bg)
 	{
 		var obj=this;
+		//alert(typeof obj.bgImage);
 		return function(bg){
 			obj.setBG(bg);
 			obj.drawBG(context);
