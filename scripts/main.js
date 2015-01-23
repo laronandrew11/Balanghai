@@ -96,22 +96,29 @@ function addFleetMenu(){ //TODO use panels?dra
 	var fleetMenu=new staticScreen();
 
 	addDefaultButtons(fleetMenu);
-	populateShipPanel(fleetMenu);
+	populateShipMenu(fleetMenu);
 	
 	fleetMenu.drawScreen(shipMenuBG);
 }
-function CreateShipItemButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
+function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
 {
 	var lbutton=button;
 	return function(){
-			alert("You have "+button.text);
-			var pnlDetails=new Panel(50,50,900,400,startbg);
-			pnlDetails.visible=true;
+			var pnlDetails=createShipDetailsPanel(item);
 			parentMenu.addPanel(pnlDetails);
 			parentMenu.drawScreen(parentMenu.bgImage);
 		}
 }
-function populateShipPanel(parentMenu)
+function createShipDetailsPanel(ship){
+	var pnlDetails=new Panel(50,50,900,400,startbg);
+	pnlDetails.addLabel(new Label(100,100,100,25,"Type: "+ship.type,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(100,150,100,25,"Hull strength: "+ship.health,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(100,200,100,25,"Speed: "+ship.speed,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(100,250,100,25,"Cargo capacity: "+ship.cargoCapacity,"Epistolar",15,"black"));
+	pnlDetails.visible=true;
+	return pnlDetails;
+}
+function populateShipMenu(parentMenu)
 {
 	//parentMenu.clearButtons();
 	var x=50;
@@ -121,7 +128,7 @@ function populateShipPanel(parentMenu)
 
 		var newButton=new Button(x,470,140,140,item.type,"Epistolar",15,"black", buttonBG);
 
-			newButton.onClick=CreateShipItemButtonHandler(parentMenu, newButton);
+			newButton.onClick=CreateShipItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.addButton(newButton);
 			x+=130;
 
@@ -163,16 +170,24 @@ function addCargoMenu(){
 	cargoMenu.drawScreen(cargoMenuBG);
 }
 
-function CreateCargoItemButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
+function CreateCargoItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
 {
 	var lbutton=button;
 	return function(){
-			alert("You have "+button.text);
-			var pnlDetails=new Panel(577,56,357,496,startbg);
-			pnlDetails.visible=true;
+			var pnlDetails=createCargoDetailsPanel(item);
 			parentMenu.addPanel(pnlDetails);
 			parentMenu.drawScreen(parentMenu.bgImage);
 		}
+}
+function createCargoDetailsPanel(cargo){
+	var pnlDetails=new Panel(577,56,357,496,startbg);
+	pnlDetails.addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(590,150,100,25,"Units owned: "+cargo.amount,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(590,250,100,25,"Weight/unit: "+cargo.unitWeight,"Epistolar",15,"black"));
+	pnlDetails.addLabel(new Label(590,300,100,25,"Total weight: "+cargo.unitWeight*cargo.amount,"Epistolar",15,"black"));
+	pnlDetails.visible=true;
+	return pnlDetails;
 }
 function populateCargoPanel(parentMenu, type)
 {
@@ -185,7 +200,7 @@ function populateCargoPanel(parentMenu, type)
 		{
 			var newButton=new Button(x,150,140,140,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 
-			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton);
+			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
 			x+=130;
 
@@ -194,6 +209,7 @@ function populateCargoPanel(parentMenu, type)
 	}
 	parentMenu.panels[0].draw(context);
 }
+
 
 function addMapMenu(){
 	var mapMenu=new staticScreen();

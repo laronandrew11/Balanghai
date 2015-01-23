@@ -8,6 +8,7 @@
 function staticScreen(){
 	var buttons = [];
 	this.panels=[];
+	this.labels=[];
 	this.bgImage;
 	this.createSetBG=function(img)
 	{
@@ -80,6 +81,15 @@ function staticScreen(){
 	}
 	this.addPanel=this.createAddPanel();
 
+	this.createAddLabel=function(label)
+	{
+		var obj=this;
+		return function(label){
+			obj.labels.push(label);
+		}
+
+	}
+	this.addLabel=this.createAddLabel();
 	this.addButton=function(button){
 		buttons.push(button);
 	}

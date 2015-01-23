@@ -1,4 +1,5 @@
 function Button(x,y,width,height,text,style,size,color,bgImage){
+	//TODO add alternate image and "selected" method for buttons that stay highlighted (ship/cargo items)
 	this.x=x;
 	this.y=y;
 	this.width=width;
