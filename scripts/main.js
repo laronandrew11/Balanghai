@@ -89,6 +89,7 @@ function addMainMenu(){
 	btnLoadGame.onClick=function(){
 		mainMenu.hidePanel(1);
 		mainMenu.showPanel(0);//display load game panel
+
 	}
 
 	var btnCredits=new Button(600,360,322,80,"","Epistolar",15,"black", creditsButtonBG);
@@ -114,6 +115,7 @@ function addFleetMenu(){ //TODO use panels?dra
 	populateShipMenu(fleetMenu);
 	
 	fleetMenu.drawScreen(shipMenuBG);
+	saveGame();
 }
 function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
 {
