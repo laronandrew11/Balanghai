@@ -1,10 +1,11 @@
 HIGH PRIORITY
-Settlement screen
-Shipbuilder screen
-Market screen
+Settlement screen: art/layout
+Shipbuilder screen: panels/buttons
+Market screen: panels/buttons
+Load/save
+Load game panel
 
-Cargo Screen: Update details panel based on selected cargo
-Ship screen: load ship data, add/update relevant buttons/panels
+Quest/event systems
 
 MEDIUM PRIORITY
 Icon lists
