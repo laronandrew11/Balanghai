@@ -81,15 +81,7 @@ function staticScreen(){
 	}
 	this.addPanel=this.createAddPanel();
 
-	this.createAddLabel=function(label)
-	{
-		var obj=this;
-		return function(label){
-			obj.labels.push(label);
-		}
 
-	}
-	this.addLabel=this.createAddLabel();
 	this.addButton=function(button){
 		buttons.push(button);
 	}
@@ -105,7 +97,26 @@ function staticScreen(){
 		}
 	}
 	this.clearPanels=this.createClearPanels();
+	this.createAddLabel=function(label)
+	{
+		var obj=this;
+		return function(label){
+			obj.labels.push(label);
+		}
 
+	}
+	this.addLabel=this.createAddLabel();
+	this.createDrawLabels=function()
+	{
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.labels.length; i++){
+					obj.labels[i].draw(context);
+			}
+		}
+	}
+	this.drawLabels=this.createDrawLabels();
 	this.createHoverEvent = function() {
 		var obj = this;
 		return function(evt) //TODO: optimize
@@ -183,6 +194,7 @@ function staticScreen(){
 		return function(bg){
 			obj.setBG(bg);
 			obj.drawBG(context);
+			obj.drawLabels();
 			obj.drawMenu(-1);
 			obj.drawPanels();
 		}

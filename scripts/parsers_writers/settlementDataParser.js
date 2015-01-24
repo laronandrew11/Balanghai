@@ -5,12 +5,8 @@ function SettlementInfoFetcher(){
 	this.createGet=function(settlementName){
 		var obj=this;
 		return function(settlementName){
-			var rawSettlementObject=obj.findSettlement(settlementName);
-			var region=rawSettlementObject.region;
-			var mapX=rawSettlementObject.mapX;
-			var mapY=rawSettlementObject.mapY;
-			var pointsOfInterest=rawSettlementObject.pois;
-			return new Settlement(settlementName, region, mapX, mapY, pointsOfInterest);
+			var settlement=obj.findSettlement(settlementName);
+			return settlement;
 		}
 	}
 	this.get=this.createGet();

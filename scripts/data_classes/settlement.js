@@ -5,7 +5,7 @@ function Settlement(name, region, mapX, mapY, pointsOfInterest)
 	this.region=region;
 	this.mapX=mapX;
 	this.mapY=mapY;
-	this.pointsOfInterest=pointsOfInterest;
+	this.pois=pointsOfInterest;
 	
 	function addPointOfInterest(newPOI)
 	{

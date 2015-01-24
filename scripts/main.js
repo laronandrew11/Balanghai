@@ -315,11 +315,11 @@ function addSettlementMenu(settlement){
 	addDefaultButtons(settlementScreen);
 
 	//load settlement data for given settlement name, and create relevant buttons/panels
-	if(contains(settlement.pointsOfInterest,"shipbuilder"))
+	if(contains(settlement.pois,"shipbuilder"))
 	{
 		addShipbuilderButton(settlementScreen,settlement);
 	}
-	if(contains(settlement.pointsOfInterest,"market"))
+	if(contains(settlement.pois,"market"))
 	{
 		addMarketButton(settlementScreen,settlement);
 	}
@@ -346,7 +346,7 @@ function addShipbuilderMenu(settlement){
 	var shipbuilderScreen=new staticScreen();
 	addDefaultButtons(shipbuilderScreen);
 
-	if(contains(settlement.pointsOfInterest,"market"))
+	if(contains(settlement.pois,"market"))
 	{
 		addMarketButton(shipbuilderScreen,settlement);
 	}
@@ -364,7 +364,7 @@ function addMarketMenu(settlement){
 	addDefaultButtons(marketScreen);
 
 
-	if(contains(settlement.pointsOfInterest,"shipbuilder"))
+	if(contains(settlement.pois,"shipbuilder"))
 	{
 		addShipbuilderButton(marketScreen,settlement);
 	}
@@ -409,6 +409,8 @@ function addDefaultButtons(parentMenu)
 		addMapMenu();
 	}
 
+	var lblPlayerName=new Label(0,300,100,50,gameState.playerName,"Epistolar",15,"black");
+
 	
 
 
@@ -417,6 +419,7 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnShip);
 	parentMenu.addButton(btnCargo);
 	parentMenu.addButton(btnMap);
+	parentMenu.addLabel(lblPlayerName);
 }
 
 function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize so that we don't parse the JSON string every time we add a new settlement
