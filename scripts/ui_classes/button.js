@@ -1,5 +1,6 @@
-function Button(x,y,width,height,text,style,size,color,bgImage){
+function Button(name, x,y,width,height,text,style,size,color,bgImage){
 	//TODO add alternate image and "selected" method for buttons that stay highlighted (ship/cargo items)
+	this.name=name;
 	this.x=x;
 	this.y=y;
 	this.width=width;
@@ -15,7 +16,7 @@ function Button(x,y,width,height,text,style,size,color,bgImage){
 		var obj = this;
 		return function(context) //TODO: optimize
 		{
-			context.drawImage(bgImage,x,y,width,height); 
+			context.drawImage(obj.bgImage,obj.x,obj.y,obj.width,obj.height); 
 			//console.log("Color "+this.color);
 			context.fillStyle = obj.color;
 			context.font = obj.font;

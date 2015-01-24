@@ -1,5 +1,5 @@
 function Panel(x,y,width,height, bgImage){
-	var panelButtons=[];
+	this.panelButtons=[];
 	this.labels=[];
 	this.x=x;
 	this.y=y;
@@ -16,13 +16,30 @@ function Panel(x,y,width,height, bgImage){
 		}
 	};
 	this.draw=this.createDraw();
-	this.addButton=function(button){
-		panelButtons.push(button);
+
+	this.createAddButton=function(button){
+		var obj=this;
+		return function(button){
+			obj.panelButtons.push(button);
+		}
 	}
-	this.clearButtons=function(){
-		while(panelButtons.length>0)
-			panelButtons.pop();
+	this.addButton=this.createAddButton();
+	this.createClearButtons=function(){
+		var obj=this;
+		return function(){
+			while(obj.panelButtons.length>0)
+				obj.panelButtons.pop();
+		}
 	}
+	this.clearButtons=this.createClearButtons();
+	this.createRemoveButtonByName=function(name){
+		var obj=this;
+		return function(name){
+			removeByValue(obj.panelButtons, name);
+		}
+
+	}
+	this.removeButtonByName=this.createRemoveButtonByName();
 	this.createAddLabel=function(label)
 	{
 		var obj=this;
@@ -44,14 +61,20 @@ function Panel(x,y,width,height, bgImage){
 	}
 	this.drawLabels=this.createDrawLabels();
 
-	this.drawMenu=function(undraw)
+	
+	this.createDrawMenu=function(undraw)
 	{
-		var i;
-		for(i=0; i<panelButtons.length; i++){
-		if(i != undraw)
-			panelButtons[i].draw(context);
+		var obj=this;
+		return function(undraw){
+			var i;
+			for(i=0; i<obj.panelButtons.length; i++){
+				if(i != undraw)
+					obj.panelButtons[i].draw(context);
+			}
 		}
+		
 	}
+	this.drawMenu=this.createDrawMenu();
 	this.createClearPanel=function(){
 		var obj=this;
 		return function(){
@@ -63,15 +86,20 @@ function Panel(x,y,width,height, bgImage){
 	}
 	this.clearPanel=this.createClearPanel();
 
-	this.onClick=function(mousePos)
+	this.createOnClick=function(mousePos)
 	{
-		for(i=0; i<panelButtons.length; i++){
-			if(inCoordinates(panelButtons[i],mousePos)){
-				panelButtons[i].onClick();
-				return;
+		var obj=this;
+		return function(mousePos)
+		{
+			for(i=0; i<obj.panelButtons.length; i++){
+				if(inCoordinates(obj.panelButtons[i],mousePos)){
+					obj.panelButtons[i].onClick();
+					return;
+				}
 			}
 		}
 	}
+	this.onClick=this.createOnClick();
 	this.removeListeners=function(){
 		//canvas.removeEventListener('mousemove', this.hoverEvent);
 		//canvas.removeEventListener('mousedown', this.clickEvent);

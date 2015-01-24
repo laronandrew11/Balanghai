@@ -42,7 +42,7 @@ function addStartScreen()
 {
 	var startScreen=new staticScreen();
 
-	var btnContinue=new Button(415,525,240,60,"CLICK TO CONTINUE","Epistolar",15,"black", buttonBG);
+	var btnContinue=new Button("CONTINUE",415,525,240,60,"CLICK TO CONTINUE","Epistolar",15,"black", buttonBG);
 	btnContinue.onClick=function(){
 		startScreen.clearScreen();
 		addMainMenu();
@@ -72,8 +72,12 @@ function CreateDeleteButtonHandler(parentPanel, button, saveName)//TODO make sim
 	var lbutton=button;
 	return function(){
 			var parser=new GameStateParser();
-			parser.deleteSave(saveName);
-			//parentPanel.draw(context);
+			if(parser.deleteSave(saveName))
+			{
+				parentPanel.removeButtonByName(saveName);
+				parentPanel.removeButtonByName("DEL"+saveName);
+				parentPanel.draw(context);
+			}
 		}
 }
 function populateLoadPanel(parentMenu, parentPanel){
@@ -87,12 +91,12 @@ function populateLoadPanel(parentMenu, parentPanel){
 
 		for(i=0;i<saveIndex.length;i++)
 		{
-			var newButton=new Button(100,y,100,25,saveIndex[i],"Epistolar",15,"black", buttonBG);
+			var newButton=new Button(saveIndex[i],100,y,100,25,saveIndex[i],"Epistolar",15,"black", buttonBG);
 			newButton.onClick=CreateLoadButtonHandler(parentMenu, newButton);
 			parentPanel.addButton(newButton);
 
-			var deleteButton=new Button(210,y,100,25,"DELETE SAVED GAME","Epistolar",15,"black", buttonBG);
-			deleteButton.onClick=CreateDeleteButtonHandler(parentMenu, newButton, saveIndex[i]);
+			var deleteButton=new Button("DEL"+saveIndex[i],210,y,100,25,"DELETE SAVED GAME","Epistolar",15,"black", buttonBG);
+			deleteButton.onClick=CreateDeleteButtonHandler(parentPanel, newButton, saveIndex[i]);
 			parentPanel.addButton(deleteButton);
 
 			y+=50;
@@ -103,11 +107,11 @@ function populateLoadPanel(parentMenu, parentPanel){
 function addMainMenu(){
 	var mainMenu=new staticScreen();
 
-	var btnCloseLoadGamePanel=new Button(100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
+	var btnCloseLoadGamePanel=new Button("CLOSE_LOAD",100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
 	btnCloseLoadGamePanel.onClick=function(){
 		mainMenu.hidePanel(0);
 	}
-	var btnCloseCreditsPanel=new Button(100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
+	var btnCloseCreditsPanel=new Button("CLOSE_CREDITS",100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
 	btnCloseCreditsPanel.onClick=function(){
 		mainMenu.hidePanel(1);
 	}
@@ -125,21 +129,21 @@ function addMainMenu(){
 	pnlCredits.addLabel(new Label(100,300,200,50,"Copyright DLSU Game Development Laboratory, 2015.","Epistolar",15,"black"));
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
-	var btnNewGame=new Button(600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
+	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
 		var newPlayerName = prompt("Please enter your name", "");
 		gameState=new GameState(newPlayerName);
 		mainMenu.clearScreen();
 		addFleetMenu();
 	}
-	var btnLoadGame=new Button(600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
+	var btnLoadGame=new Button("LOAD_GAME",600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
 	btnLoadGame.onClick=function(){
 		mainMenu.hidePanel(1);
 		mainMenu.showPanel(0);//display load game panel
 
 	}
 
-	var btnCredits=new Button(600,360,322,80,"","Epistolar",15,"black", creditsButtonBG);
+	var btnCredits=new Button("CREDITS",600,360,322,80,"","Epistolar",15,"black", creditsButtonBG);
 	btnCredits.onClick=function(){
 		mainMenu.hidePanel(0);
 		mainMenu.showPanel(1);
@@ -162,7 +166,7 @@ function addFleetMenu(){ //TODO use panels?dra
 	populateShipMenu(fleetMenu);
 	
 	fleetMenu.drawScreen(shipMenuBG);
-	alert(gameState.playerName);
+
 }
 function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
 {
@@ -190,7 +194,7 @@ function populateShipMenu(parentMenu)
 	for(i=0;i<gameState.ships.length;i++){
 		var item=gameState.ships[i];
 
-		var newButton=new Button(x,470,140,140,item.type,"Epistolar",15,"black", buttonBG);
+		var newButton=new Button(gameState.ships[i].type+i,x,470,140,140,item.type,"Epistolar",15,"black", buttonBG);
 
 			newButton.onClick=CreateShipItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.addButton(newButton);
@@ -218,7 +222,7 @@ function addCargoMenu(){
 	for(i=0;i<cargoCategories.length;i++)
 	{
 
-		var newButton=new Button(x,70,50,50,cargoCategories[i],"Epistolar",15,"black", buttonBG);
+		var newButton=new Button(cargoCategories[i],x,70,50,50,cargoCategories[i],"Epistolar",15,"black", buttonBG);
 
 		newButton.onClick=CreateCargoCategoryButtonHandler(cargoMenu, newButton);
 		cargoMenu.addButton(newButton);
@@ -263,7 +267,7 @@ function populateCargoPanel(parentMenu, type)
 		var item=gameState.cargo[i];
 		if(item.type==type)
 		{
-			var newButton=new Button(x,150,140,140,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var newButton=new Button(item.name,x,150,140,140,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 
 			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
@@ -291,7 +295,7 @@ function addMapMenu(){
 		pnlMap.addButton(newButton);
 	}
 
-	var btnYouAreHere=new Button(50+gameState.mapX,50+gameState.mapY,16,16,"","Epistolar",15,"black", pointerImg);
+	var btnYouAreHere=new Button("YOU_ARE_HERE",50+gameState.mapX,50+gameState.mapY,16,16,"","Epistolar",15,"black", pointerImg);
 	btnYouAreHere.onClick=function(){
 		alert("YOU ARE HERE");
 	}
@@ -322,7 +326,7 @@ function addSettlementMenu(settlement){
 	settlementScreen.drawScreen(startbg);
 }
 function addShipbuilderButton(parentMenu,settlement){
-	var btnShipbuilder=new Button(415,400,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+	var btnShipbuilder=new Button("SHIPBUILDER",415,400,240,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
 		btnShipbuilder.onClick=function(){
 			parentMenu.clearScreen();
 			addShipbuilderMenu(settlement);
@@ -330,7 +334,7 @@ function addShipbuilderButton(parentMenu,settlement){
 		parentMenu.addButton(btnShipbuilder);
 }
 function addMarketButton(parentMenu,settlement){
-		var btnMarket=new Button(415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
+		var btnMarket=new Button("MARKET",415,300,240,60,"Market","Epistolar",15,"black", buttonBG);
 		btnMarket.onClick=function(){
 			parentMenu.clearScreen();
 			addMarketMenu(settlement);
@@ -348,7 +352,7 @@ function addShipbuilderMenu(settlement){
 	}
 
 
-	var btnTest=new Button(115,300,60,60,"You're at Shipbuilder","Epistolar",15,"black", buttonBG);
+	var btnTest=new Button("TEST",115,300,60,60,"You're at Shipbuilder","Epistolar",15,"black", buttonBG);
 		btnTest.onClick=function(){
 			alert(settlement.name+" shipbuilder coming soon!");
 		}
@@ -365,7 +369,7 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTest=new Button(115,300,60,60,"You're at Market","Epistolar",15,"black", buttonBG);
+	var btnTest=new Button("TEST",115,300,60,60,"You're at Market","Epistolar",15,"black", buttonBG);
 		btnTest.onClick=function(){
 			alert(settlement.name+" market coming soon!");
 		}
@@ -376,30 +380,30 @@ function addMarketMenu(settlement){
 function addDefaultButtons(parentMenu)
 {
 
-	var btnMainMenu=new Button(49,0,200,50,"MAIN MENU","Epistolar",15,"black", buttonBG);
+	var btnMainMenu=new Button("MAIN_MENU",49,0,200,50,"MAIN MENU","Epistolar",15,"black", buttonBG);
 	btnMainMenu.onClick=function(){
 		parentMenu.clearScreen();
 		addMainMenu();
 	}
 
-	var btnSave=new Button(800,550,200,50,"SAVE GAME","Epistolar",15,"black", buttonBG);
+	var btnSave=new Button("SAVE",800,550,200,50,"SAVE GAME","Epistolar",15,"black", buttonBG);
 	btnSave.onClick=function(){
 		var parser=new GameStateParser();
 		parser.saveGame();
 	}
 
-	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
+	var btnShip=new Button("SHIPS",349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){
 		parentMenu.clearScreen();
 		addFleetMenu();
 	}
-	var btnCargo=new Button(549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
+	var btnCargo=new Button("CARGO",549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
 	btnCargo.onClick=function(){
 		parentMenu.clearScreen();
 		addCargoMenu();
 	}
 
-	var btnMap=new Button(749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
+	var btnMap=new Button("MAP",749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
 	btnMap.onClick=function(){
 		parentMenu.clearScreen();
 		addMapMenu();
@@ -419,7 +423,7 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 {
 
 	var settlement=fetcher.get(settlementName);
-	var newButton=new Button(44+settlement.mapX,44+settlement.mapY,12,12,settlement.name,"Epistolar",15,"black", settlementImg);
+	var newButton=new Button(settlementName,44+settlement.mapX,44+settlement.mapY,12,12,settlement.name,"Epistolar",15,"black", settlementImg);
 	newButton.onClick=function(){
 			//alert(settlement.name);
 			parentMenu.clearScreen();

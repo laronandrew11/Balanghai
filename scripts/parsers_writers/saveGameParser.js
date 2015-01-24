@@ -66,17 +66,21 @@ function GameStateParser(){
 	}
 	this.deleteSave=function(saveName)
 	{
-		var saveIndex;
-		if(localStorage.saveIndex!=undefined)
-			saveIndex=JSON.parse(localStorage.saveIndex);
-		else saveIndex=[];
-		if(typeof localStorage.getItem(saveName)!=undefined)
+		var x=confirm("Delete this saved game?")
+		if(x==true)
 		{
-			localStorage.removeItem(saveName);
-			removeByValue(saveIndex,saveName);
-			localStorage.saveIndex=JSON.stringify(saveIndex);
-			alert("Deleted save");
+			var saveIndex;
+			if(localStorage.saveIndex!=undefined)
+				saveIndex=JSON.parse(localStorage.saveIndex);
+			else saveIndex=[];
+			if(typeof localStorage.getItem(saveName)!=undefined)
+			{
+				localStorage.removeItem(saveName);
+				removeByValue(saveIndex,saveName);
+				localStorage.saveIndex=JSON.stringify(saveIndex);
+			}
 		}
+		return x;
 
 	}
 }
