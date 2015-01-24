@@ -33,58 +33,6 @@ var gameState;
 
 
 
-function saveGame(){
-	if(typeof(Storage)!=="undefined")
- 	{
-		var saveName=prompt("Enter save name: ");
-		var saveText='{"gameState":{"playerName":"'+gameState.playerName+'","money":'+gameState.money+',"mapX":'+gameState.mapX+',"mapY":'+gameState.mapY+',"usedCapacity":'+gameState.usedCapacity+',"settlement":"'+gameState.settlement+'",';
-		var i;
-
-		var shipsString='"ships":[';
-		for(i=0;i<gameState.ships.length;i++)
-		{
-			shipsString=shipsString+'{"type":"'+	gameState.ships[i].type+'", "speed":'+gameState.ships[i].speed+', "health": '+gameState.ships[i].health+', "cargoCapacity":'+gameState.ships[i].cargoCapacity+'}';
-			if(i<gameState.ships.length-1)
-				shipsString=shipsString+', ';
-		}
-		shipsString=shipsString+'],';
-
-		var cargoString='"cargo":[';
-		for(i=0;i<gameState.cargo.length;i++)
-		{
-			cargoString=cargoString+'{"name":"'+	gameState.cargo[i].name+'", "type":"'+gameState.cargo[i].type+'", "unitWeight": '+gameState.cargo[i].unitWeight+', "amount":'+gameState.cargo[i].amount+'}';
-			if(i<gameState.cargo.length-1)
-				cargoString=cargoString+', ';
-		}
-		cargoString=cargoString+'],';
-
-		var visibleSettlementsString='"visibleSettlements":[';
-		for(i=0;i<gameState.visibleSettlements.length;i++)
-		{
-			visibleSettlementsString=visibleSettlementsString+'"'+gameState.visibleSettlements[i]+'"';
-			if(i<gameState.visibleSettlements.length-1)
-				visibleSettlementsString=visibleSettlementsString+', ';
-		}
-		visibleSettlementsString=visibleSettlementsString+'],';
-
-		var gameDateString='"gameDate":{"year":'+gameState.gameDate.year+',"month":'+gameState.gameDate.month+',"day":'+gameState.gameDate.day+'}';
-
-		saveText=saveText+shipsString+cargoString+visibleSettlementsString+gameDateString+'}}';
-
-		var saveIndex;
-		if(localStorage.saveIndex!=undefined)
-			saveIndex=JSON.parse(localStorage.saveIndex);
-		else saveIndex=[];
-		//console.log(saveText);
-		saveIndex.push(saveName);
-		localStorage.saveIndex=JSON.stringify(saveIndex);
-		localStorage.setItem(saveName,saveText);
-		//console.log(localStorage.getItem(saveName)); 
-		//append gameState.quests;
-	}
-	else alert("Sorry, your browser does not support local storage");
-}
-
 function loadGame(saveName){
 	var saveText=localStorage.getItem(saveName);
 	console.log(saveText);
@@ -133,7 +81,6 @@ function populateLoadPanel(parent){
 
 		for(i=0;i<saveIndex.length;i++)
 		{
-			alert(saveIndex[i]);
 			var newButton=new Button(100,y,100,25,saveIndex[i],"Epistolar",15,"black", buttonBG);
 			newButton.onClick=CreateLoadButtonHandler(parent, newButton);
 			parent.addButton(newButton);
@@ -204,7 +151,6 @@ function addFleetMenu(){ //TODO use panels?dra
 	populateShipMenu(fleetMenu);
 	
 	fleetMenu.drawScreen(shipMenuBG);
-	saveGame();
 }
 function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
 {
@@ -424,6 +370,11 @@ function addDefaultButtons(parentMenu)
 		addMainMenu();
 	}
 
+	var btnSave=new Button(800,550,200,50,"SAVE GAME","Epistolar",15,"black", buttonBG);
+	btnSave.onClick=function(){
+		var parser=new GameStateParser();
+		parser.saveGame();
+	}
 
 	var btnShip=new Button(349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
 	btnShip.onClick=function(){
@@ -442,8 +393,11 @@ function addDefaultButtons(parentMenu)
 		addMapMenu();
 	}
 
+	
+
 
 	parentMenu.addButton(btnMainMenu);
+	parentMenu.addButton(btnSave);
 	parentMenu.addButton(btnShip);
 	parentMenu.addButton(btnCargo);
 	parentMenu.addButton(btnMap);
