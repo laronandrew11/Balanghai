@@ -7,3 +7,7 @@ function contains(a, obj) {
     }
     return false;
 }
+function removeByValue(a, obj){
+	var index = a.indexOf(obj);
+	a.splice(index, 1);
+}

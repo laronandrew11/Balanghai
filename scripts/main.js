@@ -32,12 +32,6 @@ var buttonBG = document.createElement('img');
 var gameState;
 
 
-
-function loadGame(saveName){
-	var saveText=localStorage.getItem(saveName);
-	console.log(saveText);
-}
-
 //TODO optimize screen switching by not re-initializing screens every time we switch screens, or removing invisible screens from memory
 function main()
 {
@@ -67,10 +61,22 @@ function CreateLoadButtonHandler(parentMenu, button)//TODO make similar methods 
 {
 	var lbutton=button;
 	return function(){
-			loadGame(lbutton.text);
+			var parser=new GameStateParser();
+			gameState=parser.loadGame(lbutton.text);
+			parentMenu.clearScreen();
+			addFleetMenu();
 		}
 }
-function populateLoadPanel(parent){
+function CreateDeleteButtonHandler(parentPanel, button, saveName)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			var parser=new GameStateParser();
+			parser.deleteSave(saveName);
+			//parentPanel.draw(context);
+		}
+}
+function populateLoadPanel(parentMenu, parentPanel){
 
 	var i;
 	var y=100;
@@ -82,8 +88,13 @@ function populateLoadPanel(parent){
 		for(i=0;i<saveIndex.length;i++)
 		{
 			var newButton=new Button(100,y,100,25,saveIndex[i],"Epistolar",15,"black", buttonBG);
-			newButton.onClick=CreateLoadButtonHandler(parent, newButton);
-			parent.addButton(newButton);
+			newButton.onClick=CreateLoadButtonHandler(parentMenu, newButton);
+			parentPanel.addButton(newButton);
+
+			var deleteButton=new Button(210,y,100,25,"DELETE SAVED GAME","Epistolar",15,"black", buttonBG);
+			deleteButton.onClick=CreateDeleteButtonHandler(parentMenu, newButton, saveIndex[i]);
+			parentPanel.addButton(deleteButton);
+
 			y+=50;
 		}
 	}
@@ -104,7 +115,7 @@ function addMainMenu(){
 	var pnlLoadGame=new Panel(100,56,357,496,startbg);
 	pnlLoadGame.addButton(btnCloseLoadGamePanel);
 
-	populateLoadPanel(pnlLoadGame);
+	populateLoadPanel(mainMenu,pnlLoadGame);
 
 	var pnlCredits=new Panel(100,56,357,496,startbg);
 	pnlCredits.addLabel(new Label(100,100,200,50,"Code: ANDREW LARON","Epistolar",15,"black"));
@@ -151,6 +162,7 @@ function addFleetMenu(){ //TODO use panels?dra
 	populateShipMenu(fleetMenu);
 	
 	fleetMenu.drawScreen(shipMenuBG);
+	alert(gameState.playerName);
 }
 function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
 {
@@ -415,7 +427,7 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 			addSettlementMenu(settlement);//TODO only pass name?
 			gameState.mapX=settlement.mapX;
 			gameState.mapY=settlement.mapY;
-			gameState.gameDate.advanceDate();
+			//gameState.gameDate.advanceDate();
 		}
 	return newButton;
 }

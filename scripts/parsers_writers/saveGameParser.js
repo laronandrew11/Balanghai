@@ -4,7 +4,7 @@ function GameStateParser(){
 		if(typeof(Storage)!=="undefined")
  		{
 			var saveName=prompt("Enter save name: ");
-			var saveText='{"gameState":{"playerName":"'+gameState.playerName+'","money":'+gameState.money+',"mapX":'+gameState.mapX+',"mapY":'+gameState.mapY+',"usedCapacity":'+gameState.usedCapacity+',"settlement":"'+gameState.settlement+'",';
+			/*var saveText='{"playerName":"'+gameState.playerName+'","money":'+gameState.money+',"mapX":'+gameState.mapX+',"mapY":'+gameState.mapY+',"usedCapacity":'+gameState.usedCapacity+',"settlement":"'+gameState.settlement+'",';
 			var i;
 
 			var shipsString='"ships":[';
@@ -36,7 +36,8 @@ function GameStateParser(){
 
 			var gameDateString='"gameDate":{"year":'+gameState.gameDate.year+',"month":'+gameState.gameDate.month+',"day":'+gameState.gameDate.day+'}';
 
-			saveText=saveText+shipsString+cargoString+visibleSettlementsString+gameDateString+'}}';
+			saveText=saveText+shipsString+cargoString+visibleSettlementsString+gameDateString+'}';*/
+			var saveText=JSON.stringify(gameState);
 
 			var saveIndex;
 			if(localStorage.saveIndex!=undefined)
@@ -51,23 +52,31 @@ function GameStateParser(){
 		}
 		else alert("Sorry, your browser does not support local storage");
 	}
-	this.parseGameState=function(){
+	
+
+	this.loadGame=function(saveName){
+		var saveText=localStorage.getItem(saveName);
+		var savedGameState;
+	
+		savedGameState=JSON.parse(saveText);
+
+			console.log(saveText);
+		return savedGameState;
 
 	}
-	var rawList;
-	rawList=JSON.parse(settlements);
-
-	this.createGetSave=function(saveName){
-		var obj=this;
-		return function(settlementName){
-			var rawSettlementObject=obj.findSettlement(settlementName);
-			var region=rawSettlementObject.region;
-			var mapX=rawSettlementObject.mapX;
-			var mapY=rawSettlementObject.mapY;
-			var pointsOfInterest=rawSettlementObject.pois;
-			return new Settlement(settlementName, region, mapX, mapY, pointsOfInterest);
+	this.deleteSave=function(saveName)
+	{
+		var saveIndex;
+		if(localStorage.saveIndex!=undefined)
+			saveIndex=JSON.parse(localStorage.saveIndex);
+		else saveIndex=[];
+		if(typeof localStorage.getItem(saveName)!=undefined)
+		{
+			localStorage.removeItem(saveName);
+			removeByValue(saveIndex,saveName);
+			localStorage.saveIndex=JSON.stringify(saveIndex);
+			alert("Deleted save");
 		}
-	}
-	this.getSave=this.createGetSave();
 
+	}
 }
