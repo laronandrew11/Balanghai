@@ -247,6 +247,18 @@ function CreateCargoItemButtonHandler(parentMenu, button, item)//TODO make simil
 			parentMenu.drawScreen(parentMenu.bgImage);
 		}
 }
+function CreateSellableItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			var amountToSell=prompt("Sell how many units?");
+			//parentMenu.panels[0].removeButtonByName(lbutton.name);
+			//TODO prompt user to specify how much to sell; update the amount displayed on existing button (or delete it if selling all), create a new button on pnlToSell
+			//var pnlDetails=createCargoDetailsPanel(item);
+			//parentMenu.addPanel(pnlDetails);
+			//parentMenu.drawScreen(parentMenu.bgImage);
+		}
+}
 function createCargoDetailsPanel(cargo){
 	var pnlDetails=new Panel(577,56,357,496,startbg);
 	pnlDetails.addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Epistolar",15,"black"));
@@ -265,7 +277,7 @@ function populateCargoPanel(parentMenu, type)
 	var i;
 	for(i=0;i<gameState.cargo.length;i++){
 		var item=gameState.cargo[i];
-		if(item.type==type)
+		if(type=='all' || item.type==type)
 		{
 			var newButton=new Button(item.name,x,150,140,140,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 
@@ -275,6 +287,25 @@ function populateCargoPanel(parentMenu, type)
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		}
+	}
+	parentMenu.panels[0].draw(context);
+}
+function populateInventoryPanel(parentMenu)//display all of player's cargo in one corner so he can sell it
+{
+	parentMenu.panels[0].clearButtons();
+	var x=60;
+	var i;
+	for(i=0;i<gameState.cargo.length;i++){
+		var item=gameState.cargo[i];
+
+		var newButton=new Button(item.amount+" "+item.name,x,60,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+
+		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item);
+		parentMenu.panels[0].addButton(newButton);//add to inventory panel
+		x+=80;
+
+			//parentMenu.drawScreen(parentMenu.bgImage);
+		
 	}
 	parentMenu.panels[0].draw(context);
 }
@@ -369,11 +400,34 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTest=new Button("TEST",115,300,60,60,"You're at Market","Epistolar",15,"black", buttonBG);
-		btnTest.onClick=function(){
-			alert(settlement.name+" market coming soon!");
+	var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+		btnTrade.onClick=function(){
+			alert("Trade function has not been coded yet");
 		}
-	marketScreen.addButton(btnTest);
+
+
+
+	var pnlPlayerInventory=new Panel(50,50,450,250,startbg);
+	var pnlShopInventory=new Panel(500,50,450,250,startbg);
+	var pnlToSell=new Panel(50,300,450,250,startbg);
+	var pnlToBuy=new Panel(500,300,450,250,startbg);
+
+	pnlPlayerInventory.visible=true;
+	pnlShopInventory.visible=true;
+	pnlToSell.visible=true;
+	pnlToBuy.visible=true;
+
+	//TODO populate inventories
+
+
+	marketScreen.addPanel(pnlPlayerInventory);
+	marketScreen.addPanel(pnlShopInventory);
+	marketScreen.addPanel(pnlToSell);
+	marketScreen.addPanel(pnlToBuy);
+	marketScreen.addButton(btnTrade);
+
+		populateInventoryPanel(marketScreen);
+
 	marketScreen.drawScreen(startbg);
 }
 

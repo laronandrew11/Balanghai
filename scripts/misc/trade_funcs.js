@@ -1,18 +1,29 @@
-function buyCargo(shopInventory, cargoID, unitWeight,price, amount)
+function buyCargo(shopInventory, cargo)
 {
-	gameState.subtractMoney(amount*price);
-	shopInventory.addMoney(amount*price);
-	gameState.addCargo(cargoID, amount);
-	shopInventory.subtractCargo(cargoID, amount);
-	gameState.subtractCapacity(amount*unitWeight);
+	gameState.subtractMoney(cargo.amount*cargo.price);
+	shopInventory.addMoney(cargo.amount*cargo.price);
+	gameState.addCargo(cargo.name, cargo.amount);
+	shopInventory.subtractCargo(cargo.name, cargo.amount);
+	gameState.subtractCapacity(cargo.amount*cargo.unitWeight);
 }
-function sellCargo(shopInventory, cargoID, unitWeight,price, amount)
+function sellCargo(shopInventory, cargo)//sell a single 'name' of cargo. Note that the passed object needs a "price" field
 {
-	gameState.addMoney(amount*price);
-	shopInventory.subtractMoney(amount*price);
-	gameState.subtractCargo(cargoID, amount);
-	shopInventory.addCargo(cargoID, amount);
-	gameState.addCapacity(amount*unitWeight);
+	gameState.addMoney(cargo.amount*cargo.price);
+	shopInventory.subtractMoney(cargo.amount*cargo.price);
+	gameState.subtractCargo(cargo.name, cargo.amount);
+	shopInventory.addCargo(cargo.name, cargo.amount);
+	gameState.addCapacity(cargo.amount*cargo.UnitWeight);
+}
+
+function tradeCargo(shopInventory,toBuy, toSell){
+	var i;
+	for(i=0;i<toBuy.length;i++)
+		buyCargo(shopInventory, toBuy[i]);
+	for(i=0;i<toSell.length;i++)
+	{
+		sellCargo(shopInventory, toBuy[i]);
+	}
+
 }
 function buyShip(){
 	
