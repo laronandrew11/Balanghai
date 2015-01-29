@@ -21,6 +21,7 @@ function Panel(x,y,width,height, bgImage){
 		var obj=this;
 		return function(button){
 			obj.panelButtons.push(button);
+
 		}
 	}
 	this.addButton=this.createAddButton();
@@ -69,7 +70,9 @@ function Panel(x,y,width,height, bgImage){
 			var i;
 			for(i=0; i<obj.panelButtons.length; i++){
 				if(i != undraw)
+				{
 					obj.panelButtons[i].draw(context);
+				}
 			}
 		}
 		

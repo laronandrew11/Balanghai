@@ -253,19 +253,21 @@ function CreateSellableItemButtonHandler(parentMenu, button, item)//TODO make si
 	return function(){
 			var amountToSell=prompt("Sell how many units?");
 			//parentMenu.panels[0].removeButtonByName(lbutton.name);
-			//TODO update the amount displayed on existing button (or delete it if selling all), create a new button on pnlToSell
-			if(amountToSell>item.amount)
+			//TODO update the amount displayed on existing button
+			if(amountToSell>item.amount||amountToSell<=0)//TODO include strings/chars as invalid input
 				alert("Invalid amount");
 			else {
 				if(amountToSell<item.amount)
 				{
 					item.amount=item.amount-amountToSell;
+					alert(lbutton.text);
 					lbutton.text=lbutton.name=item.amount+" "+item.name;//TODO fix this
+					alert(lbutton.text);
 
 				}
 				else if(amountToSell==item.amount)
 					parentMenu.panels[0].removeButtonByName(lbutton.name);
-				var sellItemButton=new Button(item.name,50,450,70,70,amountToSell+" "+item.name,"Epistolar",15,"black", buttonBG);//TODO update button position
+				var sellItemButton=new Button(item.name,50,350,70,70,amountToSell+" "+item.name,"Epistolar",15,"black", buttonBG);//TODO update button position
 				parentMenu.panels[2].addButton(sellItemButton);
 				parentMenu.drawScreen(parentMenu.bgImage);
 			}

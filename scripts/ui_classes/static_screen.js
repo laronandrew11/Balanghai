@@ -6,7 +6,7 @@
 
 
 function staticScreen(){
-	var buttons = [];
+	this.buttons = [];
 	this.panels=[];
 	this.labels=[];
 	this.bgImage;
@@ -29,14 +29,18 @@ function staticScreen(){
 		
 	//this.drawBG=this.createDrawBG();
 
-	this.drawMenu=function(undraw)
+	this.createDrawMenu=function(undraw)
 	{
-		var i;
-		for(i=0; i<buttons.length; i++){
-		if(i != undraw)
-			buttons[i].draw(context);
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.buttons.length; i++){
+			if(i != undraw)
+				obj.buttons[i].draw(context);
+			}
 		}
 	}
+	this.drawMenu=this.createDrawMenu();
 	this.createDrawPanels=function()
 	{
 		var obj=this;
@@ -82,13 +86,22 @@ function staticScreen(){
 	this.addPanel=this.createAddPanel();
 
 
-	this.addButton=function(button){
-		buttons.push(button);
+	this.createAddButton=function(button){
+		var obj=this;
+		return function(button){
+			obj.buttons.push(button);
+		}
 	}
-	this.clearButtons=function(){
-		while(buttons.length>0)
-			buttons.pop();
+	this.addButton=this.createAddButton();
+
+	this.createClearButtons=function(){
+		var obj=this;
+		return function(){
+			while(obj.buttons.length>0)
+				obj.buttons.pop();
+		}
 	}
+	this.clearButtons=this.createClearButtons();
 	this.createClearPanels=function(){
 		var obj=this;
 		return function(){
@@ -123,10 +136,10 @@ function staticScreen(){
 		{
 			var mousePos = getMousePos(canvas, evt);
 			var i;
-			for(i=0; i<buttons.length; i++){
+			for(i=0; i<obj.buttons.length; i++){
 				if(inCoordinates(buttons[i],mousePos)){
 					obj.drawBG(context);
-					buttons[i].onHover(context);
+					obj.buttons[i].onHover(context);
 					obj.drawMenu(i);
 					return;
 				}
@@ -156,9 +169,9 @@ function staticScreen(){
 		var obj=this;
 		return function(evt){
 			var mousePos = getMousePos(canvas, evt);
-			for(i=0; i<buttons.length; i++){
-				if(inCoordinates(buttons[i],mousePos)){
-					buttons[i].onClick();
+			for(i=0; i<obj.buttons.length; i++){
+				if(inCoordinates(obj.buttons[i],mousePos)){
+					obj.buttons[i].onClick();
 					return;
 				}
 			}
