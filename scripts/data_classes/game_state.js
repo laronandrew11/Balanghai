@@ -12,6 +12,7 @@ function GameState(playerName){
 	this.gameDate=new GameDate(1200,1,1);
 
 	this.quests=[];
+	this.toSell=[];
 
 	
 	this.addShip=function(newShip){
@@ -20,7 +21,21 @@ function GameState(playerName){
 	this.addCargo=function(newCargo){
 		cargo.put(newCargo);
 	}
+	this.addItemToSell=function(item){//TODO refactor, along with panel display methods
+		var obj=this;
+		return function(item){
+			removeItemByValue(obj.cargo,item);
+			alert(obj.cargo);
+		}
+	}
+	this.removeItemToSell=function(item){
+		var obj=this;
+		return function(item){
+			removeItemByValue(obj.toSell,item);
 
+			alert(obj.toSell);
+		}
+	}
 
 }
 
