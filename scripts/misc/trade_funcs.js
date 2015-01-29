@@ -21,7 +21,7 @@ function tradeCargo(shopInventory,toBuy, toSell){
 		buyCargo(shopInventory, toBuy[i]);
 	for(i=0;i<toSell.length;i++)
 	{
-		sellCargo(shopInventory, toBuy[i]);
+		sellCargo(shopInventory, toSell[i]);
 	}
 
 }

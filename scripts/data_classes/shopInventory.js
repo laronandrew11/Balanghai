@@ -1,6 +1,10 @@
-var shopInventory=function(money, cargoList){
+var shopInventory=function(settlementName, type, money, cargoList){
+	this.settlementName=settlementName;
+	this.type=type;
 	this.money=money;
 	this.cargoList=cargoList;
+	this.toBuy=[];
+	this.toSell=[];
 
 	this.createAddMoney=function(change){
 		var obj=this;

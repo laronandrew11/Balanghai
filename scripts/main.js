@@ -260,13 +260,14 @@ function CreateSellableItemButtonHandler(parentMenu, button, item)//TODO make si
 				if(amountToSell<item.amount)
 				{
 					item.amount=item.amount-amountToSell;
-					alert(lbutton.text);
 					lbutton.text=lbutton.name=item.amount+" "+item.name;//TODO fix this
-					alert(lbutton.text);
 
 				}
 				else if(amountToSell==item.amount)
 					parentMenu.panels[0].removeButtonByName(lbutton.name);
+
+
+
 				var sellItemButton=new Button(item.name,50,350,70,70,amountToSell+" "+item.name,"Epistolar",15,"black", buttonBG);//TODO update button position
 				parentMenu.panels[2].addButton(sellItemButton);
 				parentMenu.drawScreen(parentMenu.bgImage);
@@ -308,7 +309,7 @@ function populateCargoPanel(parentMenu, type)
 	}
 	parentMenu.panels[0].draw(context);
 }
-function populateInventoryPanel(parentMenu)//display all of player's cargo in one corner so he can sell it
+function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[0].clearButtons();
 	var x=60;
@@ -320,6 +321,28 @@ function populateInventoryPanel(parentMenu)//display all of player's cargo in on
 
 		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item);
 		parentMenu.panels[0].addButton(newButton);//add to inventory panel
+		x+=80;
+
+			//parentMenu.drawScreen(parentMenu.bgImage);
+		
+	}
+	parentMenu.panels[0].draw(context);
+}
+
+function populateShopInventoryPanel(parentMenu, settlementName)//display all of player's cargo in one corner so he can sell it
+{
+	parentMenu.panels[1].clearButtons();
+	var x=360;
+	var i;
+	var shopInventory;
+	//TODO load shop inventory based on settlement name and type
+	for(i=0;i<shopInventory.cargoList.length;i++){
+		var item=gameState.cargoList[i];
+
+		var newButton=new Button(item.amount+" "+item.name,x,60,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+
+		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item);
+		parentMenu.panels[1].addButton(newButton);//add to inventory panel
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -444,7 +467,9 @@ function addMarketMenu(settlement){
 	marketScreen.addPanel(pnlToBuy);
 	marketScreen.addButton(btnTrade);
 
-		populateInventoryPanel(marketScreen);
+		populatePlayerInventoryPanel(marketScreen);
+		populateShopInventoryPanel(marketScreen, settlement.name);
+
 
 	marketScreen.drawScreen(startbg);
 }
