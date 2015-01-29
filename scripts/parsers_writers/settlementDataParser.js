@@ -18,9 +18,13 @@ function SettlementInfoFetcher(){
 			{
 				if(rawList[i].name==settlementName)
 				{
-					return rawList[i];
+					return new Settlement(rawList[i].name,rawList[i].region,rawList[i].mapX,rawList[i].mapY,rawList[i].pois);
 				}
 			}
+	}
+	this.getAll=function()
+	{
+		return rawList;
 	}
 
 

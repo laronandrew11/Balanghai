@@ -1,4 +1,4 @@
-var shopInventory=function(settlementName, type, money, cargoList){
+function ShopInventory(settlementName, type, money, cargoList){
 	this.settlementName=settlementName;
 	this.type=type;
 	this.money=money;
@@ -13,7 +13,7 @@ var shopInventory=function(settlementName, type, money, cargoList){
 			obj.money+=change;
 		}
 	}
-	this.addMoney=createAddMoney();
+	this.addMoney=this.createAddMoney();
 	this.createSubtractMoney=function(change){
 		var obj=this;
 		return function(change)
@@ -21,7 +21,7 @@ var shopInventory=function(settlementName, type, money, cargoList){
 			obj.money-=change;
 		}
 	}
-	this.subtractMoney=createAddMoney();
+	this.subtractMoney=this.createSubtractMoney();
 
 	this.createAddCargo=function(cargoID, amount){
 		var obj=this;
@@ -31,7 +31,7 @@ var shopInventory=function(settlementName, type, money, cargoList){
 			//TODO record amount of units that player sold, for price adjustment purposes
 		}
 	}
-	this.addCargo=createAddCargo();
+	this.addCargo=this.createAddCargo();
 	this.createSubtractCargo=function(cargoID, amount){
 		var obj=this;
 		return function(cargoID, amount)
@@ -40,5 +40,5 @@ var shopInventory=function(settlementName, type, money, cargoList){
 			//TODO record amount of units that player sold, for price adjustment purposes
 		}
 	}
-	this.subtractCargo=creatSubtractCargo();
+	this.subtractCargo=this.createSubtractCargo();
 }

@@ -266,9 +266,40 @@ function CreateSellableItemButtonHandler(parentMenu, button, item)//TODO make si
 				else if(amountToSell==item.amount)
 					parentMenu.panels[0].removeButtonByName(lbutton.name);
 
-
+				//TODO add toSell to the shop's inventory
 
 				var sellItemButton=new Button(item.name,50,350,70,70,amountToSell+" "+item.name,"Epistolar",15,"black", buttonBG);//TODO update button position
+				parentMenu.panels[2].addButton(sellItemButton);
+				parentMenu.drawScreen(parentMenu.bgImage);
+			}
+
+			//var pnlDetails=createCargoDetailsPanel(item);
+			//parentMenu.addPanel(pnlDetails);
+			//parentMenu.drawScreen(parentMenu.bgImage);
+		}
+}
+function CreateToSellItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			var amountToRemove=prompt("Remove how many units?");
+			//parentMenu.panels[0].removeButtonByName(lbutton.name);
+			//TODO update the amount displayed on existing button
+			if(amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
+				alert("Invalid amount");
+			else {
+				if(amountToRemove<item.amount)
+				{
+					item.amount=item.amount-amountToRemove;
+					lbutton.text=lbutton.name=item.amount+" "+item.name;//TODO fix this
+
+				}
+				else if(amountToRemove==item.amount)
+					parentMenu.panels[0].removeButtonByName(lbutton.name);
+
+
+
+				var sellItemButton=new Button(item.name,50,350,70,70,amountToRemove+" "+item.name,"Epistolar",15,"black", buttonBG);//TODO update button position
 				parentMenu.panels[2].addButton(sellItemButton);
 				parentMenu.drawScreen(parentMenu.bgImage);
 			}
@@ -329,15 +360,16 @@ function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo
 	parentMenu.panels[0].draw(context);
 }
 
-function populateShopInventoryPanel(parentMenu, settlementName)//display all of player's cargo in one corner so he can sell it
+function populateShopInventoryPanel(parentMenu, settlement)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[1].clearButtons();
-	var x=360;
+	var x=560;
 	var i;
-	var shopInventory;
+	console.log(settlement.getShopInventory);
+	var shopInventory=settlement.getShopInventory('market');
 	//TODO load shop inventory based on settlement name and type
 	for(i=0;i<shopInventory.cargoList.length;i++){
-		var item=gameState.cargoList[i];
+		var item=shopInventory.cargoList[i];
 
 		var newButton=new Button(item.amount+" "+item.name,x,60,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 
@@ -357,7 +389,7 @@ function addMapMenu(){
 	
 	var pnlMap=new Panel(50,50,900,500,mapImg);
 	
-
+	populateShopInventories();//TODO find a better place for this function call?
 	//add settlements
 	var settlementFetcher= new SettlementInfoFetcher();
 	var i;
@@ -468,7 +500,7 @@ function addMarketMenu(settlement){
 	marketScreen.addButton(btnTrade);
 
 		populatePlayerInventoryPanel(marketScreen);
-		populateShopInventoryPanel(marketScreen, settlement.name);
+		populateShopInventoryPanel(marketScreen, settlement);
 
 
 	marketScreen.drawScreen(startbg);

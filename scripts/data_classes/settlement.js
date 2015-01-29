@@ -7,8 +7,25 @@ function Settlement(name, region, mapX, mapY, pointsOfInterest)
 	this.mapY=mapY;
 	this.pois=pointsOfInterest;
 	
-	function addPointOfInterest(newPOI)
+	this.createAddPointOfInterest=function(newPOI)
 	{
-		pointsOfInterest.put(newPOI);
+		var obj=this;
+		return function(newPOI){
+			obj.pois.put(newPOI);
+			//if(newPOI=="market"||newPOI=="shipbuilder")
+				//obj.shopInventories.put(new ShopInventory(obj.name, newPOI,1000,));
+		}
 	}
+	this.addPointOfInterest=this.createAddPointOfInterest();
+
+	this.createGetShopInventory=function(poiType){
+		var obj=this;
+		return function(poiType){
+			console.log(shopInventoryMap.get(obj.name+"-"+poiType));
+			return shopInventoryMap.get(obj.name+"-"+poiType);
+		}
+		
+	}
+	this.getShopInventory=this.createGetShopInventory();
+
 }
