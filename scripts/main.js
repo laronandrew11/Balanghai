@@ -1,10 +1,12 @@
 //TODO remove from global scope
+var defaultbg= document.createElement('img');
+	defaultbg.src = 'img/shipmenu.png';
 var startbg = document.createElement('img');
 	startbg.src = 'img/startscreen.png';
 var mainMenuBG = document.createElement('img');
 	mainMenuBG.src = 'img/mainmenu.png';
 var shipMenuBG = document.createElement('img');
-	shipMenuBG.src = 'img/shipmenu.jpg';
+	shipMenuBG.src = 'img/shipmenu.png';
 var cargoMenuBG = document.createElement('img');
 	cargoMenuBG.src = 'img/cargo.png';
 var mapBG = document.createElement('img');
@@ -18,7 +20,9 @@ var settlementImg = document.createElement('img');
 	settlementImg.src = 'img/settlement.png';
 	
 var buttonBG = document.createElement('img');
-	buttonBG.src = 'img/button.png';
+	buttonBG.src = 'img/shipbutton.png';
+	var shipButtonBG = document.createElement('img');
+	shipButtonBG.src = 'img/shipbutton.png';
 	var creditsButtonBG = document.createElement('img');
 	creditsButtonBG.src = 'img/creditsbut.png';
 	var loadGameButtonBG = document.createElement('img');

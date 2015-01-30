@@ -1,9 +1,9 @@
 HIGH PRIORITY
 Settlement screen: art/layout
 Shipbuilder screen: panels/buttons
-Market screen: buy/sell functions + UI
---shop inventory storing/loading
---
+
+--Price calculations
+--Trade function
 
 
 Quest/event systems

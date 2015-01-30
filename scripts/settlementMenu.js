@@ -12,7 +12,7 @@ function addSettlementMenu(settlement){
 	{
 		addMarketButton(settlementScreen,settlement);
 	}
-	settlementScreen.drawScreen(startbg);
+	settlementScreen.drawScreen(defaultbg);
 }
 function addShipbuilderButton(parentMenu,settlement){
 	var btnShipbuilder=new Button("SHIPBUILDER",100,500,100,60,"Shipbuilder","Epistolar",15,"black", buttonBG);

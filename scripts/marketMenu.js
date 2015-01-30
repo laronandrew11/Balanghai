@@ -18,7 +18,6 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 				//update item to sell
 				if(!shopInventory.hasToSellItem(item.name))
 				{
-					alert(amountToBuy);
 					var itemToBuy=new Cargo(item.name,item.type,item.unitWeight, amountToBuy);
 					shopInventory.toSell.push(itemToBuy);
 				}
@@ -84,7 +83,6 @@ function CreateSellableItemButtonHandler(parentMenu, button, item)//TODO make si
 				//update item to sell
 				if(!gameState.hasToSellItem(item.name))
 				{
-					alert(amountToSell);
 					var itemToSell=new Cargo(item.name,item.type,item.unitWeight, amountToSell);
 					gameState.toSell.push(itemToSell);
 				}
@@ -224,6 +222,7 @@ function addMarketMenu(settlement){
 	var marketScreen=new staticScreen();
 	addDefaultButtons(marketScreen);
 
+	var shopInventory=settlement.getShopInventory('market');
 
 	if(contains(settlement.pois,"shipbuilder"))
 	{
@@ -232,7 +231,7 @@ function addMarketMenu(settlement){
 
 	var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
-			alert("Trade function has not been coded yet");
+			//alert("Trade function has not been coded yet");
 		}
 
 
@@ -248,7 +247,7 @@ function addMarketMenu(settlement){
 	pnlToBuy.visible=true;
 
 	//TODO populate inventories
-	var shopInventory=settlement.getShopInventory('market');
+	
 
 	marketScreen.addPanel(pnlPlayerInventory);
 	marketScreen.addPanel(pnlShopInventory);
@@ -262,7 +261,7 @@ function addMarketMenu(settlement){
 		populateToBuyPanel(marketScreen, shopInventory);
 
 
-	marketScreen.drawScreen(startbg);
+	marketScreen.drawScreen(defaultbg);
 }
 
 

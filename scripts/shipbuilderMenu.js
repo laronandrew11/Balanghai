@@ -13,5 +13,5 @@ function addShipbuilderMenu(settlement){
 			alert(settlement.name+" shipbuilder coming soon!");
 		}
 	shipbuilderScreen.addButton(btnTest);
-	shipbuilderScreen.drawScreen(startbg);
+	shipbuilderScreen.drawScreen(defaultbg);
 }
