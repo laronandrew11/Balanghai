@@ -24,9 +24,9 @@ function staticScreen(){
 		//return function(context)
 		//{
 			context.drawImage(this.bgImage,0,0,1000,600); 			
-		}
+		//}
 
-		
+	}	
 	//this.drawBG=this.createDrawBG();
 
 	this.createDrawMenu=function(undraw)

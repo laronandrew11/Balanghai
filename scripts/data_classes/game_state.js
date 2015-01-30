@@ -21,20 +21,57 @@ function GameState(playerName){
 	this.addCargo=function(newCargo){
 		cargo.put(newCargo);
 	}
-	this.addItemToSell=function(item){//TODO refactor, along with panel display methods
-		var obj=this;
-		return function(item){
-			removeItemByValue(obj.cargo,item);
-			alert(obj.cargo);
+	this.removeCargo=function(name){
+		var i;
+		for(i=0;i<this.cargo.length;i++)
+		{
+			if(this.cargo[i].name==name)
+				this.cargo.splice(i,1);
 		}
 	}
-	this.removeItemToSell=function(item){
-		var obj=this;
-		return function(item){
-			removeItemByValue(obj.toSell,item);
-
-			alert(obj.toSell);
+	this.removeToSellItem=function(name){
+		var i;
+		for(i=0;i<this.toSell.length;i++)
+		{
+			if(this.toSell[i].name==name)
+				this.toSell.splice(i,1);
 		}
+	}
+	this.hasToSellItem=function(name){
+		var i;
+		for(i=0;i<this.toSell.length;i++)
+		{
+			if(this.toSell[i].name==name)
+				return true;
+		}
+		return false;
+	}
+	this.hasCargo=function(name){
+		var i;
+		for(i=0;i<this.cargo.length;i++)
+		{
+			if(this.cargo[i].name==name)
+				return true;
+		}
+		return false;
+	}
+	this.getCargo=function(name){
+		var i;
+		for(i=0;i<this.cargo.length;i++)
+		{
+			if(this.cargo[i].name==name)
+				return this.cargo[i];
+		}
+		return null;
+	}
+	this.getToSellItem=function(name){
+		var i;
+		for(i=0;i<this.toSell.length;i++)
+		{
+			if(this.toSell[i].name==name)
+				return this.toSell[i];
+		}
+		return null;
 	}
 
 }
