@@ -241,7 +241,10 @@ function addMarketMenu(settlement){
 			lblShopMoney.text=shopInventory.money;
 			alert(gameState.money);
 			alert(shopInventory.money);
-			marketScreen.drawScreen(defaultbg);
+			populatePlayerInventoryPanel(marketScreen);
+			populateShopInventoryPanel(marketScreen, shopInventory);
+			populateToSellPanel(marketScreen);
+			populateToBuyPanel(marketScreen, shopInventory);
 		}
 
 
