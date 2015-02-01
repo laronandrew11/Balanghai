@@ -2,6 +2,8 @@ HIGH PRIORITY
 Settlement screen: art/layout
 Shipbuilder screen: panels/buttons
 
+
+--price records, cargo type records
 --Price calculations
 --Trade function
 

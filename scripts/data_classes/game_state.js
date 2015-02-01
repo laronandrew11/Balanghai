@@ -18,9 +18,27 @@ function GameState(playerName){
 	this.addShip=function(newShip){
 		ships.put(newShip);
 	}
-	this.addCargo=function(newCargo){
-		cargo.put(newCargo);
+	this.createAddCargo=function(newCargo){
+		var obj=this;
+		return function(newCargo){
+			if(!obj.hasCargo(newCargo.name))
+				obj.cargo.push(newCargo);
+			else obj.getCargo(newCargo.name).amount+=newCargo.amount;
+		}
 	}
+	this.addCargo=this.createAddCargo();
+	this.createSubtractCargo=function(name, amount)
+	{
+		var obj=this;
+		return function(name, amount){
+			var cargo=obj.getCargo(name);
+			if(cargo.amount<amount)
+				cargo.amount-=amount;
+			else if (cargo.amount==amount)
+				obj.removeCargo(name);
+		}
+	}		
+	this.subtractCargo=this.createSubtractCargo();
 	this.removeCargo=function(name){
 		var i;
 		for(i=0;i<this.cargo.length;i++)
@@ -72,6 +90,12 @@ function GameState(playerName){
 				return this.toSell[i];
 		}
 		return null;
+	}
+	this.subtractCapacity=function(weight){
+		this.usedCapacity+=weight;
+	}
+	this.addCapacity=function(weight){
+		this.usedCapacity-=weight;
 	}
 
 }

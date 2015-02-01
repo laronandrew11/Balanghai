@@ -5,6 +5,7 @@ function ShopInventory(settlementName, type, money, cargoList){
 	this.cargoList=cargoList;
 	this.toBuy=[];
 	this.toSell=[];
+	this.priceTable;
 
 	this.createAddMoney=function(change){
 		var obj=this;
@@ -23,23 +24,26 @@ function ShopInventory(settlementName, type, money, cargoList){
 	}
 	this.subtractMoney=this.createSubtractMoney();
 
-	this.createAddCargo=function(cargoID, amount){
+		this.createAddCargo=function(newCargo){
 		var obj=this;
-		return function(cargoID, amount)
-		{
-			//TODO find cargoID and add amount
-			//TODO record amount of units that player sold, for price adjustment purposes
+		return function(newCargo){
+			if(!obj.hasCargo(newCargo.name))
+				obj.cargoList.push(newCargo);
+			else obj.getCargo(newCargo.name).amount+=newCargo.amount;
 		}
 	}
 	this.addCargo=this.createAddCargo();
-	this.createSubtractCargo=function(cargoID, amount){
+	this.createSubtractCargo=function(name, amount)
+	{
 		var obj=this;
-		return function(cargoID, amount)
-		{
-			//TODO find cargoID and add amount
-			//TODO record amount of units that player sold, for price adjustment purposes
+		return function(name, amount){
+			var cargo=obj.getCargo(name);
+			if(cargo.amount<amount)
+				cargo.amount-=amount;
+			else if (cargo.amount==amount)
+				obj.removeCargo(name);
 		}
-	}
+	}		
 	this.subtractCargo=this.createSubtractCargo();
 
 	this.removeCargo=function(name){
@@ -94,4 +98,31 @@ function ShopInventory(settlementName, type, money, cargoList){
 		}
 		return null;
 	}
+	this.createSetPrices=function(priceTable){
+		var obj=this;
+		return function(priceTable){
+			var i;
+			for (i=0;i<obj.cargoList.length;i++)
+				obj.cargoList[i].price=obj.getPrice(priceTable, obj.cargoList[i].name);
+		}
+	}
+	this.setPrices=this.createSetPrices();
+	this.getPrice=function(cargoName,priceTable){
+		var i;
+		for(i=0;i<priceTable.length;i++)
+		{
+			if(priceTable[i].cargoName==cargoName)
+				return priceTable[i].buyPrice;//price which the player will buy at, and the shop will sell at
+		}
+		return null;
+	}
+	this.CreateSetPriceTable=function(priceTable)
+	{
+		var obj=this;
+		return function(priceTable){
+			obj.priceTable=priceTable;
+			obj.setPrices(priceTable);
+		}
+	}
+	this.setPriceTable=this.CreateSetPriceTable();
 }

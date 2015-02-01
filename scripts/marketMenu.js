@@ -223,6 +223,11 @@ function addMarketMenu(settlement){
 	addDefaultButtons(marketScreen);
 
 	var shopInventory=settlement.getShopInventory('market');
+	var fetcher=new PriceTableInfoFetcher();
+	shopInventory.setPriceTable(fetcher.findPriceTable(settlement.name));//TODO in future, specify shop type as well
+
+	var lblPlayerMoney=new Label(60,140,100,50,gameState.money,"Epistolar",15,"black");
+	var lblShopMoney=new Label(550,140,100,50,shopInventory.money,"Epistolar",15,"black");
 
 	if(contains(settlement.pois,"shipbuilder"))
 	{
@@ -231,7 +236,12 @@ function addMarketMenu(settlement){
 
 	var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
-			//alert("Trade function has not been coded yet");
+			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
+			lblPlayerMoney.text=gameState.money;
+			lblShopMoney.text=shopInventory.money;
+			alert(gameState.money);
+			alert(shopInventory.money);
+			marketScreen.drawScreen(defaultbg);
 		}
 
 
@@ -246,7 +256,7 @@ function addMarketMenu(settlement){
 	pnlToSell.visible=true;
 	pnlToBuy.visible=true;
 
-	//TODO populate inventories
+
 	
 
 	marketScreen.addPanel(pnlPlayerInventory);
@@ -254,6 +264,9 @@ function addMarketMenu(settlement){
 	marketScreen.addPanel(pnlToSell);
 	marketScreen.addPanel(pnlToBuy);
 	marketScreen.addButton(btnTrade);
+
+	pnlPlayerInventory.addLabel(lblPlayerMoney);
+	pnlShopInventory.addLabel(lblShopMoney);
 
 		populatePlayerInventoryPanel(marketScreen);
 		populateShopInventoryPanel(marketScreen, shopInventory);
