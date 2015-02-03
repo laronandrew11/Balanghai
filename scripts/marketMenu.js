@@ -57,8 +57,8 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 				{
 					shopInventory.getCargo(item.name).amount+=amountToRemove;
 				}
-				populatePlayerInventoryPanel(parentMenu);
-				populateToSellPanel(parentMenu);
+				populateShopInventoryPanel(parentMenu, shopInventory);
+				populateToBuyPanel(parentMenu, shopInventory);
 				//parentMenu.drawScreen(context);
 			}
 		}
@@ -134,7 +134,7 @@ function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo
 {
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
-		var lblPlayerMoney=new Label(60,140,100,50,gameState.money,"Epistolar",15,"black");
+		var lblPlayerMoney=new Label(60,200,100,50,"Your money: "+gameState.money,"Epistolar",15,"black");
 	var x=60;
 	var i;
 	for(i=0;i<gameState.cargo.length;i++){
@@ -144,6 +144,9 @@ function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo
 
 		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item);
 		parentMenu.panels[0].addButton(newButton);//add to inventory panel
+
+		var newLabel=new Label(x,140,100,50,item.price+"/unit","Epistolar",15,"black");
+		parentMenu.panels[0].addLabel(newLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -156,6 +159,7 @@ function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo
 function populateToSellPanel(parentMenu)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[2].clearButtons();
+	parentMenu.panels[2].clearLabels();
 	var x=60;
 	var i;
 	for(i=0;i<gameState.toSell.length;i++){
@@ -165,6 +169,9 @@ function populateToSellPanel(parentMenu)//display all of player's cargo in one c
 
 		newButton.onClick=CreateToSellItemButtonHandler(parentMenu, newButton, item);
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
+
+		var newLabel=new Label(x,430,100,50,item.price+"/unit","Epistolar",15,"black");
+		parentMenu.panels[2].addLabel(newLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -178,7 +185,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 {
 	parentMenu.panels[1].clearButtons();
 	parentMenu.panels[1].clearLabels();
-		var lblShopMoney=new Label(550,140,100,50,shopInventory.money,"Epistolar",15,"black");
+	var lblShopMoney=new Label(550,200,100,50,"Shop's money: "+shopInventory.money,"Epistolar",15,"black");
 	var x=560;
 	var i;
 	
@@ -190,9 +197,13 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 
 		newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
 		parentMenu.panels[1].addButton(newButton);//add to inventory panel
+
+		var newLabel=new Label(x,140,100,50,item.price+"/unit","Epistolar",15,"black");
+		parentMenu.panels[1].addLabel(newLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
+
 		
 	}
 	parentMenu.panels[1].addLabel(lblShopMoney);
@@ -201,6 +212,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 function populateToBuyPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[3].clearButtons();
+	parentMenu.panels[3].clearLabels();
 	var x=560;
 	var i;
 	
@@ -212,6 +224,9 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 		newButton.onClick=CreateToBuyItemButtonHandler(parentMenu, newButton, item, shopInventory);
 		parentMenu.panels[3].addButton(newButton);//add to inventory panel
+
+		var newLabel=new Label(x,430,100,50,item.price+"/unit","Epistolar",15,"black");
+		parentMenu.panels[3].addLabel(newLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -247,10 +262,7 @@ function addMarketMenu(settlement){
 	var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
-			//marketScreen.panels[0].labels[0].text=gameState.money;
-			//marketScreen.panels[1].labels[0].text=shopInventory.money;
-			alert(gameState.money);
-			alert(shopInventory.money);
+		
 			populatePlayerInventoryPanel(marketScreen);
 			populateShopInventoryPanel(marketScreen, shopInventory);
 			populateToSellPanel(marketScreen);
