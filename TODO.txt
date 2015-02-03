@@ -1,11 +1,7 @@
 HIGH PRIORITY
-Settlement screen: art/layout
-Shipbuilder screen: panels/buttons
+-Shipbuilder screen: panels/buttons, trade logic
 
-
---price records, cargo type records
---Price calculations
---Trade function
+-Save game should include shop inventories and price tables
 
 
 Quest/event systems
