@@ -18,7 +18,7 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 				//update item to sell
 				if(!shopInventory.hasToSellItem(item.name))
 				{
-					var itemToBuy=new Cargo(item.name,item.type,item.unitWeight, amountToBuy);
+					var itemToBuy=new Cargo(item.name,item.type,item.unitWeight, amountToBuy, item.price);
 					shopInventory.toSell.push(itemToBuy);
 				}
 				else
@@ -50,7 +50,7 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 				//update item in general inventory
 				if(!shopInventory.hasCargo(item.name))
 				{
-					var itemToRemove=new Cargo(item.name,item.type,item.unitWeight, amountToRemove);
+					var itemToRemove=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
 					shopInventory.cargo.push(itemToRemove);
 				}
 				else
@@ -83,7 +83,7 @@ function CreateSellableItemButtonHandler(parentMenu, button, item)//TODO make si
 				//update item to sell
 				if(!gameState.hasToSellItem(item.name))
 				{
-					var itemToSell=new Cargo(item.name,item.type,item.unitWeight, amountToSell);
+					var itemToSell=new Cargo(item.name,item.type,item.unitWeight, amountToSell, item.price);
 					gameState.toSell.push(itemToSell);
 				}
 				else
@@ -116,7 +116,7 @@ function CreateToSellItemButtonHandler(parentMenu, button, item)//TODO make simi
 				//update item in general inventory
 				if(!gameState.hasCargo(item.name))
 				{
-					var itemToReturn=new Cargo(item.name,item.type,item.unitWeight, amountToRemove);
+					var itemToReturn=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
 					gameState.cargo.push(itemToReturn);
 				}
 				else
@@ -224,7 +224,10 @@ function addMarketMenu(settlement){
 
 	var shopInventory=settlement.getShopInventory('market');
 	var fetcher=new PriceTableInfoFetcher();
-	shopInventory.setPriceTable(fetcher.findPriceTable(settlement.name));//TODO in future, specify shop type as well
+	var priceTable=fetcher.findPriceTable(settlement.name);
+	//alert(priceTable[0].cargoName);
+	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
+	gameState.setPrices(priceTable);
 
 	var lblPlayerMoney=new Label(60,140,100,50,gameState.money,"Epistolar",15,"black");
 	var lblShopMoney=new Label(550,140,100,50,shopInventory.money,"Epistolar",15,"black");

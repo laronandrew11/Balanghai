@@ -27,6 +27,7 @@ function ShopInventory(settlementName, type, money, cargoList){
 		this.createAddCargo=function(newCargo){
 		var obj=this;
 		return function(newCargo){
+			alert("New cargo name:" +newCargo.name);
 			if(!obj.hasCargo(newCargo.name))
 			{
 				obj.cargoList.push(newCargo);
@@ -109,7 +110,7 @@ function ShopInventory(settlementName, type, money, cargoList){
 		return function(priceTable){
 			var i;
 			for (i=0;i<obj.cargoList.length;i++)
-				obj.cargoList[i].price=obj.getPrice(priceTable, obj.cargoList[i].name);
+				obj.cargoList[i].price=obj.getPrice(obj.cargoList[i].name, priceTable);
 		}
 	}
 	this.setPrices=this.createSetPrices();

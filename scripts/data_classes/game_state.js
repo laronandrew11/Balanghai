@@ -97,7 +97,31 @@ function GameState(playerName){
 	this.addCapacity=function(weight){
 		this.usedCapacity-=weight;
 	}
-
+		this.createSetPrices=function(priceTable){
+		var obj=this;
+		return function(priceTable){
+			var i;
+			for (i=0;i<obj.cargo.length;i++)
+				obj.cargo[i].price=obj.getPrice(obj.cargo[i].name, priceTable);
+		}
+	}
+	this.setPrices=this.createSetPrices();
+	this.createGetPrice=function(cargoName,priceTable){
+		var obj=this;
+		return function(cargoName, priceTable)
+		{
+			var i;
+			for(i=0;i<priceTable.length;i++)
+			{
+				if(priceTable[i].cargoName==cargoName)
+				{
+					return priceTable[i].sellPrice;//price which the player will buy at, and the shop will sell at
+				}
+			}
+			return null;
+		}
+	}
+	this.getPrice=this.createGetPrice();
 }
 
 function save(){
