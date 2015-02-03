@@ -27,15 +27,12 @@ function ShopInventory(settlementName, type, money, cargoList){
 		this.createAddCargo=function(newCargo){
 		var obj=this;
 		return function(newCargo){
-			alert("New cargo name:" +newCargo.name);
 			if(!obj.hasCargo(newCargo.name))
 			{
 				obj.cargoList.push(newCargo);
-				alert("New cargo type pushed");
 			}
 			else{
 				obj.getCargo(newCargo.name).amount+=newCargo.amount;
-				alert(obj.getCargo(newCargo.name).amount);
 			} 
 		}
 	}
