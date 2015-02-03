@@ -133,6 +133,8 @@ function CreateToSellItemButtonHandler(parentMenu, button, item)//TODO make simi
 function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[0].clearButtons();
+	parentMenu.panels[0].clearLabels();
+		var lblPlayerMoney=new Label(60,140,100,50,gameState.money,"Epistolar",15,"black");
 	var x=60;
 	var i;
 	for(i=0;i<gameState.cargo.length;i++){
@@ -147,6 +149,7 @@ function populatePlayerInventoryPanel(parentMenu)//display all of player's cargo
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		
 	}
+		parentMenu.panels[0].addLabel(lblPlayerMoney);
 	parentMenu.panels[0].draw(context);
 }
 
@@ -167,12 +170,15 @@ function populateToSellPanel(parentMenu)//display all of player's cargo in one c
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		
 	}
+
 	parentMenu.panels[2].draw(context);
 }
 
 function populateShopInventoryPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[1].clearButtons();
+	parentMenu.panels[1].clearLabels();
+		var lblShopMoney=new Label(550,140,100,50,shopInventory.money,"Epistolar",15,"black");
 	var x=560;
 	var i;
 	
@@ -189,6 +195,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		
 	}
+	parentMenu.panels[1].addLabel(lblShopMoney);
 	parentMenu.panels[1].draw(context);
 }
 function populateToBuyPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
@@ -229,8 +236,8 @@ function addMarketMenu(settlement){
 	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
 	gameState.setPrices(priceTable);
 
-	var lblPlayerMoney=new Label(60,140,100,50,gameState.money,"Epistolar",15,"black");
-	var lblShopMoney=new Label(550,140,100,50,shopInventory.money,"Epistolar",15,"black");
+
+
 
 	if(contains(settlement.pois,"shipbuilder"))
 	{
@@ -240,8 +247,8 @@ function addMarketMenu(settlement){
 	var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
-			lblPlayerMoney.text=gameState.money;
-			lblShopMoney.text=shopInventory.money;
+			//marketScreen.panels[0].labels[0].text=gameState.money;
+			//marketScreen.panels[1].labels[0].text=shopInventory.money;
 			alert(gameState.money);
 			alert(shopInventory.money);
 			populatePlayerInventoryPanel(marketScreen);
@@ -270,9 +277,6 @@ function addMarketMenu(settlement){
 	marketScreen.addPanel(pnlToSell);
 	marketScreen.addPanel(pnlToBuy);
 	marketScreen.addButton(btnTrade);
-
-	pnlPlayerInventory.addLabel(lblPlayerMoney);
-	pnlShopInventory.addLabel(lblShopMoney);
 
 		populatePlayerInventoryPanel(marketScreen);
 		populateShopInventoryPanel(marketScreen, shopInventory);

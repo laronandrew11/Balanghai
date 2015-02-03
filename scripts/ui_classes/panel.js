@@ -49,6 +49,14 @@ function Panel(x,y,width,height, bgImage){
 		}
 
 	}
+	this.createClearLabels=function(){
+		var obj=this;
+		return function(){
+			while(obj.labels.length>0)
+				obj.labels.pop();
+		}
+	}
+	this.clearLabels=this.createClearLabels();
 	this.addLabel=this.createAddLabel();
 	this.createDrawLabels=function()
 	{
