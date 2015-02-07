@@ -2,16 +2,57 @@ function addShipbuilderMenu(settlement){
 	var shipbuilderScreen=new staticScreen();
 	addDefaultButtons(shipbuilderScreen);
 
+	var shopInventory=settlement.getShopInventory('shipbuilder');
+	var fetcher=new PriceTableInfoFetcher();
+	var priceTable=fetcher.findPriceTable(settlement.name, 'shipbuilder');
+	//alert(priceTable[0].cargoName);
+	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
+	gameState.setPrices(priceTable);
+
+
+
 	if(contains(settlement.pois,"market"))
 	{
 		addMarketButton(shipbuilderScreen,settlement);
 	}
 
+/*Population functions and cargo trading functions will be modified to accomodate shipbuilders...*/
 
-	var btnTest=new Button("TEST",115,300,60,60,"You're at Shipbuilder","Epistolar",15,"black", buttonBG);
-		btnTest.onClick=function(){
-			alert(settlement.name+" shipbuilder coming soon!");
+var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+		btnTrade.onClick=function(){
+			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
+		
+			populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
+			populateShopInventoryPanel(shipbuilderScreen, shopInventory);
+			populateToSellPanel(shipbuilderScreen, 'shipbuilder');
+			populateToBuyPanel(shipbuilderScreen, shopInventory);
 		}
-	shipbuilderScreen.addButton(btnTest);
+
+
+
+	var pnlPlayerInventory=new Panel(50,50,450,250,startbg);
+	var pnlShopInventory=new Panel(500,50,450,250,startbg);
+	var pnlToSell=new Panel(50,300,450,250,startbg);
+	var pnlToBuy=new Panel(500,300,450,250,startbg);
+
+	pnlPlayerInventory.visible=true;
+	pnlShopInventory.visible=true;
+	pnlToSell.visible=true;
+	pnlToBuy.visible=true;
+
+
+	
+
+	marketScreen.addPanel(pnlPlayerInventory);
+	marketScreen.addPanel(pnlShopInventory);
+	marketScreen.addPanel(pnlToSell);
+	marketScreen.addPanel(pnlToBuy);
+	marketScreen.addButton(btnTrade);
+
+		populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
+		populateShopInventoryPanel(shipbuilderScreen, shopInventory);
+		populateToSellPanel(shipbuilderScreen, 'shipbuilder');
+		populateToBuyPanel(shipbuilderScreen, shopInventory);
+
 	shipbuilderScreen.drawScreen(defaultbg);
 }

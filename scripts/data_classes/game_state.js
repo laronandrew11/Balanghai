@@ -6,7 +6,7 @@ function GameState(playerName){
 	this.mapY=199;
 	this.usedCapacity=30;
 	this.settlement="Sikdagat"; //if applicable
-	this.ships=[new Ship("Bangka",10,100,50)];
+	this.ships=[new Ship("Pag-asa","Bangka",10,100,50)];
 	this.cargo=[new Cargo("Rice","Food",1, 10),new Cargo("Water","Food",1, 10),new Cargo("Abaca Wood","Wood",1, 10)];
 	this.visibleSettlements=["Sikdagat","Kagisanan","Mapawikan","Atabay","Balasin","Lungon"];
 	this.gameDate=new GameDate(1200,1,1);

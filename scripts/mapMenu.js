@@ -36,9 +36,12 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 			//alert(settlement.name);
 			parentMenu.clearScreen();
 			//the ff. is temporary until we have a travel screen where time actually passes
+			
+			//init();
 			addSettlementMenu(settlement);//TODO only pass name?
 			gameState.mapX=settlement.mapX;
 			gameState.mapY=settlement.mapY;
+
 			//gameState.gameDate.advanceDate();
 		}
 	return newButton;

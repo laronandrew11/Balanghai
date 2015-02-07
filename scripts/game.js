@@ -18,7 +18,7 @@ var timer=0;
 //Initialize
 function init(){
 	cam = new camera(500,300);
-	moon = new background(0,0,3000,1200,bg);
+	bgObject= new background(0,0,3000,1200,bg);
 	cursor = new dot(0,0,5,5,"blue");
 	camdot = new dot(500,300,5,5,"yellow");
 
@@ -41,10 +41,10 @@ function update(){
 	document.onkeyup = keyup; 
 	
 	
-/*virtual camera stuff
+/*virtual camera stuff*/
 gun();
 cameradot();
-track(camdot.x,camdot.y)*/
+track(camdot.x,camdot.y);
 	
 }
 
@@ -52,25 +52,28 @@ track(camdot.x,camdot.y)*/
 function draw(){
 
 
-//offx=-500;
-//offy=-300;
-							//var xpos = cam.x;
-							//var ypos = cam.y;
-							//context.save();
-							//context.translate(-(xpos+offx), -(ypos+offy));
+	offx=-500;
+	offy=-300;
+	
+	var xpos = cam.x;
+	var ypos = cam.y;
+	context.save();
+	context.translate(-(xpos+offx), -(ypos+offy));
 
-			//VIRTUAL CAMERA: cam.start(-500,-300);				
+	//VIRTUAL CAMERA: 
+	cam.start(-500,-300);				
 
 	refresh();	
 	//TODO draw stuff here
 
-/* VIRTUAL CAMERA: drawrec(cursor,0,cursor.color);
-drawrec(camdot,0,camdot.color);
+/* VIRTUAL CAMERA:*/
+ 	drawrec(cursor,0,cursor.color);
+	drawrec(camdot,0,camdot.color);
 
 						
-		//context.translate((xpos+offx), (ypos+offy));
-		//context.restore();
-cam.end();*/
+	context.translate((xpos+offx), (ypos+offy));
+	context.restore();
+	cam.end();
 
 }
 
@@ -78,7 +81,7 @@ cam.end();*/
 function refresh(){
 context.fillStyle="gray";
 context.fillRect(0,0,1000,600);
-	drawrotated(moon.source,moon,moon.angle);
+	drawrotated(bgObject.source,bgObject,bgObject.angle);
 }
 
 

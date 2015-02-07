@@ -11,8 +11,8 @@ function PriceTableInfoFetcher(){
 	this.get=this.createGet();
 
 
-	this.findPriceTable=function(settlementName){//TODO switch this and other search functions to use binary search
-		return priceTableMap.get(settlementName);
+	this.findPriceTable=function(settlementName, poiType){//TODO switch this and other search functions to use binary search
+		return priceTableMap.get(settlementName+"-"+poiType);
 	}
 	this.getAll=function()
 	{

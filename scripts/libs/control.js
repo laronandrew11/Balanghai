@@ -25,16 +25,16 @@ if(camdot.y<300){
 camdot.y=300;
 }
 
-if(camdot.y>moon.height-300){
-camdot.y=moon.height-300;
+if(camdot.y>bgObject.height-300){
+camdot.y=bgObject.height-300;
 }
 
 if(camdot.x<500){
 camdot.x=500;
 }
 
-if(camdot.x>moon.width-500){
-camdot.x=moon.width-500;
+if(camdot.x>bgObject.width-500){
+camdot.x=bgObject.width-500;
 }
 
 }

@@ -88,7 +88,9 @@ function ShopInventory(settlementName, type, money, cargoList){
 		var i;
 		for(i=0;i<this.cargoList.length;i++)
 		{
-			if(this.cargoList[i].name==name)
+			if(this.type=="market" && this.cargoList[i].name==name)
+				return this.cargoList[i];
+			else if(this.type=="shipbuilder"&&this.cargoList[i].properName==name)
 				return this.cargoList[i];
 		}
 		return null;
@@ -107,7 +109,7 @@ function ShopInventory(settlementName, type, money, cargoList){
 		return function(priceTable){
 			var i;
 			for (i=0;i<obj.cargoList.length;i++)
-				obj.cargoList[i].price=obj.getPrice(obj.cargoList[i].name, priceTable);
+				obj.cargoList[i].price=obj.getPrice(obj.cargoList[i].name, priceTable);//TODO introduce a variation formula to modify prices of ships based on their unique attributes being better or lower than the baseline; also do this for gamestate
 		}
 	}
 	this.setPrices=this.createSetPrices();
