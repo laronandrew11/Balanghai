@@ -74,6 +74,11 @@ var buttonBG = document.createElement('img');
 	cargoCategoryButtons.push(clothingButtonBG);
 	cargoCategoryButtons.push(miscButtonBG);
 
+	var cargoInventoryPanelBG = document.createElement('img');
+	cargoInventoryPanelBG.src = 'img/panels/cargowithbox.png';
+	var cargoDetailsPanelBG = document.createElement('img');
+	cargoDetailsPanelBG.src = 'img/panels/carpet.png';
+
 //var activeScreen;
 
 var gameState;

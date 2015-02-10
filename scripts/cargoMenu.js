@@ -24,7 +24,7 @@ function addCargoMenu(){
 
 
 
-	var pnlInventory=new Panel(70,100,457,406,null);
+	var pnlInventory=new Panel(70,60,505,510,cargoInventoryPanelBG);
 	pnlInventory.visible=true;
 
 	populateCategoryButtons(cargoMenu,pnlInventory);
@@ -48,7 +48,7 @@ function CreateCargoItemButtonHandler(parentMenu, button, item)//TODO make simil
 
 
 function createCargoDetailsPanel(cargo){
-	var pnlDetails=new Panel(577,56,357,496,null);
+	var pnlDetails=new Panel(575,72,368,508,cargoDetailsPanelBG);
 	pnlDetails.addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Epistolar",15,"black"));
 	pnlDetails.addLabel(new Label(590,150,100,25,"Units owned: "+cargo.amount,"Epistolar",15,"black"));
 	pnlDetails.addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Epistolar",15,"black"));
