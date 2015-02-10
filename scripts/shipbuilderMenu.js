@@ -43,11 +43,11 @@ var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", b
 
 	
 
-	marketScreen.addPanel(pnlPlayerInventory);
-	marketScreen.addPanel(pnlShopInventory);
-	marketScreen.addPanel(pnlToSell);
-	marketScreen.addPanel(pnlToBuy);
-	marketScreen.addButton(btnTrade);
+	shipbuilderScreen.addPanel(pnlPlayerInventory);
+	shipbuilderScreen.addPanel(pnlShopInventory);
+	shipbuilderScreen.addPanel(pnlToSell);
+	shipbuilderScreen.addPanel(pnlToBuy);
+	shipbuilderScreen.addButton(btnTrade);
 
 		populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
 		populateShopInventoryPanel(shipbuilderScreen, shopInventory);

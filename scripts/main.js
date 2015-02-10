@@ -46,6 +46,34 @@ var buttonBG = document.createElement('img');
 	saveButtonBG.src = 'img/buttons/fleetmenu/savebutton.png';
 	var translateButtonBG = document.createElement('img');
 	translateButtonBG.src = 'img/buttons/fleetmenu/translatebutton.png';
+
+	var artButtonBG = document.createElement('img');
+	artButtonBG.src = 'img/buttons/cargomenu/artbutton.png';
+	var clothingButtonBG = document.createElement('img');
+	clothingButtonBG.src = 'img/buttons/cargomenu/clothingbutton.png';
+	var foodButtonBG = document.createElement('img');
+	foodButtonBG.src = 'img/buttons/cargomenu/foodbutton.png';
+	var miscButtonBG = document.createElement('img');
+	miscButtonBG.src = 'img/buttons/cargomenu/miscbutton.png';
+	var stoneButtonBG = document.createElement('img');
+	stoneButtonBG.src = 'img/buttons/cargomenu/stonebutton.png';
+	var textileButtonBG = document.createElement('img');
+	textileButtonBG.src = 'img/buttons/cargomenu/textilebutton.png';
+	var weaponButtonBG = document.createElement('img');
+	weaponButtonBG.src = 'img/buttons/cargomenu/weaponbutton.png';
+	var woodButtonBG = document.createElement('img');
+	woodButtonBG.src = 'img/buttons/cargomenu/woodbutton.png';
+
+	var cargoCategoryButtons=[];
+	cargoCategoryButtons.push(foodButtonBG);
+	cargoCategoryButtons.push(stoneButtonBG);
+	cargoCategoryButtons.push(weaponButtonBG);
+	cargoCategoryButtons.push(woodButtonBG);
+	cargoCategoryButtons.push(artButtonBG);
+	cargoCategoryButtons.push(textileButtonBG);
+	cargoCategoryButtons.push(clothingButtonBG);
+	cargoCategoryButtons.push(miscButtonBG);
+
 //var activeScreen;
 
 var gameState;

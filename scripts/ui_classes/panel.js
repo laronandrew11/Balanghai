@@ -10,7 +10,8 @@ function Panel(x,y,width,height, bgImage){
 	this.createDraw = function(context){
 		var obj=this;
 		return function(context){
-			context.drawImage(bgImage,x,y,width,height); 
+			if(obj.bgImage!=null)
+				context.drawImage(bgImage,x,y,width,height); 
 			obj.drawLabels();
 			obj.drawMenu(-1);
 		}

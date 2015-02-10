@@ -2,27 +2,33 @@ function CreateCargoCategoryButtonHandler(parentMenu, button)//TODO make similar
 {
 	var lbutton=button;
 	return function(){
-			populateCargoPanel(parentMenu, lbutton.text);
+			populateCargoPanel(parentMenu, lbutton.name);
 		}
 }
-
-function addCargoMenu(){
-	var cargoMenu=new staticScreen();
-
-	var i;
-	var x=70;
+function populateCategoryButtons(parentMenu, parentPanel){
+		var i;
+	var x=130;
 	for(i=0;i<cargoCategories.length;i++)
 	{
 
-		var newButton=new Button(cargoCategories[i],x,70,50,50,cargoCategories[i],"Epistolar",15,"black", buttonBG);
+		var newButton=new Button(cargoCategories[i],x,125,48,48,"","Epistolar",15,"black", cargoCategoryButtons[i]);
 
-		newButton.onClick=CreateCargoCategoryButtonHandler(cargoMenu, newButton);
-		cargoMenu.addButton(newButton);
-		x+=55;
+		newButton.onClick=CreateCargoCategoryButtonHandler(parentMenu, newButton);
+		parentPanel.addButton(newButton);
+		x+=48;
 	}
+}
+function addCargoMenu(){
+	var cargoMenu=new staticScreen();
 
-	var pnlInventory=new Panel(70,100,457,406,startbg);
+
+
+
+	var pnlInventory=new Panel(70,100,457,406,null);
 	pnlInventory.visible=true;
+
+	populateCategoryButtons(cargoMenu,pnlInventory);
+
 	addDefaultButtons(cargoMenu);
 
 	cargoMenu.addPanel(pnlInventory);
@@ -42,7 +48,7 @@ function CreateCargoItemButtonHandler(parentMenu, button, item)//TODO make simil
 
 
 function createCargoDetailsPanel(cargo){
-	var pnlDetails=new Panel(577,56,357,496,startbg);
+	var pnlDetails=new Panel(577,56,357,496,null);
 	pnlDetails.addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Epistolar",15,"black"));
 	pnlDetails.addLabel(new Label(590,150,100,25,"Units owned: "+cargo.amount,"Epistolar",15,"black"));
 	pnlDetails.addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Epistolar",15,"black"));
@@ -55,17 +61,18 @@ function createCargoDetailsPanel(cargo){
 function populateCargoPanel(parentMenu, type)
 {
 	parentMenu.panels[0].clearButtons();
-	var x=70;
+	populateCategoryButtons(parentMenu,parentMenu.panels[0]);
+	var x=130;
 	var i;
 	for(i=0;i<gameState.cargo.length;i++){
 		var item=gameState.cargo[i];
 		if(type=='all' || item.type==type)
 		{
-			var newButton=new Button(item.name,x,150,140,140,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var newButton=new Button(item.name,x,180,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 
 			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
-			x+=130;
+			x+=85;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		}
