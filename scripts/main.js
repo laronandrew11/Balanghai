@@ -24,13 +24,28 @@ var buttonBG = document.createElement('img');
 	var shipButtonBG = document.createElement('img');
 	shipButtonBG.src = 'img/shipbutton.png';
 	var creditsButtonBG = document.createElement('img');
-	creditsButtonBG.src = 'img/creditsbut.png';
+	creditsButtonBG.src = 'img/buttons/mainmenu/creditsbut.png';
 	var loadGameButtonBG = document.createElement('img');
-	loadGameButtonBG.src = 'img/loadgamebut.png';
+	loadGameButtonBG.src = 'img/buttons/mainmenu/loadgamebut.png';
 	var newGameButtonBG = document.createElement('img');
-	newGameButtonBG.src = 'img/newgamebut.png';
+	newGameButtonBG.src = 'img/buttons/mainmenu/newgamebut.png';
 	var closeButtonBG=document.createElement('img');
 	closeButtonBG.src='img/closePanel.png';
+
+	var shipsButtonBG = document.createElement('img');
+	shipsButtonBG.src = 'img/buttons/fleetmenu/shipsbutton.png';
+	var cargoButtonBG = document.createElement('img');
+	cargoButtonBG.src = 'img/buttons/fleetmenu/cargobutton.png';
+	var mapButtonBG = document.createElement('img');
+	mapButtonBG.src = 'img/buttons/fleetmenu/mapbutton.png';
+	var questButtonBG = document.createElement('img');
+	questButtonBG.src = 'img/buttons/fleetmenu/questbutton.png';
+	var settlementButtonBG = document.createElement('img');
+	settlementButtonBG.src = 'img/buttons/fleetmenu/settlementbutton.png';
+	var saveButtonBG = document.createElement('img');
+	saveButtonBG.src = 'img/buttons/fleetmenu/savebutton.png';
+	var translateButtonBG = document.createElement('img');
+	translateButtonBG.src = 'img/buttons/fleetmenu/translatebutton.png';
 //var activeScreen;
 
 var gameState;
@@ -64,33 +79,51 @@ function deactivateScreen(){
 function addDefaultButtons(parentMenu)
 {
 
-	var btnMainMenu=new Button("MAIN_MENU",49,0,200,50,"MAIN MENU","Epistolar",15,"black", buttonBG);
+	var btnMainMenu=new Button("MAIN_MENU",49,0,200,50,"","Epistolar",15,"black", buttonBG);
 	btnMainMenu.onClick=function(){
 		parentMenu.clearScreen();
 		addMainMenu();
 	}
 
-	var btnSave=new Button("SAVE",800,550,200,50,"SAVE GAME","Epistolar",15,"black", buttonBG);
+	var btnSave=new Button("SAVE",690,520,80,80,"","Epistolar",15,"black", saveButtonBG);
 	btnSave.onClick=function(){
 		var parser=new GameStateParser();
 		parser.saveGame();
 	}
 
-	var btnShip=new Button("SHIPS",349,0,200,50,"SHIPS","Epistolar",15,"black", buttonBG);
+	var btnShip=new Button("SHIPS",290,520,80,80,"","Epistolar",15,"black", shipsButtonBG);
 	btnShip.onClick=function(){
 		parentMenu.clearScreen();
 		addFleetMenu();
 	}
-	var btnCargo=new Button("CARGO",549,0,200,50,"CARGO","Epistolar",15,"black", buttonBG);
+	var btnCargo=new Button("CARGO",370,520,80,80,"","Epistolar",15,"black", cargoButtonBG);
 	btnCargo.onClick=function(){
 		parentMenu.clearScreen();
 		addCargoMenu();
 	}
 
-	var btnMap=new Button("MAP",749,0,200,50,"MAP","Epistolar",15,"black", buttonBG);
+	var btnMap=new Button("MAP",450,520,80,80,"","Epistolar",15,"black", mapButtonBG);
 	btnMap.onClick=function(){
 		parentMenu.clearScreen();
 		addMapMenu();
+	}
+
+	var btnQuests=new Button("QUESTS",530,520,80,80,"","Epistolar",15,"black", questButtonBG);
+	btnQuests.onClick=function(){
+		//parentMenu.clearScreen();
+		alert("Quest function coming soon!");
+	}
+	var btnSettlement=new Button("SETTLEMENT",610,520,80,80,"","Epistolar",15,"black", settlementButtonBG);
+	btnSettlement.onClick=function(){
+		var fetcher=new SettlementInfoFetcher();
+		var settlement=fetcher.get(gameState.settlement);
+		parentMenu.clearScreen();
+		addSettlementMenu(settlement);
+	}
+	var btnTranslate=new Button("WORK",920,520,80,80,"","Epistolar",15,"black", translateButtonBG);
+	btnTranslate.onClick=function(){
+		//parentMenu.clearScreen();
+		alert("Translation function coming soon!");
 	}
 
 	var lblPlayerName=new Label(0,300,100,50,gameState.playerName,"Epistolar",15,"black");
@@ -103,6 +136,9 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnShip);
 	parentMenu.addButton(btnCargo);
 	parentMenu.addButton(btnMap);
+	parentMenu.addButton(btnQuests);
+	parentMenu.addButton(btnSettlement);
+	parentMenu.addButton(btnTranslate);
 	parentMenu.addLabel(lblPlayerName);
 }
 

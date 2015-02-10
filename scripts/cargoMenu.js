@@ -21,7 +21,7 @@ function addCargoMenu(){
 		x+=55;
 	}
 
-	var pnlInventory=new Panel(70,130,457,456,startbg);
+	var pnlInventory=new Panel(70,100,457,406,startbg);
 	pnlInventory.visible=true;
 	addDefaultButtons(cargoMenu);
 
