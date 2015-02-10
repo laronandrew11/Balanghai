@@ -114,7 +114,7 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TOD
 				//parentMenu.drawScreen(context);
 			}
 		}
-		}
+		
 			else if(poiType=='shipbuilder')
 			{
 				gameState.removeCargo(item.properName);
