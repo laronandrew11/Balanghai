@@ -27,8 +27,7 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 					{
 						shopInventory.getToSellItem(item.name).amount+=amountToBuy;
 					}
-					populateShopInventoryPanel(parentMenu, shopInventory);
-					populateToBuyPanel(parentMenu, shopInventory);
+			
 					//parentMenu.drawScreen(context);
 				}
 			}
@@ -38,6 +37,8 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 				var itemToBuy=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				shopInventory.toSell.push(itemToBuy);
 			}
+			populateShopInventoryPanel(parentMenu, shopInventory);
+				populateToBuyPanel(parentMenu, shopInventory);
 		}
 }
 function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
@@ -68,8 +69,7 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 					{
 						shopInventory.getCargo(item.name).amount+=amountToRemove;
 					}
-					populateShopInventoryPanel(parentMenu, shopInventory);
-					populateToBuyPanel(parentMenu, shopInventory);
+					
 					//parentMenu.drawScreen(context);
 				}
 			}
@@ -78,13 +78,17 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 				shopInventory.removeToSellItem(item.properName);
 				var itemToRemove=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				shopInventory.cargo.push(itemToRemove);
+				
 			}
+			populateShopInventoryPanel(parentMenu, shopInventory);
+				populateToBuyPanel(parentMenu, shopInventory);
 		}
 }
 function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TODO make similar methods for other buttons if needed
 {
 	var lbutton=button;
 	return function(){
+
 		if(poiType=='market'){
 			var amountToSell=parseInt(prompt("Sell how many units?"));
 			if(amountToSell>item.amount||amountToSell<=0)//TODO include strings/chars as invalid input
@@ -109,8 +113,7 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TOD
 				{
 					gameState.getToSellItem(item.name).amount+=amountToSell;
 				}
-				populatePlayerInventoryPanel(parentMenu);
-				populateToSellPanel(parentMenu);
+			
 				//parentMenu.drawScreen(context);
 			}
 		}
@@ -120,7 +123,10 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TOD
 				gameState.removeCargo(item.properName);
 				var itemToSell=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.toSell.push(itemToSell);
+		
 			}
+					populatePlayerInventoryPanel(parentMenu, poiType);
+				populateToSellPanel(parentMenu, poiType);
 		}
 }
 function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO make similar methods for other buttons if needed
@@ -152,8 +158,7 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO 
 				{
 					gameState.getCargo(item.name).amount+=amountToRemove;
 				}
-				populatePlayerInventoryPanel(parentMenu);
-				populateToSellPanel(parentMenu);
+			
 				//parentMenu.drawScreen(context);
 			}
 		}
@@ -162,7 +167,10 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO 
 				gameState.removeToSellItem(item.properName);
 				var itemToReturn=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.ships.push(itemToReturn);
+			
 			}
+				populatePlayerInventoryPanel(parentMenu, poiType);
+				populateToSellPanel(parentMenu, poiType);
 
 		}
 }
@@ -174,15 +182,20 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 		var lblPlayerMoney=new Label(60,200,100,50,"Your money: "+gameState.money,"Epistolar",15,"black");
 	var x=60;
 	var i;
-	for(i=0;i<gameState.cargo.length;i++){
-		var item=gameState.cargo[i];
+	if(poiType=="market")
+		var cargoList=gameState.cargo;
+	else if(poiType=='shipbuilder')
+		var cargoList=gameState.ships;
 
-		if(shopInventory.type=='market'){
+	for(i=0;i<cargoList.length;i++){
+		var item=cargoList[i];
+
+		if(poiType=='market'){
 			var newButton=new Button(item.amount+" "+item.name,x,60,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 			var newLabel=new Label(x,140,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
-		else if(shopInventory.type=='shipbuilder'){
+		else if(poiType=='shipbuilder'){
 			var newButton=new Button(item.properName,x,60,70,70,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
 			var newLabel=new Label(x,140,100,50,item.price,"Epistolar",15,"black");
 		}
@@ -209,17 +222,15 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 	var i;
 	for(i=0;i<gameState.toSell.length;i++){
 		var item=gameState.toSell[i];
-
-		if(shopInventory.type=='market'){
+		if(poiType=='market'){
 			var newButton=new Button(item.amount+" "+item.name,x,350,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
 			var newLabel=new Label(x,430,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
-		else if(shopInventory.type=='shipbuilder'){
+		else if(poiType=='shipbuilder'){
 			var newButton=new Button(item.properName,x,350,70,70,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
 			var newLabel=new Label(x,430,100,50,item.price,"Epistolar",15,"black");
 		}
-
 		newButton.onClick=CreateToSellItemButtonHandler(parentMenu, newButton, item, poiType);
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
 		parentMenu.panels[2].addLabel(newLabel);
@@ -310,13 +321,14 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 function addMarketMenu(settlement){
 	var marketScreen=new staticScreen();
 	addDefaultButtons(marketScreen);
-
+	alert(settlement.name);
 	var shopInventory=settlement.getShopInventory('market');
+	alert(shopInventory.type);
 	var fetcher=new PriceTableInfoFetcher();
-	var priceTable=fetcher.findPriceTable(settlement.name);
+	var priceTable=fetcher.findPriceTable(settlement.name, 'market');
 	//alert(priceTable[0].cargoName);
 	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
-	gameState.setPrices(priceTable);
+	gameState.setPrices(priceTable, "cargo");
 
 
 
@@ -326,7 +338,7 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+	var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 		

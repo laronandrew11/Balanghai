@@ -7,7 +7,7 @@ function addShipbuilderMenu(settlement){
 	var priceTable=fetcher.findPriceTable(settlement.name, 'shipbuilder');
 	//alert(priceTable[0].cargoName);
 	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
-	gameState.setPrices(priceTable);
+	gameState.setPrices(priceTable, "ships");
 
 
 
@@ -18,7 +18,7 @@ function addShipbuilderMenu(settlement){
 
 /*Population functions and cargo trading functions will be modified to accomodate shipbuilders...*/
 
-var btnTrade=new Button("TRADE",400,550,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 		

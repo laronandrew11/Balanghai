@@ -1,10 +1,16 @@
-function buyCargo(shopInventory, cargo)
+function buyCargo(shopInventory, cargo, itemType)
 {
 	gameState.money-=(cargo.amount*cargo.price);
 	shopInventory.addMoney(cargo.amount*cargo.price);
-	gameState.addCargo(cargo);
+	if(itemType=='cargo')
+	{
+		gameState.addCargo(cargo);
+		gameState.subtractCapacity(cargo.amount*cargo.unitWeight);
+	}
+		
 	shopInventory.removeToSellItem(cargo.name);
-	gameState.subtractCapacity(cargo.amount*cargo.unitWeight);
+
+	
 }
 function sellCargo(shopInventory, cargo)//sell a single 'name' of cargo. Note that the passed object needs a "price" field
 {
