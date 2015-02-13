@@ -340,7 +340,7 @@ function addMarketMenu(settlement){
 
 	var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
-			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell, 'cargo');
+			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 		
 			populatePlayerInventoryPanel(marketScreen,'market');
 			populateShopInventoryPanel(marketScreen, shopInventory);

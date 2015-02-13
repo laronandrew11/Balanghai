@@ -6,6 +6,8 @@ HIGH PRIORITY
 SHIPBUILDER:
 -update gamestate, trade_func and shopinventory to handle both shipbuilder and market transactions
 
+-when leaving a shop screen, put items from toSell or toBuy back in the proper lists
+
 DYNAMIC TRAVEL SCREEN
 
 

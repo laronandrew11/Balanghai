@@ -175,5 +175,11 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addLabel(lblPlayerName);
 }
 
-
+function returnCargoToSell(){
+	var i;
+	for(i=0;i<gameState.toSell.length;i++)
+	{
+		//return cargo to either cargo list or ship list
+	}
+}
 

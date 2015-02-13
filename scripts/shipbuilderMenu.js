@@ -20,7 +20,7 @@ function addShipbuilderMenu(settlement){
 
 var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
-			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell,'ship');
+			tradeShips(shopInventory, shopInventory.toSell, gameState.toSell);
 		
 			populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
 			populateShopInventoryPanel(shipbuilderScreen, shopInventory);

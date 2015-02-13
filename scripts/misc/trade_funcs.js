@@ -1,63 +1,54 @@
-function buyCargo(shopInventory, cargo, itemType)
+function buyCargo(shopInventory, cargo)
 {
 	
-	if(itemType=='cargo')
-	{
+	
 		gameState.addCargo(cargo);
 		gameState.subtractCapacity(cargo.amount*cargo.unitWeight);
 		gameState.money-=(cargo.amount*cargo.price);
 		shopInventory.addMoney(cargo.amount*cargo.price);
 		shopInventory.removeToSellItem(cargo.name);
-	}
-	else if(itemType=='ship')
-	{
-		gameState.ships.push(cargo);
-		gameState.money-=cargo.price;
-		shopInventory.addMoney(cargo.price);
-		shopInventory.removeToSellItem(cargo.properName);
-	}
-		
-	
-
 	
 }
-function sellCargo(shopInventory, cargo, itemType)//sell a single 'name' of cargo. Note that the passed object needs a "price" field
+function sellCargo(shopInventory, cargo)//sell a single 'name' of cargo. Note that the passed object needs a "price" field
 {
-	alert(itemType);
-	shopInventory.addCargo(cargo);
-	if(itemType=='cargo')
-	{
-
-		
+		shopInventory.addCargo(cargo);
 		gameState.addCapacity(cargo.amount*cargo.UnitWeight);
 		gameState.money+=(cargo.amount*cargo.price);
 		shopInventory.money-=(cargo.amount*cargo.price);
-		gameState.removeToSellItem(cargo.name, itemType);
-	}
-	else if(itemType=='ship')
-	{
-		//gameState.removeShip(cargo.properName);
-		gameState.money+=cargo.price;
-		shopInventory.money-=cargo.price;
-		gameState.removeToSellItem(cargo.properName, itemType);
-	}
-	
+		gameState.removeToSellItem(cargo.name, 'cargo');
+
 }
 
-function tradeCargo(shopInventory,toBuy, toSell, itemType){
+function tradeCargo(shopInventory,toBuy, toSell){
 	var i;
 	for(i=0;i<toBuy.length;i++)
-		buyCargo(shopInventory, toBuy[i], itemType);
+		buyCargo(shopInventory, toBuy[i]);
 	for(i=0;i<toSell.length;i++)
 	{
-		sellCargo(shopInventory, toSell[i], itemType);
+		sellCargo(shopInventory, toSell[i]);
 	}
 
 }
-function buyShip(){
-	
+function buyShip(shopInventory,ship){
+		gameState.ships.push(ship);
+		gameState.money-=ship.price;
+		shopInventory.addMoney(ship.price);
+		shopInventory.removeToSellItem(ship.properName);
 }
-function sellShip(){
+function sellShip(shopInventory,ship){
+		shopInventory.addCargo(ship);
+		gameState.money+=ship.price;
+		shopInventory.money-=ship.price;
+		gameState.removeToSellItem(ship.properName, 'ship');
+}
+function tradeShips(shopInventory,toBuy, toSell, itemType){
+	var i;
+	for(i=0;i<toBuy.length;i++)
+		buyShip(shopInventory, toBuy[i]);
+	for(i=0;i<toSell.length;i++)
+	{
+		sellShip(shopInventory, toSell[i]);
+	}
 
 }
 function repairShip(){
