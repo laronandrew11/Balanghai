@@ -63,7 +63,7 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 					if(!shopInventory.hasCargo(item.name))
 					{
 						var itemToRemove=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
-						shopInventory.cargo.push(itemToRemove);
+						shopInventory.cargoList.push(itemToRemove);
 					}
 					else
 					{
@@ -77,7 +77,7 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 			{
 				shopInventory.removeToSellItem(item.properName);
 				var itemToRemove=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
-				shopInventory.cargo.push(itemToRemove);
+				shopInventory.cargoList.push(itemToRemove);
 				
 			}
 			populateShopInventoryPanel(parentMenu, shopInventory);
@@ -120,7 +120,7 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TOD
 		
 			else if(poiType=='shipbuilder')
 			{
-				gameState.removeCargo(item.properName);
+				gameState.removeShip(item.properName);
 				var itemToSell=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.toSell.push(itemToSell);
 		
@@ -146,7 +146,7 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO 
 				}
 				else if(amountToRemove==item.amount)
 				{
-					gameState.removeToSellItem(item.name);
+					gameState.removeToSellItem(item.name, 'cargo');
 				}
 				//update item in general inventory
 				if(!gameState.hasCargo(item.name))
@@ -164,7 +164,7 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO 
 		}
 			else if(poiType=='shipbuilder')
 			{
-				gameState.removeToSellItem(item.properName);
+				gameState.removeToSellItem(item.properName, 'ship');
 				var itemToReturn=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.ships.push(itemToReturn);
 			
@@ -340,7 +340,7 @@ function addMarketMenu(settlement){
 
 	var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
-			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
+			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell, 'cargo');
 		
 			populatePlayerInventoryPanel(marketScreen,'market');
 			populateShopInventoryPanel(marketScreen, shopInventory);

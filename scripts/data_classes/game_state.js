@@ -16,7 +16,16 @@ function GameState(playerName){
 
 	
 	this.addShip=function(newShip){
-		ships.put(newShip);
+		this.ships.put(newShip);
+	}
+	this.removeShip=function(shipName)
+	{
+		var i;
+		for(i=0;i<this.ships.length;i++)
+		{
+			if(this.ships[i].properName==shipName)
+				this.ships.splice(i,1);
+		}
 	}
 	this.createAddCargo=function(newCargo){
 		var obj=this;
@@ -47,12 +56,23 @@ function GameState(playerName){
 				this.cargo.splice(i,1);
 		}
 	}
-	this.removeToSellItem=function(name){
+	this.removeToSellItem=function(name, itemType){
 		var i;
-		for(i=0;i<this.toSell.length;i++)
+		if(itemType=='cargo')
 		{
-			if(this.toSell[i].name==name)
-				this.toSell.splice(i,1);
+			for(i=0;i<this.toSell.length;i++)
+			{
+				if(this.toSell[i].name==name)
+					this.toSell.splice(i,1);
+			}
+		}
+		else if(itemType=='ship')
+		{
+			for(i=0;i<this.toSell.length;i++)
+			{
+				if(this.toSell[i].properName==name)
+					this.toSell.splice(i,1);
+			}
 		}
 	}
 	this.hasToSellItem=function(name){

@@ -27,13 +27,18 @@ function ShopInventory(settlementName, type, money, cargoList){
 		this.createAddCargo=function(newCargo){
 		var obj=this;
 		return function(newCargo){
-			if(!obj.hasCargo(newCargo.name))
+			if(obj.type=='market')
 			{
-				obj.cargoList.push(newCargo);
+				if(!obj.hasCargo(newCargo.name))
+				{
+					obj.cargoList.push(newCargo);
+				}
+				else{
+					obj.getCargo(newCargo.name).amount+=newCargo.amount;
+				} 
 			}
-			else{
-				obj.getCargo(newCargo.name).amount+=newCargo.amount;
-			} 
+			else if (obj.type=='shipbuilder')
+				obj.cargoList.push(newCargo);
 		}
 	}
 	this.addCargo=this.createAddCargo();
@@ -54,7 +59,10 @@ function ShopInventory(settlementName, type, money, cargoList){
 		var i;
 		for(i=0;i<this.cargoList.length;i++)
 		{
-			if(this.cargoList[i].name==name)
+			
+			if(this.type=='market'&&this.cargoList[i].name==name)
+				this.cargoList.splice(i,1);
+			else if(this.type=='shipbuilder'&&this.cargoList[i].properName==name)
 				this.cargoList.splice(i,1);
 		}
 	}
@@ -62,7 +70,9 @@ function ShopInventory(settlementName, type, money, cargoList){
 		var i;
 		for(i=0;i<this.toSell.length;i++)
 		{
-			if(this.toSell[i].name==name)
+			if(this.type=='market'&&this.toSell[i].name==name)
+				this.toSell.splice(i,1);
+			else if(this.type=='shipbuilder'&&this.toSell[i].properName==name)
 				this.toSell.splice(i,1);
 		}
 	}
