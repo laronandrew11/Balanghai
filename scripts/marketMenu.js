@@ -321,9 +321,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 function addMarketMenu(settlement){
 	var marketScreen=new staticScreen();
 	addDefaultButtons(marketScreen);
-	alert(settlement.name);
 	var shopInventory=settlement.getShopInventory('market');
-	alert(shopInventory.type);
 	var fetcher=new PriceTableInfoFetcher();
 	var priceTable=fetcher.findPriceTable(settlement.name, 'market');
 	//alert(priceTable[0].cargoName);

@@ -1,7 +1,7 @@
 function buyCargo(shopInventory, cargo)
 {
 	
-	
+		alert(cargo.name);
 		gameState.addCargo(cargo);
 		gameState.subtractCapacity(cargo.amount*cargo.unitWeight);
 		gameState.money-=(cargo.amount*cargo.price);
@@ -21,11 +21,15 @@ function sellCargo(shopInventory, cargo)//sell a single 'name' of cargo. Note th
 
 function tradeCargo(shopInventory,toBuy, toSell){
 	var i;
-	for(i=0;i<toBuy.length;i++)
-		buyCargo(shopInventory, toBuy[i]);
-	for(i=0;i<toSell.length;i++)
+	var maxToBuy=toBuy.length;
+	var maxToSell=toSell.length;
+	for(i=0;i<maxToBuy;i++)
 	{
-		sellCargo(shopInventory, toSell[i]);
+		buyCargo(shopInventory, toBuy[0]);
+	}
+	for(i=0;i<maxToSell;i++)
+	{
+		sellCargo(shopInventory, toSell[0]);
 	}
 
 }
@@ -43,11 +47,13 @@ function sellShip(shopInventory,ship){
 }
 function tradeShips(shopInventory,toBuy, toSell, itemType){
 	var i;
-	for(i=0;i<toBuy.length;i++)
-		buyShip(shopInventory, toBuy[i]);
-	for(i=0;i<toSell.length;i++)
+	var maxToBuy=toBuy.length;
+	var maxToSell=toSell.length;
+	for(i=0;i<maxToBuy;i++)
+		buyShip(shopInventory, toBuy[0]);
+	for(i=0;i<maxToSell;i++)
 	{
-		sellShip(shopInventory, toSell[i]);
+		sellShip(shopInventory, toSell[0]);
 	}
 
 }

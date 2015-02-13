@@ -1,4 +1,5 @@
 var shopInventoryMap=new Map();
+populateShopInventories();
 function populateShopInventories(){
 	var fetcher=new SettlementInfoFetcher();
 	var i;

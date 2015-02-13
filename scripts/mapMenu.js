@@ -3,7 +3,7 @@ function addMapMenu(){
 	
 	var pnlMap=new Panel(50,50,900,500,mapImg);
 	
-	populateShopInventories();//TODO find a better place for this function call?
+
 	//add settlements
 	var settlementFetcher= new SettlementInfoFetcher();
 	var i;
