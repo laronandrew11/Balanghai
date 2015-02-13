@@ -7,7 +7,8 @@ function addShipbuilderMenu(settlement){
 	var priceTable=fetcher.findPriceTable(settlement.name, 'shipbuilder');
 	//alert(priceTable[0].cargoName);
 	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
-	gameState.setPrices(priceTable, "ships");
+	gameState.itemType='ship';
+	gameState.setPrices(priceTable);
 
 
 

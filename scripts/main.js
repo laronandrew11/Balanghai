@@ -36,6 +36,7 @@ function addDefaultButtons(parentMenu)
 	var btnMainMenu=new Button("MAIN_MENU",49,0,200,50,"","Epistolar",15,"black", buttonBG);
 	btnMainMenu.onClick=function(){
 		parentMenu.clearScreen();
+		returnItemsToSell();
 		addMainMenu();
 	}
 
@@ -48,17 +49,20 @@ function addDefaultButtons(parentMenu)
 	var btnShip=new Button("SHIPS",290,520,80,80,"","Epistolar",15,"black", shipsButtonBG);
 	btnShip.onClick=function(){
 		parentMenu.clearScreen();
+		returnItemsToSell();
 		addFleetMenu();
 	}
 	var btnCargo=new Button("CARGO",370,520,80,80,"","Epistolar",15,"black", cargoButtonBG);
 	btnCargo.onClick=function(){
 		parentMenu.clearScreen();
+		returnItemsToSell();
 		addCargoMenu();
 	}
 
 	var btnMap=new Button("MAP",450,520,80,80,"","Epistolar",15,"black", mapButtonBG);
 	btnMap.onClick=function(){
 		parentMenu.clearScreen();
+		returnItemsToSell();
 		addMapMenu();
 	}
 
@@ -72,6 +76,7 @@ function addDefaultButtons(parentMenu)
 		var fetcher=new SettlementInfoFetcher();
 		var settlement=fetcher.get(gameState.settlement);
 		parentMenu.clearScreen();
+		returnItemsToSell();
 		addSettlementMenu(settlement);
 	}
 	var btnTranslate=new Button("WORK",920,520,80,80,"","Epistolar",15,"black", translateButtonBG);
@@ -96,26 +101,28 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addLabel(lblPlayerName);
 }
 
-function returnItemsToSell(itemType){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler
+function returnItemsToSell(){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler
 	var i;
-	for(i=0;i<gameState.toSell.length;i++)
+	var max=gameState.toSell.length;
+	for(i=0;i<max;i++)
 	{
-		var item=gameState.toSell[i];
-		if(itemType=='cargo'){
+		var item=gameState.toSell[0];
+		if(gameState.itemType=='cargo'){
+			//alert(item.name);
 			gameState.removeToSellItem(item.name, 'cargo');
 				
 				//update item in general inventory
 				if(!gameState.hasCargo(item.name))
 				{
-					var itemToReturn=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
+					var itemToReturn=new Cargo(item.name,item.type,item.unitWeight, item.amount, item.price);
 					gameState.cargo.push(itemToReturn);
 				}
 				else
 				{
-					gameState.getCargo(item.name).amount+=amountToRemove;
+					gameState.getCargo(item.name).amount+=item.amount;
 				}
 		}
-		else if (itemType=='ship')
+		else if (gameState.itemType=='ship')
 		{
 			gameState.removeToSellItem(item.properName, 'ship');
 			var itemToReturn=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
@@ -126,9 +133,10 @@ function returnItemsToSell(itemType){//refactor: use the inside of the loop as a
 }
 function returnItemsToBuy(shopInventory){
 	var i;
-	for(i=0;i<shopInventory.toSell.length;i++)
+	var max=shopInventory.toSell.length;
+	for(i=0;i<max;i++)
 	{
-		var item=shopInventory.toSell[i];
+		var item=shopInventory.toSell[0];
 		if(shopInventory.type=='market')
 		{
 			shopInventory.removeToSellItem(item.name);
@@ -136,12 +144,12 @@ function returnItemsToBuy(shopInventory){
 					//update item in general inventory
 					if(!shopInventory.hasCargo(item.name))
 					{
-						var itemToRemove=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
+						var itemToRemove=new Cargo(item.name,item.type,item.unitWeight, item.amount, item.price);
 						shopInventory.cargoList.push(itemToRemove);
 					}
 					else
 					{
-						shopInventory.getCargo(item.name).amount+=amountToRemove;
+						shopInventory.getCargo(item.name).amount+=item.amount;
 					}
 		}
 		else if (shopInventory.type=='shipbuilder')

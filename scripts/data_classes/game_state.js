@@ -117,17 +117,17 @@ function GameState(playerName){
 	this.addCapacity=function(weight){
 		this.usedCapacity-=weight;
 	}
-		this.createSetPrices=function(priceTable, itemType){
+		this.createSetPrices=function(priceTable){
 		var obj=this;
-		return function(priceTable, itemType){
+		return function(priceTable){
 
 			var i;
-			if(itemType=="cargo")
+			if(this.itemType=="cargo")
 			{
 				for (i=0;i<obj.cargo.length;i++)
 					obj.cargo[i].price=obj.getPrice(obj.cargo[i].name, priceTable);
 			}
-			else if (itemType=="ships")
+			else if (this.itemType=="ship")
 			{
 				for (i=0;i<obj.ships.length;i++)
 					obj.ships[i].price=obj.getPrice(obj.ships[i].name, priceTable);

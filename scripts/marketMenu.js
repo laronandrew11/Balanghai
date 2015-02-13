@@ -326,7 +326,8 @@ function addMarketMenu(settlement){
 	var priceTable=fetcher.findPriceTable(settlement.name, 'market');
 	//alert(priceTable[0].cargoName);
 	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
-	gameState.setPrices(priceTable, "cargo");
+	gameState.itemType='cargo';
+	gameState.setPrices(priceTable);
 
 
 
