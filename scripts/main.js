@@ -96,11 +96,60 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addLabel(lblPlayerName);
 }
 
-function returnCargoToSell(){
+function returnItemsToSell(itemType){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler
 	var i;
 	for(i=0;i<gameState.toSell.length;i++)
 	{
-		//return cargo to either cargo list or ship list
+		var item=gameState.toSell[i];
+		if(itemType=='cargo'){
+			gameState.removeToSellItem(item.name, 'cargo');
+				
+				//update item in general inventory
+				if(!gameState.hasCargo(item.name))
+				{
+					var itemToReturn=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
+					gameState.cargo.push(itemToReturn);
+				}
+				else
+				{
+					gameState.getCargo(item.name).amount+=amountToRemove;
+				}
+		}
+		else if (itemType=='ship')
+		{
+			gameState.removeToSellItem(item.properName, 'ship');
+			var itemToReturn=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
+			gameState.ships.push(itemToReturn);
+		}
+
+	}
+}
+function returnItemsToBuy(shopInventory){
+	var i;
+	for(i=0;i<shopInventory.toSell.length;i++)
+	{
+		var item=shopInventory.toSell[i];
+		if(shopInventory.type=='market')
+		{
+			shopInventory.removeToSellItem(item.name);
+					
+					//update item in general inventory
+					if(!shopInventory.hasCargo(item.name))
+					{
+						var itemToRemove=new Cargo(item.name,item.type,item.unitWeight, amountToRemove, item.price);
+						shopInventory.cargoList.push(itemToRemove);
+					}
+					else
+					{
+						shopInventory.getCargo(item.name).amount+=amountToRemove;
+					}
+		}
+		else if (shopInventory.type=='shipbuilder')
+		{
+			shopInventory.removeToSellItem(item.properName);
+			var itemToRemove=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
+			shopInventory.cargoList.push(itemToRemove);
+		}
 	}
 }
 
