@@ -8,12 +8,14 @@ canvas.onmousedown=mousedown;
 	bg.src = 'img/background.jpg';
 
 
-
+var dynamicScreens=[];
 
 var mousex;
 var mousey;
 
 var timer=0;
+
+/*END GLOBAL VARIABLES*/
 
 //Initialize
 function init(){
