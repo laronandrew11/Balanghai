@@ -29,7 +29,7 @@ this.y=0;
 this.angle=0;
 this.width=width;
 this.height=height;
-this.color="white"
+this.color="white";
 }
 
 	function dot(x,y,width,height,color){

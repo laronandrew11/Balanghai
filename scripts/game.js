@@ -114,6 +114,7 @@ function keyup(event){
 function mousedown(){
 	mousex=event.offsetX;
 	mousey=event.offsetY;
+	set();
 }
 
 function mousemove(){

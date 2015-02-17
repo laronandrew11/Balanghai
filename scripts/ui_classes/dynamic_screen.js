@@ -1,5 +1,6 @@
 //global variables come from game.js, camera.js and other libs
 function DynamicScreen(){
+	this.isActive=true;
 	this.createInitialize=function()
 	{
 		var obj=this;
@@ -70,16 +71,20 @@ function DynamicScreen(){
 	this.createLoop=function(){
 		var obj=this;
 		return function(){
-			obj.update();
-			timer+=1/100;
-			obj.draw();
+			if(obj.isActive)
+			{
+				obj.update();
+				timer+=1/100;
+				obj.draw();
 
-
-			setTimeout(obj.loop,fps);
+				console.log("Looped!");
+				setTimeout(obj.loop,fps);
+			}
 		}
 	}
 	this.loop=this.createLoop();
 	this.refresh=function(){
+		
 		//context.fillStyle="gray";
 		context.fillRect(0,0,1000,600);
 			drawrotated(bgObject.source,bgObject,bgObject.angle);
