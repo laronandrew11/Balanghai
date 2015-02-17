@@ -15,7 +15,7 @@
 						
 						
 			function drawrec(object,angle,color){
-							console.log(object);
+							//console.log(object);
 							var xpos = object.x+object.width/2
 							var ypos = object.y+object.height/2
 							context.save();

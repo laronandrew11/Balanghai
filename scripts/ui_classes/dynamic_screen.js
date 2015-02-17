@@ -73,9 +73,9 @@ function DynamicScreen(){
 			obj.update();
 			timer+=1/100;
 			obj.draw();
-			fps=10;
 
-			setTimeout(loop,fps);
+
+			setTimeout(obj.loop,fps);
 		}
 	}
 	this.loop=this.createLoop();
@@ -121,6 +121,5 @@ function DynamicScreen(){
 	//TODO add separate listeners for dynamic screen instead of using global listeners
 	//canvas.addEventListener('mousedown', this.clickEvent, false);
 	//document.onkeydown = this.keyEvent;
-	canvas.addEventListener('mousedown', this.clickEvent, false);
-	document.onkeydown = this.keyEvent;
+
 }

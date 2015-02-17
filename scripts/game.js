@@ -6,7 +6,7 @@ canvas.onmousemove=mousemove;
 canvas.onmousedown=mousedown;
 canvas.onmouseup=mouseup;
 	var bg = document.createElement('img');
-	bg.src = 'img/background.jpg';
+	bg.src = 'img/travelmap.png';
 
 
 var dynamicScreens=[];
@@ -15,11 +15,12 @@ var mousex;
 var mousey;
 
 var timer=0;
+var fps=10;
 
 /*END GLOBAL VARIABLES*/
 
 //Initialize
-function init(){
+/*function init(){
 	cam = new camera(500,300);
 	bgObject= new background(0,0,3000,1200,bg);
 	cursor = new dot(0,0,5,5,"blue");
@@ -45,7 +46,7 @@ function update(){
 	
 	
 /*virtual camera stuff*/
-gun();
+/*gun();
 cameradot();
 track(camdot.x,camdot.y);
 	
@@ -70,7 +71,7 @@ function draw(){
 	//TODO draw stuff here
 
 /* VIRTUAL CAMERA:*/
- 	drawrec(cursor,0,cursor.color);
+ /*	drawrec(cursor,0,cursor.color);
 	drawrec(camdot,0,camdot.color);
 
 						
@@ -85,7 +86,7 @@ function refresh(){
 context.fillStyle="gray";
 context.fillRect(0,0,1000,600);
 	drawrotated(bgObject.source,bgObject,bgObject.angle);
-}
+}*/
 
 
 
@@ -125,5 +126,4 @@ function mouseup(){
 	mousey=event.offsetY;
 
 }
-
 
