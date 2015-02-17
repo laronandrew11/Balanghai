@@ -6,7 +6,7 @@ function random(min, max){
 
 
 
-
+//from two objects,return distance
 function getTwoPointVector(object,direction){
 
 		        mx=direction.x+direction.width/2;
@@ -35,9 +35,9 @@ function getdistance(object,object2){
 
 
 
-
+//gives the object a vector using its angle.or given the angle from the function.
 function getvector(object,angle){
-		        mx=((object.x+object.width/2)+Math.cos((object.angle+angle)*(Math.PI/180)));
+				mx=((object.x+object.width/2)+Math.cos((object.angle+angle)*(Math.PI/180)));
 				my=((object.y+object.height/2)+Math.sin((object.angle+angle)*(Math.PI/180)));
 				sx=object.x+object.width/2;
 				sy=object.y+object.height/2;

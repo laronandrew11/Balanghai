@@ -4,6 +4,7 @@ var canvas = document.getElementById("game");
 var context = canvas.getContext("2d");
 canvas.onmousemove=mousemove;
 canvas.onmousedown=mousedown;
+canvas.onmouseup=mouseup;
 	var bg = document.createElement('img');
 	bg.src = 'img/background.jpg';
 
@@ -115,6 +116,11 @@ function mousedown(){
 }
 
 function mousemove(){
+	mousex=event.offsetX;
+	mousey=event.offsetY;
+
+}
+function mouseup(){
 	mousex=event.offsetX;
 	mousey=event.offsetY;
 

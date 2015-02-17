@@ -1,5 +1,5 @@
 //global variables come from game.js, camera.js and other libs
-function DynamicScreen(cam, bg, cursor, camdot){
+function DynamicScreen(){
 	this.createInitialize=function()
 	{
 		var obj=this;
@@ -7,8 +7,11 @@ function DynamicScreen(cam, bg, cursor, camdot){
 			cam = new camera(500,300);
 			bgObject= new background(0,0,3000,1200,bg);
 			cursor = new dot(0,0,5,5,"blue");
-			alert(typeof cursor);
+			
 			camdot = new dot(500,300,5,5,"yellow");
+			boat= new ship(500,600,50,50,"red");
+
+		heading = new dot(500,600,50,50,"red");
 			obj.loop();
 		}
 	}
@@ -20,6 +23,8 @@ function DynamicScreen(cam, bg, cursor, camdot){
 			document.onkeydown = keydown;
 			document.onkeyup = keyup; 
 			/*virtual camera stuff*/
+			move();//these functions are in control.js
+
 			gun();
 			cameradot();
 			track(camdot.x,camdot.y);
@@ -30,7 +35,7 @@ function DynamicScreen(cam, bg, cursor, camdot){
 	{
 		var obj=this;
 		return function(){
-			offx=-500;
+			/*offx=-500;
 			offy=-300;
 		
 			var xpos = cam.x;
@@ -45,12 +50,19 @@ function DynamicScreen(cam, bg, cursor, camdot){
 			//TODO draw stuff here
 
 		/* VIRTUAL CAMERA:*/
-		 	drawrec(cursor,0,cursor.color);
+		 	/*drawrec(cursor,0,cursor.color);
 			drawrec(camdot,0,camdot.color);
 
 								
 			context.translate((xpos+offx), (ypos+offy));
 			context.restore();
+			cam.end();*/
+			cam.start(-500,-300);				
+			obj.refresh();//redraws the background
+			drawrec(cursor,0,cursor.color);
+			drawrec(camdot,0,camdot.color);
+			drawrec(boat,0,"white");
+
 			cam.end();
 		}
 	}
@@ -68,7 +80,7 @@ function DynamicScreen(cam, bg, cursor, camdot){
 	}
 	this.loop=this.createLoop();
 	this.refresh=function(){
-		context.fillStyle="gray";
+		//context.fillStyle="gray";
 		context.fillRect(0,0,1000,600);
 			drawrotated(bgObject.source,bgObject,bgObject.angle);
 	}
@@ -83,7 +95,7 @@ function DynamicScreen(cam, bg, cursor, camdot){
 	}
 	this.createClickEvent=function(evt)
 	{
-		var obj=this;
+		/*var obj=this;
 		return function(evt){
 			var mousePos = getMousePos(canvas, evt);
 			for(i=0; i<obj.buttons.length; i++){
@@ -99,7 +111,7 @@ function DynamicScreen(cam, bg, cursor, camdot){
 					return;
 				}
 			}
-		}
+		}*/
 	}
 	this.clickEvent=this.createClickEvent();
 	this.deactivate=function()
@@ -109,4 +121,6 @@ function DynamicScreen(cam, bg, cursor, camdot){
 	//TODO add separate listeners for dynamic screen instead of using global listeners
 	//canvas.addEventListener('mousedown', this.clickEvent, false);
 	//document.onkeydown = this.keyEvent;
+	canvas.addEventListener('mousedown', this.clickEvent, false);
+	document.onkeydown = this.keyEvent;
 }
