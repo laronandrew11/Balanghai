@@ -6,7 +6,7 @@ function DynamicScreen(){
 		var obj=this;
 		return function(){
 			cam = new camera(500,300);
-			bgObject= new background(0,0,3000,1200,bg);
+			bgObject= new background(0,0,4500,2500,bg);
 			cursor = new dot(0,0,5,5,"blue");
 			
 			camdot = new dot(500,300,5,5,"yellow");
