@@ -81,8 +81,9 @@ function addDefaultButtons(parentMenu)
 	}
 	var btnTranslate=new Button("WORK",920,520,80,80,"","Epistolar",15,"black", translateButtonBG);
 	btnTranslate.onClick=function(){
-		//parentMenu.clearScreen();
-		alert("Translation function coming soon!");
+		parentMenu.clearScreen();
+		addTranslationMenu();
+		
 	}
 
 	var lblPlayerName=new Label(0,300,100,50,gameState.playerName,"Epistolar",15,"black");
