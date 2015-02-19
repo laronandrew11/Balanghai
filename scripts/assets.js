@@ -9,6 +9,10 @@ var shipMenuBG = document.createElement('img');
 	shipMenuBG.src = 'img/shipmenu.png';
 var cargoMenuBG = document.createElement('img');
 	cargoMenuBG.src = 'img/cargo.png';
+var settlementMenuBG = document.createElement('img');
+	settlementMenuBG.src = 'img/settlementmenu.png';
+var tradeMenuBG = document.createElement('img');
+	tradeMenuBG.src = 'img/trademenu.png';
 var mapBG = document.createElement('img');
 	mapBG.src = 'img/map.png';
 	

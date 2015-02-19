@@ -12,10 +12,10 @@ function addSettlementMenu(settlement){
 	{
 		addMarketButton(settlementScreen,settlement);
 	}
-	settlementScreen.drawScreen(defaultbg);
+	settlementScreen.drawScreen(settlementMenuBG);
 }
 function addShipbuilderButton(parentMenu,settlement){
-	var btnShipbuilder=new Button("SHIPBUILDER",100,500,100,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
+	var btnShipbuilder=new Button("SHIPBUILDER",95,540,100,60,"Shipbuilder","Epistolar",15,"black", buttonBG);
 		btnShipbuilder.onClick=function(){
 			parentMenu.clearScreen();
 			returnItemsToSell();
@@ -24,7 +24,7 @@ function addShipbuilderButton(parentMenu,settlement){
 		parentMenu.addButton(btnShipbuilder);
 }
 function addMarketButton(parentMenu,settlement){
-		var btnMarket=new Button("MARKET",200,500,100,60,"Market","Epistolar",15,"black", buttonBG);
+		var btnMarket=new Button("MARKET",200,540,100,60,"Market","Epistolar",15,"black", buttonBG);
 		btnMarket.onClick=function(){
 			parentMenu.clearScreen();
 			returnItemsToSell();

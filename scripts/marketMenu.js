@@ -179,8 +179,8 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 {
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
-		var lblPlayerMoney=new Label(60,200,100,50,"Your money: "+gameState.money,"Epistolar",15,"black");
-	var x=60;
+		var lblPlayerMoney=new Label(260,380,100,50,"Your money: "+gameState.money,"Epistolar",18,"black");
+	var x=95;
 	var i;
 	if(poiType=="market")
 		var cargoList=gameState.cargo;
@@ -191,13 +191,13 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 		var item=cargoList[i];
 
 		if(poiType=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,60,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,140,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
 		else if(poiType=='shipbuilder'){
-			var newButton=new Button(item.properName,x,60,70,70,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,140,100,50,item.price,"Epistolar",15,"black");
+			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,265,100,50,item.price,"Epistolar",15,"black");
 		}
 
 		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
@@ -218,23 +218,23 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 {
 	parentMenu.panels[2].clearButtons();
 	parentMenu.panels[2].clearLabels();
-	var x=60;
+	var x=95;
 	var i;
 	for(i=0;i<gameState.toSell.length;i++){
 		var item=gameState.toSell[i];
 		if(poiType=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,350,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,430,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
 		else if(poiType=='shipbuilder'){
-			var newButton=new Button(item.properName,x,350,70,70,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,430,100,50,item.price,"Epistolar",15,"black");
+			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,490,100,50,item.price,"Epistolar",15,"black");
 		}
 		newButton.onClick=CreateToSellItemButtonHandler(parentMenu, newButton, item, poiType);
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
 		parentMenu.panels[2].addLabel(newLabel);
-		x+=80;
+		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		
@@ -247,21 +247,21 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 {
 	parentMenu.panels[1].clearButtons();
 	parentMenu.panels[1].clearLabels();
-	var lblShopMoney=new Label(550,200,100,50,"Shop's money: "+shopInventory.money,"Epistolar",15,"black");
-	var x=560;
+	var lblShopMoney=new Label(550,380,100,50,"Shop's money: "+shopInventory.money,"Epistolar",18,"black");
+	var x=530;
 	var i;
 	
 	//TODO load shop inventory based on settlement name and type
 	for(i=0;i<shopInventory.cargoList.length;i++){
 		var item=shopInventory.cargoList[i];
 		if(shopInventory.type=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,60,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,140,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
-			var newButton=new Button(item.properName,x,60,70,70,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,140,100,50,item.price,"Epistolar",15,"black");
+			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,265,100,50,item.price,"Epistolar",15,"black");
 		}
 			
 		newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
@@ -270,7 +270,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 
 		
 		parentMenu.panels[1].addLabel(newLabel);
-		x+=80;
+		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 
@@ -283,7 +283,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 {
 	parentMenu.panels[3].clearButtons();
 	parentMenu.panels[3].clearLabels();
-	var x=560;
+	var x=530;
 	var i;
 	
 	//TODO load shop inventory based on settlement name and type
@@ -291,13 +291,13 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 		var item=shopInventory.toSell[i];
 
 		if(shopInventory.type=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,350,70,70,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,430,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
-			var newButton=new Button(item.properName,x,350,70,70,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,430,100,50,item.price,"Epistolar",15,"black");
+			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
+			var newLabel=new Label(x,490,100,50,item.price,"Epistolar",15,"black");
 		}
 
 		newButton.onClick=CreateToBuyItemButtonHandler(parentMenu, newButton, item, shopInventory);
@@ -337,7 +337,7 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+	var btnTrade=new Button("TRADE",440,350,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 		
@@ -349,10 +349,10 @@ function addMarketMenu(settlement){
 
 
 
-	var pnlPlayerInventory=new Panel(50,50,450,250,startbg);
-	var pnlShopInventory=new Panel(500,50,450,250,startbg);
-	var pnlToSell=new Panel(50,300,450,250,startbg);
-	var pnlToBuy=new Panel(500,300,450,250,startbg);
+	var pnlPlayerInventory=new Panel(50,50,450,250,null);
+	var pnlShopInventory=new Panel(500,50,450,250,null);
+	var pnlToSell=new Panel(50,300,450,250,null);
+	var pnlToBuy=new Panel(500,300,450,250,null);
 
 	pnlPlayerInventory.visible=true;
 	pnlShopInventory.visible=true;
@@ -374,7 +374,7 @@ function addMarketMenu(settlement){
 		populateToBuyPanel(marketScreen, shopInventory);
 
 
-	marketScreen.drawScreen(defaultbg);
+	marketScreen.drawScreen(tradeMenuBG);
 }
 
 

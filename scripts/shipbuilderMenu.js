@@ -55,5 +55,5 @@ var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", b
 		populateToSellPanel(shipbuilderScreen, 'shipbuilder');
 		populateToBuyPanel(shipbuilderScreen, shopInventory);
 
-	shipbuilderScreen.drawScreen(defaultbg);
+	shipbuilderScreen.drawScreen(tradeMenuBG);
 }
