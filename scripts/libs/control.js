@@ -16,9 +16,11 @@ function gun(){
 
 function move(){
 d=getTwoPointVector(boat,heading);
+
 if(d>10){
-boat.x+=boat.cx*d/20;
-boat.y+=boat.cy*d/20;
+	
+boat.x+=boat.cx*d/2000*gameState.getMinSpeed();
+boat.y+=boat.cy*d/2000*gameState.getMinSpeed();
 }
 }
 

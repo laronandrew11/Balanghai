@@ -76,8 +76,6 @@ function DynamicScreen(){
 				obj.update();
 				timer+=1/100;
 				obj.draw();
-
-				console.log("Looped!");
 				setTimeout(obj.loop,fps);
 			}
 		}

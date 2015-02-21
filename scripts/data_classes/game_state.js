@@ -14,6 +14,21 @@ function GameState(playerName){
 	this.quests=[];
 	this.toSell=[];
 
+	this.getMinSpeed=function(){
+		var speeds=[];
+		var minSpeed=900;
+		var i;
+		for(i=0;i<this.ships.length;i++)
+		{
+			speeds.push(this.ships[i].speed);
+		}
+		for(i=0;i<speeds.length;i++)
+		{
+			if(speeds[i]<minSpeed)
+				minSpeed=speeds[i];
+		}
+		return minSpeed;
+	}
 	
 	this.addShip=function(newShip){
 		this.ships.put(newShip);
