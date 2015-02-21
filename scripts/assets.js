@@ -94,6 +94,8 @@ var cargoMenuBG = document.createElement('img');
 	cargoMenuBG.src = 'img/cargo.png';
 var mapBG = document.createElement('img');
 	mapBG.src = 'img/map.png';
+var translationMenuBG=document.createElement('img');
+	translationMenuBG.src = 'img/questmenu.png';
 	
 var mapImg = document.createElement('img');
 	mapImg.src = 'img/minimap.png';
