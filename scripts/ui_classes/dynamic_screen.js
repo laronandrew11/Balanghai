@@ -70,11 +70,14 @@ function DynamicScreen(){
 	this.draw=this.createDraw();
 	this.createLoop=function(){
 		var obj=this;
+
 		return function(){
 			if(obj.isActive)
 			{
 				obj.update();
 				timer+=1/100;
+				//if(timer==50/100)//TODO find a working date advancement condition
+					gameState.gameDate.advanceDate();
 				obj.draw();
 				setTimeout(obj.loop,fps);
 			}

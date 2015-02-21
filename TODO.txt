@@ -12,6 +12,11 @@ SHIPBUILDER:
 -when leaving a shop screen, put items from toSell or toBuy back in the proper lists
 
 DYNAMIC TRAVEL SCREEN
+-display discovered settlements
+
+-get ship to start at settlement location, and have headings + current ship position reflect in gameState mapX and mapY
+
+-find way to get game date to update at regular interval
 
 
 
