@@ -13,6 +13,7 @@ function GameState(playerName){
 	this.itemType;
 	this.quests=[];
 	this.toSell=[];
+	this.pendingTranslations=[];
 
 	this.getMinSpeed=function(){
 		var speeds=[];
