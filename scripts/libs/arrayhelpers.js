@@ -11,3 +11,8 @@ function removeByValue(a, obj){
 	var index = a.indexOf(obj);
 	a.splice(index, 1);
 }
+
+function randomIntFromInterval(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
