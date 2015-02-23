@@ -11,7 +11,7 @@ function triggerTranslationQuest()
 	var reward=new Cargo("Abaca Wood","Wood",1, 100);//TODO randomize from translationRewards
 	var sentence="Hello, World!"
 	gameState.pendingTranslations.push(new Translation(sentence, reward));
-	alert("New translation quest available");
+	//alert("New translation quest available");
 	/*latestTranslation=prompt("Foreign traders from Cidenthal wish to learn your native tongue. They will provide "+reward.amount+" "+reward.name+" if you translate the following sentence into Tagalog: \n\n"+sentence);
 	if(latestTranslation!=null)
 		gameState.addCargo(reward);*/

@@ -10,9 +10,10 @@ canvas.onmouseup=mouseup;
 
 
 var dynamicScreens=[];
-
+var heading;
 var mousex;
 var mousey;
+var dynamicScreenActive=false;
 
 var timer=0;
 var fps=10;
@@ -114,7 +115,8 @@ function keyup(event){
 function mousedown(){
 	mousex=event.offsetX;
 	mousey=event.offsetY;
-	set();
+	if(dynamicScreenActive==true)
+		set();
 }
 
 function mousemove(){

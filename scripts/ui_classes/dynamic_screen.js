@@ -10,10 +10,11 @@ function DynamicScreen(){
 			cursor = new dot(0,0,5,5,"blue");
 			
 			camdot = new dot(500,300,5,5,"yellow");
-			boat= new ship(500,600,50,50,"red");
+			boat= new ship(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 
-		heading = new dot(500,600,50,50,"red");
+		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 			obj.loop();
+			dynamicScreenActive=true;
 		}
 	}
 	this.initialize=this.createInitialize();
