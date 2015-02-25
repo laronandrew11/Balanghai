@@ -1,27 +1,11 @@
 HIGH PRIORITY
 
+-Find out how to break the dynamic screen loop
 
 -Save game should include shop inventories and price tables
 
-SHIPBUILDER:
--update gamestate, trade_func and shopinventory to handle both shipbuilder and market transactions (done-ish)
-
 
 -update price from buy price to sell price when a shop receives a new item
-
--when leaving a shop screen, put items from toSell or toBuy back in the proper lists
-
-DYNAMIC TRAVEL SCREEN
--display discovered settlements
-
--get ship to start at settlement location, and have headings + current ship position reflect in gameState mapX and mapY
-
--find way to get game date to update at regular interval
-
-
-
-
-
 
 
 Quest/event systems

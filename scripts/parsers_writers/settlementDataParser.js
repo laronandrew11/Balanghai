@@ -24,7 +24,13 @@ function SettlementInfoFetcher(){
 	}
 	this.getAll=function()
 	{
-		return rawList;
+		var i;
+		var settlementList=[];
+		for(i=0;i<rawList.length;i++)
+		{
+			settlementList.push(new Settlement(rawList[i].name,rawList[i].region,rawList[i].mapX,rawList[i].mapY,rawList[i].pois));
+		}
+		return settlementList;
 	}
 
 

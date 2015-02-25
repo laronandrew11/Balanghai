@@ -1,6 +1,8 @@
 //global variables come from game.js, camera.js and other libs
 function DynamicScreen(){
 	this.isActive=true;
+	this.staticSprites=[];
+	this.settlements=[];
 	this.createInitialize=function()
 	{
 		var obj=this;
@@ -13,8 +15,9 @@ function DynamicScreen(){
 			boat= new ship(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
+		dynamicScreenActive=true;
 			obj.loop();
-			dynamicScreenActive=true;
+			
 		}
 	}
 	this.initialize=this.createInitialize();
@@ -30,6 +33,8 @@ function DynamicScreen(){
 			gun();
 			cameradot();
 			track(camdot.x,camdot.y);
+			if(arrivedAtHeading==true)
+				obj.checkForSettlement();
 		}
 	}
 	this.update=this.createUpdate();
@@ -59,8 +64,15 @@ function DynamicScreen(){
 			context.translate((xpos+offx), (ypos+offy));
 			context.restore();
 			cam.end();*/
+
+			var i;
 			cam.start(-500,-300);				
 			obj.refresh();//redraws the background
+
+			for(i=0;i<obj.staticSprites.length;i++)
+			{
+				obj.staticSprites[i].draw(context);
+			}
 			drawrec(cursor,0,cursor.color);
 			drawrec(camdot,0,camdot.color);
 			drawrec(boat,0,"white");
@@ -73,7 +85,7 @@ function DynamicScreen(){
 		var obj=this;
 
 		return function(){
-			if(obj.isActive)
+			if(dynamicScreenActive==true)
 			{
 				obj.update();
 				var oldTimer=timer;
@@ -93,13 +105,38 @@ function DynamicScreen(){
 		}
 	}
 	this.loop=this.createLoop();
+	this.checkForSettlement=function(){
+		var i=0;
+		for(i=0;i<this.settlements.length;i++)
+		{
+			//console.log(this.settlements[i].name);
+
+			if(Math.abs(this.settlements[i].mapX*5-heading.x)<=10 && Math.abs(this.settlements[i].mapY*5-heading.y)<=10)//settlement and heading are close enough to each other
+			{
+
+				var settlement=this.settlements[i];
+				dynamicScreenActive=false;
+				addSettlementMenu(settlement);
+				gameState.mapX=settlement.mapX;
+				gameState.mapY=settlement.mapY;
+				gameState.settlement=settlement.name;
+			}
+		}
+	}
 	this.refresh=function(){
 		
 		//context.fillStyle="gray";
 		context.fillRect(0,0,1000,600);
 			drawrotated(bgObject.source,bgObject,bgObject.angle);
 	}
-
+	this.addStaticSprite=function(sprite){
+		this.staticSprites.push(sprite);
+	}
+	this.addSettlement=function(sprite, settlement)
+	{
+		this.staticSprites.push(sprite);
+		this.settlements.push(settlement);
+	}
 
 	this.keyEvent=function(event){
 		var key = event.keyCode;

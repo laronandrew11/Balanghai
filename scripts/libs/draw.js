@@ -68,12 +68,14 @@ function AnimatedSprite(source,tileWidth,tileHeight,frames) {
 	}
 }
 						
-function Sprite(source) {
+function Sprite(source, x,y) {
 	this.image = new Image();
 	this.image.src = source;
+	this.x=x;
+	this.y=y;
 	
-	this.draw = function(context,x,y) {
-		context.drawImage(this.image,x,y);
+	this.draw = function(context) {
+		context.drawImage(this.image,this.x,this.y);
 	}
 }
 						

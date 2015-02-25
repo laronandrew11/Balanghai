@@ -21,15 +21,20 @@ if(d>10){
 	
 boat.x+=boat.cx*d/2000*gameState.getMinSpeed();
 boat.y+=boat.cy*d/2000*gameState.getMinSpeed();
+gameState.mapX=boat.x/5;
+gameState.mapY=boat.y/5;
 }
+else arrivedAtHeading=true;
 }
 
 function set(){
 heading.x=cursor.x;
 heading.y=cursor.y;
+arrivedAtHeading=false;
 
 
 }
+
 
 
 function cameradot(){	
