@@ -15,6 +15,6 @@ function GameDate(year, month, day){
 				this.year++;
 			}
 		}
-		console.log("Game date advanced");
+		//console.log("Game date advanced");
 	}
 }

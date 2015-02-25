@@ -5,11 +5,11 @@ function DynamicScreen(){
 	{
 		var obj=this;
 		return function(){
-			cam = new camera(500,300);
+			cam = new camera(gameState.mapX*5,gameState.mapY*5);
 			bgObject= new background(0,0,4500,2500,bg);
 			cursor = new dot(0,0,5,5,"blue");
 			
-			camdot = new dot(500,300,5,5,"yellow");
+			camdot = new dot(gameState.mapX*5,gameState.mapY*5,5,5,"yellow");
 			boat= new ship(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
@@ -76,9 +76,17 @@ function DynamicScreen(){
 			if(obj.isActive)
 			{
 				obj.update();
+				var oldTimer=timer;
 				timer+=1/100;
-				//if(timer==50/100)//TODO find a working date advancement condition
+				if(Math.floor(timer)-Math.floor(oldTimer)==1)
+				{
+					secondCounter++;
+				}
+				if(secondCounter==10)
+				{
 					gameState.gameDate.advanceDate();
+					secondCounter=0;
+				}
 				obj.draw();
 				setTimeout(obj.loop,fps);
 			}

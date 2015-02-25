@@ -16,6 +16,7 @@ var mousey;
 var dynamicScreenActive=false;
 
 var timer=0;
+var secondCounter=0;
 var fps=10;
 
 /*END GLOBAL VARIABLES*/

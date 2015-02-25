@@ -15,9 +15,9 @@ function populateTranslationMenu(parentMenu)
 	for(i=0;i<gameState.pendingTranslations.length;i++)
 	{
 		var reward=gameState.pendingTranslations[i].reward;
-		var lblReward=new Label(400,y,100,50,"Reward: "+reward.amount+" "+reward.name,"Epistolar",18,"black");
-		var lblSentence=new Label(100,y,100,50,gameState.pendingTranslations[i].sentence,"Epistolar",18,"black");
-		var btnTranslate=new Button("translate",700,y-40,80,80,"Translate","Epistolar",15,"black", buttonBG);
+		var lblReward=new Label(550,y,100,50,"Reward: "+reward.amount+" "+reward.name,"Epistolar",18,"black");
+		var lblSentence=new Label(100,y,100,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Epistolar",18,"black");
+		var btnTranslate=new Button("translate",800,y-40,80,80,"Translate","Epistolar",15,"black", buttonBG);
 		btnTranslate.onClick=createTranslateButtonHandler(parentMenu, btnTranslate, gameState.pendingTranslations[i]);
 
 		parentMenu.addLabel(lblReward);

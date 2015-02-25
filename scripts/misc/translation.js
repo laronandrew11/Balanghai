@@ -6,12 +6,18 @@ function Translation(sentence, reward)//add expiry date?
 	this.reward=reward;
 	this.translation=null;
 }
-var translationRewards=[new Cargo("Abaca Wood","Wood",1, 100), new Cargo("Water","Food",1, 10)];
-var translationSentences=["I like cats.","Do you want to build a boat?","Where is my hat?","Give me your hand."];
+var translationRewards=[];
+translationRewards.push(new Cargo("Abaca Wood","Wood",1, 100));
+translationRewards.push(new Cargo("Water","Food",1, 10));
+var translationSentences=[];
+translationSentences.push("I like cats.");
+translationSentences.push("Do you want to build a boat?");
+translationSentences.push("Where is my hat?");
+translationSentences.push("Give me your hand.");
 function triggerTranslationQuest()
 {
 	var reward=translationRewards[randomIntFromInterval(0,translationRewards.length-1)];//TODO randomize from translationRewards
-	var sentence=translationSentences[randomIntFromInterval(0,translationRewards.length-1)];
+	var sentence=translationSentences[randomIntFromInterval(0,translationSentences.length-1)];
 	gameState.pendingTranslations.push(new Translation(sentence, reward));
 	//alert("New translation quest available");
 	/*latestTranslation=prompt("Foreign traders from Cidenthal wish to learn your native tongue. They will provide "+reward.amount+" "+reward.name+" if you translate the following sentence into Tagalog: \n\n"+sentence);
