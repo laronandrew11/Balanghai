@@ -7,6 +7,7 @@ function Panel(x,y,width,height, bgImage){
 	this.height=height;
 	this.bgImage=bgImage;
 	this.visible=false;
+	this.name=null;
 	this.createDraw = function(context){
 		var obj=this;
 		return function(context){

@@ -19,7 +19,7 @@ function addShipbuilderMenu(settlement){
 
 /*Population functions and cargo trading functions will be modified to accomodate shipbuilders...*/
 
-var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+var btnTrade=new Button("TRADE",440,350,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeShips(shopInventory, shopInventory.toSell, gameState.toSell);
 		
@@ -31,10 +31,10 @@ var btnTrade=new Button("TRADE",450,275,100,50,"TRADE","Epistolar",15,"black", b
 
 
 
-	var pnlPlayerInventory=new Panel(50,50,450,250,startbg);
-	var pnlShopInventory=new Panel(500,50,450,250,startbg);
-	var pnlToSell=new Panel(50,300,450,250,startbg);
-	var pnlToBuy=new Panel(500,300,450,250,startbg);
+	var pnlPlayerInventory=new Panel(50,50,450,250,null);
+	var pnlShopInventory=new Panel(500,50,450,250,null);
+	var pnlToSell=new Panel(50,300,450,250,null);
+	var pnlToBuy=new Panel(500,300,450,250,null);
 
 	pnlPlayerInventory.visible=true;
 	pnlShopInventory.visible=true;

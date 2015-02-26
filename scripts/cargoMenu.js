@@ -24,7 +24,10 @@ function addCargoMenu(){
 
 
 
-	var pnlInventory=new Panel(70,60,505,510,cargoInventoryPanelBG);
+	var pnlInventory=new Panel(70,60,505,510,null);
+	var pnlDetails=new Panel(575,72,368,508,null);
+
+	pnlDetails.visible=true;
 	pnlInventory.visible=true;
 
 	populateCategoryButtons(cargoMenu,pnlInventory);
@@ -32,30 +35,35 @@ function addCargoMenu(){
 	addDefaultButtons(cargoMenu);
 
 	cargoMenu.addPanel(pnlInventory);
+	cargoMenu.addPanel(pnlDetails);
 	
 	cargoMenu.drawScreen(cargoMenuBG);
 }
 
-function CreateCargoItemButtonHandler(parentMenu, button, item)//TODO make similar methods for other buttons if needed
+function CreateCargoItemButtonHandler(parentMenu, button, cargo)//TODO make similar methods for other buttons if needed
 {
 	var lbutton=button;
 	return function(){
-			var pnlDetails=createCargoDetailsPanel(item);
-			parentMenu.addPanel(pnlDetails);
+
+			//var pnlDetails=createCargoDetailsPanel(item);
+			//parentMenu.addPanel(pnlDetails);
+			parentMenu.panels[1].clearLabels();
+			parentMenu.panels[1].addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Epistolar",15,"black"));
+			parentMenu.panels[1].addLabel(new Label(590,150,100,25,"Units owned: "+cargo.amount,"Epistolar",15,"black"));
+			parentMenu.panels[1].addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Epistolar",15,"black"));
+			parentMenu.panels[1].addLabel(new Label(590,250,100,25,"Weight/unit: "+cargo.unitWeight,"Epistolar",15,"black"));
+			parentMenu.panels[1].addLabel(new Label(590,300,100,25,"Total weight: "+cargo.unitWeight*cargo.amount,"Epistolar",15,"black"));
 			parentMenu.drawScreen(parentMenu.bgImage);
 		}
 }
 
 
 function createCargoDetailsPanel(cargo){
-	var pnlDetails=new Panel(575,72,368,508,cargoDetailsPanelBG);
-	pnlDetails.addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Epistolar",15,"black"));
-	pnlDetails.addLabel(new Label(590,150,100,25,"Units owned: "+cargo.amount,"Epistolar",15,"black"));
-	pnlDetails.addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Epistolar",15,"black"));
-	pnlDetails.addLabel(new Label(590,250,100,25,"Weight/unit: "+cargo.unitWeight,"Epistolar",15,"black"));
-	pnlDetails.addLabel(new Label(590,300,100,25,"Total weight: "+cargo.unitWeight*cargo.amount,"Epistolar",15,"black"));
+	
+	pnlDetails.name="Details";
+	
 	//add labels: "You paid:" and maybe common market prices per region
-	pnlDetails.visible=true;
+	
 	return pnlDetails;
 }
 function populateCargoPanel(parentMenu, type)
@@ -69,7 +77,7 @@ function populateCargoPanel(parentMenu, type)
 		if(type=='all' || item.type==type)
 		{
 			var newButton=new Button(item.name,x,180,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
-
+			//console.log(parentMenu);
 			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
 			x+=85;
@@ -77,5 +85,6 @@ function populateCargoPanel(parentMenu, type)
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		}
 	}
-	parentMenu.panels[0].draw(context);
+	parentMenu.drawScreen(cargoMenuBG);
+	//parentMenu.panels[0].draw(context);
 }

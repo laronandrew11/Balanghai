@@ -86,7 +86,26 @@ function staticScreen(){
 
 	}
 	this.addPanel=this.createAddPanel();
-
+	this.createGetPanelByName=function(name){
+		var obj=this;
+		return function(name){
+			var i;
+			for(i=0;i<obj.panels.length;i++)
+				{
+					if(obj.panels[i].name==name){
+						return obj.panels[i];
+					}
+				}
+		}
+	}
+	this.getPanelByName=this.createGetPanelByName();
+	this.createRemovePanelByName=function(name){
+		var obj=this;
+		return function(name){
+			removeByValue(obj.panels, obj.getPanelByName(name));
+		}
+	}
+	this.removePanelByName=this.createRemovePanelByName();
 
 	this.createAddButton=function(button){
 		var obj=this;

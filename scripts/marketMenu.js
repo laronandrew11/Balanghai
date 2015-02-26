@@ -211,7 +211,7 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 		
 	}
 		parentMenu.panels[0].addLabel(lblPlayerMoney);
-	parentMenu.panels[0].draw(context);
+	parentMenu.drawScreen(tradeMenuBG);
 }
 
 function populateToSellPanel(parentMenu, poiType)//display all of player's cargo in one corner so he can sell it
@@ -240,7 +240,8 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 		
 	}
 
-	parentMenu.panels[2].draw(context);
+	parentMenu.drawScreen(tradeMenuBG);
+	//parentMenu.panels[2].draw(context);
 }
 
 function populateShopInventoryPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
@@ -277,7 +278,8 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 		
 	}
 	parentMenu.panels[1].addLabel(lblShopMoney);
-	parentMenu.panels[1].draw(context);
+	parentMenu.drawScreen(tradeMenuBG);
+	//parentMenu.panels[1].draw(context);
 }
 function populateToBuyPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
 {
@@ -310,7 +312,8 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		
 	}
-	parentMenu.panels[3].draw(context);
+	parentMenu.drawScreen(tradeMenuBG);
+	//parentMenu.panels[3].draw(context);
 }
 
 
