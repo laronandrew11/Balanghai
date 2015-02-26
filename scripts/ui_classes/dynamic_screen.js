@@ -3,6 +3,7 @@ function DynamicScreen(){
 	this.isActive=true;
 	this.staticSprites=[];
 	this.settlements=[];
+	this.labels=[];
 	this.createInitialize=function()
 	{
 		var obj=this;
@@ -17,7 +18,6 @@ function DynamicScreen(){
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 		arrivedAtHeading=false;
 		dynamicScreenActive=true;
-		alert(dynamicScreenActive);
 			obj.loop();
 			
 		}
@@ -29,6 +29,7 @@ function DynamicScreen(){
 		return function(){
 			document.onkeydown = keydown;
 			document.onkeyup = keyup; 
+			obj.labels[0].text=gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day;
 			/*virtual camera stuff*/
 			move();//these functions are in control.js
 
@@ -77,8 +78,9 @@ function DynamicScreen(){
 			drawrec(cursor,0,cursor.color);
 			drawrec(camdot,0,camdot.color);
 			drawrec(boat,0,"white");
-
+		
 			cam.end();
+			obj.drawLabels();
 		}
 	}
 	this.draw=this.createDraw();
@@ -94,10 +96,11 @@ function DynamicScreen(){
 				{
 					secondCounter++;
 				}
-				if(secondCounter==10)
+				if(secondCounter==1)
 				{
 					gameState.gameDate.advanceDate();
 					secondCounter=0;
+					
 				}
 				obj.draw();
 				if(arrivedAtHeading==true)
@@ -142,6 +145,28 @@ function DynamicScreen(){
 		this.staticSprites.push(sprite);
 		this.settlements.push(settlement);
 	}
+
+	this.createAddLabel=function(label)
+	{
+		var obj=this;
+		return function(label){
+			obj.labels.push(label);
+		}
+
+	}
+	this.addLabel=this.createAddLabel();
+	this.createDrawLabels=function()
+	{
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.labels.length; i++){
+					obj.labels[i].draw(context);
+					//alert("Label drawn");
+			}
+		}
+	}
+	this.drawLabels=this.createDrawLabels();
 
 	this.keyEvent=function(event){
 		var key = event.keyCode;

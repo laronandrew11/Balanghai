@@ -18,7 +18,7 @@ function Label(x,y,width,height,text,style,size,color){
 			//console.log("Color "+this.color);
 			context.fillStyle = obj.color;
 			context.font = obj.font;
-			context.fillText(text, x, y);
+			context.fillText(obj.text, x, y);
 		}
 	}
 
