@@ -24,7 +24,8 @@ function staticScreen(){
 		//return function(context)
 		//{
 			//context.fillRect(0,0,1000,600);
-			context.drawImage(this.bgImage,0,0,1000,600); 			
+			context.drawImage(this.bgImage,0,0,1000,600); 
+	
 		//}
 
 	}	

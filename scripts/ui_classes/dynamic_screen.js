@@ -15,7 +15,9 @@ function DynamicScreen(){
 			boat= new ship(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
+		arrivedAtHeading=false;
 		dynamicScreenActive=true;
+		alert(dynamicScreenActive);
 			obj.loop();
 			
 		}
@@ -33,8 +35,7 @@ function DynamicScreen(){
 			gun();
 			cameradot();
 			track(camdot.x,camdot.y);
-			if(arrivedAtHeading==true)
-				obj.checkForSettlement();
+			
 		}
 	}
 	this.update=this.createUpdate();
@@ -85,8 +86,7 @@ function DynamicScreen(){
 		var obj=this;
 
 		return function(){
-			if(dynamicScreenActive==true)
-			{
+		
 				obj.update();
 				var oldTimer=timer;
 				timer+=1/100;
@@ -100,8 +100,12 @@ function DynamicScreen(){
 					secondCounter=0;
 				}
 				obj.draw();
-				setTimeout(obj.loop,fps);
-			}
+				if(arrivedAtHeading==true)
+					obj.checkForSettlement();
+				if(dynamicScreenActive==true)
+					setTimeout(obj.loop,fps);
+			
+	
 		}
 	}
 	this.loop=this.createLoop();
@@ -111,7 +115,7 @@ function DynamicScreen(){
 		{
 			//console.log(this.settlements[i].name);
 
-			if(Math.abs(this.settlements[i].mapX*5-heading.x)<=10 && Math.abs(this.settlements[i].mapY*5-heading.y)<=10)//settlement and heading are close enough to each other
+			if(this.settlements[i].name!=gameState.settlement&&Math.abs(this.settlements[i].mapX*5-heading.x)<=10 && Math.abs(this.settlements[i].mapY*5-heading.y)<=10)//settlement and heading are close enough to each other
 			{
 
 				var settlement=this.settlements[i];
@@ -120,6 +124,7 @@ function DynamicScreen(){
 				gameState.mapX=settlement.mapX;
 				gameState.mapY=settlement.mapY;
 				gameState.settlement=settlement.name;
+				
 			}
 		}
 	}

@@ -19,8 +19,8 @@ d=getTwoPointVector(boat,heading);
 
 if(d>10){
 	
-boat.x+=boat.cx*d/2000*gameState.getMinSpeed();
-boat.y+=boat.cy*d/2000*gameState.getMinSpeed();
+boat.x+=boat.cx/20*gameState.getMinSpeed();
+boat.y+=boat.cy/20*gameState.getMinSpeed();
 gameState.mapX=boat.x/5;
 gameState.mapY=boat.y/5;
 }
