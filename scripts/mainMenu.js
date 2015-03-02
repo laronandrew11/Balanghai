@@ -66,7 +66,7 @@ function addMainMenu(){
 	pnlCredits.addLabel(new Label(100,100,200,50,"Code: ANDREW LARON","Epistolar",15,"black"));
 	pnlCredits.addLabel(new Label(100,150,200,50,"Additional Code: MIGUEL DUNGAN, JANA AUSTRIA","Epistolar",15,"black"));
 	pnlCredits.addLabel(new Label(100,200,200,50,"Background Art: NIGEL BINAS","Epistolar",15,"black"));
-	pnlCredits.addLabel(new Label(100,250,200,50,"Character Art: <name>","Epistolar",15,"black"));
+	pnlCredits.addLabel(new Label(100,250,200,50,"Character, Ship and Cargo Art: JANA AUSTRIA","Epistolar",15,"black"));
 	pnlCredits.addLabel(new Label(100,300,200,50,"Copyright DLSU Game Development Laboratory, 2015.","Epistolar",15,"black"));
 	pnlCredits.addButton(btnCloseCreditsPanel);
 

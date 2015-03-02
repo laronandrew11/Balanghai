@@ -229,8 +229,9 @@ function staticScreen(){
 			obj.setBG(bg);
 			obj.drawBG(context);
 			obj.drawLabels();
-			obj.drawMenu(-1);
+			
 			obj.drawPanels();
+			obj.drawMenu(-1);
 		}
 	}
 	this.drawScreen=this.createDrawScreen();
