@@ -8,12 +8,12 @@ function DynamicScreen(){
 	{
 		var obj=this;
 		return function(){
-			cam = new camera(gameState.mapX*5,gameState.mapY*5);
-			bgObject= new background(0,0,4500,2500,bg);
+			cam = new camera(gameState.mapX*mapScale,gameState.mapY*mapScale);
+			bgObject= new background(0,0,900*mapScale,500*mapScale,bg);
 			cursor = new dot(0,0,5,5,"blue");
 			
-			camdot = new dot(gameState.mapX*5,gameState.mapY*5,5,5,"yellow");
-			boat= new ship(gameState.mapX*5,gameState.mapY*5,50,50,"red");
+			camdot = new dot(gameState.mapX*mapScale,gameState.mapY*mapScale,5,5,"yellow");
+			boat= new ship(gameState.mapX*mapScale,gameState.mapY*mapScale,50,50,"red");
 
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 		arrivedAtHeading=false;
@@ -118,15 +118,16 @@ function DynamicScreen(){
 		{
 			//console.log(this.settlements[i].name);
 
-			if(this.settlements[i].name!=gameState.settlement&&Math.abs(this.settlements[i].mapX*5-heading.x)<=10 && Math.abs(this.settlements[i].mapY*5-heading.y)<=10)//settlement and heading are close enough to each other
+			if(this.settlements[i].name!=gameState.settlement&&Math.abs(this.settlements[i].mapX*mapScale-heading.x)<=10 && Math.abs(this.settlements[i].mapY*mapScale-heading.y)<=10)//settlement and heading are close enough to each other
 			{
 
 				var settlement=this.settlements[i];
 				dynamicScreenActive=false;
-				addSettlementMenu(settlement);
 				gameState.mapX=settlement.mapX;
 				gameState.mapY=settlement.mapY;
 				gameState.settlement=settlement.name;
+				addSettlementMenu(settlement);
+				
 				
 			}
 		}

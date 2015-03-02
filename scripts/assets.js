@@ -14,7 +14,8 @@ var settlementMenuBG = document.createElement('img');
 var tradeMenuBG = document.createElement('img');
 	tradeMenuBG.src = 'img/trademenu.png';
 var mapBG = document.createElement('img');
-	mapBG.src = 'img/map.png';
+	mapBG.src = 'img/settlementmenu.png';
+
 	
 var mapImg = document.createElement('img');
 	mapImg.src = 'img/minimap.png';
@@ -22,6 +23,9 @@ var pointerImg = document.createElement('img');
 	pointerImg.src = 'img/pointer.png';
 var settlementImg = document.createElement('img');
 	settlementImg.src = 'img/settlement.png';
+
+var lunhawanSettlementImg = document.createElement('img');
+	lunhawanSettlementImg.src = 'img/settlements/lunhawan.png';
 	
 var buttonBG = document.createElement('img');
 	buttonBG.src = 'img/shipbutton.png';

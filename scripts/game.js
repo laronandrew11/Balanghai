@@ -19,6 +19,7 @@ var timer=0;
 var secondCounter=0;
 var fps=10;
 var arrivedAtHeading=false;
+var mapScale=4;
 //var destinationSettlement;
 
 /*END GLOBAL VARIABLES*/

@@ -21,8 +21,8 @@ if(d>10){
 	
 boat.x+=boat.cx/20*gameState.getMinSpeed();
 boat.y+=boat.cy/20*gameState.getMinSpeed();
-gameState.mapX=boat.x/5;
-gameState.mapY=boat.y/5;
+gameState.mapX=boat.x/mapScale;
+gameState.mapY=boat.y/mapScale;
 }
 else arrivedAtHeading=true;
 }

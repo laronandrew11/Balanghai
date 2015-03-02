@@ -1,0 +1,12 @@
+-Cargo icons
+-Ship icons
+-Ship views
+-Ship sprite
+-Travel background
+-BG for map menu
+-Popup for translation quests
+-settlement marker
+-you are here marker
+-settlement buildings-done
+-generic panel (for credits panel)
+-reworked shipbuilder screen (show ship details)
