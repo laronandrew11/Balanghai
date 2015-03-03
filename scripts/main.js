@@ -33,7 +33,7 @@ function deactivateScreen(){
 function addDefaultButtons(parentMenu)
 {
 
-	var btnMainMenu=new Button("MAIN_MENU",49,0,200,50,"","Epistolar",15,"black", buttonBG);
+	var btnMainMenu=new Button("MAIN_MENU",49,0,320,67,"","Epistolar",15,"black", mainMenuButtonBG);
 	btnMainMenu.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();
@@ -87,7 +87,7 @@ function addDefaultButtons(parentMenu)
 	}
 
 	var lblPlayerName=new Label(0,300,100,50,gameState.playerName,"Epistolar",15,"black");
-
+	var lblGameDate=new Label(700,36,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Epistolar",36,"black");
 	
 
 
@@ -100,6 +100,7 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnSettlement);
 	parentMenu.addButton(btnTranslate);
 	parentMenu.addLabel(lblPlayerName);
+	parentMenu.addLabel(lblGameDate);
 }
 
 function returnItemsToSell(){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler

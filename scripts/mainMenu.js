@@ -48,11 +48,11 @@ function populateLoadPanel(parentMenu, parentPanel){
 function addMainMenu(){
 	var mainMenu=new staticScreen();
 
-	var btnCloseLoadGamePanel=new Button("CLOSE_LOAD",100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
+	var btnCloseLoadGamePanel=new Button("CLOSE_LOAD",100,56,25,25,"","Epistolar",15,"black", closeButtonBG);
 	btnCloseLoadGamePanel.onClick=function(){
 		mainMenu.hidePanel(0);
 	}
-	var btnCloseCreditsPanel=new Button("CLOSE_CREDITS",100,56,25,25,"Close Panel","Epistolar",15,"black", closeButtonBG);
+	var btnCloseCreditsPanel=new Button("CLOSE_CREDITS",100,56,25,25,"","Epistolar",15,"black", closeButtonBG);
 	btnCloseCreditsPanel.onClick=function(){
 		mainMenu.hidePanel(1);
 	}

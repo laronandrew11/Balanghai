@@ -5,7 +5,7 @@ function addTravelMenu(){
 	addSettlementMarkers(settlementFetcher, travelScreen);
 		//pnlMap.addButton(newButton);
 	
-	var lblGameDate=new Label(200,36,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Epistolar",36,"black");
+	var lblGameDate=new Label(700,36,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Epistolar",36,"black");
 	travelScreen.addLabel(lblGameDate);
 	travelScreen.initialize();
 }

@@ -3,8 +3,7 @@ TO DRAW
 -reworked shipbuilder screen (show ship details)
 -settlement marker - TO DO
 -you are here marker - TO DO
--main menu button
--close panel button
+
 
 
 TO GET
@@ -22,3 +21,5 @@ DONE
 -Ship sprite (except rotation/collision)
 -Cargo icons (except instant refresh)
 -BG for map menu
+-main menu button
+-close panel button
