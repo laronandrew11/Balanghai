@@ -72,11 +72,11 @@ function addMainMenu(){
 
 	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.onClick=function(){
-		/*var newPlayerName = prompt("Please enter your name", "");
+		var newPlayerName = prompt("Please enter your name", "");
 		gameState=new GameState(newPlayerName);
 		mainMenu.clearScreen();
-		addFleetMenu();*/
-		popup('popup-div');
+		addFleetMenu();
+		//popup('popup-div');
 	}
 	var btnLoadGame=new Button("LOAD_GAME",600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
 	btnLoadGame.onClick=function(){
