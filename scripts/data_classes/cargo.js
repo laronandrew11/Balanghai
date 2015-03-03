@@ -4,4 +4,5 @@ function Cargo(name, type, unitWeight, amount, price){
 	this.unitWeight=unitWeight;
 	this.amount=amount;
 	this.price=price;
+	this.imageSrc;
 }

@@ -1,12 +1,22 @@
--Cargo icons
--Ship icons
--Ship views
--Ship sprite
--Travel background
--BG for map menu
--Popup for translation quests
--settlement marker
--you are here marker
--settlement buildings-done
+TO DRAW
 -generic panel (for credits panel)
 -reworked shipbuilder screen (show ship details)
+-settlement marker - TO DO
+-you are here marker - TO DO
+-main menu button
+-close panel button
+-Ship icons
+-Ship views
+
+TO GET
+-BG for map menu
+
+TO CODE
+
+-Popup for translation quests 
+
+-Ship sprite - TO CODE
+-Cargo icons
+DONE
+-settlement buildings- DONE (ish)
+-Travel background - DONE
