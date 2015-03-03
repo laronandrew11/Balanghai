@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Balanghai</title>
+		<link rel="stylesheet" type="text/css" href="css/popup.css">
 		<style>
 			body {
 			background-color: #000000;
@@ -16,9 +17,12 @@
 	<body onload="main();">
 		<div align="center">
 			<span style="cursor:crosshair">
-				<canvas id="game" width="1000" height="600">
-				</canvas>
-				<div id="popup"></div>
+				<div id="canvasdiv"><canvas id="game" width="1000" height="600">
+				</canvas></div>
+				<div id="blanket" style="display:none;"></div>
+				<div id="popup-div" style="display:none;">
+					<a href="#" onclick="popup('popup-div')">Click Me To Close</a>
+				</div>
 			</span>
 		</div>
 	</body>
@@ -32,6 +36,8 @@
 <script src = 'scripts/libs/collision.js'></script>
 <script src = 'scripts/libs/control.js'></script>
 <script src = 'scripts/libs/arrayhelpers.js'></script>
+<script src = 'scripts/libs/css_popup.js'></script>
+
 
 <script src= 'data/settlements.json'></script>
 <script src= 'data/cargoCategories.js'></script>
