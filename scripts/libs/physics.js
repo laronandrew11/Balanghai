@@ -2,7 +2,21 @@ function random(min, max){
 	return Math.floor(Math.random() * (max - min * 1)) + min;
 }
 
+function getangle(object,direction){
 
+		        mx=direction.x+direction.width/2;
+				my=direction.y+direction.height/2;
+				sx=object.x+object.width/2;
+				sy=object.y+object.height/2;
+				dx=(mx-sx);
+				dy=(my-sy);
+				d=Math.sqrt((dx*dx)+(dy*dy));
+				object.cx=dx/d;
+				object.cy=dy/d;
+				
+				object.angle=(Math.atan2(object.cy,object.cx)*180/Math.PI)
+				return d;
+}
 
 
 

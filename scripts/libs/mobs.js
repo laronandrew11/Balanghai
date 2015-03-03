@@ -52,6 +52,13 @@ this.color=color||"red";
 this.cx=0;
 this.cy=0;
 
+this.angle=0;
+
+this.sprite = new AnimatedSprite('img/sprites/bangkasprite.png',this.width,this.height,4);
+this.draw= function(){
+this.sprite.draw(context,this.x,this.y,this.height,this.width,this.angle);
+}
+
 
 
 

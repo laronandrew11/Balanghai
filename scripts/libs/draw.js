@@ -62,9 +62,21 @@ function AnimatedSprite(source,tileWidth,tileHeight,frames) {
 			this.timer = 0;
 	}
 	
-	this.draw = function(context,x,y,height,width,alpha) {
+	this.draw = function(context,x,y,height,width,angle,alpha) {
 		context.globalAlpha = alpha||1;
-		context.drawImage(this.sprite.image,this.timer * this.tileWidth,0,this.tileWidth,this.tileHeight, x,y,width,height);
+		//context.drawImage(this.sprite.image,this.timer * this.tileWidth,angle,this.tileWidth,this.tileHeight, x,y,width,height);
+				var xpos = x+width/2
+				var ypos = y+height/2
+				context.save();
+				context.translate(xpos, ypos);
+				context.rotate((angle) * Math.PI / 180);
+				context.translate(-xpos, -ypos);
+				
+				context.drawImage(this.sprite.image,this.timer * this.tileWidth,0,this.tileWidth,this.tileHeight, x,y,width,height);
+		
+				context.restore();
+		
+		
 	}
 }
 						

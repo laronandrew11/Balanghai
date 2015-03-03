@@ -13,7 +13,7 @@ function DynamicScreen(){
 			cursor = new dot(0,0,5,5,"blue");
 			
 			camdot = new dot(gameState.mapX*mapScale,gameState.mapY*mapScale,5,5,"yellow");
-			boat= new ship(gameState.mapX*mapScale,gameState.mapY*mapScale,50,50,"red");
+			boat= new ship(gameState.mapX*mapScale,gameState.mapY*mapScale,47.5,70,"red");
 
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 		arrivedAtHeading=false;
@@ -75,9 +75,10 @@ function DynamicScreen(){
 			{
 				obj.staticSprites[i].draw(context);
 			}
-			drawrec(cursor,0,cursor.color);
-			drawrec(camdot,0,camdot.color);
-			drawrec(boat,0,"white");
+			//drawrec(cursor,0,cursor.color);
+			//drawrec(camdot,0,camdot.color);
+			//drawrec(boat,0,"white");
+			boat.draw();
 		
 			cam.end();
 			obj.drawLabels();

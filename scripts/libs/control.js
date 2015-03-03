@@ -23,6 +23,7 @@ boat.x+=boat.cx/20*gameState.getMinSpeed();
 boat.y+=boat.cy/20*gameState.getMinSpeed();
 gameState.mapX=boat.x/mapScale;
 gameState.mapY=boat.y/mapScale;
+boat.sprite.update();
 }
 else arrivedAtHeading=true;
 }
@@ -30,6 +31,8 @@ else arrivedAtHeading=true;
 function set(){
 heading.x=cursor.x;
 heading.y=cursor.y;
+
+getangle(boat,cursor);
 arrivedAtHeading=false;
 
 
