@@ -5,18 +5,20 @@ TO DRAW
 -you are here marker - TO DO
 -main menu button
 -close panel button
--Ship icons
--Ship views
+
 
 TO GET
--BG for map menu
+-Ship icons
+-Ship views
 
 TO CODE
 
 -Popup for translation quests 
 
--Ship sprite - TO CODE
--Cargo icons
+
 DONE
 -settlement buildings- DONE (ish)
 -Travel background - DONE
+-Ship sprite (except rotation/collision)
+-Cargo icons (except instant refresh)
+-BG for map menu

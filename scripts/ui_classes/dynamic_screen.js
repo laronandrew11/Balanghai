@@ -81,6 +81,7 @@ function DynamicScreen(){
 			boat.draw();
 		
 			cam.end();
+			context.drawImage(borderImg,0,0,1000,600); 
 			obj.drawLabels();
 		}
 	}

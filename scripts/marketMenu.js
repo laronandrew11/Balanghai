@@ -191,7 +191,11 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 		var item=cargoList[i];
 
 		if(poiType=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var fetcher=new CargoRecordInfoFetcher();
+			var buttonImg = document.createElement('img');
+			buttonImg.src =  fetcher.getImageSrc(item.name);
+
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
 			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
@@ -223,7 +227,11 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 	for(i=0;i<gameState.toSell.length;i++){
 		var item=gameState.toSell[i];
 		if(poiType=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var fetcher=new CargoRecordInfoFetcher();
+			var buttonImg = document.createElement('img');
+			buttonImg.src =  fetcher.getImageSrc(item.name);
+
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
 			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
@@ -256,7 +264,10 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 	for(i=0;i<shopInventory.cargoList.length;i++){
 		var item=shopInventory.cargoList[i];
 		if(shopInventory.type=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var fetcher=new CargoRecordInfoFetcher();
+			var buttonImg = document.createElement('img');
+			buttonImg.src =  fetcher.getImageSrc(item.name);
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
 			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
@@ -293,7 +304,10 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 		var item=shopInventory.toSell[i];
 
 		if(shopInventory.type=='market'){
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonBG);
+			var fetcher=new CargoRecordInfoFetcher();
+			var buttonImg = document.createElement('img');
+			buttonImg.src =  fetcher.getImageSrc(item.name);
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
 			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
