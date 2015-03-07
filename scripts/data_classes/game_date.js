@@ -15,6 +15,18 @@ function GameDate(year, month, day){
 				this.year++;
 			}
 		}
+		checkWinCondition(this.year, this.month, this.day);
 		//console.log("Game date advanced");
 	}
+}
+function checkWinCondition(year, month, day){
+	var endDate=gameState.endDate;
+	if(year=endDate.year&&month==endDate.month&&day==endDate.day)
+	{
+		if(gameState.money>=gameState.targetMoney)
+			alert("You win!");
+		else alert("You lose!");
+	}
+	
+	
 }
