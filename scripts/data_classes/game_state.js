@@ -2,6 +2,8 @@ function GameState(playerName){
 	//information needed to save the game; mostly player-related info
 	this.playerName = playerName ;
 	this.money=1000;
+	this.targetMoney=10000;
+	this.endDate=new GameDate(1210,12,30);
 	this.mapX=494;
 	this.mapY=199;
 	this.usedCapacity=30;
