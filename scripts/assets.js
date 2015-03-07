@@ -18,7 +18,7 @@ var settlementMenuBG = document.createElement('img');
 var tradeMenuBG = document.createElement('img');
 	tradeMenuBG.src = 'img/trademenu.png';
 var mapBG = document.createElement('img');
-	mapBG.src = 'img/settlementmenu.png';
+	mapBG.src = 'img/questmenu.png';
 var borderImg = document.createElement('img');
 	borderImg.src = 'img/border.png';
 	
