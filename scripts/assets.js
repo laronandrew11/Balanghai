@@ -11,6 +11,10 @@ var cargoMenuBG = document.createElement('img');
 	cargoMenuBG.src = 'img/cargo.png';
 var settlementMenuBG = document.createElement('img');
 	settlementMenuBG.src = 'img/settlementmenu.png';
+	var questMenuBG = document.createElement('img');
+	questMenuBG.src = 'img/questmenu.png';
+		var translationMenuBG = document.createElement('img');
+	translationMenuBG.src = 'img/questmenu.png';
 var tradeMenuBG = document.createElement('img');
 	tradeMenuBG.src = 'img/trademenu.png';
 var mapBG = document.createElement('img');
@@ -57,6 +61,9 @@ var buttonBG = document.createElement('img');
 	saveButtonBG.src = 'img/buttons/fleetmenu/savebutton.png';
 	var translateButtonBG = document.createElement('img');
 	translateButtonBG.src = 'img/buttons/fleetmenu/translatebutton.png';
+
+	var translatePanelImg = document.createElement('img');
+	translatePanelImg.src = 'img/panels/translation.png';
 
 	var artButtonBG = document.createElement('img');
 	artButtonBG.src = 'img/buttons/cargomenu/artbutton.png';

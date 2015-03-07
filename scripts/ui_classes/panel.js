@@ -1,6 +1,7 @@
 function Panel(x,y,width,height, bgImage){
 	this.panelButtons=[];
 	this.labels=[];
+	this.textboxes=[];
 	this.x=x;
 	this.y=y;
 	this.width=width;
@@ -14,6 +15,7 @@ function Panel(x,y,width,height, bgImage){
 			if(obj.bgImage!=null)
 				context.drawImage(bgImage,x,y,width,height); 
 			obj.drawLabels();
+			obj.drawTextboxes();
 			obj.drawMenu(-1);
 		}
 	};
@@ -72,6 +74,25 @@ function Panel(x,y,width,height, bgImage){
 	}
 	this.drawLabels=this.createDrawLabels();
 
+	this.createAddTextbox=function(textbox){
+		var obj=this;
+		return function(textbox){
+			obj.textboxes.push(textbox);
+		}
+	}
+	this.addTextbox=this.createAddTextbox();
+		this.createDrawTextboxes=function()
+	{
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.textboxes.length; i++){
+					obj.textboxes[i].draw(context);
+			}
+		}
+	}
+	this.drawTextboxes=this.createDrawTextboxes();
+
 	
 	this.createDrawMenu=function(undraw)
 	{
@@ -107,6 +128,12 @@ function Panel(x,y,width,height, bgImage){
 			for(i=0; i<obj.panelButtons.length; i++){
 				if(inCoordinates(obj.panelButtons[i],mousePos)){
 					obj.panelButtons[i].onClick();
+					return;
+				}
+			}
+			for(i=0; i<obj.textboxes.length; i++){
+				if(inCoordinates(obj.textboxes[i],mousePos)){
+					obj.textboxes[i].onClick();
 					return;
 				}
 			}
