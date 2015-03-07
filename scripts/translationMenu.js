@@ -10,7 +10,7 @@ function addTranslationMenu(){
 }
 function populateTranslationMenu(parentMenu)
 {
-	triggerTranslationQuest();
+	//triggerTranslationQuest();
 	var i;
 	var y=150;
 	for(i=0;i<gameState.pendingTranslations.length;i++)
