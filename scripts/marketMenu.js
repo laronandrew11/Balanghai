@@ -357,11 +357,13 @@ function addMarketMenu(settlement){
 	var btnTrade=new Button("TRADE",440,350,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
-		
+			marketScreen.labels[2].text=gameState.money+" gold";
+
 			populatePlayerInventoryPanel(marketScreen,'market');
 			populateShopInventoryPanel(marketScreen, shopInventory);
 			populateToSellPanel(marketScreen,'market');
 			populateToBuyPanel(marketScreen, shopInventory);
+
 		}
 
 

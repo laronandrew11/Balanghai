@@ -57,12 +57,12 @@ function addMainMenu(){
 		mainMenu.hidePanel(1);
 	}
 
-	var pnlLoadGame=new Panel(100,56,357,496,startbg);
+	var pnlLoadGame=new Panel(100,56,357,496,cargoDetailsPanelBG);
 	pnlLoadGame.addButton(btnCloseLoadGamePanel);
 
 	populateLoadPanel(mainMenu,pnlLoadGame);
 
-	var pnlCredits=new Panel(100,56,357,496,startbg);
+	var pnlCredits=new Panel(100,56,357,496,cargoDetailsPanelBG);
 	pnlCredits.addLabel(new Label(100,100,200,50,"Code: ANDREW LARON","Epistolar",15,"black"));
 	pnlCredits.addLabel(new Label(100,150,200,50,"Additional Code: MIGUEL DUNGAN, JANA AUSTRIA","Epistolar",15,"black"));
 	pnlCredits.addLabel(new Label(100,200,200,50,"Background Art: NIGEL BINAS","Epistolar",15,"black"));

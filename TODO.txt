@@ -1,10 +1,12 @@
 HIGH PRIORITY
 
-1) Load cargo images
-2) Div popup w/ textbox
-3) Ship sprite
+-Fix ship sprite
+-allow player free roam
+-fix delayed drawing of cargo images
 
-
+Textbox:
+-implement wrapping (also for label)
+-improve keycode checking
 
 -Save game should include shop inventories and price tables
 

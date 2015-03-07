@@ -86,9 +86,9 @@ function addDefaultButtons(parentMenu)
 		
 	}
 
-	var lblPlayerName=new Label(0,300,100,50,gameState.playerName,"Epistolar",15,"black");
-	var lblGameDate=new Label(700,36,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Epistolar",36,"black");
-	
+	var lblPlayerName=new Label(700,18,100,50,gameState.playerName,"Epistolar",18,"black");
+	var lblGameDate=new Label(700,38,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Epistolar",18,"black");
+	var lblMoney=new Label(800,38,100,50,gameState.money+" gold","Epistolar",18,"black");
 
 
 	parentMenu.addButton(btnMainMenu);
@@ -101,6 +101,7 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnTranslate);
 	parentMenu.addLabel(lblPlayerName);
 	parentMenu.addLabel(lblGameDate);
+	parentMenu.addLabel(lblMoney);
 }
 
 function returnItemsToSell(){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler

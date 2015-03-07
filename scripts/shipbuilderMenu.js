@@ -22,11 +22,13 @@ function addShipbuilderMenu(settlement){
 var btnTrade=new Button("TRADE",440,350,100,50,"TRADE","Epistolar",15,"black", buttonBG);
 		btnTrade.onClick=function(){
 			tradeShips(shopInventory, shopInventory.toSell, gameState.toSell);
-		
+			shipbuilderScreen.labels[2].text=gameState.money+" gold";
+
 			populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
 			populateShopInventoryPanel(shipbuilderScreen, shopInventory);
 			populateToSellPanel(shipbuilderScreen, 'shipbuilder');
 			populateToBuyPanel(shipbuilderScreen, shopInventory);
+
 		}
 
 
