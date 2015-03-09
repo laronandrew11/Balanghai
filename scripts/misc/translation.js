@@ -16,6 +16,7 @@ translationSentences.push("Where is my hat?");
 translationSentences.push("Give me your hand.");
 function triggerTranslationQuest()
 {
+	alert("New translation quest available. Check your Work menu.");
 	var reward=translationRewards[randomIntFromInterval(0,translationRewards.length-1)];//TODO randomize from translationRewards
 	var sentence=translationSentences[randomIntFromInterval(0,translationSentences.length-1)];
 	gameState.pendingTranslations.push(new Translation(sentence, reward));

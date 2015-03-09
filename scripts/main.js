@@ -68,8 +68,10 @@ function addDefaultButtons(parentMenu)
 
 	var btnQuests=new Button("QUESTS",530,520,80,80,"","Epistolar",15,"black", questButtonBG);
 	btnQuests.onClick=function(){
-		//parentMenu.clearScreen();
-		alert("Quest function coming soon!");
+		parentMenu.clearScreen();
+		returnItemsToSell();
+		addQuestMenu();
+		
 	}
 	var btnSettlement=new Button("SETTLEMENT",610,520,80,80,"","Epistolar",15,"black", settlementButtonBG);
 	btnSettlement.onClick=function(){
@@ -82,6 +84,7 @@ function addDefaultButtons(parentMenu)
 	var btnTranslate=new Button("WORK",920,520,80,80,"","Epistolar",15,"black", translateButtonBG);
 	btnTranslate.onClick=function(){
 		parentMenu.clearScreen();
+		returnItemsToSell();
 		addTranslationMenu();
 		
 	}

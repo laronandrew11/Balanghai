@@ -3,8 +3,8 @@ function addTranslationMenu(){
 
 	addDefaultButtons(translationScreen);
 	populateTranslationMenu(translationScreen);
-	dynamicScreenActive=true;
-	//load settlement data for given settlement name, and create relevant buttons/panels
+	//dynamicScreenActive=true;
+
 	translationScreen.drawScreen(translationMenuBG);
 
 }
