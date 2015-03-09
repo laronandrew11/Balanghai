@@ -3,4 +3,6 @@ function ShipRecord(name, speed, health, cargoCapacity, image, thumbnail){
 	this.speed=speed;
 	this.health=health;
 	this.cargoCapacity=cargoCapacity;
+	this.image=image;
+	this.thumbnail=thumbnail;
 }
