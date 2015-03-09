@@ -192,10 +192,9 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 
 		if(poiType=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
-			var buttonImg = document.createElement('img');
-			buttonImg.src =  fetcher.getImageSrc(item.name);
+		
 
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
@@ -228,10 +227,9 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 		var item=gameState.toSell[i];
 		if(poiType=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
-			var buttonImg = document.createElement('img');
-			buttonImg.src =  fetcher.getImageSrc(item.name);
+		
 
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
@@ -265,9 +263,8 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 		var item=shopInventory.cargoList[i];
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
-			var buttonImg = document.createElement('img');
-			buttonImg.src =  fetcher.getImageSrc(item.name);
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
+			
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			
@@ -305,9 +302,8 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
-			var buttonImg = document.createElement('img');
-			buttonImg.src =  fetcher.getImageSrc(item.name);
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", buttonImg);
+		
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
 		}
 			

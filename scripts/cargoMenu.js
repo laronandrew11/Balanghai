@@ -77,9 +77,9 @@ function populateCargoPanel(parentMenu, type)
 		var item=gameState.cargo[i];
 		if(type=='all' || item.type==type)
 		{
-			var buttonImg = document.createElement('img');
-			buttonImg.src =  fetcher.getImageSrc(item.name);
-			var newButton=new Button(item.name,x,180,80,80,item.amount+" "+item.name,"Epistolar",15,"black",buttonImg);
+			//var buttonImg = document.createElement('img');
+			//buttonImg.src =  fetcher.getImageSrc(item.name);
+			var newButton=new Button(item.name,x,180,80,80,item.amount+" "+item.name,"Epistolar",15,"black",fetcher.getImageSrc(item.name));
 			//console.log(parentMenu);
 			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
