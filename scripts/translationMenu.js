@@ -36,10 +36,10 @@ function createTranslateButtonHandler(parentMenu, button, translation){
 		var translationPanel=new Panel(0,0,1000,600,translatePanelImg);
 
 		var fetcher=new CargoRecordInfoFetcher();
-		var rewardImg = document.createElement('img');
-			rewardImg.src =  fetcher.getImageSrc(translation.reward.name);
+		var rewardImg =  fetcher.getImageSrc(translation.reward.name);
 		var lblReward=new Label(710,200,100,50,translation.reward.amount+" "+translation.reward.name,"Epistolar",18,"black");
-		var btnReward=new Button("reward", 710,100, 80,80,"","Epistolar",15,"black",rewardImg);//TODO: change to sprite or label
+		var lblRewardImg=new Label("reward", 710,100, 80,80,"","Epistolar",15,"black");//TODO: change to sprite or label
+		lblRewardImg.bgImage=rewardImg;
 
 		var blurb="Traders from Cidenthal will ";
 	
@@ -62,7 +62,7 @@ function createTranslateButtonHandler(parentMenu, button, translation){
 		translationPanel.addLabel(lblDescription3);
 		translationPanel.addLabel(lblSentence);
 		translationPanel.addButton(btnTranslate);
-		translationPanel.addButton(btnReward);
+		translationPanel.addLabel(lblRewardImage);
 		translationPanel.addTextbox(txtTranslation);
 
 		translationPanel.visible=true;

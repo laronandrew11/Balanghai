@@ -21,6 +21,16 @@ var mapBG = document.createElement('img');
 	mapBG.src = 'img/questmenu.png';
 var borderImg = document.createElement('img');
 	borderImg.src = 'img/border.png';
+
+var coinImg = document.createElement('img');
+	coinImg.src = 'img/coin.png';
+var scrollSmallImg = document.createElement('img');
+	scrollSmallImg.src = 'img/scroll-sm.png';
+	var scrollLargeImg = document.createElement('img');
+	scrollLargeImg.src = 'img/scroll-lg.png';
+
+
+
 	
 var mapImg = document.createElement('img');
 	mapImg.src = 'img/minimap.png';
@@ -46,7 +56,9 @@ var buttonBG = document.createElement('img');
 	loadGameButtonBG.src = 'img/buttons/mainmenu/loadgamebut.png';
 	var newGameButtonBG = document.createElement('img');
 	newGameButtonBG.src = 'img/buttons/mainmenu/newgamebut.png';
-
+	
+	var tradeButtonBG = document.createElement('img');
+	tradeButtonBG.src = 'img/buttons/trademenu/tradebutton.png';
 	var shipsButtonBG = document.createElement('img');
 	shipsButtonBG.src = 'img/buttons/fleetmenu/shipsbutton.png';
 	var cargoButtonBG = document.createElement('img');

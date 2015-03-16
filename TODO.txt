@@ -2,7 +2,9 @@ HIGH PRIORITY
 
 -Fix ship sprite
 -allow player free roam
--fix delayed drawing of cargo images
+
+Label:
+-draw text on top of label instead of above
 
 Textbox:
 -implement wrapping (also for label)

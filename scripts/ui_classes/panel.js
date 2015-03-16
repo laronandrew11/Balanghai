@@ -14,9 +14,10 @@ function Panel(x,y,width,height, bgImage){
 		return function(context){
 			if(obj.bgImage!=null)
 				context.drawImage(bgImage,x,y,width,height); 
-			obj.drawLabels();
+			
 			obj.drawTextboxes();
 			obj.drawMenu(-1);
+			obj.drawLabels();
 		}
 	};
 	this.draw=this.createDraw();

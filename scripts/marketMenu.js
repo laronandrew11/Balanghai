@@ -179,7 +179,7 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 {
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
-		var lblPlayerMoney=new Label(260,380,100,50,"Your money: "+gameState.money,"Epistolar",18,"black");
+		var lblPlayerMoney=new Label(260,380,100,50,"Your money: "+gameState.money,"Bebas",18,"black");
 	var x=95;
 	var i;
 	if(poiType=="market")
@@ -194,13 +194,14 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 			var fetcher=new CargoRecordInfoFetcher();
 		
 
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,265,100,50,item.price+"/unit","Bebas",15,"black");
 		}
 			
 		else if(poiType=='shipbuilder'){
-			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,265,100,50,item.price,"Epistolar",15,"black");
+			var fetcher=new ShipInfoFetcher();
+			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,265,100,50,item.price,"Bebas",15,"black");
 		}
 
 		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
@@ -229,13 +230,14 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 			var fetcher=new CargoRecordInfoFetcher();
 		
 
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,490,100,50,item.price+"/unit","Bebas",15,"black");
 		}
 			
 		else if(poiType=='shipbuilder'){
-			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,490,100,50,item.price,"Epistolar",15,"black");
+			var fetcher=new ShipInfoFetcher();
+			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,490,100,50,item.price,"Bebas",15,"black");
 		}
 		newButton.onClick=CreateToSellItemButtonHandler(parentMenu, newButton, item, poiType);
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
@@ -254,7 +256,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 {
 	parentMenu.panels[1].clearButtons();
 	parentMenu.panels[1].clearLabels();
-	var lblShopMoney=new Label(550,380,100,50,"Shop's money: "+shopInventory.money,"Epistolar",18,"black");
+	var lblShopMoney=new Label(550,380,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
 	var x=530;
 	var i;
 	
@@ -264,13 +266,14 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
 			
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,265,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,265,100,50,item.price+"/unit","Bebas",15,"black");
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
-			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,265,100,50,item.price,"Epistolar",15,"black");
+			var fetcher=new ShipInfoFetcher();
+			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,265,100,50,item.price,"Bebas",15,"black");
 		}
 			
 		newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
@@ -303,13 +306,14 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
 		
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Epistolar",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,490,100,50,item.price+"/unit","Epistolar",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,490,100,50,item.price+"/unit","Bebas",15,"black");
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
-			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Epistolar",15,"black", buttonBG);
-			var newLabel=new Label(x,490,100,50,item.price,"Epistolar",15,"black");
+			var fetcher=new ShipInfoFetcher();
+			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,490,100,50,item.price,"Bebas",15,"black");
 		}
 
 		newButton.onClick=CreateToBuyItemButtonHandler(parentMenu, newButton, item, shopInventory);
@@ -350,10 +354,10 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTrade=new Button("TRADE",440,350,100,50,"TRADE","Epistolar",15,"black", buttonBG);
+	var btnTrade=new Button("TRADE",440,350,111,62,"","Bebas",15,"black", tradeButtonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
-			marketScreen.labels[2].text=gameState.money+" gold";
+			marketScreen.labels[2].text=gameState.money;
 
 			populatePlayerInventoryPanel(marketScreen,'market');
 			populateShopInventoryPanel(marketScreen, shopInventory);

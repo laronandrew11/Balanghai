@@ -8,6 +8,8 @@ var gameState;
 //TODO optimize screen switching by not re-initializing screens every time we switch screens, or removing invisible screens from memory
 function main()
 {
+	 context.textBaseline = 'top';
+  //context.textAlign = "center";
 	addStartScreen();
 
 }	
@@ -89,10 +91,11 @@ function addDefaultButtons(parentMenu)
 		
 	}
 
-	var lblPlayerName=new Label(700,18,100,50,gameState.playerName,"Epistolar",18,"black");
-	var lblGameDate=new Label(700,38,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Epistolar",18,"black");
-	var lblMoney=new Label(800,38,100,50,gameState.money+" gold","Epistolar",18,"black");
-
+	var lblPlayerName=new Label(700,18,100,50,gameState.playerName,"Bebas",18,"black");
+	var lblGameDate=new Label(700,38,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Bebas",18,"black");
+	var lblMoney=new Label(800,38,100,50,gameState.money,"Bebas",18,"black");
+	var lblCoin=new Label(765,15,33,31,"","Epistolar",18,"black");
+	lblCoin.bgImage=coinImg;
 
 	parentMenu.addButton(btnMainMenu);
 	parentMenu.addButton(btnSave);
@@ -104,7 +107,9 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnTranslate);
 	parentMenu.addLabel(lblPlayerName);
 	parentMenu.addLabel(lblGameDate);
+
 	parentMenu.addLabel(lblMoney);
+		parentMenu.addLabel(lblCoin);
 }
 
 function returnItemsToSell(){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler

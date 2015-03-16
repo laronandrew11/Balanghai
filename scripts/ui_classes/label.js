@@ -8,13 +8,14 @@ function Label(x,y,width,height,text,style,size,color){
 	this.size = size;
 	this.font = this.size + "px " + this.style;
 	this.color = color;
-	//this.bgImage=bgImage;
+	this.bgImage=null;
 
 	this.createDraw = function(context) {
 		var obj = this;
 		return function(context) //TODO: optimize
 		{
-			//context.drawImage(bgImage,x,y,width,height); 
+			if(obj.bgImage!=null)
+				context.drawImage(obj.bgImage,x,y,width,height); 
 			//console.log("Color "+this.color);
 			context.fillStyle = obj.color;
 			context.font = obj.font;
