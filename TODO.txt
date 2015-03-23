@@ -1,10 +1,15 @@
 HIGH PRIORITY
+-Update map font?
+-Update label/button positioning
+-Add category marker labels to cargo items
+
+
 
 -Fix ship sprite
 -allow player free roam
 
 Label:
--draw text on top of label instead of above
+-find way to change alignment to center or left
 
 Textbox:
 -implement wrapping (also for label)

@@ -32,6 +32,24 @@ function addStartScreen()
 function deactivateScreen(){
 
 }*/
+function addDefaultLabels(parentMenu)
+{
+	var lblPlayerName=new Label(700,2,145,38,gameState.playerName,"Bebas",18,"black");
+	lblPlayerName.bgImage=scrollLargeImg;
+	var lblGameDate=new Label(700,38,100,38,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Bebas",18,"black");
+	lblGameDate.bgImage=scrollLargeImg;
+	var lblMoney=new Label(840,38,145,38,gameState.money,"Bebas",18,"black");
+	lblMoney.bgImage=scrollLargeImg;
+	var lblCoin=new Label(805,38,33,31,"","Epistolar",18,"black");
+	lblCoin.bgImage=coinImg;
+
+	
+	parentMenu.addLabel(lblGameDate);
+	parentMenu.addLabel(lblPlayerName);
+	parentMenu.addLabel(lblMoney);
+	parentMenu.addLabel(lblCoin);
+
+}
 function addDefaultButtons(parentMenu)
 {
 
@@ -91,12 +109,7 @@ function addDefaultButtons(parentMenu)
 		
 	}
 
-	var lblPlayerName=new Label(700,18,100,50,gameState.playerName,"Bebas",18,"black");
-	var lblGameDate=new Label(700,38,100,50,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Bebas",18,"black");
-	var lblMoney=new Label(800,38,100,50,gameState.money,"Bebas",18,"black");
-	var lblCoin=new Label(765,15,33,31,"","Epistolar",18,"black");
-	lblCoin.bgImage=coinImg;
-
+	
 	parentMenu.addButton(btnMainMenu);
 	parentMenu.addButton(btnSave);
 	parentMenu.addButton(btnShip);
@@ -105,11 +118,7 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnQuests);
 	parentMenu.addButton(btnSettlement);
 	parentMenu.addButton(btnTranslate);
-	parentMenu.addLabel(lblPlayerName);
-	parentMenu.addLabel(lblGameDate);
-
-	parentMenu.addLabel(lblMoney);
-		parentMenu.addLabel(lblCoin);
+	addDefaultLabels(parentMenu);
 }
 
 function returnItemsToSell(){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler

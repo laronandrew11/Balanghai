@@ -58,14 +58,14 @@ function CreateCargoItemButtonHandler(parentMenu, button, cargo)//TODO make simi
 }
 
 
-function createCargoDetailsPanel(cargo){
+/*function createCargoDetailsPanel(cargo){
 	
 	pnlDetails.name="Details";
 	
 	//add labels: "You paid:" and maybe common market prices per region
 	
 	return pnlDetails;
-}
+}*/
 function populateCargoPanel(parentMenu, type)
 {
 	parentMenu.panels[0].clearButtons();
@@ -83,10 +83,13 @@ function populateCargoPanel(parentMenu, type)
 			var newButton=new Button(item.name,x,180,80,80,"","Bebas",15,"black",fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,230,82,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
+			/*var priceLabel=new Label(x+47,15,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;*/
 			//console.log(parentMenu);
 			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
 			parentMenu.panels[0].addLabel(newLabel);
+			//parentMenu.panels[0].addLabel(priceLabel);
 			x+=85;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);

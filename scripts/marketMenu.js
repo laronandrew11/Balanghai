@@ -194,14 +194,20 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 			var fetcher=new CargoRecordInfoFetcher();
 		
 
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,265,100,50,item.price+"/unit","Bebas",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 			
 		else if(poiType=='shipbuilder'){
 			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,265,100,50,item.price,"Bebas",15,"black");
+			var newButton=new Button(item.properName,x,185,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,235,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 
 		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
@@ -209,6 +215,7 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 
 		
 		parentMenu.panels[0].addLabel(newLabel);
+		parentMenu.panels[0].addLabel(priceLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -230,18 +237,25 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 			var fetcher=new CargoRecordInfoFetcher();
 		
 
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,490,100,50,item.price+"/unit","Bebas",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,460,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 			
 		else if(poiType=='shipbuilder'){
 			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,490,100,50,item.price,"Bebas",15,"black");
+			var newButton=new Button(item.properName,x,410,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,460,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 		newButton.onClick=CreateToSellItemButtonHandler(parentMenu, newButton, item, poiType);
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
 		parentMenu.panels[2].addLabel(newLabel);
+		parentMenu.panels[2].addLabel(priceLabel);
 		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -266,14 +280,20 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
 			
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,265,100,50,item.price+"/unit","Bebas",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
 			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,185,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,265,100,50,item.price,"Bebas",15,"black");
+			var newButton=new Button(item.properName,x,185,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,235,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 			
 		newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
@@ -282,6 +302,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 
 		
 		parentMenu.panels[1].addLabel(newLabel);
+		parentMenu.panels[1].addLabel(priceLabel);
 		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -306,14 +327,20 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
 		
-			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,item.amount+" "+item.name,"Bebas",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,490,100,50,item.price+"/unit","Bebas",15,"black");
+			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,460,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
 			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,410,80,80,item.properName+" ("+item.name+")","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,490,100,50,item.price,"Bebas",15,"black");
+			var newButton=new Button(item.properName,x,410,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,460,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+			newLabel.bgImage=scrollSmallImg;
+			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
+			priceLabel.bgImage=coinImg;
 		}
 
 		newButton.onClick=CreateToBuyItemButtonHandler(parentMenu, newButton, item, shopInventory);
@@ -321,6 +348,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 		
 		parentMenu.panels[3].addLabel(newLabel);
+		parentMenu.panels[3].addLabel(priceLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);

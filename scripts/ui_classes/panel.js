@@ -13,7 +13,7 @@ function Panel(x,y,width,height, bgImage){
 		var obj=this;
 		return function(context){
 			if(obj.bgImage!=null)
-				context.drawImage(bgImage,x,y,width,height); 
+				context.drawImage(obj.bgImage,x,y,width,height); 
 			
 			obj.drawTextboxes();
 			obj.drawMenu(-1);
