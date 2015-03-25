@@ -69,7 +69,7 @@ function AnimatedSprite(source,tileWidth,tileHeight,frames) {
 				var ypos = y+height/2
 				context.save();
 				context.translate(xpos, ypos);
-				context.rotate((angle) * Math.PI / 180);
+				context.rotate((angle) * Math.PI / 180); 
 				context.translate(-xpos, -ypos);
 				
 				context.drawImage(this.sprite.image,this.timer * this.tileWidth,0,this.tileWidth,this.tileHeight, x,y,width,height);

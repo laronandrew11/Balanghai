@@ -5,7 +5,7 @@ function addSettlementMenu(settlement){
 	var buildingsPanel=new Panel(220,150,595,310,lunhawanSettlementImg);
 	buildingsPanel.visible=true;
 
-	var lblName=new Label(400,500,100,50,gameState.settlement,"Epistolar",36,"black");
+	var lblName=new Label(400,450,100,50,gameState.settlement,"Epistolar",36,"black");
 	settlementScreen.addLabel(lblName);
 	settlementScreen.addPanel(buildingsPanel);
 	//load settlement data for given settlement name, and create relevant buttons/panels

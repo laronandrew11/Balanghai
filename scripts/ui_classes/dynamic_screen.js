@@ -14,6 +14,7 @@ function DynamicScreen(){
 			
 			camdot = new dot(gameState.mapX*mapScale,gameState.mapY*mapScale,5,5,"yellow");
 			boat= new ship(gameState.mapX*mapScale,gameState.mapY*mapScale,47.5,70,"red");
+			 getangle(boat,heading);
 
 		//heading = new dot(gameState.mapX*5,gameState.mapY*5,50,50,"red");
 		arrivedAtHeading=false;
@@ -93,7 +94,7 @@ function DynamicScreen(){
 		
 				obj.update();
 				var oldTimer=timer;
-				timer+=1/100;
+				timer+=5/100;
 				if(Math.floor(timer)-Math.floor(oldTimer)==1)
 				{
 					secondCounter++;
