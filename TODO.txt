@@ -3,9 +3,6 @@ HIGH PRIORITY
 -Update label/button positioning
 -Add category marker labels to cargo items
 
-
-
--Fix ship sprite
 -allow player free roam
 
 Label:

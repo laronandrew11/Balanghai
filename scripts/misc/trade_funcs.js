@@ -1,7 +1,6 @@
 function buyCargo(shopInventory, cargo)
 {
 	
-		alert(cargo.name);
 		gameState.addCargo(cargo);
 		gameState.subtractCapacity(cargo.amount*cargo.unitWeight);
 		gameState.money-=(cargo.amount*cargo.price);

@@ -63,11 +63,11 @@ function addMainMenu(){
 	populateLoadPanel(mainMenu,pnlLoadGame);
 
 	var pnlCredits=new Panel(100,56,357,496,cargoDetailsPanelBG);
-	pnlCredits.addLabel(new Label(100,100,200,50,"Code: ANDREW LARON","Epistolar",15,"black"));
-	pnlCredits.addLabel(new Label(100,150,200,50,"Additional Code: MIGUEL DUNGAN, JANA AUSTRIA","Epistolar",15,"black"));
-	pnlCredits.addLabel(new Label(100,200,200,50,"Background Art: NIGEL BINAS","Epistolar",15,"black"));
-	pnlCredits.addLabel(new Label(100,250,200,50,"Character, Ship and Cargo Art: JANA AUSTRIA","Epistolar",15,"black"));
-	pnlCredits.addLabel(new Label(100,300,200,50,"Copyright DLSU Game Development Laboratory, 2015.","Epistolar",15,"black"));
+	pnlCredits.addLabel(new Label(100,100,200,50,"Code: ANDREW LARON","Bebas",15,"black"));
+	pnlCredits.addLabel(new Label(100,150,200,50,"Additional Code: MIGUEL DUNGAN, JANA AUSTRIA","Bebas",15,"black"));
+	pnlCredits.addLabel(new Label(100,200,200,50,"Background Art: NIGEL BINAS","Bebas",15,"black"));
+	pnlCredits.addLabel(new Label(100,250,200,50,"Character, Ship and Cargo Art: JANA AUSTRIA","Bebas",15,"black"));
+	pnlCredits.addLabel(new Label(100,300,200,50,"Copyright DLSU Game Development Laboratory, 2015.","Bebas",15,"black"));
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
 	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
