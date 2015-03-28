@@ -1,21 +1,26 @@
 HIGH PRIORITY
--Update map font?
--Update label/button positioning
--Add category marker labels to cargo items
-
--allow player free roam
-
-Label:
--find way to change alignment to center or left
-
+3/29
+-Save game should include shop inventories and price tables
+3/30
+-update price from buy price to sell price when a shop receives a new item
+3/31
 Textbox:
 -implement wrapping (also for label)
--improve keycode checking
+-blinking cursor
+4/1
+-More immersive translation alert on travel screen
+-Alternatives to alerts and prompts in general
+4/2
+-allow player free roam
+4/3
+-Add category marker labels to cargo items
+-Improve label/button text alignment
+4/4
+-Item button wrapping/scrolling on cargo, ship and trade screens
+4/5
+-Design economic model
+-Update map font?
 
--Save game should include shop inventories and price tables
-
-
--update price from buy price to sell price when a shop receives a new item
 
 
 Quest/event systems
