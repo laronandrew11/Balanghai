@@ -1,19 +1,20 @@
 HIGH PRIORITY
-3/29
--Save game should include shop inventories and price tables
 3/30
+-Add category marker labels to cargo items
 -update price from buy price to sell price when a shop receives a new item
+-Save game should include  price tables
 3/31
+-allow loading shop inventories from saved games properly
 Textbox:
 -implement wrapping (also for label)
--blinking cursor
+-adjust cursor positioning
 4/1
 -More immersive translation alert on travel screen
 -Alternatives to alerts and prompts in general
 4/2
 -allow player free roam
 4/3
--Add category marker labels to cargo items
+
 -Improve label/button text alignment
 4/4
 -Item button wrapping/scrolling on cargo, ship and trade screens

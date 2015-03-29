@@ -1,5 +1,5 @@
 var shopInventoryMap=new Map();
-populateShopInventories();
+//populateShopInventories();
 function populateShopInventories(){
 	var fetcher=new SettlementInfoFetcher();
 	var i;
@@ -19,7 +19,7 @@ function populateShopInventories(){
 			{
 				var cargoList=[new Ship("Halimaw",'Bangka',10,110,50), new Ship("Batumbakal",'Bangka',10,100,60)];
 			}
-			shopInventoryMap.set(key, new ShopInventory(settlement.name, settlement.pois[j], 1000, cargoList));
+			gameState.shopInventoryMap.set(key, new ShopInventory(settlement.name, settlement.pois[j], 1000, cargoList));
 		}
 			
 	}

@@ -6,11 +6,22 @@ var Textbox=function(parentScreen, x,y,width,height)
 	this.height=height;
 	this.text="";
 	this.keyMap=[];
+	this.cursorVisible=false;
+	this.parentScreen=parentScreen;
 	this.capsLock=false;//will this do any good?
 	//context.fillStyle = color;
 	//context.font = size + "px " + b.style;
 	//context.fillText(b.text, b.x, b.y);
+	this.createCursorBlink=function(){
+		var obj=this;
+		return function(){
+			obj.cursorVisible=!obj.cursorVisible;
 
+			obj.redraw();
+			setTimeout(obj.cursorBlink,500);
+		}
+	}
+	this.cursorBlink=this.createCursorBlink();
 
 	this.createKeyEvent=function(event){
 		var obj=this;
@@ -200,11 +211,29 @@ var Textbox=function(parentScreen, x,y,width,height)
 	this.draw=function(){
 		context.fillText(this.text, this.x, this.y, this.width, this.height);
 	}
-	this.redraw=function(){
-		parentScreen.drawScreen(parentScreen.bgImage);
+	this.createRedraw=function(){
+		var obj=this;
+		return function(){
+			obj.parentScreen.drawScreen(obj.parentScreen.bgImage);
+			if(obj.cursorVisible)
+			{
+				var textWidth = context.measureText(obj.text).width;
+				  context.beginPath();
+	     		 context.moveTo(obj.x+textWidth, obj.y);
+	     		 context.lineTo(obj.x+textWidth, obj.y+20);//TODO: un-hardcode text height
+	      		context.stroke();
+	      	}
+     	 }
 	}
-	this.onClick=function(){
-		document.onkeydown=document.onkeyup=this.keyEvent;
+	this.redraw=this.createRedraw();
+
+	this.createOnClick=function(){
+		var obj=this;
+		return function(){
+			document.onkeydown=document.onkeyup=obj.keyEvent;
+			obj.cursorBlink();
+		}
 		
 	}
+	this.onClick=this.createOnClick();
 }

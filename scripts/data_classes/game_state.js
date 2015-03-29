@@ -16,6 +16,7 @@ function GameState(playerName){
 	this.quests=[];
 	this.toSell=[];
 	this.pendingTranslations=[];
+	this.shopInventoryMap=new Map();
 
 	this.getMinSpeed=function(){
 		var speeds=[];

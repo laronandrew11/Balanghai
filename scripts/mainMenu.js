@@ -74,6 +74,7 @@ function addMainMenu(){
 	btnNewGame.onClick=function(){
 		var newPlayerName = prompt("Please enter your name", "");
 		gameState=new GameState(newPlayerName);
+		populateShopInventories();
 		mainMenu.clearScreen();
 		addFleetMenu();
 		//popup('popup-div');

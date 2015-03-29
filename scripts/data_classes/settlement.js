@@ -21,7 +21,7 @@ function Settlement(name, region, mapX, mapY, pointsOfInterest)
 	this.createGetShopInventory=function(poiType){
 		var obj=this;
 		return function(poiType){
-			return shopInventoryMap.get(obj.name+"-"+poiType);
+			return gameState.shopInventoryMap.get(obj.name+"-"+poiType);
 		}
 		
 	}
