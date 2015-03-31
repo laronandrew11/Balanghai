@@ -17,6 +17,7 @@ function GameState(playerName){
 	this.toSell=[];
 	this.pendingTranslations=[];
 	this.shopInventoryMap=new Map();
+	this.priceTable;
 
 	this.getMinSpeed=function(){
 		var speeds=[];
@@ -34,9 +35,14 @@ function GameState(playerName){
 		return minSpeed;
 	}
 	
-	this.addShip=function(newShip){
-		this.ships.put(newShip);
+	this.createAddShip=function(newShip){
+		var obj=this;
+		return function(newShip){
+			newShip.price=obj.getPrice(newShip.name, obj.priceTable);
+			obj.ships.push(newShip);
+		}
 	}
+	this.addShip=this.createAddShip();
 	this.removeShip=function(shipName)
 	{
 		var i;
@@ -50,7 +56,10 @@ function GameState(playerName){
 		var obj=this;
 		return function(newCargo){
 			if(!obj.hasCargo(newCargo.name))
+			{
+				newCargo.price=obj.getPrice(newCargo.name, obj.priceTable);
 				obj.cargo.push(newCargo);
+			}
 			else obj.getCargo(newCargo.name).amount+=newCargo.amount;
 		}
 	}
@@ -170,6 +179,15 @@ function GameState(playerName){
 		}
 	}
 	this.getPrice=this.createGetPrice();
+	this.CreateSetPriceTable=function(priceTable)//set price table to price table of local shop
+	{
+		var obj=this;
+		return function(priceTable){
+			obj.priceTable=priceTable;
+			obj.setPrices(priceTable);
+		}
+	}
+	this.setPriceTable=this.CreateSetPriceTable();
 }
 
 function save(){

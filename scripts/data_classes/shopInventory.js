@@ -31,6 +31,7 @@ function ShopInventory(settlementName, type, money, cargoList){
 			{
 				if(!obj.hasCargo(newCargo.name))
 				{
+					newCargo.price=obj.getPrice(newCargo.name, obj.priceTable);
 					obj.cargoList.push(newCargo);
 				}
 				else{
@@ -38,7 +39,10 @@ function ShopInventory(settlementName, type, money, cargoList){
 				} 
 			}
 			else if (obj.type=='shipbuilder')
+			{
+				newCargo.price=obj.getPrice(newCargo.name, obj.priceTable);
 				obj.cargoList.push(newCargo);
+			}
 		}
 	}
 	this.addCargo=this.createAddCargo();

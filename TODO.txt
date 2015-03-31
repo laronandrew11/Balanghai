@@ -1,7 +1,4 @@
 HIGH PRIORITY
-3/31
--update price from buy price to sell price when a shop receives a new item
--Save game should include  price tables
 
 
 4/1
@@ -11,12 +8,14 @@ HIGH PRIORITY
 4/2
 -allow player free roam
 4/3
-
+-Category sorting for market screen
+-View all cargo mode for cargo screen
 -Improve label/button text alignment
 4/4
 -Item button wrapping/scrolling on cargo, ship and trade screens
 4/5
 -Design economic model
+-Save game should include  price tables
 -Update map font?
 
 Textbox:

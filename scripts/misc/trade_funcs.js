@@ -33,7 +33,7 @@ function tradeCargo(shopInventory,toBuy, toSell){
 
 }
 function buyShip(shopInventory,ship){
-		gameState.ships.push(ship);
+		gameState.addShip(ship);
 		gameState.money-=ship.price;
 		shopInventory.addMoney(ship.price);
 		shopInventory.removeToSellItem(ship.properName);

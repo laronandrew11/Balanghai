@@ -388,7 +388,7 @@ function addMarketMenu(settlement){
 	//alert(priceTable[0].cargoName);
 	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
 	gameState.itemType='cargo';
-	gameState.setPrices(priceTable);
+	gameState.setPriceTable(priceTable);
 
 
 
