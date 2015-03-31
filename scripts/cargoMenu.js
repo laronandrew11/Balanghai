@@ -66,7 +66,7 @@ function CreateCargoItemButtonHandler(parentMenu, button, cargo)//TODO make simi
 	
 	return pnlDetails;
 }*/
-function populateCargoPanel(parentMenu, type)
+function populateCargoPanel(parentMenu, type)// i is index where the category's colored tab is stored in categoryLabels[]. Kind of redundant.
 {
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
@@ -83,12 +83,17 @@ function populateCargoPanel(parentMenu, type)
 			var newButton=new Button(item.name,x,180,80,80,"","Bebas",15,"black",fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,230,82,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
+
+			var lblTag=new Label(x,180,47,31,"","Bebas",15,"black");
+			var catIndex=cargoCategories.indexOf(item.type);
+			lblTag.bgImage=cargoCategoryLabels[catIndex];
 			/*var priceLabel=new Label(x+47,15,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;*/
 			//console.log(parentMenu);
 			newButton.onClick=CreateCargoItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.panels[0].addButton(newButton);//add to inventory panel
 			parentMenu.panels[0].addLabel(newLabel);
+			parentMenu.panels[0].addLabel(lblTag);
 			//parentMenu.panels[0].addLabel(priceLabel);
 			x+=85;
 

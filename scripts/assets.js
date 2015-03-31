@@ -94,6 +94,25 @@ var buttonBG = document.createElement('img');
 	var woodButtonBG = document.createElement('img');
 	woodButtonBG.src = 'img/buttons/cargomenu/woodbutton.png';
 
+	var artLabelBG = document.createElement('img');
+	artLabelBG.src = 'img/categorylabels/yellowart.png';
+	var clothingLabelBG = document.createElement('img');
+	clothingLabelBG.src = 'img/categorylabels/bluecloth.png';
+	var foodLabelBG = document.createElement('img');
+	foodLabelBG.src = 'img/categorylabels/greenfood.png';
+	var miscLabelBG = document.createElement('img');
+	miscLabelBG.src = 'img/categorylabels/miscwhite.png';
+	var stoneLabelBG = document.createElement('img');
+	stoneLabelBG.src = 'img/categorylabels/blackore.png';
+	var textileLabelBG = document.createElement('img');
+	textileLabelBG.src = 'img/categorylabels/magentatex.png';
+	var weaponLabelBG = document.createElement('img');
+	weaponLabelBG.src = 'img/categorylabels/redsword.png';
+	var woodLabelBG = document.createElement('img');
+	woodLabelBG.src = 'img/categorylabels/palewood.png';
+
+
+
 	var cargoCategoryButtons=[];
 	cargoCategoryButtons.push(foodButtonBG);
 	cargoCategoryButtons.push(stoneButtonBG);
@@ -103,6 +122,16 @@ var buttonBG = document.createElement('img');
 	cargoCategoryButtons.push(textileButtonBG);
 	cargoCategoryButtons.push(clothingButtonBG);
 	cargoCategoryButtons.push(miscButtonBG);
+
+	var cargoCategoryLabels=[];
+	cargoCategoryLabels.push(foodLabelBG);
+	cargoCategoryLabels.push(stoneLabelBG);
+	cargoCategoryLabels.push(weaponLabelBG);
+	cargoCategoryLabels.push(woodLabelBG);
+	cargoCategoryLabels.push(artLabelBG);
+	cargoCategoryLabels.push(textileLabelBG);
+	cargoCategoryLabels.push(clothingLabelBG);
+	cargoCategoryLabels.push(miscLabelBG);
 
 	var cargoInventoryPanelBG = document.createElement('img');
 	cargoInventoryPanelBG.src = 'img/panels/cargowithbox.png';

@@ -1,14 +1,11 @@
 HIGH PRIORITY
-3/30
--Add category marker labels to cargo items
+3/31
 -update price from buy price to sell price when a shop receives a new item
 -Save game should include  price tables
-3/31
--allow loading shop inventories from saved games properly
-Textbox:
--implement wrapping (also for label)
--adjust cursor positioning
+
+
 4/1
+-allow loading shop inventories from saved games properly
 -More immersive translation alert on travel screen
 -Alternatives to alerts and prompts in general
 4/2
@@ -22,7 +19,9 @@ Textbox:
 -Design economic model
 -Update map font?
 
-
+Textbox:
+-implement wrapping (also for label)
+-adjust cursor positioning
 
 Quest/event systems
 

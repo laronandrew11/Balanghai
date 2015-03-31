@@ -197,6 +197,10 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
+			var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
+			var catIndex=cargoCategories.indexOf(item.type);
+			lblTag.bgImage=cargoCategoryLabels[catIndex];
+			parentMenu.panels[0].addLabel(lblTag);
 			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 		}
@@ -240,6 +244,10 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,460,80,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
+			var lblTag=new Label(x,410,47,31,"","Bebas",15,"black");
+			var catIndex=cargoCategories.indexOf(item.type);
+			lblTag.bgImage=cargoCategoryLabels[catIndex];
+			parentMenu.panels[2].addLabel(lblTag);
 			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 		}
@@ -283,6 +291,10 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
+			var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
+			var catIndex=cargoCategories.indexOf(item.type);
+			lblTag.bgImage=cargoCategoryLabels[catIndex];
+			parentMenu.panels[1].addLabel(lblTag);
 			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 		}
@@ -330,6 +342,10 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 			var newButton=new Button(item.amount+" "+item.name,x,410,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
 			var newLabel=new Label(x,460,80,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
+			var lblTag=new Label(x,410,47,31,"","Bebas",15,"black");
+			var catIndex=cargoCategories.indexOf(item.type);
+			lblTag.bgImage=cargoCategoryLabels[catIndex];
+			parentMenu.panels[3].addLabel(lblTag);
 			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 		}
