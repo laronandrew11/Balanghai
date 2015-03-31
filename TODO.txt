@@ -1,6 +1,4 @@
 HIGH PRIORITY
-
-
 4/1
 -allow loading shop inventories from saved games properly
 -More immersive translation alert on travel screen
@@ -8,8 +6,6 @@ HIGH PRIORITY
 4/2
 -allow player free roam
 4/3
--Category sorting for market screen
--View all cargo mode for cargo screen
 -Improve label/button text alignment
 4/4
 -Item button wrapping/scrolling on cargo, ship and trade screens
@@ -17,6 +13,8 @@ HIGH PRIORITY
 -Design economic model
 -Save game should include  price tables
 -Update map font?
+4/6
+-Stop market screen from displaying all cargo after a transaction instead of staying in the currently selected cargo category
 
 Textbox:
 -implement wrapping (also for label)

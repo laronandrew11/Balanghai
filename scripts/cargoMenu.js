@@ -36,7 +36,7 @@ function addCargoMenu(){
 
 	cargoMenu.addPanel(pnlInventory);
 	cargoMenu.addPanel(pnlDetails);
-	
+	populateCargoPanel(cargoMenu, "Other");//should be "All" but we just use "Other" since we have no items in that category yet
 	cargoMenu.drawScreen(cargoMenuBG);
 }
 
@@ -76,7 +76,7 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 	var fetcher=new CargoRecordInfoFetcher();
 	for(i=0;i<gameState.cargo.length;i++){
 		var item=gameState.cargo[i];
-		if(type=='all' || item.type==type)
+		if(type=='Other' || item.type==type)
 		{
 			//var buttonImg = document.createElement('img');
 			//buttonImg.src =  fetcher.getImageSrc(item.name);

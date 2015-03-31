@@ -37,7 +37,7 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 				var itemToBuy=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				shopInventory.toSell.push(itemToBuy);
 			}
-			populateShopInventoryPanel(parentMenu, shopInventory);
+			populateShopInventoryPanel(parentMenu, shopInventory,"Other");
 				populateToBuyPanel(parentMenu, shopInventory);
 		}
 }
@@ -80,7 +80,7 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 				shopInventory.cargoList.push(itemToRemove);
 				
 			}
-			populateShopInventoryPanel(parentMenu, shopInventory);
+			populateShopInventoryPanel(parentMenu, shopInventory,"Other");
 				populateToBuyPanel(parentMenu, shopInventory);
 		}
 }
@@ -125,7 +125,7 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TOD
 				gameState.toSell.push(itemToSell);
 		
 			}
-					populatePlayerInventoryPanel(parentMenu, poiType);
+					populatePlayerInventoryPanel(parentMenu, poiType,"Other");
 				populateToSellPanel(parentMenu, poiType);
 		}
 }
@@ -169,17 +169,60 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO 
 				gameState.ships.push(itemToReturn);
 			
 			}
-				populatePlayerInventoryPanel(parentMenu, poiType);
+				populatePlayerInventoryPanel(parentMenu, poiType,"Other");
 				populateToSellPanel(parentMenu, poiType);
 
 		}
 }
 
-function populatePlayerInventoryPanel(parentMenu, poiType)//display all of player's cargo in one corner so he can sell it
+
+function populatePlayerCategoryButtons(parentMenu){
+	var i;
+	var x=92;
+	for(i=0;i<cargoCategories.length;i++)
+	{
+
+		var newButton=new Button(cargoCategories[i],x,127,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
+		newButton.onClick=CreatePlayerCargoCategoryButtonHandler(parentMenu, newButton);
+		parentMenu.panels[0].addButton(newButton);
+		x+=47;
+	}
+}
+function CreatePlayerCargoCategoryButtonHandler(parentMenu, button)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			populatePlayerInventoryPanel(parentMenu, "market",lbutton.name);
+		}
+}
+function populateShopCategoryButtons(parentMenu, shopInventory){
+	var i;
+	var x=522;
+	for(i=0;i<cargoCategories.length;i++)
+	{
+
+		var newButton=new Button(cargoCategories[i],x,127,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
+		newButton.onClick=CreateShopCargoCategoryButtonHandler(parentMenu, shopInventory,newButton);
+		parentMenu.panels[1].addButton(newButton);
+		x+=47;
+	}
+}
+function CreateShopCargoCategoryButtonHandler(parentMenu, shopInventory,button)//TODO make similar methods for other buttons if needed
+{
+	var lbutton=button;
+	return function(){
+			populateShopInventoryPanel(parentMenu, shopInventory,lbutton.name);
+		}
+}
+
+
+function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display all of player's cargo in one corner so he can sell it. Note that cargoType is unneeded by shipbuilder
 {
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
-		var lblPlayerMoney=new Label(260,380,100,50,"Your money: "+gameState.money,"Bebas",18,"black");
+	if(poiType=='market')
+		populatePlayerCategoryButtons(parentMenu);
+	var lblPlayerMoney=new Label(260,360,100,50,"Your money: "+gameState.money,"Bebas",18,"black");
 	var x=95;
 	var i;
 	if(poiType=="market")
@@ -191,18 +234,25 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 		var item=cargoList[i];
 
 		if(poiType=='market'){
-			var fetcher=new CargoRecordInfoFetcher();
-		
+			if(cargoType=='Other' || item.type==cargoType){
+				var fetcher=new CargoRecordInfoFetcher();
+			
 
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
-			newLabel.bgImage=scrollSmallImg;
-			var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
-			var catIndex=cargoCategories.indexOf(item.type);
-			lblTag.bgImage=cargoCategoryLabels[catIndex];
-			parentMenu.panels[0].addLabel(lblTag);
-			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
-			priceLabel.bgImage=coinImg;
+				var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+				var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+				newLabel.bgImage=scrollSmallImg;
+				var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
+				var catIndex=cargoCategories.indexOf(item.type);
+				lblTag.bgImage=cargoCategoryLabels[catIndex];
+				parentMenu.panels[0].addLabel(lblTag);
+				var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+				priceLabel.bgImage=coinImg;
+				newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
+				parentMenu.panels[0].addButton(newButton);
+				parentMenu.panels[0].addLabel(newLabel);
+		parentMenu.panels[0].addLabel(priceLabel);
+		x+=80;
+			}
 		}
 			
 		else if(poiType=='shipbuilder'){
@@ -212,15 +262,18 @@ function populatePlayerInventoryPanel(parentMenu, poiType)//display all of playe
 			newLabel.bgImage=scrollSmallImg;
 			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
-		}
-
-		newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
-		parentMenu.panels[0].addButton(newButton);//add to inventory panel
-
-		
-		parentMenu.panels[0].addLabel(newLabel);
+			newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
+			parentMenu.panels[0].addButton(newButton);
+			parentMenu.panels[0].addLabel(newLabel);
 		parentMenu.panels[0].addLabel(priceLabel);
 		x+=80;
+		}
+
+		
+		//add to inventory panel
+
+		
+		
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		
@@ -274,11 +327,13 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 	//parentMenu.panels[2].draw(context);
 }
 
-function populateShopInventoryPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
+function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[1].clearButtons();
 	parentMenu.panels[1].clearLabels();
-	var lblShopMoney=new Label(550,380,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
+	if(shopInventory.type=='market')
+		populateShopCategoryButtons(parentMenu, shopInventory);
+	var lblShopMoney=new Label(550,360,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
 	var x=530;
 	var i;
 	
@@ -286,17 +341,24 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 	for(i=0;i<shopInventory.cargoList.length;i++){
 		var item=shopInventory.cargoList[i];
 		if(shopInventory.type=='market'){
-			var fetcher=new CargoRecordInfoFetcher();
-			
-			var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
-			newLabel.bgImage=scrollSmallImg;
-			var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
-			var catIndex=cargoCategories.indexOf(item.type);
-			lblTag.bgImage=cargoCategoryLabels[catIndex];
-			parentMenu.panels[1].addLabel(lblTag);
-			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
-			priceLabel.bgImage=coinImg;
+			if(cargoType=='Other' || item.type==cargoType){
+				var fetcher=new CargoRecordInfoFetcher();
+				
+				var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+				var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+				newLabel.bgImage=scrollSmallImg;
+				var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
+				var catIndex=cargoCategories.indexOf(item.type);
+				lblTag.bgImage=cargoCategoryLabels[catIndex];
+				parentMenu.panels[1].addLabel(lblTag);
+				var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+				priceLabel.bgImage=coinImg;
+				newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
+				parentMenu.panels[1].addButton(newButton);//add to inventory panel
+				parentMenu.panels[1].addLabel(newLabel);
+				parentMenu.panels[1].addLabel(priceLabel);
+				x+=82;
+			}
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
@@ -306,16 +368,14 @@ function populateShopInventoryPanel(parentMenu, shopInventory)//display all of p
 			newLabel.bgImage=scrollSmallImg;
 			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
+			newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
+			parentMenu.panels[1].addButton(newButton);//add to inventory panel
+			parentMenu.panels[1].addLabel(newLabel);
+			parentMenu.panels[1].addLabel(priceLabel);
+			x+=82;
 		}
 			
-		newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
-		parentMenu.panels[1].addButton(newButton);//add to inventory panel
-
-
 		
-		parentMenu.panels[1].addLabel(newLabel);
-		parentMenu.panels[1].addLabel(priceLabel);
-		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 
@@ -403,8 +463,8 @@ function addMarketMenu(settlement){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 			marketScreen.labels[2].text=gameState.money;
 
-			populatePlayerInventoryPanel(marketScreen,'market');
-			populateShopInventoryPanel(marketScreen, shopInventory);
+			populatePlayerInventoryPanel(marketScreen,'market','Other');
+			populateShopInventoryPanel(marketScreen, shopInventory,'Other');
 			populateToSellPanel(marketScreen,'market');
 			populateToBuyPanel(marketScreen, shopInventory);
 
@@ -431,8 +491,10 @@ function addMarketMenu(settlement){
 	marketScreen.addPanel(pnlToBuy);
 	marketScreen.addButton(btnTrade);
 
-		populatePlayerInventoryPanel(marketScreen, 'market');
-		populateShopInventoryPanel(marketScreen, shopInventory);
+	
+
+		populatePlayerInventoryPanel(marketScreen, 'market','Other');
+		populateShopInventoryPanel(marketScreen, shopInventory, 'Other');
 		populateToSellPanel(marketScreen, 'market');
 		populateToBuyPanel(marketScreen, shopInventory);
 

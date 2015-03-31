@@ -38,7 +38,7 @@ function GameStateParser(){
 
 			saveText=saveText+shipsString+cargoString+visibleSettlementsString+gameDateString+'}';*/
 			var saveText=JSON.stringify(gameState);
-
+			console.log("Saved state: "+saveText);
 			var saveIndex;
 			if(localStorage.saveIndex!=undefined)
 				saveIndex=JSON.parse(localStorage.saveIndex);
