@@ -1,4 +1,5 @@
 var shopInventoryMap=new Map();
+var settlementProductionRecords=[];
 //populateShopInventories();
 function populateShopInventories(){
 	var fetcher=new SettlementInfoFetcher();
@@ -28,6 +29,41 @@ function populateShopInventories(){
 			
 	}
 }
+function populateSettlementProductionRecords(){
+	settlementProductionRecords.push(new SettlementProductionRecord("Sikdagat",["Kamote","Abaca Wood"],["Leather","Iron"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Kagisanan",["Rope","Vest"],["Abaca Wood","Porcelain","Pinya"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Mapawikan",["Animal Skin","Barong"],["Kamote","Pinya"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Atabay",["Leather"],["Animal Skin"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Balasin",["Pinya","Banana"],["Kalasag","Batik"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Lungon",["Kalasag","Mango"],["Barong","Banana"]));
+
+	settlementProductionRecords.push(new SettlementProductionRecord("Tanjung Hitam",["Banana"],["Mango","Coffee"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Diutara",["Mahogany"],["Kris","Banana"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Luarhari",["Coffee"],["Vest"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Kelairan",["Batik","Kris"],["Mahogany","Poison"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Merantai",["Vest"],["Batik"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Bakar",["Poison"],["Mahogany"]));
+
+	settlementProductionRecords.push(new SettlementProductionRecord("Rha Tar",["Rope"],["Silk","Abaca Wood"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Taungtaw",["Teak"],["Rope"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Shwe Kampar",["Gold","Ivory"],["Teak","Banana"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Kapu Khong",["Banana"],["Gold"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Ngar Phamsa",["Leather","Gold"],["Animal Skin"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Meong Sudthai",["Mahogany"],["Leather"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Saeng Diew",["Animal Skin"],["Mahogany","Teak"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Tonle Veng",["Teak"],["Banana"]));
+
+	settlementProductionRecords.push(new SettlementProductionRecord("Xigang",["Gold"],["Porcelain"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Qinglin",["Gold Jewelry"],["Gold"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Xiaogong",["Leather"],["Animal Skin"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Nandao",["Animal Skin","Silk"],["Gold Jewelry","Ivory"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Yonghai",["Silk"],["Vest"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Yuying",["Porcelain"],["Leather"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Xionghu",["Trousers, Vest"],["Silk"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Fuwan",["Porcelain"],["Iron","Trousers"]));
+	settlementProductionRecords.push(new SettlementProductionRecord("Guijiang",["Iron"],["Rope"]));
+
+}	
 function populateMarket(settlement){
 	var cargoList;
 
@@ -95,3 +131,4 @@ function populateShipbuilder(settlement)
 	
 	return cargoList;
 }
+
