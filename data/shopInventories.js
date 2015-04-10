@@ -29,6 +29,17 @@ function populateShopInventories(){
 			
 	}
 }
+
+function hasCargo(cargoList,name){//TODO should we remove the shopInventory class's hasCargo method, or have it call this method?
+		var i;
+		for(i=0;i<cargoList.length;i++)
+		{
+			if(cargoList[i].name==name)
+				return true;
+		}
+		return false;
+	}
+
 function populateSettlementProductionRecords(){
 	settlementProductionRecords.push(new SettlementProductionRecord("Sikdagat",["Kamote","Abaca Wood"],["Leather","Iron"]));
 	settlementProductionRecords.push(new SettlementProductionRecord("Kagisanan",["Rope","Vest"],["Abaca Wood","Porcelain","Pinya"]));
@@ -64,6 +75,18 @@ function populateSettlementProductionRecords(){
 	settlementProductionRecords.push(new SettlementProductionRecord("Guijiang",["Iron"],["Rope"]));
 
 }	
+function getSettlementProductionRecord(settlementName){
+	var i;
+	for (i=0;i<settlementProductionRecords.length;i++)
+	{
+
+
+		if(settlementName==settlementProductionRecords[i].name)
+			return settlementProductionRecords[i];
+	}
+	return null;
+}
+
 function populateMarket(settlement){
 	var cargoList;
 
@@ -87,7 +110,15 @@ function populateMarket(settlement){
 			break;
 
 	}
-	
+	var productionRecord=getSettlementProductionRecord(settlement.name);
+	var fetcher=new CargoRecordInfoFetcher();
+	var i;
+	for(i=0;i<productionRecord.production.length;i++)
+	{
+		var cargoName=productionRecord.production[i];
+		if(!hasCargo(cargoList,cargoName))
+			cargoList.push(new Cargo(cargoName,fetcher.getType(cargoName),fetcher.getUnitWeight(cargoName),180+randomizeMedium()));//TODO get cargo info from cargorecords
+	}
 	return cargoList;
 }
 function randomizeSmall(){

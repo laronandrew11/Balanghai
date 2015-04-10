@@ -1,7 +1,7 @@
 var priceTableMap=new Map();
 var basePriceMap=new Map();
-populateBaseCargoPrices();
-populatePriceTable();
+//populateBaseCargoPrices();
+//populatePriceTable();
 
 
 function populatePriceTable(){
@@ -11,11 +11,13 @@ function populatePriceTable(){
 	var settlements=fetcher.getAll();
 	for(i=0;i<settlements.length;i++)
 	{
-
+		var productionRecord=getSettlementProductionRecord(settlements[i].name);
+			console.log(productionRecord);
 		for(j=0;j<settlements[i].pois.length;j++)
 		{
 
 			var priceRecords=[];
+			
 			var k;
 			if(settlements[i].pois[j]=='market')
 			{
@@ -23,8 +25,14 @@ function populatePriceTable(){
 
 				for(k=0;k<basePrices.length;k++)
 				{
-					console.log(basePrices[k].name+", "+basePrices[k].buyPrice+", "+basePrices[k].sellPrice);
-					priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice),randomizePrice(basePrices[k].sellPrice)));//temporary: set prices of everything to 10
+					
+					//console.log(basePrices[k].name+", "+basePrices[k].buyPrice+", "+basePrices[k].sellPrice);
+					if(contains(productionRecord.production,basePrices[k].cargoName))
+						priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice-basePrices[k].buyPrice/2),randomizePrice(basePrices[k].sellPrice-basePrices[k].sellPrice/2)));
+					else if(contains(productionRecord.consumption,basePrices[k].cargoName))
+						priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice+basePrices[k].buyPrice/2),randomizePrice(basePrices[k].sellPrice+basePrices[k].sellPrice/2)));
+					else
+						priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice),randomizePrice(basePrices[k].sellPrice)));//temporary: set prices of everything to 10
 				}
 			}
 			else if(settlements[i].pois[j]=='shipbuilder')

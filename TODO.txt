@@ -1,42 +1,31 @@
 HIGH PRIORITY
--complete inventory and pricing systems
+-Item button wrapping/scrolling on cargo, ship and trade screens
+-weekly re-rolling of inventories and prices
 -allow player free roam
 -enforce weight system
 
 
 
--allow loading shop inventories from saved games properly
+MEDIUM PRIORITY
+-random inventory items
 -More immersive translation alert on travel screen
 -Alternatives to alerts and prompts in general
-
-
-4/3
--Improve label/button text alignment
-4/4
--Item button wrapping/scrolling on cargo, ship and trade screens
-4/5
--Design economic model
 -Save game should include  price tables
--Update map font?
-4/6
--Stop market screen from displaying all cargo after a transaction instead of staying in the currently selected cargo category
+-allow loading shop inventories from saved games properly
 
 Textbox:
 -implement wrapping (also for label)
 -adjust cursor positioning
 
+LOW PRIORITY
+-Improve label/button text alignment
+-Update map font?
+-Stop market screen from displaying all cargo after a transaction instead of staying in the currently selected cargo category
+-Proper hover system; remove previous button text on hover/mouse off
+
+LATER ITERATION
 Quest/event systems
 
-MEDIUM PRIORITY
-Icon lists
-Scrollbar?
-Zoom?
-
-
-LOW PRIORITY
-Remove previous button text on hover/mouse off
-Get custom font to work correctly
 
 REFACTORING (optional)
 Pre-sort lists by name if possible, so that we can use binary search
-Convert ship, cargo and map screens to panels within a single fleet menu?

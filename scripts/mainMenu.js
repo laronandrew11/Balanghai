@@ -74,7 +74,10 @@ function addMainMenu(){
 	btnNewGame.onClick=function(){
 		var newPlayerName = prompt("Please enter your name", "");
 		gameState=new GameState(newPlayerName);
+		
 		populateSettlementProductionRecords();
+		populateBaseCargoPrices();
+		populatePriceTable();
 		populateShopInventories();
 		mainMenu.clearScreen();
 		addFleetMenu();
