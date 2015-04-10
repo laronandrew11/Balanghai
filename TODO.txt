@@ -1,12 +1,16 @@
-HIGH PRIORITY
+HIGH PRIORITY (finish by April 16)
+-More ship names
+-Prevent ships from being assigned duplicate names
 -Item button wrapping/scrolling on cargo, ship and trade screens
 -weekly re-rolling of inventories and prices
 -allow player free roam
 -enforce weight system
+-enforce speed system (?)
 
 
 
 MEDIUM PRIORITY
+-make ship prices reflect their attributes
 -random inventory items
 -More immersive translation alert on travel screen
 -Alternatives to alerts and prompts in general

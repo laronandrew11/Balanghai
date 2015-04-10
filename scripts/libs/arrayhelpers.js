@@ -16,3 +16,7 @@ function randomIntFromInterval(min,max)
 {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
+
+function randomizeToPercentage(orig, denominator){
+  return orig+randomIntFromInterval(-(orig/denominator), orig/denominator);
+}

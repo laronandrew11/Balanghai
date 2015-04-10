@@ -1,5 +1,6 @@
 var priceTableMap=new Map();
 var basePriceMap=new Map();
+var shipBasePriceMap=new Map();
 //populateBaseCargoPrices();
 //populatePriceTable();
 
@@ -11,8 +12,8 @@ function populatePriceTable(){
 	var settlements=fetcher.getAll();
 	for(i=0;i<settlements.length;i++)
 	{
-		var productionRecord=getSettlementProductionRecord(settlements[i].name);
-			console.log(productionRecord);
+		
+
 		for(j=0;j<settlements[i].pois.length;j++)
 		{
 
@@ -21,26 +22,34 @@ function populatePriceTable(){
 			var k;
 			if(settlements[i].pois[j]=='market')
 			{
+				var productionRecord=getSettlementProductionRecord(settlements[i].name);
 				var basePrices=basePriceMap.get(settlements[i].region);
 
 				for(k=0;k<basePrices.length;k++)
 				{
 					
 					//console.log(basePrices[k].name+", "+basePrices[k].buyPrice+", "+basePrices[k].sellPrice);
-					if(contains(productionRecord.production,basePrices[k].cargoName))
-						priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice-basePrices[k].buyPrice/2),randomizePrice(basePrices[k].sellPrice-basePrices[k].sellPrice/2)));
-					else if(contains(productionRecord.consumption,basePrices[k].cargoName))
-						priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice+basePrices[k].buyPrice/2),randomizePrice(basePrices[k].sellPrice+basePrices[k].sellPrice/2)));
+					if(contains(productionRecord.production,basePrices[k].name))
+						priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice-basePrices[k].buyPrice/2),randomizePrice(basePrices[k].sellPrice-basePrices[k].sellPrice/2)));
+					else if(contains(productionRecord.consumption,basePrices[k].name))
+						priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice+basePrices[k].buyPrice/2),randomizePrice(basePrices[k].sellPrice+basePrices[k].sellPrice/2)));
 					else
-						priceRecords.push(new PriceRecord(basePrices[k].cargoName, randomizePrice(basePrices[k].buyPrice),randomizePrice(basePrices[k].sellPrice)));//temporary: set prices of everything to 10
+						priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice),randomizePrice(basePrices[k].sellPrice)));
 				}
 			}
 			else if(settlements[i].pois[j]=='shipbuilder')
 			{
-				for(k=0;k<shipRecords.length;k++)
+				var productionRecord=getShipProductionRecord(settlements[i].name);
+				var basePrices=shipBasePriceMap.get(settlements[i].region);
+			
+				for(k=0;k<basePrices.length;k++)
 				{
-					priceRecords.push(new PriceRecord(shipRecords[k].name, 400,300));//temporary: set base prices of every ship type to 400
+				if(contains(productionRecord.production,basePrices[k].name))
+					priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice*0.7),randomizePrice(basePrices[k].sellPrice*0.7)));
+				else
+					priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice),randomizePrice(basePrices[k].sellPrice)));
 				}
+
 			}
 			priceTableMap.set(settlements[i].name+"-"+settlements[i].pois[j], priceRecords);
 		}	
@@ -51,9 +60,7 @@ function populatePriceTable(){
 
 function randomizePrice(originalPrice){
 	
-	var randomMax=originalPrice/10;
-	var randomMin=-randomMax;
-	return originalPrice + randomIntFromInterval(randomMin, randomMax);
+	return randomizeToPercentage(originalPrice, 10);
 }
 
 function populateBaseCargoPrices(){
@@ -179,3 +186,43 @@ function populateBaseCargoPrices(){
 	basePriceMap.set("Manjiang", priceRecords4);
 }
 
+function populateBaseShipPrices(){
+	var priceRecords1=[];
+	priceRecords1.push(new PriceRecord("Bangka",400,300));//low
+	priceRecords1.push(new PriceRecord("Vinta",650,550));//low
+	priceRecords1.push(new PriceRecord("Proa",600,500));//medium
+	priceRecords1.push(new PriceRecord("Balanghai",1200,1100));//exclusive-P
+	priceRecords1.push(new PriceRecord("Tanjaq",800,700));//exclusive-C
+	priceRecords1.push(new PriceRecord("Junk",7000,6500));//exclusive-C
+	shipBasePriceMap.set("Lunhawan", priceRecords1);
+
+	var priceRecords2=[];
+	priceRecords2.push(new PriceRecord("Bangka",400,300));//low
+	priceRecords2.push(new PriceRecord("Vinta",750,650));//medium
+	priceRecords2.push(new PriceRecord("Proa",500,450));//low
+	priceRecords2.push(new PriceRecord("Balanghai",2000,1900));//exclusive-C
+	priceRecords2.push(new PriceRecord("Tanjaq",600,500));//exclusive-P
+	priceRecords2.push(new PriceRecord("Junk",7500,7000));//exclusive-C
+	shipBasePriceMap.set("Besaria", priceRecords2);
+
+	var priceRecords3=[];
+	priceRecords3.push(new PriceRecord("Bangka",500,400));//medium
+	priceRecords3.push(new PriceRecord("Vinta",800,700));//high
+	priceRecords3.push(new PriceRecord("Proa",700,600));//high
+	priceRecords3.push(new PriceRecord("Balanghai",2100,2000));//exclusive-C
+	priceRecords3.push(new PriceRecord("Tanjaq",750,700));//exclusive-C
+	priceRecords3.push(new PriceRecord("Junk",6500,6000));//exclusive-C
+	shipBasePriceMap.set("Phra Van", priceRecords3);
+
+	var priceRecords4=[];
+	priceRecords4.push(new PriceRecord("Bangka",500,400));//medium
+	priceRecords4.push(new PriceRecord("Vinta",750,650));//medium
+	priceRecords4.push(new PriceRecord("Proa",700,600));//high
+	priceRecords4.push(new PriceRecord("Balanghai",1900,1800));//exclusive-C
+	priceRecords4.push(new PriceRecord("Tanjaq",750,650));//exclusive-C
+	priceRecords4.push(new PriceRecord("Junk",5000,4500));//exclusive-P
+	shipBasePriceMap.set("Manjiang", priceRecords4);
+
+
+
+}

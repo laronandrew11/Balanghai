@@ -76,7 +76,9 @@ function addMainMenu(){
 		gameState=new GameState(newPlayerName);
 		
 		populateSettlementProductionRecords();
+		populateShipProductionRecords();
 		populateBaseCargoPrices();
+		populateBaseShipPrices();
 		populatePriceTable();
 		populateShopInventories();
 		mainMenu.clearScreen();

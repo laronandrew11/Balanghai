@@ -1,5 +1,6 @@
 var shopInventoryMap=new Map();
 var settlementProductionRecords=[];
+var shipProductionRecords=[];
 //populateShopInventories();
 function populateShopInventories(){
 	var fetcher=new SettlementInfoFetcher();
@@ -75,18 +76,59 @@ function populateSettlementProductionRecords(){
 	settlementProductionRecords.push(new SettlementProductionRecord("Guijiang",["Iron"],["Rope"]));
 
 }	
+function populateShipProductionRecords(){
+	shipProductionRecords.push(new SettlementProductionRecord("Sikdagat",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Kagisanan",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Mapawikan",["Bangka","Vinta"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Atabay",["Bangka","Vinta","Proa"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Balasin",["Bangka","Proa","Balanghai"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Lungon",["Bangka","Proa"],[]));
+
+	shipProductionRecords.push(new SettlementProductionRecord("Tanjung Hitam",["Bangka","Proa"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Diutara",["Proa","Bangka","Tanjaq"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Luarhari",["Proa","Tanjaq"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Kelairan",["Proa"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Merantai",["Proa","Tanjaq"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Bakar",["Proa","Tanjaq"],[]));
+
+	shipProductionRecords.push(new SettlementProductionRecord("Rha Tar",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Taungtaw",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Shwe Kampar",["Bangka","Proa"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Kapu Khong",["Bangka","Proa"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Ngar Phamsa",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Meong Sudthai",["Bangka","Proa"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Saeng Diew",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Tonle Veng",["Bangka","Proa"],[]));
+
+	shipProductionRecords.push(new SettlementProductionRecord("Xigang",["Junk"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Qinglin",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Xiaogong",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Nandao",["Junk"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Yonghai",["Junk"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Yuying",["Junk"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Xionghu",["Bangka"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Fuwan",["Bangka","Junk"],[]));
+	shipProductionRecords.push(new SettlementProductionRecord("Guijiang",["Junk"],[]));
+
+}	
 function getSettlementProductionRecord(settlementName){
 	var i;
 	for (i=0;i<settlementProductionRecords.length;i++)
 	{
-
-
 		if(settlementName==settlementProductionRecords[i].name)
 			return settlementProductionRecords[i];
 	}
 	return null;
 }
-
+function getShipProductionRecord(settlementName){
+	var i;
+	for (i=0;i<shipProductionRecords.length;i++)
+	{
+		if(settlementName==shipProductionRecords[i].name)
+			return shipProductionRecords[i];
+	}
+	return null;
+}
 function populateMarket(settlement){
 	var cargoList;
 
@@ -138,28 +180,42 @@ function randomizeLarge(){
 }
 function populateShipbuilder(settlement)
 {
-	var cargoList;
+	var shipList=[];
 	var nameList;
+
+	
 	switch(settlement.region){
 		case "Lunhawan":
 			nameList=["Halimaw","Batumbakal"];
-			cargoList=[new Ship("Halimaw",'Bangka',10,110,50), new Ship("Batumbakal",'Bangka',10,100,60)];
 			break;
 		case "Besaria":
 			nameList=["Singa","Gajah"];
-			cargoList=[new Ship("Halimaw",'Bangka',10,110,50), new Ship("Batumbakal",'Bangka',10,100,60)];
 			break;
 		case "Manjiang":
 			nameList=["Hailang","Zhihui"];
-			cargoList=[new Ship("Halimaw",'Bangka',10,110,50), new Ship("Batumbakal",'Bangka',10,100,60)];
 			break;
 		case "Phra Van":
 			nameList=["Halimaw","Batumbakal"];
-			cargoList=[new Ship("Halimaw",'Bangka',10,110,50), new Ship("Batumbakal",'Bangka',10,100,60)];
-			break;
-	
+			break;	
 	}
-	
-	return cargoList;
+
+	var productionRecord=getShipProductionRecord(settlement.name);
+
+	var fetcher=new ShipInfoFetcher();
+
+	var i;
+	for(i=0;i<productionRecord.production.length;i++)
+	{
+		var shipName=productionRecord.production[i];
+		var shipRecord=fetcher.getShipRecordByType(shipName);
+		var j;
+		for(j=0;j<3+randomIntFromInterval(-2,2);j++)
+			shipList.push(new Ship(nameList[randomIntFromInterval(0,nameList.length-1)],shipName,randomizeToPercentage(shipRecord.speed, 20),randomizeToPercentage(shipRecord.health,20),randomizeToPercentage(shipRecord.cargoCapacity,20)));//TODO get cargo info from cargorecords
+	}
+
+	return shipList;
 }
+
+
+
 

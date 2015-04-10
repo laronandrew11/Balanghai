@@ -31,5 +31,16 @@ function ShipInfoFetcher(){
 		}
 	}
 	this.getIcon=this.createGetIcon();
+	this.getShipRecordByType=function(shipType){
+		var i;
+			for(i=0;i<shipRecords.length;i++)
+			{
+				if(shipRecords[i].name==shipType)
+				{
+				
+					return shipRecords[i];
+				}
+			}
+	}
 
 }

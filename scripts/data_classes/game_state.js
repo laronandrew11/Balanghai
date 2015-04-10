@@ -170,7 +170,7 @@ function GameState(playerName){
 			var i;
 			for(i=0;i<priceTable.length;i++)
 			{
-				if(priceTable[i].cargoName==cargoName)
+				if(priceTable[i].name==cargoName)
 				{
 					return priceTable[i].sellPrice;//price which the player will buy at, and the shop will sell at
 				}
