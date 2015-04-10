@@ -1,10 +1,15 @@
 HIGH PRIORITY
-4/1
+-complete inventory and pricing systems
+-allow player free roam
+-enforce weight system
+
+
+
 -allow loading shop inventories from saved games properly
 -More immersive translation alert on travel screen
 -Alternatives to alerts and prompts in general
-4/2
--allow player free roam
+
+
 4/3
 -Improve label/button text alignment
 4/4
