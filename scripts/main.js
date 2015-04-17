@@ -101,7 +101,7 @@ function addDefaultButtons(parentMenu)
 		returnItemsToSell();
 		addSettlementMenu(settlement);
 	}
-	var btnTranslate=new Button("WORK",850,500,100,100,"","Epistolar",15,"black", translateButtonBG);
+	var btnTranslate=new Button("WORK",850,470,100,125,"","Epistolar",15,"black", translateButtonBG);
 	btnTranslate.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();

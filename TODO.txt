@@ -1,3 +1,12 @@
+Sir Sol's suggestions
+-highlight/disabled images for buttons
+-differentiate "Work" and "Quest" menu--> "work" should be "foreign"
+-change "offer" button text to "trade"
+-replace alerts with panels
+
+
+
+
 HIGH PRIORITY (finish by April 16)
 -More ship names
 -Prevent ships from being assigned duplicate names

@@ -224,7 +224,12 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 		populatePlayerCategoryButtons(parentMenu);
 	var lblPlayerMoney=new Label(260,360,100,50,"Your money: "+gameState.money,"Bebas",18,"black");
 	var x=95;
+	var y=185;
 	var i;
+
+	var columns=4;
+	var columnIndex=0;
+
 	if(poiType=="market")
 		var cargoList=gameState.cargo;
 	else if(poiType=='shipbuilder')
@@ -233,19 +238,25 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 	for(i=0;i<cargoList.length;i++){
 		var item=cargoList[i];
 
+		if(columnIndex==columns)
+		{
+			y+=85;
+			x=95;
+			columnIndex=0;
+		}
 		if(poiType=='market'){
 			if(cargoType=='Other' || item.type==cargoType){
 				var fetcher=new CargoRecordInfoFetcher();
 			
 
-				var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
-				var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+				var newButton=new Button(item.amount+" "+item.name,x,y,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+				var newLabel=new Label(x,y+50,80,30,item.amount+" "+item.name,"Bebas",15,"black");
 				newLabel.bgImage=scrollSmallImg;
-				var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
+				var lblTag=new Label(x,y,47,31,"","Bebas",15,"black");
 				var catIndex=cargoCategories.indexOf(item.type);
 				lblTag.bgImage=cargoCategoryLabels[catIndex];
 				parentMenu.panels[0].addLabel(lblTag);
-				var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+				var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
 				priceLabel.bgImage=coinImg;
 				newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
 				parentMenu.panels[0].addButton(newButton);
@@ -257,10 +268,10 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 			
 		else if(poiType=='shipbuilder'){
 			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,185,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,235,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+			var newButton=new Button(item.properName,x,y,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,y+50,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
-			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+			var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 			newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
 			parentMenu.panels[0].addButton(newButton);
@@ -320,7 +331,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
-		
+		columnIndex++;
 	}
 
 	parentMenu.drawScreen(tradeMenuBG);
@@ -335,23 +346,33 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 		populateShopCategoryButtons(parentMenu, shopInventory);
 	var lblShopMoney=new Label(550,360,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
 	var x=530;
+	var y=185;
 	var i;
 	
 	//TODO load shop inventory based on settlement name and type
+	var columns=4;
+	var columnIndex=0;
 	for(i=0;i<shopInventory.cargoList.length;i++){
 		var item=shopInventory.cargoList[i];
+		
+		if(columnIndex==columns)
+		{
+			y+=85;
+			x=530;
+			columnIndex=0;
+		}
 		if(shopInventory.type=='market'){
 			if(cargoType=='Other' || item.type==cargoType){
 				var fetcher=new CargoRecordInfoFetcher();
 				
-				var newButton=new Button(item.amount+" "+item.name,x,185,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
-				var newLabel=new Label(x,235,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+				var newButton=new Button(item.amount+" "+item.name,x,y,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+				var newLabel=new Label(x,y+50,80,30,item.amount+" "+item.name,"Bebas",15,"black");
 				newLabel.bgImage=scrollSmallImg;
-				var lblTag=new Label(x,185,47,31,"","Bebas",15,"black");
+				var lblTag=new Label(x,y,47,31,"","Bebas",15,"black");
 				var catIndex=cargoCategories.indexOf(item.type);
 				lblTag.bgImage=cargoCategoryLabels[catIndex];
 				parentMenu.panels[1].addLabel(lblTag);
-				var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+				var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
 				priceLabel.bgImage=coinImg;
 				newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
 				parentMenu.panels[1].addButton(newButton);//add to inventory panel
@@ -363,10 +384,10 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 			
 		else if(shopInventory.type=='shipbuilder'){
 			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,185,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,235,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+			var newButton=new Button(item.properName,x,y,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+			var newLabel=new Label(x,y+50,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
-			var priceLabel=new Label(x+47,185,33,31,item.price,"Bebas",15,"black");
+			var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 			newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
 			parentMenu.panels[1].addButton(newButton);//add to inventory panel
@@ -375,7 +396,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 			x+=82;
 		}
 			
-		
+		columnIndex++;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 
@@ -458,7 +479,7 @@ function addMarketMenu(settlement){
 		addShipbuilderButton(marketScreen,settlement);
 	}
 
-	var btnTrade=new Button("TRADE",440,350,111,62,"","Bebas",15,"black", tradeButtonBG);
+	var btnTrade=new Button("TRADE",400,350,162,65,"","Bebas",15,"black", tradeButtonBG);
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 			marketScreen.labels[2].text=gameState.money;

@@ -39,6 +39,9 @@ var pointerImg = document.createElement('img');
 var settlementImg = document.createElement('img');
 	settlementImg.src = 'img/settlement.png';
 
+var poiButtonImg=document.createElement('img');
+	poiButtonImg.src = 'img/buttons/settlementmenu/poiButton.png';
+
 var lunhawanSettlementImg = document.createElement('img');
 	lunhawanSettlementImg.src = 'img/settlements/lunhawan.png';
 	
