@@ -24,6 +24,8 @@ var borderImg = document.createElement('img');
 
 var coinImg = document.createElement('img');
 	coinImg.src = 'img/icons/coin.png';
+var weightImg = document.createElement('img');
+	weightImg.src = 'img/icons/weight.png';
 var totalWeightImg = document.createElement('img');
 	totalWeightImg.src = 'img/icons/totalweight.png';
 

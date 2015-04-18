@@ -314,7 +314,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 			var catIndex=cargoCategories.indexOf(item.type);
 			lblTag.bgImage=cargoCategoryLabels[catIndex];
 			parentMenu.panels[2].addLabel(lblTag);
-			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
+			var priceLabel=new Label(x+47,410,33,31,item.price*item.amount,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 		}
 			
@@ -431,7 +431,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 			var catIndex=cargoCategories.indexOf(item.type);
 			lblTag.bgImage=cargoCategoryLabels[catIndex];
 			parentMenu.panels[3].addLabel(lblTag);
-			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
+			var priceLabel=new Label(x+47,410,33,31,item.price*item.amount,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
 		}
 			
