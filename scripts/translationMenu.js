@@ -1,7 +1,10 @@
 function addTranslationMenu(){
 	var translationScreen=new staticScreen();
-
+	var lblBorder=new Label(0,0,1000,600,"","Epistolar", 15, "black");
+	lblBorder.bgImage=borderImg;
+	translationScreen.addLabel(lblBorder);
 	addDefaultButtons(translationScreen);
+
 	populateTranslationMenu(translationScreen);
 	//dynamicScreenActive=true;
 
