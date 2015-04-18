@@ -43,11 +43,14 @@ function addDefaultLabels(parentMenu)
 	var lblCoin=new Label(805,38,33,31,"","Epistolar",18,"black");
 	lblCoin.bgImage=coinImg;
 
+	var lblCargoCapacity=new Label(848,2,145,38,gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity(),"Bebas",18,"black");
+	lblCargoCapacity.bgImage=scrollLargeImg;
 	
 	parentMenu.addLabel(lblGameDate);
 	parentMenu.addLabel(lblPlayerName);
 	parentMenu.addLabel(lblMoney);
 	parentMenu.addLabel(lblCoin);
+	parentMenu.addLabel(lblCargoCapacity);
 
 }
 function addDefaultButtons(parentMenu)

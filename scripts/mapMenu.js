@@ -36,8 +36,7 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 			//alert(settlement.name);
 			parentMenu.clearScreen();
 			heading = new dot(settlement.mapX*mapScale,settlement.mapY*mapScale,50,50,"red");
-			isHeadingSettlement=true;
-			destinationSettlement=settlement;
+	
 			//the ff. is temporary until we have a travel screen where time actually passes
 			addTravelMenu();
 			

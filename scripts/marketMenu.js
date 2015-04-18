@@ -487,7 +487,7 @@ function addMarketMenu(settlement){
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 			marketScreen.labels[2].text=gameState.money;
-
+			marketScreen.labels[4].text=gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity();
 			populatePlayerInventoryPanel(marketScreen,'market','Other');
 			populateShopInventoryPanel(marketScreen, shopInventory,'Other');
 			populateToSellPanel(marketScreen,'market');

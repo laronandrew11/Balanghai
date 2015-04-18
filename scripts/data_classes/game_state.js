@@ -6,7 +6,6 @@ function GameState(playerName){
 	this.endDate=new GameDate(1200,12,30);
 	this.mapX=494;
 	this.mapY=199;
-	this.usedCapacity=30;
 	this.settlement="Sikdagat"; //if applicable
 	this.ships=[new Ship("Pag-asa","Bangka",10,100,50)];
 	this.cargo=[new Cargo("Rice","Food",1, 10),new Cargo("Water","Food",1, 10),new Cargo("Abaca Wood","Wood",1, 10)];
@@ -35,6 +34,20 @@ function GameState(playerName){
 		return minSpeed;
 	}
 	
+	this.getMaxCapacity=function(){
+		var maxCapacity=0;
+		for(i=0;i<this.ships.length;i++)
+		{
+			maxCapacity+=this.ships[i].cargoCapacity;
+		}
+		return maxCapacity;
+	}
+	this.getUsedCapacity=function(){
+		var usedCapacity=0;
+		for(i=0;i<this.cargo.length;i++)
+			usedCapacity+=this.cargo[i].amount*this.cargo[i].unitWeight;
+		return usedCapacity;
+	}
 	this.createAddShip=function(newShip){
 		var obj=this;
 		return function(newShip){
