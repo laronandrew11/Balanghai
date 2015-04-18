@@ -129,6 +129,7 @@ function DynamicScreen(){
 				gameState.mapX=settlement.mapX;
 				gameState.mapY=settlement.mapY;
 				gameState.settlement=settlement.name;
+				alert(settlement.name);
 				addSettlementMenu(settlement);
 				
 				

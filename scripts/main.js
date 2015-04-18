@@ -42,8 +42,10 @@ function addDefaultLabels(parentMenu)
 	lblMoney.bgImage=scrollLargeImg;
 	var lblCoin=new Label(805,38,33,31,"","Epistolar",18,"black");
 	lblCoin.bgImage=coinImg;
+	var lblWeight=new Label(848,2,36,25,"","Epistolar",18,"black");
+	lblWeight.bgImage=totalWeightImg;
 
-	var lblCargoCapacity=new Label(848,2,145,38,gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity(),"Bebas",18,"black");
+	var lblCargoCapacity=new Label(884,2,145,38,gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity(),"Bebas",18,"black");
 	lblCargoCapacity.bgImage=scrollLargeImg;
 	
 	parentMenu.addLabel(lblGameDate);
@@ -51,6 +53,7 @@ function addDefaultLabels(parentMenu)
 	parentMenu.addLabel(lblMoney);
 	parentMenu.addLabel(lblCoin);
 	parentMenu.addLabel(lblCargoCapacity);
+	parentMenu.addLabel(lblWeight);
 
 }
 function addDefaultButtons(parentMenu)

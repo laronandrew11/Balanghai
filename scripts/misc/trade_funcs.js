@@ -19,18 +19,40 @@ function sellCargo(shopInventory, cargo)//sell a single 'name' of cargo. Note th
 }
 
 function tradeCargo(shopInventory,toBuy, toSell){
+	if(isWithinWeight(toBuy,toSell))
+	{
+		var i;
+		var maxToBuy=toBuy.length;
+		var maxToSell=toSell.length;
+		for(i=0;i<maxToBuy;i++)
+		{
+			buyCargo(shopInventory, toBuy[0]);
+		}
+		for(i=0;i<maxToSell;i++)
+		{
+			sellCargo(shopInventory, toSell[0]);
+		}
+	}
+	else alert("Your ships cannot carry all this cargo!")
+
+}
+function isWithinWeight(toBuy, toSell)
+{
 	var i;
+	var netWeight=0;
 	var maxToBuy=toBuy.length;
 	var maxToSell=toSell.length;
 	for(i=0;i<maxToBuy;i++)
 	{
-		buyCargo(shopInventory, toBuy[0]);
+		netWeight+=toBuy[i].amount*toBuy[i].unitWeight;
 	}
 	for(i=0;i<maxToSell;i++)
 	{
-		sellCargo(shopInventory, toSell[0]);
+		netWeight-=toSell[i].amount*toSell[i].unitWeight;
 	}
-
+	if(gameState.getMaxCapacity()<gameState.getUsedCapacity()+netWeight)
+		return false;
+	return true;
 }
 function buyShip(shopInventory,ship){
 		gameState.addShip(ship);

@@ -23,7 +23,11 @@ var borderImg = document.createElement('img');
 	borderImg.src = 'img/border.png';
 
 var coinImg = document.createElement('img');
-	coinImg.src = 'img/coin.png';
+	coinImg.src = 'img/icons/coin.png';
+var totalWeightImg = document.createElement('img');
+	totalWeightImg.src = 'img/icons/totalweight.png';
+
+
 var scrollSmallImg = document.createElement('img');
 	scrollSmallImg.src = 'img/scroll-sm.png';
 	var scrollLargeImg = document.createElement('img');

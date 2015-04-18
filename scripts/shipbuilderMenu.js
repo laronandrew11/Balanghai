@@ -19,7 +19,7 @@ function addShipbuilderMenu(settlement){
 
 /*Population functions and cargo trading functions will be modified to accomodate shipbuilders...*/
 
-var btnTrade=new Button("TRADE",440,350,111,62,"","Bebas",15,"black", tradeButtonBG);
+var btnTrade=new Button("TRADE",,400,350,162,65,"","Bebas",15,"black", tradeButtonBG);
 		btnTrade.onClick=function(){
 			tradeShips(shopInventory, shopInventory.toSell, gameState.toSell);
 			shipbuilderScreen.labels[2].text=gameState.money;
