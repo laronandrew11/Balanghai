@@ -12,6 +12,10 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 	this.color = color;
 	this.bgImage=bgImage;
 
+	this.status="default";//or "highlighted" or "disabled"
+	this.disabledImage;
+	this.highlightImage;
+
 	this.createDraw = function(context) {
 		var obj = this;
 		return function(context) //TODO: optimize
