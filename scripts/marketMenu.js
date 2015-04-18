@@ -263,6 +263,7 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 				parentMenu.panels[0].addLabel(newLabel);
 		parentMenu.panels[0].addLabel(priceLabel);
 		x+=80;
+		columnIndex++;
 			}
 		}
 			
@@ -278,6 +279,7 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 			parentMenu.panels[0].addLabel(newLabel);
 		parentMenu.panels[0].addLabel(priceLabel);
 		x+=80;
+		columnIndex++;
 		}
 
 		
@@ -331,7 +333,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
-		columnIndex++;
+
 	}
 
 	parentMenu.drawScreen(tradeMenuBG);
@@ -379,6 +381,7 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 				parentMenu.panels[1].addLabel(newLabel);
 				parentMenu.panels[1].addLabel(priceLabel);
 				x+=82;
+				columnIndex++;
 			}
 		}
 			
@@ -394,9 +397,10 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 			parentMenu.panels[1].addLabel(newLabel);
 			parentMenu.panels[1].addLabel(priceLabel);
 			x+=82;
+			columnIndex++;
 		}
 			
-		columnIndex++;
+		
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 

@@ -72,19 +72,29 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 	parentMenu.panels[0].clearLabels();
 	populateCategoryButtons(parentMenu,parentMenu.panels[0]);
 	var x=130;
+	var y=180;
 	var i;
+	var columns=4;
+	var columnIndex=0;
 	var fetcher=new CargoRecordInfoFetcher();
 	for(i=0;i<gameState.cargo.length;i++){
 		var item=gameState.cargo[i];
+
+		if(columnIndex==columns)
+		{
+			y+=85;
+			x=130;
+			columnIndex=0;
+		}
 		if(type=='Other' || item.type==type)
 		{
 			//var buttonImg = document.createElement('img');
 			//buttonImg.src =  fetcher.getImageSrc(item.name);
-			var newButton=new Button(item.name,x,180,80,80,"","Bebas",15,"black",fetcher.getImageSrc(item.name));
-			var newLabel=new Label(x,230,82,30,item.amount+" "+item.name,"Bebas",15,"black");
+			var newButton=new Button(item.name,x,y,80,80,"","Bebas",15,"black",fetcher.getImageSrc(item.name));
+			var newLabel=new Label(x,y+50,82,30,item.amount+" "+item.name,"Bebas",15,"black");
 			newLabel.bgImage=scrollSmallImg;
 
-			var lblTag=new Label(x,180,47,31,"","Bebas",15,"black");
+			var lblTag=new Label(x,y,47,31,"","Bebas",15,"black");
 			var catIndex=cargoCategories.indexOf(item.type);
 			lblTag.bgImage=cargoCategoryLabels[catIndex];
 			/*var priceLabel=new Label(x+47,15,33,31,item.price,"Bebas",15,"black");
@@ -96,9 +106,11 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 			parentMenu.panels[0].addLabel(lblTag);
 			//parentMenu.panels[0].addLabel(priceLabel);
 			x+=85;
+			columnIndex++;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
 		}
+
 	}
 	parentMenu.drawScreen(cargoMenuBG);
 	//parentMenu.panels[0].draw(context);

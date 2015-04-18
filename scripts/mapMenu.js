@@ -31,7 +31,7 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 {
 
 	var settlement=fetcher.get(settlementName);
-	var newButton=new Button(settlementName,44+settlement.mapX,44+settlement.mapY,12,12,settlement.name,"Epistolar",15,"black", settlementImg);
+	var newButton=new Button(settlementName,44+settlement.mapX,44+settlement.mapY,12,12,settlement.name,"Epistolar",16,"black", poiButtonImg);
 	newButton.onClick=function(){
 			//alert(settlement.name);
 			parentMenu.clearScreen();
