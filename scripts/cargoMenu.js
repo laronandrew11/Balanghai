@@ -118,14 +118,12 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 
 			if(columnIndex==columns)
 		{
-			//alert("Column index ==columns");
 			y+=85;
 			x=130;
 			columnIndex=0;
 			rowIndex++;
 		}
 		if(rowIndex==rows){//move to next page
-			//alert("Row index ==rows");
 			rowIndex=0;
 			columnIndex=0;
 			y=180;
