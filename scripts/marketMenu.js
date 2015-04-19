@@ -258,10 +258,13 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 				parentMenu.panels[0].addLabel(lblTag);
 				var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
 				priceLabel.bgImage=coinImg;
+				var weightLabel=new Label(x+47,y+24,33,31,item.unitWeight,"Bebas",15,"black");
+				weightLabel.bgImage=weightImg;
 				newButton.onClick=CreateSellableItemButtonHandler(parentMenu, newButton, item, poiType);
 				parentMenu.panels[0].addButton(newButton);
 				parentMenu.panels[0].addLabel(newLabel);
-		parentMenu.panels[0].addLabel(priceLabel);
+			parentMenu.panels[0].addLabel(priceLabel);
+			parentMenu.panels[0].addLabel(weightLabel);
 		x+=80;
 		columnIndex++;
 			}
@@ -304,6 +307,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 	var total=0;
 	var totalWeight=0;
 	var itemPrice;
+	var itemWeight;
 	
 
 	for(i=0;i<gameState.toSell.length;i++){
@@ -320,8 +324,11 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 			lblTag.bgImage=cargoCategoryLabels[catIndex];
 			parentMenu.panels[2].addLabel(lblTag);
 			itemPrice=item.price*item.amount;
-			totalWeight+=item.unitWeight*item.amount;
+			itemWeight=item.unitWeight*item.amount;
+			totalWeight+=itemWeight;
 			var priceLabel=new Label(x+47,410,33,31,itemPrice,"Bebas",15,"black");
+			var weightLabel=new Label(x+47,y+24,33,31,itemWeight,"Bebas",15,"black");
+				weightLabel.bgImage=weightImg;
 
 			priceLabel.bgImage=coinImg;
 		}
@@ -392,10 +399,13 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 				parentMenu.panels[1].addLabel(lblTag);
 				var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
 				priceLabel.bgImage=coinImg;
+				var weightLabel=new Label(x+47,y+24,33,31,item.unitWeight,"Bebas",15,"black");
+				weightLabel.bgImage=weightImg;
 				newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
 				parentMenu.panels[1].addButton(newButton);//add to inventory panel
 				parentMenu.panels[1].addLabel(newLabel);
 				parentMenu.panels[1].addLabel(priceLabel);
+				parentMenu.panels[1].addLabel(weightLabel);
 				x+=82;
 				columnIndex++;
 			}
@@ -479,7 +489,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 	var totalLabel=new Label(870,420,33,31,total,"Bebas",15,"black");
 	totalLabel.bgImage=coinImg;
 	parentMenu.panels[3].addLabel(totalLabel);
-	if(poiType=="market")
+	if(shopInventory.type=="market")
 	{
 		var totalWeightLabel=new Label(870,455,33,31,totalWeight,"Bebas",15,"black");
 		totalWeightLabel.bgImage=totalWeightImg;
