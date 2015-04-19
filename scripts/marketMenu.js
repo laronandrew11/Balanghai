@@ -327,7 +327,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 			itemWeight=item.unitWeight*item.amount;
 			totalWeight+=itemWeight;
 			var priceLabel=new Label(x+47,410,33,31,itemPrice,"Bebas",15,"black");
-			var weightLabel=new Label(x+47,y+24,33,31,itemWeight,"Bebas",15,"black");
+			var weightLabel=new Label(x+47,434,33,31,itemWeight,"Bebas",15,"black");
 				weightLabel.bgImage=weightImg;
 
 			priceLabel.bgImage=coinImg;
@@ -348,6 +348,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
 		parentMenu.panels[2].addLabel(newLabel);
 		parentMenu.panels[2].addLabel(priceLabel);
+		parentMenu.panels[2].addLabel(weightLabel);
 		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -445,6 +446,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 	var total=0;
 	var totalWeight=0;
 	var itemPrice;
+	var itemWeight;
 	//TODO load shop inventory based on settlement name and type
 	for(i=0;i<shopInventory.toSell.length;i++){
 		var item=shopInventory.toSell[i];
@@ -460,9 +462,14 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 			lblTag.bgImage=cargoCategoryLabels[catIndex];
 			parentMenu.panels[3].addLabel(lblTag);
 			itemPrice=item.price*item.amount;
-			totalWeight+=item.unitWeight*item.amount;
+			itemWeight=item.unitWeight*item.amount;
+			totalWeight+=itemWeight;
 			var priceLabel=new Label(x+47,410,33,31,itemPrice,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
+
+			var weightLabel=new Label(x+47,434,33,31,itemWeight,"Bebas",15,"black");
+				weightLabel.bgImage=weightImg;
+
 		}
 			
 		else if(shopInventory.type=='shipbuilder'){
@@ -481,6 +488,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 		
 		parentMenu.panels[3].addLabel(newLabel);
 		parentMenu.panels[3].addLabel(priceLabel);
+		parentMenu.panels[3].addLabel(weightLabel);
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
