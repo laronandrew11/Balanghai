@@ -72,7 +72,7 @@ function addScrollButtons(parentMenu, parentPanel,type)
 	var upButton=new Button("UP",465,175,50,40,"","Epistolar",15,"black", upArrowImg);
 	upButton.onClick=createScrollButtonHandler(parentMenu, upButton,type, false);
 	var downButton=new Button("DOWN",462,465,50,40,"","Epistolar",15,"black", downArrowImg);
-	downButton.onClick=createScrollButtonHandler(parentMenu, upButton, type, true);
+	downButton.onClick=createScrollButtonHandler(parentMenu, downButton, type, true);
 	parentPanel.addButton(upButton);
 	parentPanel.addButton(downButton);
 

@@ -393,16 +393,19 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 {
 	parentMenu.panels[1].clearButtons();
 	parentMenu.panels[1].clearLabels();
+	addShopScrollButtons(parentMenu, parentMenu.panels[1],shopInventory, cargoType);
 	if(shopInventory.type=='market')
 		populateShopCategoryButtons(parentMenu, shopInventory);
 	var lblShopMoney=new Label(550,360,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
 	var x=530;
 	var y=185;
 	var i;
-	
-	//TODO load shop inventory based on settlement name and type
 	var columns=4;
 	var columnIndex=0;
+	var rows=2;
+	var pageIndex=0;
+	var rowIndex=0;
+
 	for(i=0;i<shopInventory.cargoList.length;i++){
 		var item=shopInventory.cargoList[i];
 		
@@ -411,45 +414,62 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 			y+=85;
 			x=530;
 			columnIndex=0;
+			rowIndex++;
 		}
-		if(shopInventory.type=='market'){
-			if(cargoType=='Other' || item.type==cargoType){
-				var fetcher=new CargoRecordInfoFetcher();
+		if(rowIndex==rows){//move to next page
+			rowIndex=0;
+			columnIndex=0;
+			y=180;
+			pageIndex++;
+
+		}
+		if(rowIndex<=rows)
+		{
+			if(shopInventory.type=='market'){
+				if(cargoType=='Other' || item.type==cargoType){
+					if(pageIndex==shopPageNo)
+					{
+						var fetcher=new CargoRecordInfoFetcher();
+						
+						var newButton=new Button(item.amount+" "+item.name,x,y,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
+						var newLabel=new Label(x,y+50,80,30,item.amount+" "+item.name,"Bebas",15,"black");
+						newLabel.bgImage=scrollSmallImg;
+						var lblTag=new Label(x,y,47,31,"","Bebas",15,"black");
+						var catIndex=cargoCategories.indexOf(item.type);
+						lblTag.bgImage=cargoCategoryLabels[catIndex];
+						parentMenu.panels[1].addLabel(lblTag);
+						var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
+						priceLabel.bgImage=coinImg;
+						var weightLabel=new Label(x+47,y+24,33,31,item.unitWeight,"Bebas",15,"black");
+						weightLabel.bgImage=weightImg;
+						newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
+						parentMenu.panels[1].addButton(newButton);//add to inventory panel
+						parentMenu.panels[1].addLabel(newLabel);
+						parentMenu.panels[1].addLabel(priceLabel);
+						parentMenu.panels[1].addLabel(weightLabel);
+						x+=82;
+					}
+					columnIndex++;
+				}
+			}
 				
-				var newButton=new Button(item.amount+" "+item.name,x,y,80,80,"","Bebas",15,"black", fetcher.getImageSrc(item.name));
-				var newLabel=new Label(x,y+50,80,30,item.amount+" "+item.name,"Bebas",15,"black");
-				newLabel.bgImage=scrollSmallImg;
-				var lblTag=new Label(x,y,47,31,"","Bebas",15,"black");
-				var catIndex=cargoCategories.indexOf(item.type);
-				lblTag.bgImage=cargoCategoryLabels[catIndex];
-				parentMenu.panels[1].addLabel(lblTag);
-				var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
-				priceLabel.bgImage=coinImg;
-				var weightLabel=new Label(x+47,y+24,33,31,item.unitWeight,"Bebas",15,"black");
-				weightLabel.bgImage=weightImg;
-				newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
-				parentMenu.panels[1].addButton(newButton);//add to inventory panel
-				parentMenu.panels[1].addLabel(newLabel);
-				parentMenu.panels[1].addLabel(priceLabel);
-				parentMenu.panels[1].addLabel(weightLabel);
-				x+=82;
+			else if(shopInventory.type=='shipbuilder'){
+				if(pageIndex==shopPageNo)
+				{
+					var fetcher=new ShipInfoFetcher();
+					var newButton=new Button(item.properName,x,y,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
+					var newLabel=new Label(x,y+50,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
+					newLabel.bgImage=scrollSmallImg;
+					var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
+					priceLabel.bgImage=coinImg;
+					newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
+					parentMenu.panels[1].addButton(newButton);//add to inventory panel
+					parentMenu.panels[1].addLabel(newLabel);
+					parentMenu.panels[1].addLabel(priceLabel);
+					x+=82;
+				}
 				columnIndex++;
 			}
-		}
-			
-		else if(shopInventory.type=='shipbuilder'){
-			var fetcher=new ShipInfoFetcher();
-			var newButton=new Button(item.properName,x,y,80,80,"","Bebas",15,"black", fetcher.getIcon(item.name));
-			var newLabel=new Label(x,y+50,80,30,item.properName+" ("+item.name+")","Bebas",15,"black");
-			newLabel.bgImage=scrollSmallImg;
-			var priceLabel=new Label(x+47,y,33,31,item.price,"Bebas",15,"black");
-			priceLabel.bgImage=coinImg;
-			newButton.onClick=CreateBuyableItemButtonHandler(parentMenu, newButton, item, shopInventory);
-			parentMenu.panels[1].addButton(newButton);//add to inventory panel
-			parentMenu.panels[1].addLabel(newLabel);
-			parentMenu.panels[1].addLabel(priceLabel);
-			x+=82;
-			columnIndex++;
 		}
 			
 		
@@ -538,6 +558,8 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 
 function addMarketMenu(settlement){
+	playerPageNo=0;
+	shopPageNo=0;
 	var marketScreen=new staticScreen();
 	addDefaultButtons(marketScreen);
 	var shopInventory=settlement.getShopInventory('market');
@@ -603,10 +625,10 @@ function addMarketMenu(settlement){
 
 function addShopScrollButtons(parentMenu, parentPanel,shopInventory, cargoType)
 {
-	var upButton=new Button("UP",465,175,50,40,"","Epistolar",15,"black", upArrowImg);
+	var upButton=new Button("UP",860,177,50,40,"","Epistolar",15,"black", upArrowImg);
 	upButton.onClick=createShopScrollButtonHandler(parentMenu, upButton,cargoType, false);
-	var downButton=new Button("DOWN",462,465,50,40,"","Epistolar",15,"black", downArrowImg);
-	downButton.onClick=createShopScrollButtonHandler(parentMenu, upButton, cargoType, true);
+	var downButton=new Button("DOWN",858,301,50,40,"","Epistolar",15,"black", downArrowImg);
+	downButton.onClick=createShopScrollButtonHandler(parentMenu, downButton, cargoType, true);
 	parentPanel.addButton(upButton);
 	parentPanel.addButton(downButton);
 
@@ -615,6 +637,7 @@ function createShopScrollButtonHandler(parentMenu, button,shopInventory, cargoTy
 {
 	var lbutton=button;
 	return function(){
+		alert(down);
 		if(down==false&&shopPageNo>0)
 		{
 			shopPageNo--;
@@ -623,6 +646,7 @@ function createShopScrollButtonHandler(parentMenu, button,shopInventory, cargoTy
 		}
 		else if(down==true)//note: this code allows indefinite scrolling down
 		{
+				alert("Down");
 			shopPageNo++;
 			populateShopInventoryPanel(parentMenu, shopInventory, cargoType);
 			parentMenu.drawScreen(tradeMenuBG);
@@ -635,7 +659,7 @@ function addPlayerScrollButtons(parentMenu, parentPanel, poiType,cargoType)
 	var upButton=new Button("UP",428,177,50,40,"","Epistolar",15,"black", upArrowImg);
 	upButton.onClick=createPlayerScrollButtonHandler(parentMenu, upButton,poiType,cargoType, false);
 	var downButton=new Button("DOWN",426,301,50,40,"","Epistolar",15,"black", downArrowImg);
-	downButton.onClick=createPlayerScrollButtonHandler(parentMenu, upButton,poiType, cargoType, true);
+	downButton.onClick=createPlayerScrollButtonHandler(parentMenu, downButton,poiType, cargoType, true);
 	parentPanel.addButton(upButton);
 	parentPanel.addButton(downButton);
 
@@ -644,6 +668,7 @@ function createPlayerScrollButtonHandler(parentMenu, button,poiType,cargoType,do
 {
 	var lbutton=button;
 	return function(){
+		alert(down);
 		if(down==false&&playerPageNo>0)
 		{
 			playerPageNo--;

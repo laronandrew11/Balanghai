@@ -1,4 +1,6 @@
 function addShipbuilderMenu(settlement){
+	playerPageNo=0;
+	shopPageNo=0;
 	var shipbuilderScreen=new staticScreen();
 	addDefaultButtons(shipbuilderScreen);
 
