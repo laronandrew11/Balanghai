@@ -1,25 +1,18 @@
 TO DRAW
--generic panel (for credits panel)
+
 -reworked shipbuilder screen (show ship details)
--settlement marker - TO DO
--you are here marker - TO DO
 
 
 
-TO GET
--Ship icons
--Ship views
+NIGEL
+-generic panel (for credits panel)
+-"You are here" marker (arrow or tiny ship)
+-Highlighted/disabled versions of all buttons + "settlementicon"
 
-TO CODE
+JANA
+-Icon + Image:
+-Balanghai
+-Junk
+-Proa (AKA Paraw)
+-Tanjaq (rectangle-sailed Indonesian ship, search for "layar tanjaq")
 
--Popup for translation quests 
-
-
-DONE
--settlement buildings- DONE (ish)
--Travel background - DONE
--Ship sprite (except rotation/collision)
--Cargo icons (except instant refresh)
--BG for map menu
--main menu button
--close panel button

@@ -182,20 +182,20 @@ function populateShipbuilder(settlement)
 {
 	var shipList=[];
 	var nameList;
-
+	var usedNames=[];
 	
 	switch(settlement.region){
 		case "Lunhawan":
-			nameList=["Halimaw","Batumbakal"];
+			nameList=["Tamaraw","Sampaguita","Kalayaan","Batumbakal"];
 			break;
 		case "Besaria":
-			nameList=["Singa","Gajah"];
+			nameList=["Singa","Gajah", "Taliwangsa","Berani"];
 			break;
 		case "Manjiang":
-			nameList=["Hailang","Zhihui"];
+			nameList=["Hailang","Zhihui","Sanbao","Nanyang"];
 			break;
 		case "Phra Van":
-			nameList=["Halimaw","Batumbakal"];
+			nameList=["Thang Wing","Sain","Kamleang","Keiyrti"];
 			break;	
 	}
 
@@ -210,7 +210,15 @@ function populateShipbuilder(settlement)
 		var shipRecord=fetcher.getShipRecordByType(shipName);
 		var j;
 		for(j=0;j<3+randomIntFromInterval(-2,2);j++)
-			shipList.push(new Ship(nameList[randomIntFromInterval(0,nameList.length-1)],shipName,randomizeToPercentage(shipRecord.speed, 20),randomizeToPercentage(shipRecord.health,20),randomizeToPercentage(shipRecord.cargoCapacity,20)));//TODO get cargo info from cargorecords
+		{
+			
+			var newName=nameList[randomIntFromInterval(0,nameList.length-1)];
+			if(!contains(usedNames,newName)){
+				shipList.push(new Ship(newName,shipName,randomizeToPercentage(shipRecord.speed, 20),randomizeToPercentage(shipRecord.health,20),randomizeToPercentage(shipRecord.cargoCapacity,20)));//TODO get cargo info from cargorecords
+				usedNames.push(newName);
+			}
+				
+		}
 	}
 
 	return shipList;

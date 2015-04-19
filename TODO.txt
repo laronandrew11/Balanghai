@@ -1,19 +1,38 @@
 Sir Sol's suggestions
+4/20:
 -highlight/disabled images for buttons
+-hover listeners
+4/21:
 -replace alerts and prompts with panels
+4/22:
+-implement quest system for tutorial
+
 
 -change "offer" button text to "trade" (DONE)
 -change BG of translation menu (DONE)
 
 
 HIGH PRIORITY (finish by April 23)
+4/18:
+-Total price/total weight labels on trade screens
+
+4/19:
+-Item scrolling on cargo, ship and trade screens
+
+
 -More ship names
 -Prevent ships from being assigned duplicate names
--Item scrolling on cargo, ship and trade screens
+
+???:
 -weekly re-rolling of inventories and prices
 -allow player free roam
 
--enforce speed system (?)
+Textbox:
+-implement wrapping (also for label)
+-adjust cursor positioning
+
+
+-enforce speed system (DONE)
 -cargo/ship button wrapping (DONE)
 -enforce weight system (DONE!)
 
@@ -21,14 +40,10 @@ HIGH PRIORITY (finish by April 23)
 MEDIUM PRIORITY
 -make ship prices reflect their attributes
 -random inventory items
-
--Alternatives to alerts and prompts in general
 -Save game should include  price tables
 -allow loading shop inventories from saved games properly
 
-Textbox:
--implement wrapping (also for label)
--adjust cursor positioning
+
 
 LOW PRIORITY
 -Improve label/button text alignment

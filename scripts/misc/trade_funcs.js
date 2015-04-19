@@ -21,11 +21,11 @@ function sellCargo(shopInventory, cargo)//sell a single 'name' of cargo. Note th
 function tradeCargo(shopInventory,toBuy, toSell){
 	if(!isWithinWeight(toBuy,toSell))
 		alert("Your ships cannot carry all this cargo!")
-	else if(canAfford(shopInventory,toBuy,toSell)==0)
+	else if(canAfford(shopInventory,toBuy,toSell,"cargo")==0)
 		alert("You cannot afford this!")
-	else if(canAfford(shopInventory,toBuy,toSell)==2)
+	else if(canAfford(shopInventory,toBuy,toSell,"cargo")==2)
 		alert("The market cannot afford this!")
-	else if(canAfford(shopInventory,toBuy,toSell)==1)
+	else if(canAfford(shopInventory,toBuy,toSell,"cargo")==1)
 	{
 		var i;
 		var maxToBuy=toBuy.length;
@@ -60,20 +60,35 @@ function isWithinWeight(toBuy, toSell)
 		return false;
 	return true;
 }
-function canAfford(shopInventory,toBuy, toSell)
+function canAfford(shopInventory,toBuy, toSell,type)
 {
 	var i;
 	var cost=0;
 	var maxToBuy=toBuy.length;
 	var maxToSell=toSell.length;
-	for(i=0;i<maxToBuy;i++)
+	if(type=="cargo")
 	{
-		cost+=toBuy[i].amount*toBuy[i].price;
+		for(i=0;i<maxToBuy;i++)
+		{
+			cost+=toBuy[i].amount*toBuy[i].price;
+		}
+		for(i=0;i<maxToSell;i++)
+		{
+			cost-=toSell[i].amount*toSell[i].price;
+		}
 	}
-	for(i=0;i<maxToSell;i++)
+	else if(type=="ship")
 	{
-		cost-=toSell[i].amount*toSell[i].price;
+		for(i=0;i<maxToBuy;i++)
+		{
+			cost+=toBuy[i].price;
+		}
+		for(i=0;i<maxToSell;i++)
+		{
+			cost-=toSell[i].price;
+		}
 	}
+	
 	if(gameState.money<cost)
 		return 0;
 	if(shopInventory.money<-cost)
@@ -96,11 +111,18 @@ function tradeShips(shopInventory,toBuy, toSell, itemType){
 	var i;
 	var maxToBuy=toBuy.length;
 	var maxToSell=toSell.length;
-	for(i=0;i<maxToBuy;i++)
-		buyShip(shopInventory, toBuy[0]);
-	for(i=0;i<maxToSell;i++)
+	 if(canAfford(shopInventory,toBuy,toSell,"ship")==0)
+		alert("You cannot afford this!")
+	else if(canAfford(shopInventory,toBuy,toSell,"ship")==2)
+		alert("The market cannot afford this!")
+	else if(canAfford(shopInventory,toBuy,toSell,"ship")==1)
 	{
-		sellShip(shopInventory, toSell[0]);
+		for(i=0;i<maxToBuy;i++)
+			buyShip(shopInventory, toBuy[0]);
+		for(i=0;i<maxToSell;i++)
+		{
+			sellShip(shopInventory, toSell[0]);
+		}
 	}
 
 }
