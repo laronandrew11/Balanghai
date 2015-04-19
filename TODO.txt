@@ -13,29 +13,27 @@ Sir Sol's suggestions
 
 
 HIGH PRIORITY (finish by April 23)
-4/18:
--Total price/total weight labels on trade screens
 
 4/19:
 -Item scrolling on cargo, ship and trade screens
 
-
 -More ship names
--Prevent ships from being assigned duplicate names
+-Prevent ships from being assigned duplicate names (in progress; ships in same settlement will not receive duplicate names)
 
-???:
--weekly re-rolling of inventories and prices
--allow player free roam
-
+4/20:
 Textbox:
 -implement wrapping (also for label)
 -adjust cursor positioning
 
 
+???:
+-weekly re-rolling of inventories and prices
+-allow player free roam
+
 -enforce speed system (DONE)
 -cargo/ship button wrapping (DONE)
 -enforce weight system (DONE!)
-
+-Total price/total weight labels on trade screens (DONE)
 
 MEDIUM PRIORITY
 -make ship prices reflect their attributes

@@ -9,6 +9,9 @@ NIGEL
 -"You are here" marker (arrow or tiny ship)
 -Highlighted/disabled versions of all buttons + "settlementicon"
 
+-"total money" icon
+-up and down arrow buttons +highlighted + disabled
+
 JANA
 -Icon + Image:
 -Balanghai

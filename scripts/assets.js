@@ -29,6 +29,11 @@ var weightImg = document.createElement('img');
 var totalWeightImg = document.createElement('img');
 	totalWeightImg.src = 'img/icons/totalweight.png';
 
+var upArrowImg=document.createElement('img');
+	upArrowImg.src = 'img/buttons/upArrow.png';
+	var downArrowImg=document.createElement('img');
+	downArrowImg.src = 'img/buttons/downArrow.png';
+
 
 var scrollSmallImg = document.createElement('img');
 	scrollSmallImg.src = 'img/scroll-sm.png';
