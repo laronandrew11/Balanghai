@@ -36,8 +36,8 @@ var btnTrade=new Button("TRADE",400,350,162,65,"","Bebas",15,"black", tradeButto
 
 
 
-	var pnlPlayerInventory=new Panel(50,50,450,250,null);
-	var pnlShopInventory=new Panel(500,50,450,250,null);
+	var pnlPlayerInventory=new Panel(50,50,450,300,null);
+	var pnlShopInventory=new Panel(500,50,450,300,null);
 	var pnlToSell=new Panel(50,300,450,250,null);
 	var pnlToBuy=new Panel(500,300,450,250,null);
 

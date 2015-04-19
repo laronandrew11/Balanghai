@@ -666,7 +666,6 @@ function createPlayerScrollButtonHandler(parentMenu, button,poiType,cargoType,do
 {
 	var lbutton=button;
 	return function(){
-		alert(down);
 		if(down==false&&playerPageNo>0)
 		{
 			playerPageNo--;
