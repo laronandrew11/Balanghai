@@ -626,9 +626,9 @@ function addMarketMenu(settlement){
 function addShopScrollButtons(parentMenu, parentPanel,shopInventory, cargoType)
 {
 	var upButton=new Button("UP",860,177,50,40,"","Epistolar",15,"black", upArrowImg);
-	upButton.onClick=createShopScrollButtonHandler(parentMenu, upButton,cargoType, false);
+	upButton.onClick=createShopScrollButtonHandler(parentMenu, upButton,shopInventory, cargoType,false);
 	var downButton=new Button("DOWN",858,301,50,40,"","Epistolar",15,"black", downArrowImg);
-	downButton.onClick=createShopScrollButtonHandler(parentMenu, downButton, cargoType, true);
+	downButton.onClick=createShopScrollButtonHandler(parentMenu, downButton, shopInventory, cargoType,true);
 	parentPanel.addButton(upButton);
 	parentPanel.addButton(downButton);
 
@@ -637,7 +637,6 @@ function createShopScrollButtonHandler(parentMenu, button,shopInventory, cargoTy
 {
 	var lbutton=button;
 	return function(){
-		alert(down);
 		if(down==false&&shopPageNo>0)
 		{
 			shopPageNo--;
@@ -646,7 +645,6 @@ function createShopScrollButtonHandler(parentMenu, button,shopInventory, cargoTy
 		}
 		else if(down==true)//note: this code allows indefinite scrolling down
 		{
-				alert("Down");
 			shopPageNo++;
 			populateShopInventoryPanel(parentMenu, shopInventory, cargoType);
 			parentMenu.drawScreen(tradeMenuBG);
