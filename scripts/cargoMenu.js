@@ -14,7 +14,7 @@ function populateCategoryButtons(parentMenu, parentPanel){
 
 		var newButton=new Button(cargoCategories[i],x,125,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
 		//newButton.highlightImage=coinImg;
-
+		//newButton.disabledImage=null;
 		newButton.onClick=CreateCargoCategoryButtonHandler(parentMenu, newButton);
 		parentPanel.addButton(newButton);
 		x+=47;

@@ -102,10 +102,12 @@ function buyShip(shopInventory,ship){
 		shopInventory.removeToSellItem(ship.properName);
 }
 function sellShip(shopInventory,ship){
+	if(gameState.ships.length>0){
 		shopInventory.addCargo(ship);
 		gameState.money+=ship.price;
 		shopInventory.money-=ship.price;
 		gameState.removeToSellItem(ship.properName, 'ship');
+	}
 }
 function tradeShips(shopInventory,toBuy, toSell, itemType){
 	var i;

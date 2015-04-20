@@ -1,7 +1,5 @@
 Sir Sol's suggestions
-4/20:
--highlight/disabled images for buttons
--hover listeners
+
 4/21:
 -replace alerts and prompts with panels
 4/22:
@@ -10,15 +8,12 @@ Sir Sol's suggestions
 
 -change "offer" button text to "trade" (DONE)
 -change BG of translation menu (DONE)
-
+-highlight/disabled images/functionality for buttons (DONE)
 
 HIGH PRIORITY (finish by April 23)
 
-4/19:
--More ship names
--Prevent ships from being assigned duplicate names (in progress; ships in same settlement will not receive duplicate names)
 
-4/20:
+4/21:
 Textbox:
 -implement wrapping (also for label)
 -adjust cursor positioning
@@ -36,6 +31,10 @@ Textbox:
 -Total price/total weight labels on trade screens (DONE)
 
 MEDIUM PRIORITY
+
+-More ship names
+-Prevent ships from being assigned duplicate names (in progress; ships in same settlement will not receive duplicate names)
+
 -make ship prices reflect their attributes
 -random inventory items
 -Save game should include  price tables

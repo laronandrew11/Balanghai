@@ -13,7 +13,7 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 	this.bgImage=bgImage;
 
 	this.status="enabled";//or "highlighted" or "disabled"
-	this.disabledImage=scrollSmallImg;
+	this.disabledImage=null;
 	this.highlightImage=coinImg;
 
 	this.createDraw = function(context) {
@@ -33,7 +33,10 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 					image=obj.disabledImage;
 					break;
 			}
-			context.drawImage(image,obj.x,obj.y,obj.width,obj.height); 
+			if(image!=null)
+			{
+				context.drawImage(image,obj.x,obj.y,obj.width,obj.height); 
+			}
 			//console.log("Color "+this.color);
 			context.fillStyle = obj.color;
 			context.font = obj.font;

@@ -191,6 +191,7 @@ function populatePlayerCategoryButtons(parentMenu){
 	{
 
 		var newButton=new Button(cargoCategories[i],x,127,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
+		newButton.disabledImage=null;
 		newButton.onClick=CreatePlayerCargoCategoryButtonHandler(parentMenu, newButton);
 		parentMenu.panels[0].addButton(newButton);
 		x+=47;
@@ -210,6 +211,7 @@ function populateShopCategoryButtons(parentMenu, shopInventory){
 	{
 
 		var newButton=new Button(cargoCategories[i],x,127,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
+		newButton.disabledImage=null;
 		newButton.onClick=CreateShopCargoCategoryButtonHandler(parentMenu, shopInventory,newButton);
 		parentMenu.panels[1].addButton(newButton);
 		x+=47;

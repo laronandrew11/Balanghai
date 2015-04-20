@@ -13,11 +13,10 @@ function addMapMenu(){
 		pnlMap.addButton(newButton);
 	}
 
-	var btnYouAreHere=new Button("YOU_ARE_HERE",50+gameState.mapX,50+gameState.mapY,16,16,"","Epistolar",15,"black", pointerImg);
-	btnYouAreHere.onClick=function(){
-		alert("YOU ARE HERE");
-	}
-	pnlMap.addButton(btnYouAreHere);
+	var lblYouAreHere=new Label(50+gameState.mapX,50+gameState.mapY,16,16,"","Epistolar",15,"black");
+	lblYouAreHere.bgImage=pointerImg;
+	
+	pnlMap.addLabel(lblYouAreHere);
 	pnlMap.visible=true;
 
 
