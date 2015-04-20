@@ -155,7 +155,7 @@ function Panel(x,y,width,height, bgImage){
 		return function(mousePos)
 		{
 			for(i=0; i<obj.panelButtons.length; i++){
-				if(inCoordinates(obj.panelButtons[i],mousePos)){
+				if(inCoordinates(obj.panelButtons[i],mousePos)&&obj.panelButtons[i].status!="disabled"){
 					obj.panelButtons[i].onClick();
 					return;
 				}

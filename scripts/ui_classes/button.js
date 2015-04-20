@@ -12,8 +12,8 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 	this.color = color;
 	this.bgImage=bgImage;
 
-	this.status="default";//or "highlighted" or "disabled"
-	this.disabledImage;
+	this.status="enabled";//or "highlighted" or "disabled"
+	this.disabledImage=scrollSmallImg;
 	this.highlightImage=coinImg;
 
 	this.createDraw = function(context) {
@@ -23,7 +23,7 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 			var image;
 			switch(obj.status)
 			{
-				case "default":
+				case "enabled":
 					image=obj.bgImage;
 					break;
 				case "highlighted":
@@ -51,11 +51,11 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 	}*/
 	this.onMouseOff=function(){
 		if(this.status=="highlighted")
-			this.status="default";
+			this.status="enabled";
 	}
 	this.onClick;
 	this.onHover=function(){
-		if(this.status=="default")
+		if(this.status=="enabled")
 			this.status="highlighted";
 		//this.defaultHover(context, "yellow", 18);
 	};

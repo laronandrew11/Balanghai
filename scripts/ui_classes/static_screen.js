@@ -174,10 +174,10 @@ function staticScreen(){
 			}
 			for(i=0;i<obj.panels.length;i++)
 			{
-				if(obj.panels[i].visible==true&&inCoordinates(obj.panels[i],mousePos)){
+				//if(obj.panels[i].visible==true&&inCoordinates(obj.panels[i],mousePos)){
 					obj.panels[i].hoverEvent(mousePos);
-					return;
-				}
+					//return;
+				//}
 			}
 
 
@@ -200,7 +200,7 @@ function staticScreen(){
 			var mousePos = getMousePos(canvas, evt);
 			var i;
 			for(i=0; i<obj.buttons.length; i++){
-				if(inCoordinates(obj.buttons[i],mousePos)){
+				if(inCoordinates(obj.buttons[i],mousePos)&&obj.buttons[i].status!="disabled"){
 					obj.buttons[i].onClick();
 					return;
 				}

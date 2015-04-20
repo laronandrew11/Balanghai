@@ -38,9 +38,13 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 				shopInventory.removeCargo(item.properName);
 				var itemToBuy=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				shopInventory.toSell.push(itemToBuy);
+
 			}
+			parentMenu.buttons[9].status="enabled";
 			populateShopInventoryPanel(parentMenu, shopInventory,"Other");
-				populateToBuyPanel(parentMenu, shopInventory);
+			populateToBuyPanel(parentMenu, shopInventory);
+			parentMenu.drawScreen(tradeMenuBG);
+			
 		}
 }
 function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
@@ -129,6 +133,8 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, poiType)//TOD
 			}
 					populatePlayerInventoryPanel(parentMenu, poiType,"Other");
 				populateToSellPanel(parentMenu, poiType);
+				parentMenu.buttons[9].status="enabled";
+			parentMenu.drawScreen(tradeMenuBG);
 		}
 }
 function CreateToSellItemButtonHandler(parentMenu, button, item, poiType)//TODO make similar methods for other buttons if needed
@@ -222,10 +228,14 @@ function populatePlayerInventoryPanel(parentMenu, poiType, cargoType)//display a
 {
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
-	addPlayerScrollButtons(parentMenu, parentMenu.panels[0], poiType, cargoType);
 
-	if(poiType=='market')
+
+	if(poiType=='market'){
 		populatePlayerCategoryButtons(parentMenu);
+		var tabIndex=cargoCategories.indexOf(cargoType);
+		parentMenu.panels[0].panelButtons[tabIndex].status="disabled";
+	}
+	addPlayerScrollButtons(parentMenu, parentMenu.panels[0], poiType, cargoType);
 	var lblPlayerMoney=new Label(260,360,100,50,"Your money: "+gameState.money,"Bebas",18,"black");
 	var x=95;
 	var y=185;
@@ -327,6 +337,7 @@ function populateToSellPanel(parentMenu, poiType)//display all of player's cargo
 {
 	parentMenu.panels[2].clearButtons();
 	parentMenu.panels[2].clearLabels();
+	//updateTradeButton(parentMenu);
 	var x=95;
 	var i;
 	var total=0;
@@ -393,9 +404,14 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 {
 	parentMenu.panels[1].clearButtons();
 	parentMenu.panels[1].clearLabels();
-	addShopScrollButtons(parentMenu, parentMenu.panels[1],shopInventory, cargoType);
+	
 	if(shopInventory.type=='market')
+	{
 		populateShopCategoryButtons(parentMenu, shopInventory);
+		var tabIndex=cargoCategories.indexOf(cargoType);
+		parentMenu.panels[1].panelButtons[tabIndex].status="disabled";
+	}
+	addShopScrollButtons(parentMenu, parentMenu.panels[1],shopInventory, cargoType);
 	var lblShopMoney=new Label(550,360,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
 	var x=530;
 	var y=185;
@@ -482,10 +498,12 @@ function populateShopInventoryPanel(parentMenu, shopInventory, cargoType)//displ
 	parentMenu.drawScreen(tradeMenuBG);
 	//parentMenu.panels[1].draw(context);
 }
+
 function populateToBuyPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
 {
 	parentMenu.panels[3].clearButtons();
 	parentMenu.panels[3].clearLabels();
+	//updateTradeButton(parentMenu, shopInventory);
 	var x=530;
 	var i;
 	var total=0;
@@ -493,6 +511,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 	var itemPrice;
 	var itemWeight;
 	//TODO load shop inventory based on settlement name and type
+
 	for(i=0;i<shopInventory.toSell.length;i++){
 		var item=shopInventory.toSell[i];
 
@@ -579,6 +598,7 @@ function addMarketMenu(settlement){
 	}
 
 	var btnTrade=new Button("TRADE",400,350,162,65,"","Bebas",15,"black", tradeButtonBG);
+	btnTrade.status="disabled";
 		btnTrade.onClick=function(){
 			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
 			marketScreen.labels[2].text=gameState.money;
@@ -587,7 +607,7 @@ function addMarketMenu(settlement){
 			populateShopInventoryPanel(marketScreen, shopInventory,'Other');
 			populateToSellPanel(marketScreen,'market');
 			populateToBuyPanel(marketScreen, shopInventory);
-
+			marketScreen.buttons[9].status="disabled";
 		}
 
 	var lblBalance=new Label(550,360,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
@@ -610,7 +630,6 @@ function addMarketMenu(settlement){
 	marketScreen.addPanel(pnlToSell);
 	marketScreen.addPanel(pnlToBuy);
 	marketScreen.addButton(btnTrade);
-
 
 	
 
@@ -679,4 +698,14 @@ function createPlayerScrollButtonHandler(parentMenu, button,poiType,cargoType,do
 			parentMenu.drawScreen(tradeMenuBG);
 		}
 	}
+}
+
+/**not being used right now**/
+function updateTradeButton(parentMenu){
+	if(shopInventory.toSell.length==0&&gameState.toSell.length==0)
+	{
+		parentMenu.buttons[9].status="disabled";
+	}
+	else parentMenu.buttons[9].status="enabled";
+	parentMenu.drawScreen(tradeMenuBG);
 }

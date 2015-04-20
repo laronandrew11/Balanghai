@@ -13,7 +13,8 @@ function populateCategoryButtons(parentMenu, parentPanel){
 	{
 
 		var newButton=new Button(cargoCategories[i],x,125,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
-		newButton.highlightImage=coinImg;
+		//newButton.highlightImage=coinImg;
+
 		newButton.onClick=CreateCargoCategoryButtonHandler(parentMenu, newButton);
 		parentPanel.addButton(newButton);
 		x+=47;
@@ -105,6 +106,8 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 	parentMenu.panels[0].clearLabels();
 	
 	populateCategoryButtons(parentMenu,parentMenu.panels[0]);
+	var tabIndex=cargoCategories.indexOf(type);
+	parentMenu.panels[0].panelButtons[tabIndex].status="disabled";
 	addScrollButtons(parentMenu, parentMenu.panels[0],type);
 	var x=130;
 	var y=180;
@@ -150,6 +153,7 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 
 					var lblTag=new Label(x,y,47,31,"","Bebas",15,"black");
 					var catIndex=cargoCategories.indexOf(item.type);
+
 					lblTag.bgImage=cargoCategoryLabels[catIndex];
 					/*var priceLabel=new Label(x+47,15,33,31,item.price,"Bebas",15,"black");
 					priceLabel.bgImage=coinImg;*/
