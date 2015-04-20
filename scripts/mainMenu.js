@@ -71,6 +71,7 @@ function addMainMenu(){
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
 	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
+	btnNewGame.highlightImage=coinImg;
 	btnNewGame.onClick=function(){
 		var newPlayerName = prompt("Please enter your name", "");
 		gameState=new GameState(newPlayerName);
@@ -86,6 +87,7 @@ function addMainMenu(){
 		//popup('popup-div');
 	}
 	var btnLoadGame=new Button("LOAD_GAME",600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
+	btnLoadGame.highlightImage=coinImg;
 	btnLoadGame.onClick=function(){
 		mainMenu.hidePanel(1);
 		mainMenu.showPanel(0);//display load game panel
@@ -93,6 +95,7 @@ function addMainMenu(){
 	}
 
 	var btnCredits=new Button("CREDITS",600,360,322,80,"","Epistolar",15,"black", creditsButtonBG);
+	btnCredits.highlightImage=coinImg;
 	btnCredits.onClick=function(){
 		mainMenu.hidePanel(0);
 		mainMenu.showPanel(1);

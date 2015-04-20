@@ -15,8 +15,6 @@ Sir Sol's suggestions
 HIGH PRIORITY (finish by April 23)
 
 4/19:
--Item scrolling on cargo, ship and trade screens
-
 -More ship names
 -Prevent ships from being assigned duplicate names (in progress; ships in same settlement will not receive duplicate names)
 
@@ -30,6 +28,8 @@ Textbox:
 -weekly re-rolling of inventories and prices
 -allow player free roam
 
+
+-Item scrolling on cargo, ship and trade screens (DONE)
 -enforce speed system (DONE)
 -cargo/ship button wrapping (DONE)
 -enforce weight system (DONE!)

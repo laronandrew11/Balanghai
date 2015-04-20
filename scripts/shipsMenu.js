@@ -50,7 +50,7 @@ function populateShipMenu(parentMenu)
 		var item=gameState.ships[i];
 
 		var newButton=new Button(gameState.ships[i].properName,x,400,140,140,item.properName,"Bebas",15,"black", fetcher.getIcon(item.name));
-
+		newButton.highlightImage=coinImg;
 			newButton.onClick=CreateShipItemButtonHandler(parentMenu, newButton, item);
 			parentMenu.addButton(newButton);
 			x+=130;

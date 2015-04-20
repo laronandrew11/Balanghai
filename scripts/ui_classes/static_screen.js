@@ -158,17 +158,25 @@ function staticScreen(){
 			var mousePos = getMousePos(canvas, evt);
 			var i;
 			for(i=0; i<obj.buttons.length; i++){
-				if(inCoordinates(buttons[i],mousePos)){
-					obj.drawBG(context);
-					obj.buttons[i].onHover(context);
-					obj.drawMenu(i);
-					return;
+				if(inCoordinates(obj.buttons[i],mousePos)){
+					//obj.drawBG(context);
+					obj.buttons[i].onHover();
+					//obj.drawMenu(i);
+					obj.drawScreen(obj.bgImage);
+					//return;
 				}
 				else
 				{
-					obj.drawBG(context);
-					obj.drawMenu(-1);
-					//buttons[i].onMouseOff(context);
+				
+					obj.buttons[i].onMouseOff();
+					obj.drawScreen(obj.bgImage);
+				}
+			}
+			for(i=0;i<obj.panels.length;i++)
+			{
+				if(obj.panels[i].visible==true&&inCoordinates(obj.panels[i],mousePos)){
+					obj.panels[i].hoverEvent(mousePos);
+					return;
 				}
 			}
 
@@ -190,6 +198,7 @@ function staticScreen(){
 		var obj=this;
 		return function(evt){
 			var mousePos = getMousePos(canvas, evt);
+			var i;
 			for(i=0; i<obj.buttons.length; i++){
 				if(inCoordinates(obj.buttons[i],mousePos)){
 					obj.buttons[i].onClick();
@@ -235,7 +244,7 @@ function staticScreen(){
 		}
 	}
 	this.drawScreen=this.createDrawScreen();
-	//canvas.addEventListener('mousemove', this.hoverEvent, false);
+	canvas.addEventListener('mousemove', this.hoverEvent, false);
 	canvas.addEventListener('mousedown', this.clickEvent, false);
 	document.onkeydown = this.keyEvent;
 	

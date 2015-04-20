@@ -18,6 +18,7 @@ function addStartScreen()
 	var startScreen=new staticScreen();
 
 	var btnContinue=new Button("CONTINUE",415,525,240,60,"CLICK TO CONTINUE","Epistolar",15,"black", buttonBG);
+	btnContinue.highlightImage=coinImg;
 	btnContinue.onClick=function(){
 		startScreen.clearScreen();
 		addMainMenu();
@@ -60,6 +61,7 @@ function addDefaultButtons(parentMenu)
 {
 
 	var btnMainMenu=new Button("MAIN_MENU",49,0,320,67,"","Epistolar",15,"black", mainMenuButtonBG);
+	btnMainMenu.highlightImage=coinImg;
 	btnMainMenu.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();
@@ -67,18 +69,21 @@ function addDefaultButtons(parentMenu)
 	}
 
 	var btnSave=new Button("SAVE",690,520,80,80,"","Epistolar",15,"black", saveButtonBG);
+	btnSave.highlightImage=coinImg;
 	btnSave.onClick=function(){
 		var parser=new GameStateParser();
 		parser.saveGame();
 	}
 
 	var btnShip=new Button("SHIPS",290,520,80,80,"","Epistolar",15,"black", shipsButtonBG);
+	btnShip.highlightImage=coinImg;
 	btnShip.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addFleetMenu();
 	}
 	var btnCargo=new Button("CARGO",370,520,80,80,"","Epistolar",15,"black", cargoButtonBG);
+	btnCargo.highlightImage=coinImg;
 	btnCargo.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();
@@ -86,6 +91,7 @@ function addDefaultButtons(parentMenu)
 	}
 
 	var btnMap=new Button("MAP",450,520,80,80,"","Epistolar",15,"black", mapButtonBG);
+	btnMap.highlightImage=coinImg;
 	btnMap.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();
@@ -93,6 +99,7 @@ function addDefaultButtons(parentMenu)
 	}
 
 	var btnQuests=new Button("QUESTS",530,520,80,80,"","Epistolar",15,"black", questButtonBG);
+	btnQuests.highlightImage=coinImg;
 	btnQuests.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();
@@ -100,6 +107,7 @@ function addDefaultButtons(parentMenu)
 		
 	}
 	var btnSettlement=new Button("SETTLEMENT",610,520,80,80,"","Epistolar",15,"black", settlementButtonBG);
+	btnSettlement.highlightImage=coinImg;
 	btnSettlement.onClick=function(){
 		var fetcher=new SettlementInfoFetcher();
 		var settlement=fetcher.get(gameState.settlement);
@@ -108,6 +116,7 @@ function addDefaultButtons(parentMenu)
 		addSettlementMenu(settlement);
 	}
 	var btnTranslate=new Button("WORK",850,470,100,125,"","Epistolar",15,"black", translateButtonBG);
+	btnTranslate.highlightImage=coinImg;
 	btnTranslate.onClick=function(){
 		parentMenu.clearScreen();
 		returnItemsToSell();

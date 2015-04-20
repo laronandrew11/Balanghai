@@ -14,13 +14,26 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 
 	this.status="default";//or "highlighted" or "disabled"
 	this.disabledImage;
-	this.highlightImage;
+	this.highlightImage=coinImg;
 
 	this.createDraw = function(context) {
 		var obj = this;
 		return function(context) //TODO: optimize
 		{
-			context.drawImage(obj.bgImage,obj.x,obj.y,obj.width,obj.height); 
+			var image;
+			switch(obj.status)
+			{
+				case "default":
+					image=obj.bgImage;
+					break;
+				case "highlighted":
+					image=obj.highlightImage;
+					break;
+				case "disabled":
+					image=obj.disabledImage;
+					break;
+			}
+			context.drawImage(image,obj.x,obj.y,obj.width,obj.height); 
 			//console.log("Color "+this.color);
 			context.fillStyle = obj.color;
 			context.font = obj.font;
@@ -31,19 +44,20 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 
 	this.draw=this.createDraw();
 
-	this.defaultHover=function(context, color, size){
+	/*this.defaultHover=function(context, color, size){
 		context.fillStyle = color;
 		context.font = size + "px " + this.style;
 		context.fillText(this.text, this.x, this.y);
-	}
-	this.onMouseOff=function(context){
-		context.fillStyle = this.color;
-		context.font = this.font;
-		context.fillText(this.text, x, y);
+	}*/
+	this.onMouseOff=function(){
+		if(this.status=="highlighted")
+			this.status="default";
 	}
 	this.onClick;
-	this.onHover=function(context){
-		this.defaultHover(context, "yellow", 18);
+	this.onHover=function(){
+		if(this.status=="default")
+			this.status="highlighted";
+		//this.defaultHover(context, "yellow", 18);
 	};
 	
 }

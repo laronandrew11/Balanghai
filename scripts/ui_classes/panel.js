@@ -121,6 +121,34 @@ function Panel(x,y,width,height, bgImage){
 	}
 	this.clearPanel=this.createClearPanel();
 
+		this.createHoverEvent = function(mousePos) {
+		var obj = this;
+		return function(mousePos) //TODO: optimize
+		{
+			
+			var i;
+			for(i=0; i<obj.panelButtons.length; i++){
+				if(inCoordinates(obj.panelButtons[i],mousePos)){
+					//obj.drawBG(context);
+
+					obj.panelButtons[i].onHover();
+					//obj.drawMenu(i);
+					
+					//return;
+				}
+				else
+				{
+				
+					obj.panelButtons[i].onMouseOff();
+				
+				}
+			}
+
+		}
+	}
+
+	this.hoverEvent=this.createHoverEvent();
+
 	this.createOnClick=function(mousePos)
 	{
 		var obj=this;

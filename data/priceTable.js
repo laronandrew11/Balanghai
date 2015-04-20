@@ -45,9 +45,9 @@ function populatePriceTable(){
 				for(k=0;k<basePrices.length;k++)
 				{
 				if(contains(productionRecord.production,basePrices[k].name))
-					priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice*0.7),randomizePrice(basePrices[k].sellPrice*0.7)));
+					priceRecords.push(new PriceRecord(basePrices[k].name, Math.round(randomizePrice(basePrices[k].buyPrice*0.7)),Math.round(randomizePrice(basePrices[k].sellPrice*0.7))));
 				else
-					priceRecords.push(new PriceRecord(basePrices[k].name, randomizePrice(basePrices[k].buyPrice),randomizePrice(basePrices[k].sellPrice)));
+					priceRecords.push(new PriceRecord(basePrices[k].name, Math.round(randomizePrice(basePrices[k].buyPrice)),Math.round(randomizePrice(basePrices[k].sellPrice))));
 				}
 
 			}

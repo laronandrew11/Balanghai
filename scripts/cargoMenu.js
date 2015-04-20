@@ -13,7 +13,7 @@ function populateCategoryButtons(parentMenu, parentPanel){
 	{
 
 		var newButton=new Button(cargoCategories[i],x,125,56,56,"","Epistolar",15,"black", cargoCategoryButtons[i]);
-
+		newButton.highlightImage=coinImg;
 		newButton.onClick=CreateCargoCategoryButtonHandler(parentMenu, newButton);
 		parentPanel.addButton(newButton);
 		x+=47;
@@ -70,8 +70,10 @@ function CreateCargoItemButtonHandler(parentMenu, button, cargo)//TODO make simi
 function addScrollButtons(parentMenu, parentPanel,type)
 {
 	var upButton=new Button("UP",465,175,50,40,"","Epistolar",15,"black", upArrowImg);
+	upButton.highlightImage=coinImg;
 	upButton.onClick=createScrollButtonHandler(parentMenu, upButton,type, false);
 	var downButton=new Button("DOWN",462,465,50,40,"","Epistolar",15,"black", downArrowImg);
+	downButton.highlightImage=coinImg;
 	downButton.onClick=createScrollButtonHandler(parentMenu, downButton, type, true);
 	parentPanel.addButton(upButton);
 	parentPanel.addButton(downButton);
@@ -142,6 +144,7 @@ function populateCargoPanel(parentMenu, type)// i is index where the category's 
 				if(pageIndex==cargoPageNo){
 					//alert("Right page!");
 					var newButton=new Button(item.name,x,y,80,80,"","Bebas",15,"black",fetcher.getImageSrc(item.name));
+					newButton.highlightImage=coinImg;
 					var newLabel=new Label(x,y+50,82,30,item.amount+" "+item.name,"Bebas",15,"black");
 					newLabel.bgImage=scrollSmallImg;
 
