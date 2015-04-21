@@ -1,9 +1,10 @@
 Sir Sol's suggestions
 
-4/21:
--replace alerts and prompts with panels
+
 4/22:
 -implement quest system for tutorial
+4/21:
+-replace alerts and prompts with panels
 
 
 -change "offer" button text to "trade" (DONE)

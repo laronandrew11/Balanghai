@@ -3,7 +3,7 @@ function addTranslationMenu(){
 	var lblBorder=new Label(0,0,1000,600,"","Epistolar", 15, "black");
 	lblBorder.bgImage=borderImg;
 	translationScreen.addLabel(lblBorder);
-	addDefaultButtons(translationScreen);
+	//addDefaultButtons(translationScreen);
 
 	populateTranslationMenu(translationScreen);
 	//dynamicScreenActive=true;
@@ -14,28 +14,44 @@ function addTranslationMenu(){
 function populateTranslationMenu(parentMenu)
 {
 	//triggerTranslationQuest();
-	var i;
-	var y=120;
-	for(i=0;i<gameState.pendingTranslations.length;i++)
+	parentMenu.clearPanels();
+	parentMenu.clearLabels();
+	parentMenu.clearButtons();
+	addDefaultButtons(parentMenu);
+	
+	if(gameState.pendingTranslations.length==0)
 	{
-		var reward=gameState.pendingTranslations[i].reward;
-		var lblReward=new Label(550,y,100,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
-		var lblSentence=new Label(100,y,100,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
-		var btnTranslate=new Button("translate",800,y,80,30,"Translate","Bebas",15,"black", buttonBG);
-		btnTranslate.onClick=createTranslateButtonHandler(parentMenu, btnTranslate, gameState.pendingTranslations[i]);
-
-		parentMenu.addLabel(lblReward);
-		parentMenu.addLabel(lblSentence);
-		parentMenu.addButton(btnTranslate);
-
-
-		y+=50;
+		var lblNoSentence=new Label(100,120,100,50,"No   pending   translations","Bebas",36,"black");
+		parentMenu.addLabel(lblNoSentence);
 	}
+	else
+	{
+		var i;
+		var y=120;
+		for(i=0;i<gameState.pendingTranslations.length;i++)
+		{
+			var newPanel=new Panel(100,y,600,100,null);
+			var reward=gameState.pendingTranslations[i].reward;
+			var lblReward=new Label(550,y,100,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
+			var lblSentence=new Label(100,y,100,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
+			var btnTranslateSentence=new Button("translate_sentence",800,y,80,30,"Translate","Bebas",15,"black", buttonBG);
+			btnTranslateSentence.onClick=createTranslateButtonHandler(parentMenu, btnTranslateSentence, gameState.pendingTranslations[i]);
+
+			newPanel.addLabel(lblReward);
+			newPanel.addLabel(lblSentence);
+			parentMenu.addButton(btnTranslateSentence);//putting button on panel causes the onClick function not to be called
+			newPanel.visible=true;
+			parentMenu.addPanel(newPanel);
+
+			y+=50;
+		}
+	}
+	parentMenu.drawScreen(translationMenuBG);
 }
 function createTranslateButtonHandler(parentMenu, button, translation){
 	var lbutton=button;
 	return function(){
-	
+		
 		var translationPanel=new Panel(0,0,1000,600,translatePanelImg);
 
 		var fetcher=new CargoRecordInfoFetcher();
@@ -51,11 +67,21 @@ function createTranslateButtonHandler(parentMenu, button, translation){
 		var lblDescription3=new Label(270, 170,100,50,	"this sentence:","Bebas",24,"black");
 
 		var lblSentence=new Label(290,250,100,50, translation.sentence,"Bebas",24,"black");
-		var btnTranslate=new Button("translate",450,470,150,50,"Submit","Bebas",18,"black", buttonBG);
-		btnTranslate.onClick=function(){
+		var btnSubmit=new Button("translate",450,470,150,50,"Submit","Bebas",18,"black", buttonBG);
+		btnSubmit.onClick=function(){
+			txtTranslation.deactivate();
 			translation.translation=txtTranslation.text;
 			if(translation.translation!=null&&translation.translation!="")
+			{
 				gameState.addCargo(translation.reward);
+				gameState.finishedTranslations.push(translation);
+				removeByValue(gameState.pendingTranslations, translation);
+		
+				translationPanel.visible=false;
+				populateTranslationMenu(parentMenu);
+				//parentMenu.drawScreen(parentMenu.bgImage);
+			}
+
 		}
 		var txtTranslation=new Textbox(parentMenu, 270, 350, 500, 100);
 
@@ -64,7 +90,7 @@ function createTranslateButtonHandler(parentMenu, button, translation){
 		translationPanel.addLabel(lblDescription2);
 		translationPanel.addLabel(lblDescription3);
 		translationPanel.addLabel(lblSentence);
-		translationPanel.addButton(btnTranslate);
+		translationPanel.addButton(btnSubmit);
 		translationPanel.addLabel(lblRewardImg);
 		translationPanel.addTextbox(txtTranslation);
 

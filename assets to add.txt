@@ -11,6 +11,7 @@ NIGEL
 
 -"total money" icon
 -up and down arrow buttons +highlighted + disabled
+-Dialog/Prompt Panel (give mockup)
 
 JANA
 -Icon + Image:

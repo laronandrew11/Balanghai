@@ -15,6 +15,7 @@ function GameState(playerName){
 	this.quests=[];
 	this.toSell=[];
 	this.pendingTranslations=[];
+	this.finishedTranslations=[];
 	this.shopInventoryMap=new Map();
 	this.priceTable;
 

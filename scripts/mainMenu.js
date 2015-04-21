@@ -70,12 +70,17 @@ function addMainMenu(){
 	pnlCredits.addLabel(new Label(100,300,200,50,"Copyright DLSU Game Development Laboratory, 2015.","Bebas",15,"black"));
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
-	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
-	btnNewGame.highlightImage=coinImg;
-	btnNewGame.onClick=function(){
-		var newPlayerName = prompt("Please enter your name", "");
+
+	var pnlDialog=new Panel(100,56,357,496,cargoDetailsPanelBG);
+	var txtPlayerName=new Textbox(mainMenu, 100,56,300,400);
+	pnlDialog.addTextbox(txtPlayerName);
+	
+	var btnSubmit=new Button("SUBMIT", 300,400,100,50,"Submit","Bebas",18,"black", buttonBG);
+	btnSubmit.onClick=function(){
+		txtPlayerName.deactivate();
+		var newPlayerName=txtPlayerName.text;
 		gameState=new GameState(newPlayerName);
-		
+	
 		populateSettlementProductionRecords();
 		populateShipProductionRecords();
 		populateBaseCargoPrices();
@@ -84,6 +89,26 @@ function addMainMenu(){
 		populateShopInventories();
 		mainMenu.clearScreen();
 		addFleetMenu();
+	}
+	pnlDialog.addButton(btnSubmit);
+
+
+	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
+	btnNewGame.highlightImage=coinImg;
+	btnNewGame.onClick=function(){
+
+		pnlDialog.visible=true;
+		/*var newPlayerName = prompt("Please enter your name", "");
+		gameState=new GameState(newPlayerName);
+	
+		populateSettlementProductionRecords();
+		populateShipProductionRecords();
+		populateBaseCargoPrices();
+		populateBaseShipPrices();
+		populatePriceTable();
+		populateShopInventories();
+		mainMenu.clearScreen();
+		addFleetMenu();*/
 		//popup('popup-div');
 	}
 	var btnLoadGame=new Button("LOAD_GAME",600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
@@ -101,12 +126,13 @@ function addMainMenu(){
 		mainMenu.showPanel(1);
 	}
 
-	
+
 
 	mainMenu.addButton(btnNewGame);
 	mainMenu.addButton(btnLoadGame);
 	mainMenu.addButton(btnCredits);
 	mainMenu.addPanel(pnlLoadGame);
 	mainMenu.addPanel(pnlCredits);
+	mainMenu.addPanel(pnlDialog);
 	mainMenu.drawScreen(mainMenuBG);
 }

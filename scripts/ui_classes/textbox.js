@@ -8,6 +8,7 @@ var Textbox=function(parentScreen, x,y,width,height)
 	this.keyMap=[];
 	this.cursorVisible=false;
 	this.parentScreen=parentScreen;
+	this.active=false;
 	this.capsLock=false;//will this do any good?
 	//context.fillStyle = color;
 	//context.font = size + "px " + b.style;
@@ -16,9 +17,11 @@ var Textbox=function(parentScreen, x,y,width,height)
 		var obj=this;
 		return function(){
 			obj.cursorVisible=!obj.cursorVisible;
-
-			obj.redraw();
-			setTimeout(obj.cursorBlink,500);
+			if(obj.active==true)
+			{
+				obj.redraw();
+				setTimeout(obj.cursorBlink,500);
+			}
 		}
 	}
 	this.cursorBlink=this.createCursorBlink();
@@ -230,10 +233,16 @@ var Textbox=function(parentScreen, x,y,width,height)
 	this.createOnClick=function(){
 		var obj=this;
 		return function(){
+			obj.active=true;
 			document.onkeydown=document.onkeyup=obj.keyEvent;
 			obj.cursorBlink();
 		}
 		
 	}
 	this.onClick=this.createOnClick();
+
+	this.deactivate=function(){
+		this.active=false;
+		document.onkeydown=document.onkeyup=null;
+	}
 }
