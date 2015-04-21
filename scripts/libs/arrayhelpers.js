@@ -20,3 +20,9 @@ function randomIntFromInterval(min,max)
 function randomizeToPercentage(orig, denominator){
   return orig+randomIntFromInterval(-(orig/denominator), orig/denominator);
 }
+
+function clear(a)
+{
+      while(a.length>0)
+        a.pop();
+}

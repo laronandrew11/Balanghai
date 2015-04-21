@@ -11,6 +11,7 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 	this.font = this.size + "px " + this.style;
 	this.color = color;
 	this.bgImage=bgImage;
+	this.highZOrder=false;
 
 	this.status="enabled";//or "highlighted" or "disabled"
 	this.disabledImage=null;

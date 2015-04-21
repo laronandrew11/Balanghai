@@ -71,11 +71,13 @@ function addMainMenu(){
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
 
-	var pnlDialog=new Panel(100,56,357,496,cargoDetailsPanelBG);
-	var txtPlayerName=new Textbox(mainMenu, 100,56,300,400);
+	var pnlDialog=new Panel(0,0,1000,600,translatePanelImg);
+	var lblDialogText=new Label(270,90,100,50,"Enter your name: ","Bebas",24,"black");
+	var txtPlayerName=new Textbox(mainMenu, 270, 350, 500, 100);
+	pnlDialog.addLabel(lblDialogText);
 	pnlDialog.addTextbox(txtPlayerName);
 	
-	var btnSubmit=new Button("SUBMIT", 300,400,100,50,"Submit","Bebas",18,"black", buttonBG);
+	var btnSubmit=new Button("SUBMIT", 450,470,150,50,"Submit","Bebas",18,"black", buttonBG);
 	btnSubmit.onClick=function(){
 		txtPlayerName.deactivate();
 		var newPlayerName=txtPlayerName.text;

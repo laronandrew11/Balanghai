@@ -13,6 +13,7 @@ function addSettlementMenu(settlement){
 	{
 		//addShipbuilderButton(settlementScreen,settlement);
 		var btnShipbuilder=new Button("SHIPBUILDER",685,300,15,15,"Shipbuilder","Bebas",15,"black", poiButtonImg);
+		btnShipbuilder.highZOrder=true;
 		btnShipbuilder.onClick=function(){
 			settlementScreen.clearScreen();
 			returnItemsToSell();
@@ -24,6 +25,7 @@ function addSettlementMenu(settlement){
 	{
 		//addMarketButton(settlementScreen,settlement);
 			var btnMarket=new Button("MARKET",400,320,15,15,"Market","Bebas",15,"black", poiButtonImg);
+			btnMarket.highZOrder=true;
 		btnMarket.onClick=function(){
 			settlementScreen.clearScreen();
 			returnItemsToSell();

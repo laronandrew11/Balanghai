@@ -7,6 +7,8 @@
 
 function staticScreen(){
 	this.buttons = [];
+	this.highButtons=[];
+	this.lowButtons=[];
 	this.panels=[];
 	this.labels=[];
 	this.bgImage;
@@ -43,6 +45,45 @@ function staticScreen(){
 		}
 	}
 	this.drawMenu=this.createDrawMenu();
+	this.createDrawLowButtons=function()
+	{
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.lowButtons.length; i++){
+				obj.lowButtons[i].draw(context);
+			}
+		}
+	}
+	this.drawLowButtons=this.createDrawLowButtons();
+	this.createDrawHighButtons=function()
+	{
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.highButtons.length; i++){
+				obj.highButtons[i].draw(context);
+			}
+		}
+	}
+	this.drawHighButtons=this.createDrawHighButtons();
+	this.createSortButtons=function()
+	{
+		var obj=this;
+		return function(){
+			clear(obj.highButtons);
+			clear(obj.lowButtons);
+			var i;
+			for(i=0; i<obj.buttons.length; i++){
+				if(obj.buttons[i].highZOrder==true)
+					obj.highButtons.push(obj.buttons[i]);
+				else
+					obj.lowButtons.push(obj.buttons[i]);
+			}
+		}
+	}
+	this.sortButtons=this.createSortButtons();
+
 	this.createDrawPanels=function()
 	{
 		var obj=this;
@@ -118,24 +159,27 @@ function staticScreen(){
 	this.createClearButtons=function(){
 		var obj=this;
 		return function(){
-			while(obj.buttons.length>0)
-				obj.buttons.pop();
+			clear(obj.buttons);
+			//while(obj.buttons.length>0)
+				//obj.buttons.pop();
 		}
 	}
 	this.clearButtons=this.createClearButtons();
 	this.createClearPanels=function(){
 		var obj=this;
 		return function(){
-			while(obj.panels.length>0)
-			obj.panels.pop();
+			//while(obj.panels.length>0)
+			//obj.panels.pop();
+			clear(obj.panels);
 		}
 	}
 	this.clearPanels=this.createClearPanels();
 		this.createClearLabels=function(){
 		var obj=this;
 		return function(){
-			while(obj.labels.length>0)
-			obj.labels.pop();
+			clear(obj.labels);
+			//while(obj.labels.length>0)
+			//obj.labels.pop();
 		}
 	}
 	this.clearLabels=this.createClearLabels();
@@ -246,9 +290,13 @@ function staticScreen(){
 			obj.setBG(bg);
 			obj.drawBG(context);
 			obj.drawLabels();
-			
+			obj.sortButtons();
+			obj.drawLowButtons();
+
+			//obj.drawMenu(-1);
 			obj.drawPanels();
-			obj.drawMenu(-1);
+			obj.drawHighButtons();
+			//obj.drawMenu(-1);
 		}
 	}
 	this.drawScreen=this.createDrawScreen();

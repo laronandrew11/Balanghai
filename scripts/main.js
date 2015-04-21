@@ -61,14 +61,17 @@ function addDefaultButtons(parentMenu)
 {
 
 	var btnMainMenu=new Button("MAIN_MENU",49,0,320,67,"","Epistolar",15,"black", mainMenuButtonBG);
+	btnMainMenu.highZOrder=true;
 	btnMainMenu.highlightImage=coinImg;
 	btnMainMenu.onClick=function(){
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addMainMenu();
 	}
 
 	var btnSave=new Button("SAVE",690,520,80,80,"","Epistolar",15,"black", saveButtonBG);
+	btnSave.highZOrder=true;
 	btnSave.highlightImage=coinImg;
 	btnSave.onClick=function(){
 		var parser=new GameStateParser();
@@ -76,48 +79,60 @@ function addDefaultButtons(parentMenu)
 	}
 
 	var btnShip=new Button("SHIPS",290,520,80,80,"","Epistolar",15,"black", shipsButtonBG);
+	btnShip.highZOrder=true;
 	btnShip.highlightImage=coinImg;
 	btnShip.onClick=function(){
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addFleetMenu();
 	}
 	var btnCargo=new Button("CARGO",370,520,80,80,"","Epistolar",15,"black", cargoButtonBG);
+	btnCargo.highZOrder=true;
 	btnCargo.highlightImage=coinImg;
 	btnCargo.onClick=function(){
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addCargoMenu();
 	}
 
 	var btnMap=new Button("MAP",450,520,80,80,"","Epistolar",15,"black", mapButtonBG);
+	btnMap.highZOrder=true;
 	btnMap.highlightImage=coinImg;
 	btnMap.onClick=function(){
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addMapMenu();
 	}
 
 	var btnQuests=new Button("QUESTS",530,520,80,80,"","Epistolar",15,"black", questButtonBG);
+	btnQuests.highZOrder=true;
 	btnQuests.highlightImage=coinImg;
 	btnQuests.onClick=function(){
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addQuestMenu();
 		
 	}
 	var btnSettlement=new Button("SETTLEMENT",610,520,80,80,"","Epistolar",15,"black", settlementButtonBG);
+	btnSettlement.highZOrder=true;
 	btnSettlement.highlightImage=coinImg;
 	btnSettlement.onClick=function(){
 		var fetcher=new SettlementInfoFetcher();
 		var settlement=fetcher.get(gameState.settlement);
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addSettlementMenu(settlement);
 	}
 	var btnTranslate=new Button("WORK",850,470,100,125,"","Epistolar",15,"black", translateButtonBG);
+	btnTranslate.highZOrder=true;
 	btnTranslate.highlightImage=coinImg;
 	btnTranslate.onClick=function(){
+		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addTranslationMenu();
@@ -135,7 +150,20 @@ function addDefaultButtons(parentMenu)
 	parentMenu.addButton(btnTranslate);
 	addDefaultLabels(parentMenu);
 }
+function deactivateTextboxes(parentMenu)
+{
+	var i;
+	for(i=0;i<parentMenu.panels.length;i++)
+	{
+		var j;
 
+		for(j=0;j<parentMenu.panels[i].textboxes.length;j++)
+		{
+			parentMenu.panels[i].textboxes[j].deactivate();
+		}
+		
+	}
+}
 function returnItemsToSell(){//refactor: use the inside of the loop as a separate function and recycle it in the toSellButtonHandler
 	var i;
 	var max=gameState.toSell.length;
