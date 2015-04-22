@@ -94,15 +94,13 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 	return function(){
 			if(shopInventory.type=='market')
 			{
-				var amountToRemove=parseInt(prompt("Remove how many units?"));
-				/*var amountToRemove;
+				//var amountToRemove=parseInt(prompt("Remove how many units?"));
+				var amountToRemove;
 				var dlgRemove=new Dialog(parentMenu,"Remove how many units?",function(){
-					var amountToRemove=dlgRemove.userInput;
-				})*/
-
-				if(amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
+					var amountToRemove=parseInt(dlgRemove.userInput);
+					if(amountToRemove==NaN||amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
 					alert("Invalid amount");
-				else {
+					else {
 					//update item to buy
 					if(amountToRemove<item.amount)
 					{
@@ -122,20 +120,26 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 					{
 						shopInventory.getCargo(item.name).amount+=amountToRemove;
 					}
-					
+					updateTradeButton(parentMenu,shopInventory);
+			populateShopInventoryPanel(parentMenu, shopInventory,"Other");
+				populateToBuyPanel(parentMenu, shopInventory);
 					//parentMenu.drawScreen(context);
 				}
+				})
+				dlgRemove.setVisible(true);
+
+				
 			}
 			else if(shopInventory.type=='shipbuilder')
 			{
 				shopInventory.removeToSellItem(item.properName);
 				var itemToRemove=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				shopInventory.cargoList.push(itemToRemove);
-				
-			}
-			updateTradeButton(parentMenu,shopInventory);
+				updateTradeButton(parentMenu,shopInventory);
 			populateShopInventoryPanel(parentMenu, shopInventory,"Other");
 				populateToBuyPanel(parentMenu, shopInventory);
+			}
+			
 		}
 }
 function CreateSellableItemButtonHandler(parentMenu, button, item, shopInventory)//TODO make similar methods for other buttons if needed
@@ -144,8 +148,10 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, shopInventory
 	return function(){
 
 		if(shopInventory.type=='market'){
-			var amountToSell=parseInt(prompt("Sell how many units?"));
-			if(amountToSell>item.amount||amountToSell<=0)//TODO include strings/chars as invalid input
+			//var amountToSell=parseInt(prompt("Sell how many units?"));
+			var dlgSell=new Dialog(parentMenu,"Sell how many units?",function(){
+					var amountToSell=parseInt(dlgSell.userInput);
+					if(amountToSell==NaN||amountToSell>item.amount||amountToSell<=0)//TODO include strings/chars as invalid input
 				alert("Invalid amount");
 			else {
 				//update item in general inventory
@@ -167,9 +173,16 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, shopInventory
 				{
 					gameState.getToSellItem(item.name).amount+=amountToSell;
 				}
-			
+				updateTradeButton(parentMenu,shopInventory);
+					populatePlayerInventoryPanel(parentMenu, shopInventory,"Other");
+				populateToSellPanel(parentMenu, shopInventory);
+				//parentMenu.buttons[9].status="enabled";
+			parentMenu.drawScreen(tradeMenuBG);
 				//parentMenu.drawScreen(context);
 			}
+				})
+			dlgSell.setVisible(true);
+			
 		}
 		
 			else if(shopInventory.type=='shipbuilder')
@@ -177,13 +190,13 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, shopInventory
 				gameState.removeShip(item.properName);
 				var itemToSell=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.toSell.push(itemToSell);
-		
-			}
 				updateTradeButton(parentMenu,shopInventory);
 					populatePlayerInventoryPanel(parentMenu, shopInventory,"Other");
 				populateToSellPanel(parentMenu, shopInventory);
 				//parentMenu.buttons[9].status="enabled";
 			parentMenu.drawScreen(tradeMenuBG);
+			}
+				
 		}
 }
 function CreateToSellItemButtonHandler(parentMenu, button, item, shopInventory)//TODO make similar methods for other buttons if needed
@@ -192,8 +205,10 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, shopInventory)/
 	return function(){
 		if(shopInventory.type=='market')
 		{
-			var amountToRemove=parseInt(prompt("Remove how many units?"));
-			if(amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
+			//var amountToRemove=parseInt(prompt("Remove how many units?"));
+			var dlgSellRemove=new Dialog(parentMenu,"Remove how many units?",function(){
+					var amountToRemove=parseInt(dlgSellRemove.userInput);
+					if(amountToRemove==NaN||amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
 				alert("Invalid amount");
 			else {
 				//update item to sell
@@ -215,20 +230,25 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, shopInventory)/
 				{
 					gameState.getCargo(item.name).amount+=amountToRemove;
 				}
-			
+					updateTradeButton(parentMenu, shopInventory);
+				populatePlayerInventoryPanel(parentMenu, shopInventory,"Other");
+				populateToSellPanel(parentMenu, shopInventory);
 				//parentMenu.drawScreen(context);
 			}
+				})
+			dlgSellRemove.setVisible(true);
+			
 		}
 			else if(shopInventory.type=='shipbuilder')
 			{
 				gameState.removeToSellItem(item.properName, 'ship');
 				var itemToReturn=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.ships.push(itemToReturn);
-			
-			}
-				updateTradeButton(parentMenu, shopInventory);
+					updateTradeButton(parentMenu, shopInventory);
 				populatePlayerInventoryPanel(parentMenu, shopInventory,"Other");
 				populateToSellPanel(parentMenu, shopInventory);
+			}
+			
 
 		}
 }
@@ -678,15 +698,8 @@ function addMarketMenu(settlement){
 
 
 	
-	/*var dlgSell=new Dialog(parentMenu,"Sell how many units?",function(){
-					var amountToRemove=dlgSell.userInput;
-				})
-	var dlgBuyRemove=new Dialog(parentMenu,"Remove how many units?",function(){
-					var amountToRemove=dlgBuyRemove.userInput;
-				})
-	var dlgSellRemove=new Dialog(parentMenu,"Remove how many units?",function(){
-					var amountToRemove=dlgSellRemove.userInput;
-				})*/
+	
+	
 	
 
 	marketScreen.addPanel(pnlPlayerInventory);
