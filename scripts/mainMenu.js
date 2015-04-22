@@ -71,16 +71,8 @@ function addMainMenu(){
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
 
-	var pnlDialog=new Panel(0,0,1000,600,translatePanelImg);
-	var lblDialogText=new Label(270,90,100,50,"Enter your name: ","Bebas",24,"black");
-	var txtPlayerName=new Textbox(mainMenu, 270, 350, 500, 100);
-	pnlDialog.addLabel(lblDialogText);
-	pnlDialog.addTextbox(txtPlayerName);
-	
-	var btnSubmit=new Button("SUBMIT", 450,470,150,50,"Submit","Bebas",18,"black", buttonBG);
-	btnSubmit.onClick=function(){
-		txtPlayerName.deactivate();
-		var newPlayerName=txtPlayerName.text;
+	var dlgPlayerName=new Dialog(mainMenu,"Enter your name",function(){
+		var newPlayerName=dlgPlayerName.userInput;
 		gameState=new GameState(newPlayerName);
 	
 		populateSettlementProductionRecords();
@@ -91,27 +83,14 @@ function addMainMenu(){
 		populateShopInventories();
 		mainMenu.clearScreen();
 		addFleetMenu();
-	}
-	pnlDialog.addButton(btnSubmit);
-
+	})
 
 	var btnNewGame=new Button("NEW_GAME",600,160,322,80,"","Epistolar",15,"black", newGameButtonBG);
 	btnNewGame.highlightImage=coinImg;
 	btnNewGame.onClick=function(){
 
-		pnlDialog.visible=true;
-		/*var newPlayerName = prompt("Please enter your name", "");
-		gameState=new GameState(newPlayerName);
-	
-		populateSettlementProductionRecords();
-		populateShipProductionRecords();
-		populateBaseCargoPrices();
-		populateBaseShipPrices();
-		populatePriceTable();
-		populateShopInventories();
-		mainMenu.clearScreen();
-		addFleetMenu();*/
-		//popup('popup-div');
+		//pnlDialog.visible=true;
+		dlgPlayerName.setVisible(true);
 	}
 	var btnLoadGame=new Button("LOAD_GAME",600,260,322,80,"","Epistolar",15,"black", loadGameButtonBG);
 	btnLoadGame.highlightImage=coinImg;
@@ -135,6 +114,6 @@ function addMainMenu(){
 	mainMenu.addButton(btnCredits);
 	mainMenu.addPanel(pnlLoadGame);
 	mainMenu.addPanel(pnlCredits);
-	mainMenu.addPanel(pnlDialog);
+	//mainMenu.addPanel(pnlDialog);
 	mainMenu.drawScreen(mainMenuBG);
 }

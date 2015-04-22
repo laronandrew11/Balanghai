@@ -251,22 +251,41 @@ function staticScreen(){
 		return function(evt){
 			var mousePos = getMousePos(canvas, evt);
 			var i;
-			for(i=0; i<obj.buttons.length; i++){
-				if(inCoordinates(obj.buttons[i],mousePos)&&obj.buttons[i].status!="disabled"){
-					obj.buttons[i].onClick();
-					return;
+			//if(obj.hasExclusivePanels()==false){
+				for(i=0; i<obj.buttons.length; i++){
+					if(inCoordinates(obj.buttons[i],mousePos)&&obj.buttons[i].status!="disabled"){
+						obj.buttons[i].onClick();
+						//break;
+						//return;
+					}
 				}
-			}
+			//}
 			for(i=0;i<obj.panels.length;i++)
 			{
 				if(obj.panels[i].visible==true&&inCoordinates(obj.panels[i],mousePos)){
 					obj.panels[i].onClick(mousePos);
-					return;
+					//break;
+					//return;
 				}
 			}
 		}
 	}
 	this.clickEvent=this.createClickEvent();
+
+	this.createHasExclusivePanels=function(){
+		var obj=this;
+		return function(){
+			for(i=0;i<obj.panels.length;i++)
+			{
+				if(obj.panels[i].exclusiveControl==true){
+					
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	this.hasExclusivePanels=this.createHasExclusivePanels();
 
 	this.removeListeners=function(){
 		canvas.removeEventListener('mousemove', this.hoverEvent);

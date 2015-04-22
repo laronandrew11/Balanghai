@@ -233,6 +233,7 @@ var Textbox=function(parentScreen, x,y,width,height)
 	this.createOnClick=function(){
 		var obj=this;
 		return function(){
+			//alert("Textbox!");
 			obj.active=true;
 			document.onkeydown=document.onkeyup=obj.keyEvent;
 			obj.cursorBlink();

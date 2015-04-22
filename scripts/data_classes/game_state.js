@@ -74,7 +74,11 @@ function GameState(playerName){
 				newCargo.price=obj.getPrice(newCargo.name, obj.priceTable);
 				obj.cargo.push(newCargo);
 			}
-			else obj.getCargo(newCargo.name).amount+=newCargo.amount;
+			else
+			{
+				obj.getCargo(newCargo.name).amount+=newCargo.amount;
+			
+			}
 		}
 	}
 	this.addCargo=this.createAddCargo();

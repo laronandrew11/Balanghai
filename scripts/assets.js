@@ -40,8 +40,10 @@ var scrollSmallImg = document.createElement('img');
 	var scrollLargeImg = document.createElement('img');
 	scrollLargeImg.src = 'img/scroll-lg.png';
 
-
-
+var questPlankImg=document.createElement('img');
+	questPlankImg.src = 'img/buttons/questmenu/questwood.png';
+var dialogPanelImg=document.createElement('img');
+	dialogPanelImg.src = 'img/buttons/questmenu/questwood.png';
 	
 var mapImg = document.createElement('img');
 	mapImg.src = 'img/minimap.png';

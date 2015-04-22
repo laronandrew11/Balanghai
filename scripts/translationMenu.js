@@ -28,23 +28,26 @@ function populateTranslationMenu(parentMenu)
 	else
 	{
 		var i;
-		var y=120;
+		var y=50;
 		for(i=0;i<gameState.pendingTranslations.length;i++)
 		{
-			var newPanel=new Panel(100,y,600,100,null);
+			var newPanel=new Panel(100,y,845,130,questPlankImg);
 			var reward=gameState.pendingTranslations[i].reward;
-			var lblReward=new Label(550,y,100,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
-			var lblSentence=new Label(100,y,100,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
-			var btnTranslateSentence=new Button("translate_sentence",800,y,80,30,"Translate","Bebas",15,"black", buttonBG);
+			var lblReward=new Label(550,y+70,200,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
+			lblReward.bgImage=scrollSmallImg;
+			var lblSentence=new Label(100,y+70,200,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
+			lblSentence.bgImage=scrollSmallImg;
+			var btnTranslateSentence=new Button("translate_sentence",800,y+70,80,30,"Translate","Bebas",15,"black", buttonBG);
 			btnTranslateSentence.onClick=createTranslateButtonHandler(parentMenu, btnTranslateSentence, gameState.pendingTranslations[i]);
 
 			newPanel.addLabel(lblReward);
 			newPanel.addLabel(lblSentence);
-			parentMenu.addButton(btnTranslateSentence);//putting button on panel causes the onClick function not to be called
+			newPanel.addButton(btnTranslateSentence);
+			//parentMenu.addButton(btnTranslateSentence);//putting button on panel causes the onClick function not to be called
 			newPanel.visible=true;
 			parentMenu.addPanel(newPanel);
 
-			y+=50;
+			y+=110;
 		}
 	}
 	parentMenu.drawScreen(translationMenuBG);

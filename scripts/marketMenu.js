@@ -1,13 +1,14 @@
 var playerPageNo=0;
 var shopPageNo=0;
+
 function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)//TODO make similar methods for other buttons if needed
 {
 	var lbutton=button;
 	return function(){
 			if(shopInventory.type=='market')
 			{
-				var amountToBuy=parseInt(prompt("Buy how many units?"));
-				if(amountToBuy>item.amount||amountToBuy<=0)//TODO include strings/chars as invalid input
+				//var amountToBuy=parseInt(prompt("Buy how many units?"));
+				/*if(amountToBuy>item.amount||amountToBuy<=0)//TODO include strings/chars as invalid input
 					alert("Invalid amount");
 				else {
 					//update item in general inventory
@@ -29,31 +30,76 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 					{
 						shopInventory.getToSellItem(item.name).amount+=amountToBuy;
 					}
+
 			
 					//parentMenu.drawScreen(context);
-				}
+				}*/
+				var dlgBuy=new Dialog(parentMenu,"Buy how many units?",function(){
+						
+						var amountToBuy=parseInt(dlgBuy.userInput);
+
+						if(amountToBuy==NaN||amountToBuy>item.amount||amountToBuy<=0)//TODO include strings/chars as invalid input
+						alert("Invalid amount");
+						else {
+							//update item in general inventory
+							if(amountToBuy<item.amount)
+							{
+								item.amount=item.amount-amountToBuy;
+							}
+							else if(amountToBuy==item.amount)
+							{
+								shopInventory.removeCargo(item.name);
+							}
+							//update item to sell
+							if(!shopInventory.hasToSellItem(item.name))
+							{
+
+								var itemToBuy=new Cargo(item.name,item.type,item.unitWeight, amountToBuy, item.price);
+								shopInventory.toSell.push(itemToBuy);
+							}
+							else
+							{
+								shopInventory.getToSellItem(item.name).amount+=amountToBuy;
+							}
+						
+							updateTradeButton(parentMenu,shopInventory);
+							populateShopInventoryPanel(parentMenu, shopInventory,"Other");
+							populateToBuyPanel(parentMenu, shopInventory);
+							parentMenu.drawScreen(tradeMenuBG);
+							//parentMenu.drawScreen(context);
+						}
+					
+				});
+				dlgBuy.setVisible(true);
 			}
 			else if(shopInventory.type=='shipbuilder')
 			{
 				shopInventory.removeCargo(item.properName);
 				var itemToBuy=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				shopInventory.toSell.push(itemToBuy);
-
-			}
-			//parentMenu.buttons[9].status="enabled";
-			updateTradeButton(parentMenu,shopInventory);
+				updateTradeButton(parentMenu,shopInventory);
 			populateShopInventoryPanel(parentMenu, shopInventory,"Other");
 			populateToBuyPanel(parentMenu, shopInventory);
 			parentMenu.drawScreen(tradeMenuBG);
+
+			}
+			//parentMenu.buttons[9].status="enabled";
+			
 			
 		}
 }
+
 function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 	var lbutton=button;
 	return function(){
 			if(shopInventory.type=='market')
 			{
 				var amountToRemove=parseInt(prompt("Remove how many units?"));
+				/*var amountToRemove;
+				var dlgRemove=new Dialog(parentMenu,"Remove how many units?",function(){
+					var amountToRemove=dlgRemove.userInput;
+				})*/
+
 				if(amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
 					alert("Invalid amount");
 				else {
@@ -518,10 +564,10 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 	var itemPrice;
 	var itemWeight;
 	//TODO load shop inventory based on settlement name and type
-
+	//console.log(shopInventory.toSell);
 	for(i=0;i<shopInventory.toSell.length;i++){
 		var item=shopInventory.toSell[i];
-
+		//console.log(item);
 		if(shopInventory.type=='market'){
 			var fetcher=new CargoRecordInfoFetcher();
 		
@@ -580,19 +626,16 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 
 
-
-
-
 function addMarketMenu(settlement){
 	playerPageNo=0;
 	shopPageNo=0;
 	var marketScreen=new staticScreen();
 	addDefaultButtons(marketScreen);
-	var shopInventory=settlement.getShopInventory('market');
+	var origShopInventory=settlement.getShopInventory('market');
 	var fetcher=new PriceTableInfoFetcher();
 	var priceTable=fetcher.findPriceTable(settlement.name, 'market');
 	//alert(priceTable[0].cargoName);
-	shopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
+	origShopInventory.setPriceTable(priceTable);//TODO in future, specify shop type as well
 	gameState.itemType='cargo';
 	gameState.setPriceTable(priceTable);
 
@@ -607,17 +650,21 @@ function addMarketMenu(settlement){
 	var btnTrade=new Button("TRADE",400,350,162,65,"","Bebas",15,"black", tradeButtonBG);
 	btnTrade.status="disabled";
 		btnTrade.onClick=function(){
-			tradeCargo(shopInventory, shopInventory.toSell, gameState.toSell);
+			//alert(origShopInventory.id);
+			//alert(origShopInventory.toSell.length);
+			tradeCargo(origShopInventory, origShopInventory.toSell, gameState.toSell);
 			marketScreen.labels[2].text=gameState.money;
 			marketScreen.labels[4].text=gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity();
-			populatePlayerInventoryPanel(marketScreen,shopInventory,'Other');
-			populateShopInventoryPanel(marketScreen, shopInventory,'Other');
-			populateToSellPanel(marketScreen,shopInventory);
-			populateToBuyPanel(marketScreen, shopInventory);
+			populatePlayerInventoryPanel(marketScreen,origShopInventory,'Other');
+			populateShopInventoryPanel(marketScreen, origShopInventory,'Other');
+			populateToSellPanel(marketScreen,origShopInventory);
+			populateToBuyPanel(marketScreen, origShopInventory);
 			marketScreen.buttons[9].status="disabled";
-		}
+			//origShopInventory.toSell.push(new Cargo("XXXX","food",1,2,2));
+			
+		};
 
-	var lblBalance=new Label(550,360,100,50,"Shop's money: "+shopInventory.money,"Bebas",18,"black");
+	var lblBalance=new Label(550,360,100,50,"Shop's money: "+origShopInventory.money,"Bebas",18,"black");
 
 	var pnlPlayerInventory=new Panel(50,50,450,300,null);
 	var pnlShopInventory=new Panel(500,50,450,300,null);
@@ -631,6 +678,16 @@ function addMarketMenu(settlement){
 
 
 	
+	/*var dlgSell=new Dialog(parentMenu,"Sell how many units?",function(){
+					var amountToRemove=dlgSell.userInput;
+				})
+	var dlgBuyRemove=new Dialog(parentMenu,"Remove how many units?",function(){
+					var amountToRemove=dlgBuyRemove.userInput;
+				})
+	var dlgSellRemove=new Dialog(parentMenu,"Remove how many units?",function(){
+					var amountToRemove=dlgSellRemove.userInput;
+				})*/
+	
 
 	marketScreen.addPanel(pnlPlayerInventory);
 	marketScreen.addPanel(pnlShopInventory);
@@ -640,10 +697,10 @@ function addMarketMenu(settlement){
 
 	
 
-		populatePlayerInventoryPanel(marketScreen, shopInventory,'Other');
-		populateShopInventoryPanel(marketScreen, shopInventory, 'Other');
-		populateToSellPanel(marketScreen, shopInventory);
-		populateToBuyPanel(marketScreen, shopInventory);
+		populatePlayerInventoryPanel(marketScreen, origShopInventory,'Other');
+		populateShopInventoryPanel(marketScreen, origShopInventory, 'Other');
+		populateToSellPanel(marketScreen, origShopInventory);
+		populateToBuyPanel(marketScreen, origShopInventory);
 
 
 	marketScreen.drawScreen(tradeMenuBG);
