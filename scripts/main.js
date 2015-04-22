@@ -61,6 +61,7 @@ function addDefaultButtons(parentMenu)
 {
 
 	var btnMainMenu=new Button("MAIN_MENU",49,0,320,67,"","Epistolar",15,"black", mainMenuButtonBG);
+	//btnMainMenu.highlightImage=mainMenuButtonHigh;
 	btnMainMenu.highZOrder=true;
 	btnMainMenu.highlightImage=coinImg;
 	btnMainMenu.onClick=function(){
@@ -72,7 +73,7 @@ function addDefaultButtons(parentMenu)
 
 	var btnSave=new Button("SAVE",690,520,80,80,"","Epistolar",15,"black", saveButtonBG);
 	btnSave.highZOrder=true;
-	btnSave.highlightImage=coinImg;
+	btnSave.highlightImage=saveButtonHigh;
 	btnSave.onClick=function(){
 		var parser=new GameStateParser();
 		parser.saveGame();
@@ -80,7 +81,7 @@ function addDefaultButtons(parentMenu)
 
 	var btnShip=new Button("SHIPS",290,520,80,80,"","Epistolar",15,"black", shipsButtonBG);
 	btnShip.highZOrder=true;
-	btnShip.highlightImage=coinImg;
+	btnShip.highlightImage=shipsButtonHigh;
 	btnShip.onClick=function(){
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
@@ -89,7 +90,7 @@ function addDefaultButtons(parentMenu)
 	}
 	var btnCargo=new Button("CARGO",370,520,80,80,"","Epistolar",15,"black", cargoButtonBG);
 	btnCargo.highZOrder=true;
-	btnCargo.highlightImage=coinImg;
+	btnCargo.highlightImage=cargoButtonHigh;
 	btnCargo.onClick=function(){
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
@@ -99,7 +100,7 @@ function addDefaultButtons(parentMenu)
 
 	var btnMap=new Button("MAP",450,520,80,80,"","Epistolar",15,"black", mapButtonBG);
 	btnMap.highZOrder=true;
-	btnMap.highlightImage=coinImg;
+	btnMap.highlightImage=mapButtonHigh;
 	btnMap.onClick=function(){
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
@@ -109,7 +110,7 @@ function addDefaultButtons(parentMenu)
 
 	var btnQuests=new Button("QUESTS",530,520,80,80,"","Epistolar",15,"black", questButtonBG);
 	btnQuests.highZOrder=true;
-	btnQuests.highlightImage=coinImg;
+	btnQuests.highlightImage=questButtonHigh;
 	btnQuests.onClick=function(){
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
@@ -119,7 +120,7 @@ function addDefaultButtons(parentMenu)
 	}
 	var btnSettlement=new Button("SETTLEMENT",610,520,80,80,"","Epistolar",15,"black", settlementButtonBG);
 	btnSettlement.highZOrder=true;
-	btnSettlement.highlightImage=coinImg;
+	btnSettlement.highlightImage=settlementButtonHigh;
 	btnSettlement.onClick=function(){
 		var fetcher=new SettlementInfoFetcher();
 		var settlement=fetcher.get(gameState.settlement);
@@ -130,7 +131,7 @@ function addDefaultButtons(parentMenu)
 	}
 	var btnTranslate=new Button("WORK",850,470,100,125,"","Epistolar",15,"black", translateButtonBG);
 	btnTranslate.highZOrder=true;
-	btnTranslate.highlightImage=coinImg;
+	btnTranslate.highlightImage=translateButtonHigh;
 	btnTranslate.onClick=function(){
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();

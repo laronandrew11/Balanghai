@@ -3,7 +3,7 @@ function GameState(playerName){
 	this.playerName = playerName ;
 	this.money=1000;
 	this.targetMoney=1100;
-	this.endDate=new GameDate(1200,12,30);
+	this.endDate=new GameDate(1205,12,30);
 	this.mapX=494;
 	this.mapY=199;
 	this.settlement="Sikdagat"; //if applicable

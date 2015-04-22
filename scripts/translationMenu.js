@@ -37,7 +37,7 @@ function populateTranslationMenu(parentMenu)
 			var reward=gameState.pendingTranslations[i].reward;
 			var lblReward=new Label(550,y+70,200,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
 			lblReward.bgImage=scrollSmallImg;
-			var lblSentence=new Label(100,y+70,200,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
+			var lblSentence=new Label(100,y+70,500,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
 			lblSentence.bgImage=scrollSmallImg;
 			var btnTranslateSentence=new Button("translate_sentence",800,y+70,80,30,"Translate","Bebas",15,"black", buttonBG);
 			btnTranslateSentence.onClick=createTranslateButtonHandler(parentMenu, btnTranslateSentence, gameState.pendingTranslations[i]);
