@@ -22,6 +22,7 @@ function Dialog(parentMenu, text, submitFunction)
 	this.pnlDialog.addButton(btnSubmit);
 	parentMenu.addPanel(this.pnlDialog);
 
+
 	this.setVisible=function(isVisible){
 		this.pnlDialog.visible=isVisible;
 	}

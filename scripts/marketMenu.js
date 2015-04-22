@@ -7,33 +7,7 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 	return function(){
 			if(shopInventory.type=='market')
 			{
-				//var amountToBuy=parseInt(prompt("Buy how many units?"));
-				/*if(amountToBuy>item.amount||amountToBuy<=0)//TODO include strings/chars as invalid input
-					alert("Invalid amount");
-				else {
-					//update item in general inventory
-					if(amountToBuy<item.amount)
-					{
-						item.amount=item.amount-amountToBuy;
-					}
-					else if(amountToBuy==item.amount)
-					{
-						shopInventory.removeCargo(item.name);
-					}
-					//update item to sell
-					if(!shopInventory.hasToSellItem(item.name))
-					{
-						var itemToBuy=new Cargo(item.name,item.type,item.unitWeight, amountToBuy, item.price);
-						shopInventory.toSell.push(itemToBuy);
-					}
-					else
-					{
-						shopInventory.getToSellItem(item.name).amount+=amountToBuy;
-					}
-
-			
-					//parentMenu.drawScreen(context);
-				}*/
+	
 				var dlgBuy=new Dialog(parentMenu,"Buy how many units?",function(){
 						
 						var amountToBuy=parseInt(dlgBuy.userInput);
@@ -317,6 +291,7 @@ function populatePlayerInventoryPanel(parentMenu, shopInventory, cargoType)//dis
 	var rows=2;
 	var pageIndex=0;
 	var rowIndex=0;
+
 
 	if(poiType=="market")
 		var cargoList=gameState.cargo;

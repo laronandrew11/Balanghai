@@ -5,6 +5,7 @@ function addShipbuilderMenu(settlement){
 	addDefaultButtons(shipbuilderScreen);
 
 	var shopInventory=settlement.getShopInventory('shipbuilder');
+
 	var fetcher=new PriceTableInfoFetcher();
 	var priceTable=fetcher.findPriceTable(settlement.name, 'shipbuilder');
 	//alert(priceTable[0].cargoName);
@@ -55,9 +56,9 @@ var btnTrade=new Button("TRADE",400,350,162,65,"","Bebas",15,"black", tradeButto
 	shipbuilderScreen.addPanel(pnlToBuy);
 	shipbuilderScreen.addButton(btnTrade);
 
-		populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
+		populatePlayerInventoryPanel(shipbuilderScreen, shopInventory);
 		populateShopInventoryPanel(shipbuilderScreen, shopInventory);
-		populateToSellPanel(shipbuilderScreen, 'shipbuilder');
+		populateToSellPanel(shipbuilderScreen, shopInventory);
 		populateToBuyPanel(shipbuilderScreen, shopInventory);
 
 	shipbuilderScreen.drawScreen(tradeMenuBG);

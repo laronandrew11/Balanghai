@@ -4,6 +4,7 @@ function DynamicScreen(){
 	this.staticSprites=[];
 	this.settlements=[];
 	this.labels=[];
+	this.panels=[];
 	this.createInitialize=function()
 	{
 		var obj=this;
@@ -83,6 +84,7 @@ function DynamicScreen(){
 		
 			cam.end();
 			context.drawImage(borderImg,0,0,1000,600); 
+			obj.drawPanels();
 			obj.drawLabels();
 		}
 	}
@@ -102,6 +104,8 @@ function DynamicScreen(){
 				if(secondCounter==1)
 				{
 					gameState.gameDate.advanceDate();
+					if(gameState.gameDate.day==15)
+						triggerTranslationQuest(obj);
 					secondCounter=0;
 					
 				}
@@ -172,6 +176,31 @@ function DynamicScreen(){
 		}
 	}
 	this.drawLabels=this.createDrawLabels();
+
+	this.createAddPanel=function(panel)
+	{
+		var obj=this;
+		return function(panel){
+			obj.panels.push(panel);
+		}
+
+	}
+	this.addPanel=this.createAddPanel();
+	this.createDrawPanels=function()
+	{
+		var obj=this;
+		return function(){
+			var i;
+			for(i=0; i<obj.panels.length; i++){
+				if(obj.panels[i].visible==true)
+				{
+					obj.panels[i].draw(context);
+					//alert("Panel drawn");
+				}
+			}
+		}
+	}
+	this.drawPanels=this.createDrawPanels();
 
 	this.keyEvent=function(event){
 		var key = event.keyCode;

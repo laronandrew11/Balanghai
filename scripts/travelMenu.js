@@ -12,9 +12,21 @@ function addTravelMenu(){
 	lblSpeed.bgImage=scrollLargeImg;
 	travelScreen.addLabel(lblSpeed);
 
+	var dlgNewQuest=new Dialog(travelScreen,"Cidenthalian traders have given you a new sentence to translate",function(){
+		travelScreen.active=true;
+	});
 	travelScreen.initialize();
+
 }
 	
+function triggerTravelAlert(parentMenu)
+{
+	alert("Supposed to activate panel!");
+	
+	console.log(parentMenu.panels.length);
+	parentMenu.panels[0].visible=true;
+	parentMenu.dynamicScreenActive=false;
+}
 
 function addSettlementMarkers(fetcher, parentScreen)//TODO optimize so that we don't parse the JSON string every time we add a new settlement
 {

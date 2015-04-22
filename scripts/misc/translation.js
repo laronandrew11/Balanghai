@@ -10,13 +10,14 @@ var translationRewards=[];
 translationRewards.push(new Cargo("Abaca Wood","Wood",1, 100));
 translationRewards.push(new Cargo("Water","Food",1, 10));
 var translationSentences=[];
-translationSentences.push("I like cats.");
+translationSentences.push("The archipelago contains 7,107 islands.");
 translationSentences.push("Do you want to build a boat?");
-translationSentences.push("Where is my hat?");
-translationSentences.push("Give me your hand.");
-function triggerTranslationQuest()
+translationSentences.push("International trade agreements have a long history.");
+translationSentences.push("Cooperation leads to progress.");
+function triggerTranslationQuest(parentMenu)
 {
-	alert("New translation quest available. Check your Work menu.");
+	//alert("New translation quest available. Check your Work menu.");
+	triggerTravelAlert(parentMenu);
 	var reward=translationRewards[randomIntFromInterval(0,translationRewards.length-1)];//TODO randomize from translationRewards
 	var sentence=translationSentences[randomIntFromInterval(0,translationSentences.length-1)];
 	gameState.pendingTranslations.push(new Translation(sentence, reward));

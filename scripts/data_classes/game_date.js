@@ -6,7 +6,7 @@ function GameDate(year, month, day){
 		if(this.day<30)
 			this.day++;
 		else {
-			triggerTranslationQuest();
+			
 			this.day=1;
 			if (this.month<12)
 				this.month++;

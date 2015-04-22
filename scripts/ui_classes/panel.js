@@ -68,9 +68,11 @@ function Panel(x,y,width,height, bgImage){
 	{
 		var obj=this;
 		return function(){
+
 			var i;
 			for(i=0; i<obj.labels.length; i++){
 					obj.labels[i].draw(context);
+					//console.log(obj.labels[i]);
 			}
 		}
 	}
