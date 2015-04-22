@@ -72,6 +72,33 @@ var buttonBG = document.createElement('img');
 	loadGameButtonBG.src = 'img/buttons/mainmenu/loadgamebut.png';
 	var newGameButtonBG = document.createElement('img');
 	newGameButtonBG.src = 'img/buttons/mainmenu/newgamebut.png';
+
+
+	//var mainMenuButtonHigh = document.createElement('img');
+	//mainMenuButtonBG.src = 'img/buttons/fleetmenu/mainmenu.png';
+	var creditsButtonHigh = document.createElement('img');
+	creditsButtonBG.src = 'img/buttons/mainmenu/creditsbuthigh.png';
+	var loadGameButtonHigh = document.createElement('img');
+	loadGameButtonBG.src = 'img/buttons/mainmenu/loadgamebuthigh.png';
+	var newGameButtonHigh = document.createElement('img');
+	newGameButtonHigh.src = 'img/buttons/mainmenu/newgamebuthigh.png';
+
+		var shipsButtonHigh = document.createElement('img');
+	shipsButtonHigh.src = 'img/buttons/fleetmenu/shipsbuttonhigh.png';
+	var tradeButtonHigh = document.createElement('img');
+	tradeButtonHigh.src = 'img/buttons/trademenu/tradebuttonhigh.png';
+	var cargoButtonHigh = document.createElement('img');
+	cargoButtonHigh.src = 'img/buttons/fleetmenu/cargobuttonhigh.png';
+	var mapButtonHigh = document.createElement('img');
+	mapButtonHigh.src = 'img/buttons/fleetmenu/mapbuttonhigh.png';
+	var questButtonHigh = document.createElement('img');
+	questButtonHigh.src = 'img/buttons/fleetmenu/questbuttonhigh.png';
+	var settlementButtonHigh = document.createElement('img');
+	settlementButtonHigh.src = 'img/buttons/fleetmenu/settlementbuttonhigh.png';
+	var saveButtonHigh = document.createElement('img');
+	saveButtonHigh.src = 'img/buttons/fleetmenu/savebuttonhigh.png';
+	var translateButtonHigh = document.createElement('img');
+	translateButtonHigh.src = 'img/buttons/fleetmenu/translatebuttonhigh.png';
 	
 	var tradeButtonBG = document.createElement('img');
 	tradeButtonBG.src = 'img/buttons/trademenu/tradebutton.png';
