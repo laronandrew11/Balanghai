@@ -11,6 +11,9 @@ function addMapMenu(){
 	{
 		var newButton=getSettlementButton(settlementFetcher, mapMenu, gameState.visibleSettlements[i]);
 		pnlMap.addButton(newButton);
+		var newLabel=new Label(newButton.x+14,newButton.y,80,24,gameState.visibleSettlements[i],"Bebas",16, "black");
+		newLabel.bgImage=scrollSmallImg;
+		pnlMap.addLabel(newLabel);
 	}
 
 	var lblYouAreHere=new Label(50+gameState.mapX,50+gameState.mapY,16,16,"","Epistolar",15,"black");
@@ -30,7 +33,7 @@ function getSettlementButton(fetcher, parentMenu,settlementName)//TODO optimize 
 {
 
 	var settlement=fetcher.get(settlementName);
-	var newButton=new Button(settlementName,44+settlement.mapX,44+settlement.mapY,12,12,settlement.name,"Epistolar",16,"black", poiButtonImg);
+	var newButton=new Button(settlementName,44+settlement.mapX,44+settlement.mapY,12,12,"","Epistolar",16,"black", poiButtonImg);
 	newButton.onClick=function(){
 			//alert(settlement.name);
 			parentMenu.clearScreen();

@@ -35,7 +35,7 @@ function populateTranslationMenu(parentMenu)
 		{
 			var newPanel=new Panel(100,y,845,130,questPlankImg);
 			var reward=gameState.pendingTranslations[i].reward;
-			var lblReward=new Label(550,y+70,200,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
+			var lblReward=new Label(600,y+70,200,50,"Reward: "+reward.amount+" "+reward.name,"Bebas",18,"black");
 			lblReward.bgImage=scrollSmallImg;
 			var lblSentence=new Label(100,y+70,500,50,"Sentence: "+gameState.pendingTranslations[i].sentence,"Bebas",18,"black");
 			lblSentence.bgImage=scrollSmallImg;
