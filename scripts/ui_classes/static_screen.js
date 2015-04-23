@@ -231,6 +231,7 @@ function staticScreen(){
 					//return;
 				//}
 			}
+			tutorial.draw();
 
 
 		}

@@ -9,15 +9,12 @@ HIGH PRIORITY (finish by April 23)
 
 
 4/23:
--prettify menus based on Nigel's sample screens
+
 ---Add scrolls to settlement,etc.
 -fix highlighting (no more coins)
 Textbox:
 -implement wrapping (also for label)
 -adjust cursor positioning
-
-
-
 -Fix travel screen popup
 
 -implement quest system for tutorial
@@ -27,7 +24,7 @@ Textbox:
 -weekly re-rolling of inventories and prices
 -allow player free roam
 
-
+-prettify menus based on Nigel's sample screens (DONE for now)
 -Item scrolling on cargo, ship and trade screens (DONE)
 -enforce speed system (DONE)
 -cargo/ship button wrapping (DONE)

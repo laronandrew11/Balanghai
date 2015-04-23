@@ -622,6 +622,7 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 
 function addMarketMenu(settlement){
+	gameState.currentMenu="market";
 	playerPageNo=0;
 	shopPageNo=0;
 	var marketScreen=new staticScreen();

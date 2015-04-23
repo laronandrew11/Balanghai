@@ -35,6 +35,11 @@ var highlightImg = document.createElement('img');
 var shipIcon = document.createElement('img');
 	shipIcon.src = 'img/bangka.png';
 
+
+var tutorialImg=document.createElement('img');
+	tutorialImg.src = 'img/buttons/upArrow.png';
+
+
 var upArrowImg=document.createElement('img');
 	upArrowImg.src = 'img/buttons/upArrow.png';
 	var downArrowImg=document.createElement('img');

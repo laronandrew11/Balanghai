@@ -1,4 +1,5 @@
 function addQuestMenu(){
+	gameState.currentMenu="quests";
 	var questScreen=new staticScreen();
 
 	addDefaultButtons(questScreen);

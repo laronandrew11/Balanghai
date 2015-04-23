@@ -21,6 +21,7 @@ function populateCategoryButtons(parentMenu, parentPanel){
 	}
 }
 function addCargoMenu(){
+	gameState.currentMenu="cargo";
 	var cargoMenu=new staticScreen();
 
 

@@ -1,4 +1,5 @@
 function addSettlementMenu(settlement){
+	gameState.currentMenu="settlement";
 	var settlementScreen=new staticScreen();
 
 	addDefaultButtons(settlementScreen);
@@ -29,6 +30,7 @@ function addSettlementMenu(settlement){
 		btnMarket.onClick=function(){
 			settlementScreen.clearScreen();
 			returnItemsToSell();
+			tutorial.check(1);
 			addMarketMenu(settlement);
 		}
 		settlementScreen.addButton(btnMarket);

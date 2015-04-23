@@ -1,4 +1,5 @@
 function addShipbuilderMenu(settlement){
+	gameState.currentMenu="shipbuilder";
 	playerPageNo=0;
 	shopPageNo=0;
 	var shipbuilderScreen=new staticScreen();

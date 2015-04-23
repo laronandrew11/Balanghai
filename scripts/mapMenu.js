@@ -1,4 +1,5 @@
 function addMapMenu(){
+	gameState.currentMenu="map";
 	var mapMenu=new staticScreen();
 	
 	var pnlMap=new Panel(50,50,900,500,mapImg);

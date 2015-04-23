@@ -1,4 +1,5 @@
 function addTravelMenu(){
+	gameState.currentMenu="travel";
 	var travelScreen=new DynamicScreen();
 	var settlementFetcher= new SettlementInfoFetcher();
 	

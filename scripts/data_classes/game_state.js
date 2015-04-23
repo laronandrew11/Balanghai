@@ -18,6 +18,7 @@ function GameState(playerName){
 	this.finishedTranslations=[];
 	this.shopInventoryMap=new Map();
 	this.priceTable;
+	this.currentMenu;
 
 	this.getMinSpeed=function(){
 		var speeds=[];

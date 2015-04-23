@@ -1,5 +1,6 @@
 
 function addFleetMenu(){ //TODO use panels?dra
+	gameState.currentMenu="ships";
 	var fleetMenu=new staticScreen();
 
 	addDefaultButtons(fleetMenu);

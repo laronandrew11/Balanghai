@@ -1,4 +1,5 @@
 function addTranslationMenu(){
+	gameState.currentMenu="translation";
 	var translationScreen=new staticScreen();
 	
 	//addDefaultButtons(translationScreen);

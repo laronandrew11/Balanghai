@@ -115,6 +115,7 @@ function addDefaultButtons(parentMenu)
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
+
 		addQuestMenu();
 		
 	}
@@ -127,6 +128,7 @@ function addDefaultButtons(parentMenu)
 		deactivateTextboxes(parentMenu);
 		parentMenu.clearScreen();
 		returnItemsToSell();
+		tutorial.check(0);
 		addSettlementMenu(settlement);
 	}
 	var btnTranslate=new Button("WORK",850,470,100,125,"","Epistolar",15,"black", translateButtonBG);
