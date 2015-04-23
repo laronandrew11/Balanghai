@@ -2,7 +2,7 @@ function Dialog(parentMenu, text, buttonText,submitFunction)
 {
 	this.pnlDialog=new Panel(100,50,845,130,questPlankImg);
 	this.lblDialogText=new Label(110,120,100,50,text,"Bebas",24,"black");
-	this.txtInput=new Textbox(parentMenu, 400, 120, 500, 100);
+	this.txtInput=new Textbox(parentMenu, 400, 120, 500, 100,"Bebas",14,"black");
 	this.userInput;
 	this.submitFunction=submitFunction;
 	this.pnlDialog.exclusiveControl=true;

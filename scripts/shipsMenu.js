@@ -28,7 +28,7 @@ function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make simila
 			var lblHealth=new Label(380,120,200,40,"Hull strength: "+item.health,"Bebas",18,"black");
 			lblHealth.bgImage= scrollLargeImg;
 
-			var lblSpeed= new Label(380,170,200,40,"Speed: "+item.speed,"Bebas",18,"black");
+			var lblSpeed= new Label(380,170,200,40,"Speed: "+item.speed+ "knots","Bebas",18,"black");
 			lblSpeed.bgImage= scrollLargeImg;
 
 			var lblCapacity= new Label(380,220,200,40,item.cargoCapacity,"Bebas",18,"black");

@@ -9,7 +9,7 @@ function addTravelMenu(){
 	
 	addDefaultLabels(travelScreen);
 
-	var lblSpeed=new Label(840,38,145,38,gameState.getMinSpeed()+ " knots","Bebas",18,"black");
+	var lblSpeed=new Label(840,38,145,38,gameState.getMinSpeed()+ "   knots","Bebas",18,"black");
 	lblSpeed.bgImage=scrollLargeImg;
 	travelScreen.addLabel(lblSpeed);
 
@@ -23,9 +23,8 @@ function addTravelMenu(){
 	
 function triggerTravelAlert(parentMenu)
 {
-	alert("Supposed to activate panel!");
 	
-	console.log(parentMenu.panels.length);
+	//console.log(parentMenu.panels.length);
 	parentMenu.panels[0].visible=true;
 	parentMenu.dynamicScreenActive=false;
 }

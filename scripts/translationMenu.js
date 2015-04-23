@@ -88,7 +88,7 @@ function createTranslateButtonHandler(parentMenu, button, translation){
 			}
 
 		}
-		var txtTranslation=new Textbox(parentMenu, 270, 350, 500, 100);
+		var txtTranslation=new Textbox(parentMenu, 270, 350, 500, 100, "Bebas",18,"black");
 
 		translationPanel.addLabel(lblReward);
 		translationPanel.addLabel(lblDescription);

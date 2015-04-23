@@ -13,6 +13,7 @@ function guide(){
 					context.drawImage(tutorialImg,150,100,100,100); 
 					break;
 				case 2:
+				if(gameStat.currentMenu=="market")
 					context.drawImage(tutorialImg,200,100,100,100); 
 					break;
 				default:// do nothing

@@ -119,8 +119,8 @@ function keyup(event){
 function mousedown(){
 	mousex=event.offsetX;
 	mousey=event.offsetY;
-	if(dynamicScreenActive==true)
-		set();
+	//if(dynamicScreenActive==true)
+		//set();
 }
 
 function mousemove(){

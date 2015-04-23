@@ -231,7 +231,7 @@ function staticScreen(){
 					//return;
 				//}
 			}
-			tutorial.draw();
+			
 
 
 		}
@@ -317,6 +317,7 @@ function staticScreen(){
 			obj.drawPanels();
 			obj.drawHighButtons();
 			//obj.drawMenu(-1);
+			tutorial.draw();
 		}
 	}
 	this.drawScreen=this.createDrawScreen();

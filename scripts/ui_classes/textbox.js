@@ -1,10 +1,14 @@
-var Textbox=function(parentScreen, x,y,width,height)
+var Textbox=function(parentScreen, x,y,width,height, style, size, color)
 {
 	this.x=x;
 	this.y=y;
 	this.width=width;
 	this.height=height;
 	this.text="";
+	this.style-style;
+	this.size=size;
+	this.color=color;
+	this.font = this.size + "px " + this.style;
 	this.keyMap=[];
 	this.cursorVisible=false;
 	this.parentScreen=parentScreen;
@@ -212,6 +216,8 @@ var Textbox=function(parentScreen, x,y,width,height)
 	this.keyEvent=this.createKeyEvent();
 
 	this.draw=function(){
+		context.fillStyle = this.color;
+			context.font = this.font;
 		context.fillText(this.text, this.x, this.y, this.width, this.height);
 	}
 	this.createRedraw=function(){
