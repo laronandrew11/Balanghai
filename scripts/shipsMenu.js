@@ -17,11 +17,28 @@ function CreateShipItemButtonHandler(parentMenu, button, item)//TODO make simila
 			var fetcher=new ShipInfoFetcher();
 			parentMenu.panels[0].clearLabels();
 			parentMenu.panels[0].bgImage=fetcher.getImage(item.name);
-			parentMenu.panels[0].addLabel(new Label(100,100,100,25,"Name: "+item.properName,"Bebas",18,"black"));
-			parentMenu.panels[0].addLabel(new Label(100,150,100,25,"Type: "+item.name,"Bebas",18,"black"));
-			parentMenu.panels[0].addLabel(new Label(100,200,100,25,"Hull strength: "+item.health,"Bebas",18,"black"));
-			parentMenu.panels[0].addLabel(new Label(100,250,100,25,"Speed: "+item.speed,"Bebas",18,"black"));
-			parentMenu.panels[0].addLabel(new Label(100,300,100,25,"Cargo capacity: "+item.cargoCapacity,"Bebas",18,"black"));
+
+			var lblName=new Label(360,420,300,70,item.properName,"Bebas",36,"black");
+			lblName.bgImage= scrollLargeImg;
+
+			var lblType=new Label(360,470,300,50,item.name,"Bebas",26,"black");
+			lblType.bgImage= scrollLargeImg;
+
+			var lblHealth=new Label(380,120,200,40,"Hull strength: "+item.health,"Bebas",18,"black");
+			lblHealth.bgImage= scrollLargeImg;
+
+			var lblSpeed= new Label(380,170,200,40,"Speed: "+item.speed,"Bebas",18,"black");
+			lblSpeed.bgImage= scrollLargeImg;
+
+			var lblCapacity= new Label(380,220,200,40,item.cargoCapacity,"Bebas",18,"black");
+			//lblCapacity.bgImage= cargoNumberImg;
+			lblCapacity.bgImage=scrollLargeImg;
+
+			parentMenu.panels[0].addLabel(lblName);
+			parentMenu.panels[0].addLabel(lblType);
+			parentMenu.panels[0].addLabel(lblHealth);
+			parentMenu.panels[0].addLabel(lblSpeed);
+			parentMenu.panels[0].addLabel(lblCapacity);
 			parentMenu.drawScreen(parentMenu.bgImage);
 		}
 }

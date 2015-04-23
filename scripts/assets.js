@@ -32,6 +32,8 @@ var cargoNumberImg = document.createElement('img');
 	cargoNumberImg.src = 'img/icons/cargonumber.png';
 var highlightImg = document.createElement('img');
 	highlightImg.src = 'img/highlight.png';
+var shipIcon = document.createElement('img');
+	shipIcon.src = 'img/bangka.png';
 
 var upArrowImg=document.createElement('img');
 	upArrowImg.src = 'img/buttons/upArrow.png';
