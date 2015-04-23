@@ -35,18 +35,18 @@ function deactivateScreen(){
 }*/
 function addDefaultLabels(parentMenu)
 {
-	var lblPlayerName=new Label(700,2,145,38,gameState.playerName,"Bebas",18,"black");
+	var lblPlayerName=new Label(70,2,145,38,gameState.playerName,"Bebas",18,"black");
 	lblPlayerName.bgImage=scrollLargeImg;
-	var lblGameDate=new Label(700,38,100,38,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Bebas",18,"black");
+	var lblGameDate=new Label(220,2,100,38,gameState.gameDate.year+"-"+gameState.gameDate.month+"-"+gameState.gameDate.day,"Bebas",18,"black");
 	lblGameDate.bgImage=scrollLargeImg;
-	var lblMoney=new Label(840,38,145,38,gameState.money,"Bebas",18,"black");
+	var lblMoney=new Label(730,2,100,38,gameState.money,"Bebas",18,"black");
 	lblMoney.bgImage=scrollLargeImg;
-	var lblCoin=new Label(805,38,33,31,"","Epistolar",18,"black");
+	var lblCoin=new Label(700,2,33,31,"","Epistolar",18,"black");
 	lblCoin.bgImage=coinImg;
 	var lblWeight=new Label(848,2,36,25,"","Epistolar",18,"black");
 	lblWeight.bgImage=totalWeightImg;
 
-	var lblCargoCapacity=new Label(884,2,145,38,gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity(),"Bebas",18,"black");
+	var lblCargoCapacity=new Label(884,2,100,38,gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity(),"Bebas",18,"black");
 	lblCargoCapacity.bgImage=scrollLargeImg;
 	
 	parentMenu.addLabel(lblGameDate);
@@ -60,7 +60,7 @@ function addDefaultLabels(parentMenu)
 function addDefaultButtons(parentMenu)
 {
 
-	var btnMainMenu=new Button("MAIN_MENU",49,0,320,67,"","Epistolar",15,"black", mainMenuButtonBG);
+	var btnMainMenu=new Button("MAIN_MENU",49,550,240,50,"","Epistolar",15,"black", mainMenuButtonBG);
 	//btnMainMenu.highlightImage=mainMenuButtonHigh;
 	btnMainMenu.highZOrder=true;
 	btnMainMenu.highlightImage=coinImg;
