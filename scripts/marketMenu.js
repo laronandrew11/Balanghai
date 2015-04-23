@@ -8,7 +8,7 @@ function CreateBuyableItemButtonHandler(parentMenu, button, item, shopInventory)
 			if(shopInventory.type=='market')
 			{
 	
-				var dlgBuy=new Dialog(parentMenu,"Buy how many units?",function(){
+				var dlgBuy=new Dialog(parentMenu,"Buy how many units?","Done",function(){
 						
 						var amountToBuy=parseInt(dlgBuy.userInput);
 
@@ -70,7 +70,7 @@ function CreateToBuyItemButtonHandler(parentMenu, button, item, shopInventory){
 			{
 				//var amountToRemove=parseInt(prompt("Remove how many units?"));
 				var amountToRemove;
-				var dlgRemove=new Dialog(parentMenu,"Remove how many units?",function(){
+				var dlgRemove=new Dialog(parentMenu,"Remove how many units?","Done",function(){
 					var amountToRemove=parseInt(dlgRemove.userInput);
 					if(amountToRemove==NaN||amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
 					alert("Invalid amount");
@@ -123,7 +123,7 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, shopInventory
 
 		if(shopInventory.type=='market'){
 			//var amountToSell=parseInt(prompt("Sell how many units?"));
-			var dlgSell=new Dialog(parentMenu,"Sell how many units?",function(){
+			var dlgSell=new Dialog(parentMenu,"Sell how many units?","Done",function(){
 					var amountToSell=parseInt(dlgSell.userInput);
 					if(amountToSell==NaN||amountToSell>item.amount||amountToSell<=0)//TODO include strings/chars as invalid input
 				alert("Invalid amount");
@@ -180,7 +180,7 @@ function CreateToSellItemButtonHandler(parentMenu, button, item, shopInventory)/
 		if(shopInventory.type=='market')
 		{
 			//var amountToRemove=parseInt(prompt("Remove how many units?"));
-			var dlgSellRemove=new Dialog(parentMenu,"Remove how many units?",function(){
+			var dlgSellRemove=new Dialog(parentMenu,"Remove how many units?","Done",function(){
 					var amountToRemove=parseInt(dlgSellRemove.userInput);
 					if(amountToRemove==NaN||amountToRemove>item.amount||amountToRemove<=0)//TODO include strings/chars as invalid input
 				alert("Invalid amount");

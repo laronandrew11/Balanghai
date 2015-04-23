@@ -71,7 +71,7 @@ function addMainMenu(){
 	pnlCredits.addButton(btnCloseCreditsPanel);
 
 
-	var dlgPlayerName=new Dialog(mainMenu,"Enter your name",function(){
+	var dlgPlayerName=new Dialog(mainMenu,"Enter your name","Submit",function(){
 		var newPlayerName=dlgPlayerName.userInput;
 		gameState=new GameState(newPlayerName);
 	

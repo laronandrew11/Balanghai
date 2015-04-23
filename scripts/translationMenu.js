@@ -5,9 +5,7 @@ function addTranslationMenu(){
 
 	populateTranslationMenu(translationScreen);
 	//dynamicScreenActive=true;
-	var dlgPlayerName=new Dialog(translationMenu,"New translation job available",function(){
-		
-	})
+	
 	translationScreen.drawScreen(translationMenuBG);
 
 }

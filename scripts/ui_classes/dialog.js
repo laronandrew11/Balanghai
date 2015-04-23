@@ -1,4 +1,4 @@
-function Dialog(parentMenu, text, submitFunction)
+function Dialog(parentMenu, text, buttonText,submitFunction)
 {
 	this.pnlDialog=new Panel(100,50,845,130,questPlankImg);
 	this.lblDialogText=new Label(110,120,100,50,text,"Bebas",24,"black");
@@ -11,7 +11,7 @@ function Dialog(parentMenu, text, submitFunction)
 	//this.pnlDialog.visible=true;
 	
 	
-	var btnSubmit=new Button("SUBMIT", 700,120,150,50,"Submit","Bebas",18,"black", buttonBG);
+	var btnSubmit=new Button(buttonText, 700,100,150,50,buttonText,"Bebas",18,"black", buttonBG);
 	var obj=this;
 	btnSubmit.onClick=function(){
 		obj.txtInput.deactivate();
@@ -26,4 +26,11 @@ function Dialog(parentMenu, text, submitFunction)
 	this.setVisible=function(isVisible){
 		this.pnlDialog.visible=isVisible;
 	}
+	/*this.createSetButtonText=function(text){
+		var obj=this;
+		return function(){
+			obj.pnlDialog.buttons[0].text=text;
+		}
+	}
+	this.setButtonText=this.createSetButtonText();*/
 }

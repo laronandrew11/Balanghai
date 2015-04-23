@@ -8,13 +8,14 @@ function addTravelMenu(){
 	
 	addDefaultLabels(travelScreen);
 
-	var lblSpeed=new Label(840,68,145,38,gameState.getMinSpeed()+ " knots","Bebas",18,"black");
+	var lblSpeed=new Label(840,38,145,38,gameState.getMinSpeed()+ " knots","Bebas",18,"black");
 	lblSpeed.bgImage=scrollLargeImg;
 	travelScreen.addLabel(lblSpeed);
 
-	var dlgNewQuest=new Dialog(travelScreen,"Cidenthalian traders have given you a new sentence to translate",function(){
+	var dlgNewQuest=new Dialog(travelScreen,"New sentence available to translate","OK",function(){
 		travelScreen.active=true;
 	});
+
 	travelScreen.initialize();
 
 }
