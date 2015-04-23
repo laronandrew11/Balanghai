@@ -28,6 +28,10 @@ var weightImg = document.createElement('img');
 	weightImg.src = 'img/icons/weight.png';
 var totalWeightImg = document.createElement('img');
 	totalWeightImg.src = 'img/icons/totalweight.png';
+var cargoNumberImg = document.createElement('img');
+	cargoNumberImg.src = 'img/icons/cargonumber.png';
+var highlightImg = document.createElement('img');
+	highlightImg.src = 'img/highlight.png';
 
 var upArrowImg=document.createElement('img');
 	upArrowImg.src = 'img/buttons/upArrow.png';

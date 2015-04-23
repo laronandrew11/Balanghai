@@ -18,7 +18,7 @@ function addStartScreen()
 	var startScreen=new staticScreen();
 
 	var btnContinue=new Button("CONTINUE",415,525,240,60,"CLICK TO CONTINUE","Bebas",18,"black", buttonBG);
-	btnContinue.highlightImage=coinImg;
+	
 	btnContinue.onClick=function(){
 		startScreen.clearScreen();
 		addMainMenu();

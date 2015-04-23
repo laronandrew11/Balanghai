@@ -46,15 +46,40 @@ function CreateCargoItemButtonHandler(parentMenu, button, cargo)//TODO make simi
 {
 	var lbutton=button;
 	return function(){
+			var fetcher=new CargoRecordInfoFetcher();
 
 			//var pnlDetails=createCargoDetailsPanel(item);
 			//parentMenu.addPanel(pnlDetails);
 			parentMenu.panels[1].clearLabels();
-			parentMenu.panels[1].addLabel(new Label(590,100,100,25,"Name: "+cargo.name,"Bebas",15,"black"));
-			parentMenu.panels[1].addLabel(new Label(590,150,100,25,"Units owned: "+cargo.amount,"Bebas",15,"black"));
-			parentMenu.panels[1].addLabel(new Label(590,200,100,25,"Type: "+cargo.type,"Bebas",15,"black"));
-			parentMenu.panels[1].addLabel(new Label(590,250,100,25,"Weight/unit: "+cargo.unitWeight,"Bebas",15,"black"));
-			parentMenu.panels[1].addLabel(new Label(590,300,100,25,"Total weight: "+cargo.unitWeight*cargo.amount,"Bebas",15,"black"));
+
+
+			var lblName=new Label(650,100,200,50,cargo.name,"Bebas",22,"black");
+			lblName.bgImage= scrollLargeImg;
+
+			var lblWeight=new Label(590,200,72,50,cargo.unitWeight,"Bebas",22,"black");
+			lblWeight.bgImage=weightImg;
+
+			var lblTotalWeight=new Label(590,350,72,50,cargo.unitWeight*cargo.amount,"Bebas",22,"black");
+			lblTotalWeight.bgImage=totalWeightImg;
+
+			var lblUnits=new Label(840,200,72,72,cargo.amount,"Bebas",22,"black");
+			lblUnits.bgImage=cargoNumberImg;
+
+			var catIndex=cargoCategories.indexOf(cargo.type);
+			lblType= new Label(840,350,72,72,cargo.type,"Bebas",22,"black");
+			lblType.bgImage=cargoCategoryButtons[catIndex];
+
+			
+
+			var lblItem=new Label(660,200,160,160,"","Bebas",22,"black");
+			lblItem.bgImage=fetcher.getImageSrc(cargo.name);
+
+			parentMenu.panels[1].addLabel(lblName);
+			parentMenu.panels[1].addLabel(lblUnits);
+			parentMenu.panels[1].addLabel(lblType);
+			parentMenu.panels[1].addLabel(lblWeight);
+			parentMenu.panels[1].addLabel(lblTotalWeight);
+			parentMenu.panels[1].addLabel(lblItem);
 			parentMenu.drawScreen(parentMenu.bgImage);
 		}
 }

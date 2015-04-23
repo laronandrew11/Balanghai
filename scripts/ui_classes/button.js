@@ -15,7 +15,7 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 
 	this.status="enabled";//or "highlighted" or "disabled"
 	this.disabledImage=null;
-	this.highlightImage=coinImg;
+	this.highlightImage=highlightImg;
 
 	this.createDraw = function(context) {
 		var obj = this;

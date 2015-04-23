@@ -1,12 +1,6 @@
 Sir Sol's suggestions
-
-
-4/22:
--replace alerts and prompts with panels
--prettify translation screen
--implement quest system for tutorial
-
-
+-replace alerts and prompts with panels (DONE except save/load)
+-prettify translation screen (DONE)
 -change "offer" button text to "trade" (DONE)
 -change BG of translation menu (DONE)
 -highlight/disabled images/functionality for buttons (DONE)
@@ -15,9 +9,18 @@ HIGH PRIORITY (finish by April 23)
 
 
 4/23:
+-prettify menus based on Nigel's sample screens
+---Add scrolls to settlement,etc.
+-fix highlighting (no more coins)
 Textbox:
 -implement wrapping (also for label)
 -adjust cursor positioning
+
+
+
+-Fix travel screen popup
+
+-implement quest system for tutorial
 
 
 ???:
