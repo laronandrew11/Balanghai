@@ -46,7 +46,8 @@ function populateLoadPanel(parentMenu, parentPanel){
 }
 
 function addMainMenu(){
-	gameState.currentMenu="mainMenu";
+	if(gameState!=undefined)
+		gameState.currentMenu="mainMenu";
 	var mainMenu=new staticScreen();
 
 	var btnCloseLoadGamePanel=new Button("CLOSE_LOAD",100,56,25,25,"","Epistolar",15,"black", closeButtonBG);
