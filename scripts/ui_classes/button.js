@@ -24,12 +24,12 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 			var image;
 			switch(obj.status)
 			{
-				case "enabled":
+				case "enabled": case "highlighted":
 					image=obj.bgImage;
 					break;
-				case "highlighted":
-					image=obj.highlightImage;
-					break;
+			//	case "highlighted":
+				//	image=obj.highlightImage;
+				//	break;
 				case "disabled":
 					image=obj.disabledImage;
 					break;
@@ -37,6 +37,12 @@ function Button(name, x,y,width,height,text,style,size,color,bgImage){
 			if(image!=null)
 			{
 				context.drawImage(image,obj.x,obj.y,obj.width,obj.height); 
+				if(obj.status=="highlighted")
+				{
+					context.globalAlpha=0.25;
+					context.drawImage(obj.highlightImage,obj.x,obj.y,obj.width,obj.height); 
+					context.globalAlpha=1;
+				}
 			}
 			//console.log("Color "+this.color);
 			context.fillStyle = obj.color;
