@@ -10,14 +10,10 @@ HIGH PRIORITY (finish by April 23)
 
 4/23:
 
----Add scrolls to settlement,etc.
--fix highlighting (no more coins)
-Textbox:
--implement wrapping (also for label)
--adjust cursor positioning
--Fix travel screen popup
 
--implement quest system for tutorial
+
+
+-implement quest system for tutorial (In progress by Dungan)
 
 
 ???:
@@ -30,9 +26,13 @@ Textbox:
 -cargo/ship button wrapping (DONE)
 -enforce weight system (DONE!)
 -Total price/total weight labels on trade screens (DONE)
+-fix highlighting (DONE)
 
 MEDIUM PRIORITY
-
+Textbox:
+-implement wrapping (also for label)
+-adjust cursor positioning
+-Allow travel screen popup to be dismissed (fix dynamic screen click listener)
 -More ship names
 -Prevent ships from being assigned duplicate names (in progress; ships in same settlement will not receive duplicate names)
 

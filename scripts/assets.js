@@ -36,8 +36,14 @@ var shipIcon = document.createElement('img');
 	shipIcon.src = 'img/bangka.png';
 
 
-var tutorialImg=document.createElement('img');
-	tutorialImg.src = 'img/buttons/upArrow.png';
+var pointerUp = document.createElement('img');
+	pointerUp.src = 'img/up_cursor.png';
+	var pointerDown = document.createElement('img');
+	pointerDown.src = 'img/down_cursor.png';
+	var pointerLeft = document.createElement('img');
+	pointerLeft.src = 'img/left_cursor.png';
+	var pointerRight = document.createElement('img');
+	pointerRight.src = 'img/right_cursor.png';
 
 
 var upArrowImg=document.createElement('img');
