@@ -558,6 +558,8 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 	var totalWeight=0;
 	var itemPrice;
 	var itemWeight;
+	if(shopInventory.toSell.length>0)
+		tutorial.check(2);
 	//TODO load shop inventory based on settlement name and type
 	//console.log(shopInventory.toSell);
 	for(i=0;i<shopInventory.toSell.length;i++){
@@ -656,6 +658,7 @@ function addMarketMenu(settlement){
 			populateToSellPanel(marketScreen,origShopInventory);
 			populateToBuyPanel(marketScreen, origShopInventory);
 			marketScreen.buttons[9].status="disabled";
+			tutorial.check(3);
 			//origShopInventory.toSell.push(new Cargo("XXXX","food",1,2,2));
 			
 		};

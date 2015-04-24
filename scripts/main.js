@@ -96,6 +96,7 @@ function addDefaultButtons(parentMenu)
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addCargoMenu();
+		tutorial.check(8);
 	}
 
 	var btnMap=new Button("MAP",450,520,80,80,"","Epistolar",15,"black", mapButtonBG);
@@ -106,6 +107,7 @@ function addDefaultButtons(parentMenu)
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addMapMenu();
+		tutorial.check(4);
 	}
 
 	var btnQuests=new Button("QUESTS",530,520,80,80,"","Epistolar",15,"black", questButtonBG);
@@ -139,6 +141,7 @@ function addDefaultButtons(parentMenu)
 		parentMenu.clearScreen();
 		returnItemsToSell();
 		addTranslationMenu();
+		tutorial.check(6);
 		
 	}
 

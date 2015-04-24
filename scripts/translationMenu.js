@@ -84,6 +84,7 @@ function createTranslateButtonHandler(parentMenu, button, translation){
 		
 				translationPanel.visible=false;
 				populateTranslationMenu(parentMenu);
+				tutorial.check(7);
 				//parentMenu.drawScreen(parentMenu.bgImage);
 			}
 
