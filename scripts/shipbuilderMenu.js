@@ -29,9 +29,9 @@ var btnTrade=new Button("TRADE",400,350,162,65,"","Bebas",15,"black", tradeButto
 			shipbuilderScreen.labels[2].text=gameState.money;
 			shipbuilderScreen.labels[4].text=gameState.getUsedCapacity()+"/"+gameState.getMaxCapacity();
 
-			populatePlayerInventoryPanel(shipbuilderScreen, 'shipbuilder');
+			populatePlayerInventoryPanel(shipbuilderScreen, shopInventory);
 			populateShopInventoryPanel(shipbuilderScreen, shopInventory);
-			populateToSellPanel(shipbuilderScreen, 'shipbuilder');
+			populateToSellPanel(shipbuilderScreen, shopInventory);
 			populateToBuyPanel(shipbuilderScreen, shopInventory);
 
 		}

@@ -102,18 +102,27 @@ function buyShip(shopInventory,ship){
 		shopInventory.removeToSellItem(ship.properName);
 }
 function sellShip(shopInventory,ship){
-	if(gameState.ships.length>0&&gameState.getUsedCapacity()<=gameState.getMaxCapacity()-ship.cargoCapacity){
+	
+	
+
 		shopInventory.addCargo(ship);
 		gameState.money+=ship.price;
 		shopInventory.money-=ship.price;
 		gameState.removeToSellItem(ship.properName, 'ship');
-	}
+	
 }
 function tradeShips(shopInventory,toBuy, toSell, itemType){
 	var i;
 	var maxToBuy=toBuy.length;
 	var maxToSell=toSell.length;
-	 if(canAfford(shopInventory,toBuy,toSell,"ship")==0)
+	var shipsCapacity=0;
+	for(i=0;i<gameState.toSell.length;i++)
+		shipsCapacity+=gameState.toSell[i].cargoCapacity;
+	if(gameState.ships.length==0)
+		alert("You cannot sell all your ships!");
+	else if(gameState.getUsedCapacity()>gameState.getMaxCapacity()-shipsCapacity)
+		alert("Cannot sell all these ships. You will not have enough space for your cargo.")
+	else if(canAfford(shopInventory,toBuy,toSell,"ship")==0)
 		alert("You cannot afford this!")
 	else if(canAfford(shopInventory,toBuy,toSell,"ship")==2)
 		alert("The market cannot afford this!")

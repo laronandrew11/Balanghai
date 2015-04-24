@@ -165,10 +165,13 @@ function CreateSellableItemButtonHandler(parentMenu, button, item, shopInventory
 				var itemToSell=new Ship(item.properName,item.name,item.speed, item.health,item.cargoCapacity, item.price);
 				gameState.toSell.push(itemToSell);
 				updateTradeButton(parentMenu,shopInventory);
+			
 					populatePlayerInventoryPanel(parentMenu, shopInventory,"Other");
+			
 				populateToSellPanel(parentMenu, shopInventory);
 				//parentMenu.buttons[9].status="enabled";
-			parentMenu.drawScreen(tradeMenuBG);
+			
+			//parentMenu.drawScreen(tradeMenuBG);
 			}
 				
 		}
@@ -272,6 +275,7 @@ function CreateShopCargoCategoryButtonHandler(parentMenu, shopInventory,button)/
 
 function populatePlayerInventoryPanel(parentMenu, shopInventory, cargoType)//display all of player's cargo in one corner so he can sell it. Note that cargoType is unneeded by shipbuilder
 {
+	//alert("Populating player!");
 	parentMenu.panels[0].clearButtons();
 	parentMenu.panels[0].clearLabels();
 	var poiType=shopInventory.type;
@@ -382,6 +386,7 @@ function populatePlayerInventoryPanel(parentMenu, shopInventory, cargoType)//dis
 
 function populateToSellPanel(parentMenu, shopInventory)//display all of player's cargo in one corner so he can sell it
 {
+	//alert("Populating sell!");
 	parentMenu.panels[2].clearButtons();
 	parentMenu.panels[2].clearLabels();
 	//updateTradeButton(parentMenu);
@@ -415,6 +420,11 @@ function populateToSellPanel(parentMenu, shopInventory)//display all of player's
 				weightLabel.bgImage=weightImg;
 
 			priceLabel.bgImage=coinImg;
+			parentMenu.panels[2].addLabel(weightLabel);
+
+				var totalWeightLabel=new Label(430,455,33,31,totalWeight,"Bebas",15,"black");
+	totalWeightLabel.bgImage=totalWeightImg;
+	parentMenu.panels[2].addLabel(totalWeightLabel);
 		}
 			
 		else if(poiType=='shipbuilder'){
@@ -432,7 +442,7 @@ function populateToSellPanel(parentMenu, shopInventory)//display all of player's
 		parentMenu.panels[2].addButton(newButton);//add to inventory panel
 		parentMenu.panels[2].addLabel(newLabel);
 		parentMenu.panels[2].addLabel(priceLabel);
-		parentMenu.panels[2].addLabel(weightLabel);
+		
 		x+=82;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
@@ -440,10 +450,9 @@ function populateToSellPanel(parentMenu, shopInventory)//display all of player's
 	}
 	var totalLabel=new Label(430,420,33,31,total,"Bebas",15,"black");
 	totalLabel.bgImage=coinImg;
-	var totalWeightLabel=new Label(430,455,33,31,totalWeight,"Bebas",15,"black");
-	totalWeightLabel.bgImage=totalWeightImg;
+
 	parentMenu.panels[2].addLabel(totalLabel);
-	parentMenu.panels[2].addLabel(totalWeightLabel);
+	
 	parentMenu.drawScreen(tradeMenuBG);
 	//parentMenu.panels[2].draw(context);
 }
@@ -583,6 +592,9 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 
 			var weightLabel=new Label(x+47,434,33,31,itemWeight,"Bebas",15,"black");
 				weightLabel.bgImage=weightImg;
+			parentMenu.panels[3].addLabel(newLabel);
+		parentMenu.panels[3].addLabel(priceLabel);
+		parentMenu.panels[3].addLabel(weightLabel);
 
 		}
 			
@@ -594,15 +606,15 @@ function populateToBuyPanel(parentMenu, shopInventory)//display all of player's 
 			itemPrice=item.price;
 			var priceLabel=new Label(x+47,410,33,31,item.price,"Bebas",15,"black");
 			priceLabel.bgImage=coinImg;
+			parentMenu.panels[3].addLabel(newLabel);
+		parentMenu.panels[3].addLabel(priceLabel);
 		}
 		total+=itemPrice;
 		newButton.onClick=CreateToBuyItemButtonHandler(parentMenu, newButton, item, shopInventory);
 		parentMenu.panels[3].addButton(newButton);//add to inventory panel
 
 		
-		parentMenu.panels[3].addLabel(newLabel);
-		parentMenu.panels[3].addLabel(priceLabel);
-		parentMenu.panels[3].addLabel(weightLabel);
+		
 		x+=80;
 
 			//parentMenu.drawScreen(parentMenu.bgImage);
